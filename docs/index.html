@@ -240,6 +240,48 @@ pre.cb2 .k{color:var(--violet)}pre.cb2 .s{color:var(--cyan)}
 .recw b{color:var(--cyan)}
 .cmp td:first-child{font-weight:700}
 
+
+/* ===== faithful copy of the extension's real button styles (scoped) ===== */
+.rb button{cursor:pointer;border:1px solid var(--line);border-radius:8px;padding:9px 13px;background:#10182b;color:var(--text);font:700 11px/1 var(--mono);letter-spacing:1.4px;text-transform:uppercase;transition:transform .06s,box-shadow .15s,border-color .15s,background .15s}
+.rb button:hover{border-color:rgba(53,230,255,.5)}
+.rb button.primary{border-color:transparent;color:#04121a;background:linear-gradient(180deg,#6ff0ff,var(--cyan));box-shadow:0 0 16px rgba(53,230,255,.35)}
+.rb button.danger{border-color:transparent;color:#1a0308;background:linear-gradient(180deg,#ff7d95,var(--danger));box-shadow:0 0 16px rgba(255,77,109,.35)}
+.rb button.ghost{background:transparent;color:var(--muted)}
+.rb button.block{width:100%}
+.rb button.small{padding:6px 10px;font-size:10px;letter-spacing:1px}
+.rb button.tint-cyan{color:var(--cyan);border-color:rgba(53,230,255,.4);background:rgba(53,230,255,.09)}
+.rb button.tint-violet{color:var(--violet);border-color:rgba(176,108,255,.45);background:rgba(176,108,255,.09)}
+.rb button.tint-green{color:var(--ok);border-color:rgba(55,240,168,.4);background:rgba(55,240,168,.09)}
+.rb button.tint-danger{color:var(--danger);border-color:rgba(255,77,109,.4);background:rgba(255,77,109,.09)}
+.rb button.tint-cyan:hover{background:rgba(53,230,255,.18);box-shadow:0 0 12px rgba(53,230,255,.3)}
+.rb button.tint-violet:hover{background:rgba(176,108,255,.18);box-shadow:0 0 12px rgba(176,108,255,.3)}
+.rb button.tint-green:hover{background:rgba(55,240,168,.18);box-shadow:0 0 12px rgba(55,240,168,.3)}
+.rb button.tint-danger:hover{background:rgba(255,77,109,.18);box-shadow:0 0 12px rgba(255,77,109,.3)}
+.rb .icon-btn{flex:1 1 0;min-width:0;height:36px;padding:0;display:flex;align-items:center;justify-content:center;border-radius:9px}
+.rb .icon-btn svg{width:15px;height:15px;flex:none;display:block}
+.rb .icon-btn.solo{flex:none;width:46px}
+.rb .icon-row{display:flex;gap:6px}
+.rb .data-run-btn{border-color:rgba(255,176,32,.55);background:linear-gradient(180deg,rgba(255,176,32,.24),rgba(255,176,32,.12));color:#ffd166;box-shadow:0 0 12px rgba(255,176,32,.18)}
+.rb .data-badge{display:inline-flex;align-items:center;gap:5px;font:700 9px/1.4 var(--mono);letter-spacing:1.1px;text-transform:uppercase;color:#2a1900;background:linear-gradient(180deg,#ffdd8a,var(--warn));border:1px solid rgba(255,176,32,.8);border-radius:999px;padding:3px 6px 3px 9px;box-shadow:0 0 10px rgba(255,176,32,.55);white-space:nowrap}
+.rb .data-badge i{font-style:normal;width:13px;height:13px;border-radius:50%;display:grid;place-items:center;font-size:8px}
+.rb .fi{background:#060b16;border:1px solid var(--line);border-radius:8px;padding:9px 10px;color:var(--text);font:13px var(--mono);min-width:150px}
+.rb .fi.ph{color:#566683}
+.rb .fl{display:block;color:var(--muted);margin-bottom:5px;font:600 10px/1.2 var(--mono);letter-spacing:1.2px;text-transform:uppercase}
+.rb .check{display:flex;align-items:center;gap:8px;color:var(--muted);font:500 12px var(--sans)}
+.rb .check i{width:15px;height:15px;border:1px solid var(--cyan);border-radius:3px;display:inline-grid;place-items:center;font-style:normal;font-size:11px;color:var(--cyan);flex:none}
+.rb .st{font:700 12px/1.4 var(--mono);text-align:center;padding:9px 11px;border-radius:8px;border:1px solid var(--line);background:rgba(10,16,30,.7);min-width:150px}
+.rb .st.ok{color:var(--ok);border-color:rgba(55,240,168,.55);box-shadow:0 0 16px rgba(55,240,168,.25)}
+.rb .st.run{color:var(--cyan);border-color:rgba(53,230,255,.55)}
+.rb .st.err{color:var(--danger);border-color:rgba(255,77,109,.6)}
+.rb .thumb{width:70px;height:44px;border-radius:6px;border:1px solid var(--line2);background:linear-gradient(135deg,#142038,#0a1120);display:grid;place-items:center;color:var(--muted);font-size:10px}
+.rb .modal{background:var(--panel);border:1px solid var(--line2);border-radius:12px;padding:12px;min-width:200px}
+.rb .modal strong{font:700 11px/1 var(--mono);letter-spacing:2px;text-transform:uppercase;color:#cfe0f5;display:block;margin-bottom:8px}
+.ico{display:inline-block;vertical-align:-.15em;width:1.05em;height:1.05em;color:var(--cyan)}
+.ico svg{width:100%;height:100%;display:block}
+.lk{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+#refTbl td.lkc{min-width:180px;max-width:330px}
+
+.rb button.pin{background:var(--warn);color:#201400;border:0;padding:0;letter-spacing:0;text-transform:none;font:800 12px var(--mono);border-radius:50%;width:24px;height:24px;box-shadow:0 0 0 3px var(--bg),0 0 14px var(--warn)}
 /* faq */
 details{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:0 16px;margin:8px 0}
 summary{cursor:pointer;padding:12px 0;font-weight:600;list-style:none;display:flex;justify-content:space-between;gap:10px}
@@ -303,7 +345,7 @@ footer{margin-top:80px;padding-top:22px;border-top:1px solid var(--line);color:v
   </div>
   <div class="paths">
     <a class="path" href="#install"><em>▶</em><b>I'm new</b><span>Install it and record your first flow in minutes.</span></a>
-    <a class="path" href="#data"><em>▦</em><b>Run with spreadsheets</b><span>One run per row, with a live calculator.</span></a>
+    <a class="path" href="#data"><em><i class="ico" data-ico="template"></i></em><b>Run with spreadsheets</b><span>One run per row, with a live calculator.</span></a>
     <a class="path" href="#trouble"><em>⚠</em><b>Something failed</b><span>Fix broken steps, timing and rejected files.</span></a>
     <a class="path" href="#cheat"><em>★</em><b>Quick reference</b><span>Shortcuts and the whole workflow on one card.</span></a>
   </div>
@@ -320,7 +362,7 @@ footer{margin-top:80px;padding-top:22px;border-top:1px solid var(--line);color:v
     <h3>Your workflow</h3>
     <div class="flow"><span>1 Record test case</span><b>→</b><span>2 Add assertions</span><b>→</b><span>3 Add data rows</span><b>→</b><span>4 Run</span><b>→</b><span>5 Attach evidence</span></div>
     <div class="grid2">
-      <div class="mini"><b>One flow = one test case</b><span>Name flows like <code>TC-101 Login valid</code> so the list reads like your test plan. Use <b>⧉ Duplicate</b> to branch a negative case (<code>TC-102 Login wrong password</code>) without re-recording.</span></div>
+      <div class="mini"><b>One flow = one test case</b><span>Name flows like <code>TC-101 Login valid</code> so the list reads like your test plan. Use <b><i class="ico" data-ico="duplicate"></i> Duplicate</b> to branch a negative case (<code>TC-102 Login wrong password</code>) without re-recording.</span></div>
       <div class="mini"><b>Always finish with an assertion</b><span>A flow without checks only proves the clicks worked. Add <code>assertVisible</code> / <code>assertText</code> at the end (Edit steps) so a wrong result actually <b>fails</b>.</span></div>
       <div class="mini"><b>Cover scenarios with data</b><span>Put valid, invalid and boundary values in the spreadsheet — one row each. Use <b>Repeat</b> to run a row several times for flaky-bug hunting. See the <a href="#data">calculator</a>.</span></div>
       <div class="mini"><b>Evidence in one click</b><span>On a failed run: open <b>Run history</b>, use <b>Copy image</b> and paste the screenshot into your bug ticket, and <b>Save this run</b> to attach the full JSON.</span></div>
@@ -396,7 +438,7 @@ footer{margin-top:80px;padding-top:22px;border-top:1px solid var(--line);color:v
         <li><b>Record</b> the buggy path (<kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>E</kbd>).</li>
         <li>End with an <b>assertion</b> for the expected result so the bug shows as a failure.</li>
         <li>Run it once to confirm it fails; grab the screenshot from <b>Run history</b>.</li>
-        <li><b>⇩ Export</b> the flow, and attach it with the screenshot to the ticket.</li></ol></div>
+        <li><b><i class="ico" data-ico="export"></i> Export</b> the flow, and attach it with the screenshot to the ticket.</li></ol></div>
       <div class="mid"><div><span>➜</span><div class="file">bug-123.json</div></div></div>
       <div class="lane d"><h5><span class="rtag dev">DEV</span>IMPORTS &amp; REPLAYS</h5><ol>
         <li>Open Flowcraft → <b>Import</b> → pick the JSON.</li>
@@ -412,7 +454,7 @@ footer{margin-top:80px;padding-top:22px;border-top:1px solid var(--line);color:v
     <p>Need 50 users, 200 orders or a pile of records to test with? Record creating <b>one</b>, then let a data file create the rest.</p>
     <ol class="steps">
       <li><b class="t">Record “create one record”</b><span class="d">E.g. fill the sign-up form and submit. Save it as <code>Seed users</code>.</span></li>
-      <li><b class="t">Download the data template</b><span class="d">Click <b>▦</b>. Columns: <code>Link</code>, one per input selector, then <code>Repeat</code>.</span></li>
+      <li><b class="t">Download the data template</b><span class="d">Click <b><i class="ico" data-ico="template"></i></b>. Columns: <code>Link</code>, one per input selector, then <code>Repeat</code>.</span></li>
       <li><b class="t">Generate the rows</b><span class="d">Use the Excel generator below (or fill-down in Excel) so each row has unique values.</span></li>
       <li><b class="t">Run with data</b><span class="d">Upload the file under its exact template name, then <b>Run data</b>. One record is created per row.</span></li>
     </ol>
@@ -424,7 +466,7 @@ footer{margin-top:80px;padding-top:22px;border-top:1px solid var(--line);color:v
       <div><label>VALUE PATTERNS (use {n} for the row number)</label><input id="gPat" value="user{n}@test.com,Tester {n}"></div>
       <div class="row2"><div><label>LINK (start URL, optional)</label><input id="gLink" value="https://staging.example.com/signup"></div><div><label>REPEAT</label><input id="gRep" value="1"></div><div><label>ROWS</label><input id="gN" value="10" inputmode="numeric"></div></div>
       <div><label>PREVIEW (first rows)</label><div class="tw" style="margin:0"><table id="gPrev"></table></div></div>
-      <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center"><button class="small" id="gDl" style="border-color:var(--cyan);color:var(--cyan)">⇩ Download .xlsx</button><span class="hint" id="gName" style="margin:0"></span></div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center"><button class="small" id="gDl" style="border-color:var(--cyan);color:var(--cyan)"><i class="ico" data-ico="export"></i> Download .xlsx</button><span class="hint" id="gName" style="margin:0"></span></div>
       <div class="hint">Safest habit: still download the template from the extension first and paste your generated values into it — then the headers can't be wrong. A column that doesn't match one of the flow's selectors is ignored; a selector with no column keeps its recorded value.</div>
     </div></div>
     <div class="co ok"><b>LINK COLUMN = MULTIPLE ENVIRONMENTS</b><p>The <code>Link</code> column gives each row its own start URL. Put <code>staging</code> in some rows and <code>qa</code> in others to seed several environments from one file. Leave it empty to use the flow's own start URL.</p></div>
@@ -499,28 +541,28 @@ footer{margin-top:80px;padding-top:22px;border-top:1px solid var(--line);color:v
   <h2><span class="n">02</span>Tour of the popup</h2>
   <p class="sub">Interactive: click a yellow number or any icon to see what it does.</p>
   <div class="stage">
-    <div class="mock" id="tourMock">
+    <div class="mock rb" id="tourMock">
       <div class="mh"><i>◈</i>FLOWCRAFT<span class="beta">Beta</span></div>
       <div class="box"><button class="pin" data-info="rec">1</button>
-        <span class="mb p">● Start recording</span>
+        <button class="primary block" type="button" tabindex="-1">● Start recording</button>
         <div class="hint">Tip: <b>Ctrl+Shift+E</b> toggles recording without opening this popup.</div></div>
       <div class="box"><button class="pin" data-info="saved">2</button>
         <b style="font:800 11px var(--mono);letter-spacing:.15em">SAVED FLOWS</b>
-        <div style="display:flex;gap:6px;margin-top:10px;flex-wrap:wrap"><span class="chip v">Bulk export</span><span class="chip c">Import</span><span class="chip r">Clear cache</span></div>
-        <div class="box" style="margin:10px 0 0;background:var(--panel2)"><b>link change 3</b><div class="hint" style="margin:0 0 8px">6 steps</div><span class="mb p">Run</span>
-          <div class="icons">
-            <button class="ic v" data-info="rename" title="Rename">✎</button>
-            <button class="ic c" data-info="edit" title="Edit steps">⚙</button>
-            <button class="ic c" data-info="withdata" title="Run with data">≡</button>
-            <button class="ic g" data-info="template" title="Download data template">▦</button>
-            <button class="ic v" data-info="dup" title="Duplicate">⧉</button>
-            <button class="ic g" data-info="export" title="Export">⇩</button>
-            <button class="ic r" data-info="del" title="Delete">🗑</button>
+        <div style="display:flex;gap:6px;margin-top:10px;flex-wrap:wrap"><button class="small tint-violet" type="button" tabindex="-1">Bulk export</button><button class="small tint-cyan" type="button" tabindex="-1">Import</button><button class="small tint-danger" type="button" tabindex="-1">Clear cache</button></div>
+        <div class="box" style="margin:10px 0 0;background:var(--panel2)"><b>link change 3</b><div class="hint" style="margin:0 0 8px">6 steps</div><button class="primary block" type="button" tabindex="-1">Run</button>
+          <div class="icon-row" style="margin-top:10px;padding-top:10px;border-top:1px solid var(--line-soft)">
+            <button class="small icon-btn tint-violet" data-info="rename" title="Rename"><i class="ico" data-ico="rename"></i></button>
+            <button class="small icon-btn tint-cyan" data-info="edit" title="Edit steps"><i class="ico" data-ico="edit"></i></button>
+            <button class="small icon-btn tint-cyan" data-info="withdata" title="Run with data"><i class="ico" data-ico="data"></i></button>
+            <button class="small icon-btn tint-green" data-info="template" title="Download data template"><i class="ico" data-ico="template"></i></button>
+            <button class="small icon-btn tint-violet" data-info="dup" title="Duplicate"><i class="ico" data-ico="duplicate"></i></button>
+            <button class="small icon-btn tint-green" data-info="export" title="Export"><i class="ico" data-ico="export"></i></button>
+            <button class="small icon-btn tint-danger" data-info="del" title="Delete"><i class="ico" data-ico="delete"></i></button>
           </div></div></div>
       <div class="box"><button class="pin" data-info="settings">3</button>
         <div style="display:flex;gap:8px"><div style="flex:1"><div class="hint" style="margin:0">REPEAT</div><div class="mi">1</div></div><div style="flex:1"><div class="hint" style="margin:0">DELAY (MS)</div><div class="mi">300</div></div></div>
         <div class="hint">☐ Store usernames/passwords in flows<br>☐ Retry a failed step once</div></div>
-      <div class="box" style="margin:0"><button class="pin" data-info="hist">4</button><b style="font:800 11px var(--mono);letter-spacing:.15em">RUN HISTORY</b> <span class="chip c" style="float:right">Show</span></div>
+      <div class="box" style="margin:0"><button class="pin" data-info="hist">4</button><b style="font:800 11px var(--mono);letter-spacing:.15em">RUN HISTORY</b> <button class="small tint-cyan" style="float:right" type="button" tabindex="-1">Show</button></div>
     </div>
     <div class="legend">
       <div class="info" id="info"><h4>Select something</h4><p>Click a numbered marker or an icon on the popup to see what it does.</p></div>
@@ -616,7 +658,7 @@ footer{margin-top:80px;padding-top:22px;border-top:1px solid var(--line);color:v
 <section id="edit" class="reveal" data-s="edit steps reorder delete selector value wait assert assertVisible assertText keypress setChecked click input dialog">
   <h2><span class="n">05</span>Edit steps</h2>
   <p class="sub">Fix, reorder and extend a flow — before or after saving.</p>
-  <p>Click the <b>⚙ Edit steps</b> icon on a saved flow (or <b>Edit steps</b> on a fresh recording). At the top is the <b>Start URL</b> — change it to run the same flow on another environment (staging, QA, localhost). Each step has <b>↑ ↓ ✕</b> buttons and editable fields for its selector, value, checked state, URL, milliseconds, expected text or key. At the bottom, pick a type from the dropdown and press <b>Add step</b>, then <b>Save</b> (or <b>Cancel</b>).</p>
+  <p>Click the <b><i class="ico" data-ico="edit"></i> Edit steps</b> icon on a saved flow (or <b>Edit steps</b> on a fresh recording). At the top is the <b>Start URL</b> — change it to run the same flow on another environment (staging, QA, localhost). Each step has <b>↑ ↓ ✕</b> buttons and editable fields for its selector, value, checked state, URL, milliseconds, expected text or key. At the bottom, pick a type from the dropdown and press <b>Add step</b>, then <b>Save</b> (or <b>Cancel</b>).</p>
   <div class="card">
     <div class="step"><span class="t">click</span><span class="s">#login-button</span><span class="m">↑ ↓ ✕</span></div>
     <div class="step"><span class="t">input</span><span class="s">#email — user@test.com</span><span class="m">↑ ↓ ✕</span></div>
@@ -645,9 +687,9 @@ footer{margin-top:80px;padding-top:22px;border-top:1px solid var(--line);color:v
   <h2><span class="n">06</span>Data-driven runs</h2>
   <p class="sub">Run the same flow once per spreadsheet row.</p>
   <ol class="steps">
-    <li><b class="t">Download the template</b><span class="d">Click the <b>▦ Excel icon</b> on the flow. You get a <code>.xlsx</code> with a <b>Link</b> column (each row's start URL — leave empty to use the flow's own), one column per input/checkbox selector (pre-filled with the recorded value), and a <b>Repeat</b> column.</span></li>
+    <li><b class="t">Download the template</b><span class="d">Click the <b><i class="ico" data-ico="template"></i> Excel icon</b> on the flow. You get a <code>.xlsx</code> with a <b>Link</b> column (each row's start URL — leave empty to use the flow's own), one column per input/checkbox selector (pre-filled with the recorded value), and a <b>Repeat</b> column.</span></li>
     <li><b class="t">Fill it in</b><span class="d">One row per run. A <b>Repeat</b> value runs that row more than once.</span></li>
-    <li><b class="t">Run with data</b><span class="d">Click <b>≡ Run with data</b> and choose the edited file. A <span class="badge">DATA</span> badge appears and a <b>Run data</b> button shows next to <b>Run</b>.</span></li>
+    <li><b class="t">Run with data</b><span class="d">Click <b><i class="ico" data-ico="data"></i> Run with data</b> and choose the edited file. A <span class="badge">DATA</span> badge appears and a <b>Run data</b> button shows next to <b>Run</b>.</span></li>
     <li><b class="t">Run it again any time</b><span class="d"><b>Run data</b> runs the stored file exactly as written — every row, repeated per its own Repeat — and shows a confirmation with the filename and first row before starting.</span></li>
   </ol>
   <h3>What the spreadsheet can change</h3>
@@ -691,10 +733,10 @@ footer{margin-top:80px;padding-top:22px;border-top:1px solid var(--line);color:v
   <div class="tw"><table>
     <thead><tr><th>Action</th><th>Result</th></tr></thead>
     <tbody>
-    <tr><td><b>⇩ Export</b></td><td>Downloads that one flow as <code>&lt;flow name&gt;.json</code>.</td></tr>
+    <tr><td><b><i class="ico" data-ico="export"></i> Export</b></td><td>Downloads that one flow as <code>&lt;flow name&gt;.json</code>.</td></tr>
     <tr><td><b>Bulk export</b></td><td>Pick any flows from a checklist; get one JSON file.</td></tr>
     <tr><td><b>Import</b></td><td>Loads a single or bulk file. Each flow gets a fresh ID; same-name flows are skipped and reported, so importing twice never creates duplicates.</td></tr>
-    <tr><td><b>⧉ Duplicate</b></td><td>Copies steps + start URL as <code>… (copy)</code>. Doesn't copy a data file.</td></tr>
+    <tr><td><b><i class="ico" data-ico="duplicate"></i> Duplicate</b></td><td>Copies steps + start URL as <code>… (copy)</code>. Doesn't copy a data file.</td></tr>
     </tbody></table></div>
   <div class="co only-dev"><b><span class="rtag dev">DEV</span>BUG REPRO</b><p>Attach the exported JSON to the issue. Teammates <b>Import</b> it and replay the exact path — no written steps needed.</p></div>
   <p>Downloads land in <code>Downloads/Flowcraft/&lt;Mon DD YYYY&gt;/</code>.</p>
@@ -743,7 +785,7 @@ footer{margin-top:80px;padding-top:22px;border-top:1px solid var(--line);color:v
   <p class="sub">A complete A–Z of what each control does. Filter by area or type to search.</p>
   <div class="refbar" id="refChips"></div>
   <div class="refbar"><input id="refQ" type="search" placeholder="Filter controls… e.g. export, retry, badge" aria-label="Filter controls"><span id="refCount"></span></div>
-  <div class="tw"><table id="refTbl"><thead><tr><th>Area</th><th>Control</th><th>What it does</th></tr></thead><tbody></tbody></table></div>
+  <div class="tw"><table id="refTbl"><thead><tr><th>Area</th><th>What it looks like</th><th>Control &amp; what it does</th></tr></thead><tbody></tbody></table></div>
 </section>
 
 <!-- GOOD TO KNOW -->
@@ -879,19 +921,19 @@ footer{margin-top:80px;padding-top:22px;border-top:1px solid var(--line);color:v
   var INFO={
     rec:['1 · Record panel','Start recording (or press Ctrl+Shift+E). After you stop, this area turns into the save form: name, Save flow, Edit steps, Discard.'],
     saved:['2 · Saved flows','Every saved flow appears as a card. Bulk export downloads several at once, Import loads JSON, Clear cache removes stored “Run with data” files.'],
-    rename:['✎ Rename','Rename the flow. Names must stay unique (case-insensitive).'],
-    edit:['⚙ Edit steps','Reorder, edit or delete steps, and add manual Wait / Assert steps.'],
-    withdata:['≡ Run with data','Pick a spreadsheet (xlsx / csv / json) and run once per row. The file name must match the template.'],
-    template:['▦ Download data template','Gets an .xlsx with one column per input selector plus a Repeat column, pre-filled with the recorded values.'],
-    dup:['⧉ Duplicate','Clones steps and start URL as “… (copy)” so you can branch a flow without re-recording. A data file is not copied.'],
-    export:['⇩ Export','Downloads this one flow as a JSON file named after the flow.'],
-    del:['🗑 Delete','Deletes the flow and its data file, after a confirmation.'],
+    rename:['<i class="ico" data-ico="rename"></i> Rename','Rename the flow. Names must stay unique (case-insensitive).'],
+    edit:['<i class="ico" data-ico="edit"></i> Edit steps','Reorder, edit or delete steps, and add manual Wait / Assert steps.'],
+    withdata:['<i class="ico" data-ico="data"></i> Run with data','Pick a spreadsheet (xlsx / csv / json) and run once per row. The file name must match the template.'],
+    template:['<i class="ico" data-ico="template"></i> Download data template','Gets an .xlsx with one column per input selector plus a Repeat column, pre-filled with the recorded values.'],
+    dup:['<i class="ico" data-ico="duplicate"></i> Duplicate','Clones steps and start URL as “… (copy)” so you can branch a flow without re-recording. A data file is not copied.'],
+    export:['<i class="ico" data-ico="export"></i> Export','Downloads this one flow as a JSON file named after the flow.'],
+    del:['<i class="ico" data-ico="delete"></i> Delete','Deletes the flow and its data file, after a confirmation.'],
     settings:['3 · Run settings','Repeat count, delay between steps, the plaintext-credential option (off by default) and Retry-once.'],
     hist:['4 · Run history','Show or hide past runs, view failure screenshots, save a run as JSON, or clear everything.']
   };
   var info=$('#info');
   $$('#tourMock [data-info]').forEach(function(b){b.onclick=function(){
-    var d=INFO[b.getAttribute('data-info')];info.innerHTML='<h4></h4><p></p>';$('h4',info).textContent=d[0];$('p',info).textContent=d[1];
+    var d=INFO[b.getAttribute('data-info')];info.innerHTML='<h4></h4><p></p>';$('h4',info).textContent=d[0];var ic=b.querySelector('.ico');if(ic){var c=document.createElement('span');c.className='ico';c.setAttribute('data-ico',ic.getAttribute('data-ico'));$('h4',info).insertBefore(c,$('h4',info).firstChild);fillIcons(info);$('h4',info).insertBefore(document.createTextNode(' '),c.nextSibling)}$('p',info).textContent=d[1];
     $$('#tourMock .on').forEach(function(x){x.classList.remove('on')});b.classList.add('on')}});
 
   /* recorder simulator */
@@ -911,65 +953,86 @@ footer{margin-top:80px;padding-top:22px;border-top:1px solid var(--line);color:v
 
 
 
-  /* button reference */
+  /* real icons from the extension */
+  var SV={
+   rename:'<path d="M11.3 1.7a1.5 1.5 0 0 1 2.1 0l.9.9a1.5 1.5 0 0 1 0 2.1L6 13l-3.3.7L3.4 10.4z" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/>',
+   edit:'<path d="M2 12.5h12M3 9.5l6-6 2.5 2.5-6 6H3z" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>',
+   data:'<path d="M2 3.5h12M2 8h12M2 12.5h12M5.5 3.5v9" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>',
+   template:'<rect x="1.5" y="2.5" width="13" height="11" rx="1.2" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M1.5 6.5h13M6 2.5v11M10.5 2.5v11" stroke="currentColor" stroke-width="1" fill="none"/>',
+   duplicate:'<rect x="2" y="2" width="9" height="9" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.3"/><path d="M6.5 11.5v1.5a1 1 0 0 0 1 1H14a1 1 0 0 0 1-1V7a1 1 0 0 0-1-1h-1.5" fill="none" stroke="currentColor" stroke-width="1.3"/>',
+   export:'<path d="M8 1.5v8m0 0L5 6.5M8 9.5l3-3M2.5 11.5v2a1 1 0 0 0 1 1h9a1 1 0 0 0 1-1v-2" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>',
+   delete:'<path d="M3 4.5h10M6.5 4.5V3a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v1.5M4.5 4.5l.6 8.4a1 1 0 0 0 1 .9h3.8a1 1 0 0 0 1-.9l.6-8.4" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>'
+  };
+  function ico(n){return '<i class="ico" data-ico="'+n+'"></i>'}
+  function fillIcons(root){$$('.ico[data-ico]',root).forEach(function(i){if(!i.firstChild)i.innerHTML='<svg viewBox="0 0 16 16" aria-hidden="true">'+SV[i.getAttribute('data-ico')]+'</svg>'})}
+  fillIcons();
+
+  /* button reference — each row shows the REAL control */
+  function BT(cls,t){return '<button class="'+cls+'" type="button" tabindex="-1">'+t+'</button>'}
+  function IB(tint,n){return '<button class="small icon-btn solo tint-'+tint+'" type="button" tabindex="-1">'+ico(n)+'</button>'}
+  function FI(t,ph){return '<div class="fi'+(ph?' ph':'')+'">'+t+'</div>'}
+  function CK(t,on){return '<div class="check"><i>'+(on?'✓':'')+'</i>'+t+'</div>'}
+  var PILL='display:inline-flex;align-items:center;gap:10px;background:linear-gradient(180deg,#0d1730,#070c1a);border:1px solid #2a4170;border-radius:999px;padding:7px 9px 7px 12px;font:12px var(--mono)';
+  var STOPC='width:24px;height:24px;border-radius:50%;background:var(--danger);display:grid;place-items:center;font-size:9px;color:#fff';
   var REF=[
-   ['Record','● Start recording','Starts recording on the active tab. The popup closes and a recording pill appears. Works from a blank new tab — the first real page becomes the start URL. Not available on browser system pages.'],
-   ['Record','Stop (popup or pill ■)','Ends recording and opens the Save view. Shortcut: Ctrl+Shift+E.'],
-   ['Record','Name this flow','Required, unique (case-insensitive). A duplicate name shows an inline error and blocks saving.'],
-   ['Record','Save flow','Stores the recording under that name.'],
-   ['Record','Edit steps (before saving)','Opens the step editor on the unsaved recording so you can fix a step first.'],
-   ['Record','Discard','Throws the recording away.'],
-   ['Saved flows','Bulk export','Opens a checklist (with All / None) and downloads the chosen flows as one JSON file.'],
-   ['Saved flows','Import','Loads a single or bulk JSON file. Fresh IDs; same-name flows are skipped and reported, so re-importing never duplicates.'],
-   ['Saved flows','Clear cache','After a confirmation, forgets every stored “Run with data” file. Saved flows are untouched.'],
-   ['Flow card','Run','Navigates the active tab to the start URL and replays the flow Repeat times. Asks for any blank credentials first.'],
-   ['Flow card','Run data','Appears once a data file is stored. Runs every row of that file, each repeated per its Repeat column, ignoring the popup Repeat field. Confirms the filename and first row first.'],
-   ['Flow card','DATA badge  ✕','Shows a data file is stored (hover: filename and row count). ✕ removes it and hides Run data.'],
-   ['Flow card','✎ Rename','Renames the flow (same uniqueness rule as saving).'],
-   ['Flow card','⚙ Edit steps','Opens the step editor for this flow.'],
-   ['Flow card','≡ Run with data','Opens the data picker in its own tab to choose and validate a spreadsheet.'],
-   ['Flow card','▦ Download data template','Downloads an .xlsx with Link, one column per input/checkbox selector (pre-filled), and Repeat.'],
-   ['Flow card','⧉ Duplicate','Copies steps and start URL as “… (copy)”. The data file is not copied.'],
-   ['Flow card','⇩ Export','Downloads this one flow as JSON, named after the flow.'],
-   ['Flow card','🗑 Delete','Deletes the flow and its data file, after a confirmation.'],
-   ['Run settings','Repeat','How many times Run repeats. With Run with data it caps the rows (default 1 = no cap). No effect on Run data.'],
-   ['Run settings','Delay between steps (ms)','Extra pause after each step, on top of built-in settling.'],
-   ['Run settings','Store usernames/passwords','Off by default. On = credentials kept in plaintext in saved flows and exports.'],
-   ['Run settings','Retry a failed step once','Off by default. Waits 500 ms and retries the step once before treating it as failed.'],
-   ['Run settings','Stop replay','Visible during a run; stops it after the current step.'],
-   ['Run settings','Status line','Live progress (“Run 2/5 · step 8/12”), then “Finished!”, “Stopped.” or an error.'],
-   ['Run history','Show / Hide','Expands or collapses the history panel.'],
-   ['Run history','Clear','After a confirmation, wipes all run and error history.'],
-   ['Run history','Save this run','Downloads that run (steps, results, errors, screenshots) as JSON.'],
-   ['Run history','Thumbnail','Failure screenshot. Click for full size in a new tab.'],
-   ['Run history','Copy image / Save image','Copy the screenshot as PNG to the clipboard, or save it as a .jpg.'],
-   ['Run history','Run entry line','Shows iterations done / requested, “data-driven”, failed-step count, “stopped” and any error. Older errors appear as “Other errors”.'],
-   ['Step editor','Start URL','The address the flow opens first. Change it to target another environment.'],
-   ['Step editor','↑  ↓  ✕','Move a step up or down, or delete it.'],
-   ['Step editor','Selector field','The CSS selector the step targets. Edit it when the site changes.'],
-   ['Step editor','Value / Checked','New text for an input step, or the tick box for a checkbox step. Credential values show as hidden with a “credential” badge.'],
-   ['Step editor','Go to URL field','Address for a navigate step.'],
-   ['Step editor','Milliseconds','Length of a wait step.'],
-   ['Step editor','Expected text + Exact/Contains','What an assertText step looks for, and how strictly.'],
-   ['Step editor','Key dropdown','Switch a keypress step between Enter, Escape and Tab.'],
-   ['Step editor','Add step dropdown + Add step','Adds Wait, Go to URL, Key press, Assert visible or Assert text at the end of the list.'],
-   ['Step editor','Remove stored file','Shown on a file-upload step that has a remembered file. Removes it so you\u2019re asked again at each run.'],
-   ['Step editor','Save / Cancel','Save writes the steps and start URL; Cancel discards your edits.'],
-   ['Data picker','Choose file…','Pick the Excel (.xlsx) file named exactly like the template (.csv/.json also read as fallbacks).'],
-   ['Data picker','Preview line','Shows whether the file was accepted, its row count, or why it was rejected.'],
-   ['Data picker','Run / Cancel','Run stays disabled until the file validates, then asks for credentials if needed and starts.'],
-   ['On the page','Recording pill','Pulsing dot, live step count, draggable grip, red ■ to stop.'],
-   ['On the page','Run pill','Run n/N · Step n/N, draggable. Status button pulses; after a failure it becomes a ▶ retry button. ■ stops.'],
-   ['On the page','File chooser overlay','Appears at a file-upload step (unless a file is already remembered). Pick the file, and optionally tick “Remember this file” (max 2 MB) to store it in the flow.'],
-   ['Dialogs','Credentials dialog','Lists blank username/password fields. Enter = Run, Esc = Cancel.'],
-   ['Dialogs','Confirm / alert / prompt','Themed replacements for the browser\u2019s own dialogs (delete, clear, rename, errors).'],
-   ['Keyboard','Ctrl+Shift+E  (⌘⇧E)','Start or stop recording without opening the popup. Remap at chrome://extensions/shortcuts.']
+   ['Record','● Start recording','Starts recording on the active tab. The popup closes and a recording pill appears. Works from a blank new tab — the first real page becomes the start URL. Not available on browser system pages.',BT('primary','● Start recording')],
+   ['Record','Stop (in the popup, or ■ on the pill)','Ends recording and opens the Save view. Shortcut: Ctrl+Shift+E.','<div class="lk">'+BT('danger','Stop')+'<span style="'+PILL+'"><span style="width:8px;height:8px;border-radius:50%;background:var(--danger)"></span><b style="color:var(--cyan)">6</b> steps<span style="'+STOPC+'">■</span></span></div>'],
+   ['Record','Name this flow','Required and unique (case-insensitive). A duplicate name shows an inline error and blocks saving.',FI('e.g. Login and open dashboard',1)],
+   ['Record','Save flow','Stores the recording under that name.',BT('primary','Save flow')],
+   ['Record','Edit steps (before saving)','Opens the step editor on the unsaved recording so you can fix a step first.',BT('tint-cyan','Edit steps')],
+   ['Record','Discard','Throws the recording away.',BT('tint-danger','Discard')],
+   ['Saved flows','Bulk export','Opens a checklist (with All / None) and downloads the chosen flows as one JSON file.',BT('small tint-violet','Bulk export')],
+   ['Saved flows','Import','Loads a single or bulk JSON file. Fresh IDs; same-name flows are skipped and reported, so re-importing never duplicates.',BT('small tint-cyan','Import')],
+   ['Saved flows','Clear cache','After a confirmation, forgets every stored “Run with data” file. Saved flows are untouched.',BT('small tint-danger','Clear cache')],
+   ['Flow card','Run','Navigates the active tab to the start URL and replays the flow Repeat times. Asks for any blank credentials first.',BT('primary','Run')],
+   ['Flow card','Run data','Appears once a data file is stored. Runs every row of that file, each repeated per its Repeat column, ignoring the popup Repeat field. Confirms the filename and first row first.',BT('data-run-btn','Run data')],
+   ['Flow card','DATA badge and its ✕','Shows a data file is stored (hover: filename and row count). The ✕ removes it and hides Run data.','<span class="data-badge">DATA<i>✕</i></span>'],
+   ['Flow card','Rename','Renames the flow (same uniqueness rule as saving).',IB('violet','rename')],
+   ['Flow card','Edit steps','Opens the step editor for this flow.',IB('cyan','edit')],
+   ['Flow card','Run with data','Opens the data picker in its own tab to choose and validate a spreadsheet.',IB('cyan','data')],
+   ['Flow card','Download data template','Downloads an .xlsx with Link, one column per input/checkbox selector (pre-filled), and Repeat.',IB('green','template')],
+   ['Flow card','Duplicate','Copies steps and start URL as “… (copy)”. The data file is not copied.',IB('violet','duplicate')],
+   ['Flow card','Export','Downloads this one flow as JSON, named after the flow.',IB('green','export')],
+   ['Flow card','Delete','Deletes the flow and its data file, after a confirmation.',IB('danger','delete')],
+   ['Run settings','Repeat','How many times Run repeats. With Run with data it caps the rows (default 1 = no cap). No effect on Run data.','<div><span class="fl">Repeat</span>'+FI('1')+'</div>'],
+   ['Run settings','Delay between steps (ms)','Extra pause after each step, on top of built-in settling.','<div><span class="fl">Delay between steps (ms)</span>'+FI('300')+'</div>'],
+   ['Run settings','Store usernames/passwords','Off by default. On = credentials kept in plaintext in saved flows and exports.',CK('Store usernames/passwords inside saved flows (less secure)',0)],
+   ['Run settings','Retry a failed step once','Off by default. Waits 500 ms and retries the step once before treating it as failed.',CK('Retry a failed step once before giving up',0)],
+   ['Run settings','Stop replay','Visible during a run; stops it after the current step.',BT('ghost block','Stop replay')],
+   ['Run settings','Status line','Live progress (“Run 2/5 · step 8/12”), then “Finished!”, “Stopped.” or an error.','<div class="lk"><div class="st run">Run 2/5 · step 8/12</div><div class="st ok">Finished!</div></div>'],
+   ['Run history','Show / Hide','Expands or collapses the history panel.',BT('small tint-cyan','Show')],
+   ['Run history','Clear','After a confirmation, wipes all run and error history.',BT('small tint-danger','Clear')],
+   ['Run history','Save this run','Downloads that run (steps, results, errors, screenshots) as JSON.',BT('small tint-cyan','Save this run')],
+   ['Run history','Screenshot thumbnail','Failure screenshot. Click for full size in a new tab.','<div class="thumb">screenshot</div>'],
+   ['Run history','Copy image / Save image','Copy the screenshot as PNG to the clipboard, or save it as a .jpg.','<div class="lk">'+BT('small ghost','Copy image')+BT('small ghost','Save image')+'</div>'],
+   ['Run history','Run entry line','Shows iterations done / requested, “data-driven”, failed-step count, “stopped” and any error. Older errors appear as “Other errors”.','<div style="font-size:12px"><b>link change 3</b><div style="color:var(--muted);font-size:11px">1/1 iteration(s) · 1 failed step(s)</div></div>'],
+   ['Step editor','Start URL','The address the flow opens first. Change it to target another environment.',FI('https://…',1)],
+   ['Step editor','Move up / Move down / Delete','Move a step up or down, or delete it.','<div class="lk">'+BT('small ghost','↑')+BT('small ghost','↓')+BT('small ghost','✕')+'</div>'],
+   ['Step editor','Selector field','The CSS selector the step targets. Edit it when the site changes.',FI('#login-button')],
+   ['Step editor','Value / Checked','New text for an input step, or the tick box for a checkbox step. Credential values show as hidden with a “credential” badge.','<div class="lk">'+FI('user@test.com')+CK('Checked',1)+'</div>'],
+   ['Step editor','Go to URL field','Address for a navigate step.',FI('https://…',1)],
+   ['Step editor','Milliseconds','Length of a wait step.',FI('500')],
+   ['Step editor','Expected text + Exact/Contains','What an assertText step looks for, and how strictly.','<div class="lk">'+FI('Hello',0)+FI('Exact match')+'</div>'],
+   ['Step editor','Key dropdown','Choose Enter, Escape or Tab for a key-press step.',FI('Tab ▾')],
+   ['Step editor','Add step dropdown + Add step','Adds Wait, Go to URL, Key press, Assert visible or Assert text at the end of the list.','<div class="lk">'+FI('Wait (ms) ▾')+BT('small tint-cyan','Add step')+'</div>'],
+   ['Step editor','Remove stored file','Shown on a file-upload step that has a remembered file. Removes it so you’re asked again at each run.',BT('small ghost','Remove stored file')],
+   ['Step editor','Save / Cancel','Save writes the steps and start URL; Cancel discards your edits.','<div class="lk">'+BT('primary','Save')+BT('ghost','Cancel')+'</div>'],
+   ['Data picker','Choose file…','Pick the Excel (.xlsx) file named exactly like the template (.csv/.json also read as fallbacks).',BT('tint-cyan block','Choose file…')],
+   ['Data picker','Preview line','Shows whether the file was accepted, its row count, or why it was rejected.','<div class="st ok" style="font-size:11px">✓ login-data-template.xlsx loaded — 3 row(s)</div>'],
+   ['Data picker','Run / Cancel','Run stays disabled until the file validates, then asks for credentials if needed and starts.','<div class="lk">'+BT('ghost','Cancel')+BT('primary','Run')+'</div>'],
+   ['On the page','Recording pill','Pulsing dot, live step count, draggable grip, red ■ to stop.','<span style="'+PILL+'"><span style="width:8px;height:8px;border-radius:50%;background:var(--danger);box-shadow:0 0 8px var(--danger)"></span>Recording · <b style="color:var(--cyan)">6</b> steps<span style="'+STOPC+'">■</span></span>'],
+   ['On the page','Run pill','Run n/N · Step n/N, draggable. Status button pulses; after a failure it becomes a ▶ retry button. ■ stops.','<span style="'+PILL+'"><span style="width:20px;height:20px;border-radius:50%;background:#35e6ff30;color:var(--cyan);display:grid;place-items:center;font-size:8px">▶</span>Run <b style="color:var(--cyan)">1/1</b> · Step <b style="color:var(--cyan)">4/6</b><span style="'+STOPC+'">■</span></span>'],
+   ['On the page','File chooser overlay','Appears at a file-upload step (unless a file is already remembered). Pick the file, and optionally tick “Remember this file” (max 2 MB) to store it in the flow.','<div class="modal"><strong>Flowcraft needs a file</strong><div style="font:11px var(--mono);color:#8fa2c2;margin-bottom:8px">#resume-upload</div><div class="lk" style="margin-bottom:8px"><span class="fi" style="padding:5px 8px;font-size:11px">Choose file</span></div>'+CK('Remember this file (max 2 MB)',1)+'</div>'],
+   ['Dialogs','Credentials dialog','Lists blank username/password fields. Enter = Run, Esc = Cancel.','<div class="modal"><strong>Enter credentials</strong><div class="fl">Password — #password</div>'+FI('••••••••')+'<div class="lk" style="margin-top:8px;justify-content:flex-end">'+BT('ghost small','Cancel')+BT('primary small','Run')+'</div></div>'],
+   ['Dialogs','Confirm / alert / prompt','Themed replacements for the browser’s own dialogs (delete, clear, rename, errors).','<div class="modal"><strong>Confirm</strong><div style="font-size:12px;color:var(--muted);margin-bottom:8px">Delete this flow?</div><div class="lk" style="justify-content:flex-end">'+BT('ghost small','Cancel')+BT('danger small','OK')+'</div></div>'],
+   ['Keyboard','Ctrl+Shift+E  (⌘⇧E on Mac)','Start or stop recording without opening the popup. Remap at chrome://extensions/shortcuts.','<span><kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>E</kbd></span>']
   ];
   var refBody=$('#refTbl tbody'),chipBox=$('#refChips'),curArea='All';
   if(refBody){
     var areas=['All'];REF.forEach(function(r){if(areas.indexOf(r[0])<0)areas.push(r[0])});
     function esc(t){return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;')}
-    refBody.innerHTML=REF.map(function(r){return '<tr data-a="'+r[0]+'"><td><span class="ar">'+r[0].toUpperCase()+'</span></td><td><b>'+esc(r[1])+'</b></td><td>'+esc(r[2])+'</td></tr>'}).join('');
+    refBody.innerHTML=REF.map(function(r){return '<tr data-a="'+r[0]+'"><td><span class="ar">'+r[0].toUpperCase()+'</span></td><td class="lkc rb">'+r[3]+'</td><td><b>'+esc(r[1])+'</b><div style="color:var(--muted);font-size:14px;margin-top:2px">'+esc(r[2])+'</div></td></tr>'}).join('');
+    fillIcons(refBody);
     function refFilter(){var v=($('#refQ').value||'').toLowerCase(),n=0;
       $$('#refTbl tbody tr').forEach(function(tr){var ok=(curArea==='All'||tr.getAttribute('data-a')===curArea)&&(!v||tr.textContent.toLowerCase().indexOf(v)>-1);tr.classList.toggle('hide',!ok);if(ok)n++});
       $('#refCount').textContent=n+' of '+REF.length+' controls'}
@@ -977,7 +1040,7 @@ footer{margin-top:80px;padding-top:22px;border-top:1px solid var(--line);color:v
     $('#refQ').addEventListener('input',refFilter);refFilter();
   }
 
-  /* excel generator */
+    /* excel generator */
   function gen(){
     var cols=$('#gCols').value.split(',').map(function(x){return x.trim()}).filter(Boolean),
         pats=$('#gPat').value.split(',').map(function(x){return x.trim()}),
