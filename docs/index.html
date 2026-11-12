@@ -71,8 +71,8 @@ kbd{border-bottom-width:2px;color:var(--cyan)}
 .card{background:linear-gradient(160deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:14px;padding:20px;margin:16px 0}
 .co{border-left:3px solid var(--cyan);background:var(--panel);padding:12px 16px 12px 18px;border-radius:0 12px 12px 0;margin:18px 0}
 .co.warn{border-color:var(--warn)}.co.danger{border-color:var(--danger)}.co.ok{border-color:var(--ok)}
-.co b{display:block;font:800 11px var(--mono);letter-spacing:.14em;margin-bottom:3px;color:var(--cyan)}
-.co.warn b{color:var(--warn)}.co.danger b{color:var(--danger)}.co.ok b{color:var(--ok)}
+.co>b{display:block;font:800 11px var(--mono);letter-spacing:.14em;margin-bottom:3px;color:var(--cyan)}
+.co.warn>b{color:var(--warn)}.co.danger>b{color:var(--danger)}.co.ok>b{color:var(--ok)}
 .co p{margin:4px 0 0}
 
 /* steps */
@@ -282,6 +282,7 @@ pre.cb2 .k{color:var(--violet)}pre.cb2 .s{color:var(--cyan)}
 #refTbl td.lkc{min-width:180px;max-width:330px}
 
 .rb button.pin{background:var(--warn);color:#201400;border:0;padding:0;letter-spacing:0;text-transform:none;font:800 12px var(--mono);border-radius:50%;width:24px;height:24px;box-shadow:0 0 0 3px var(--bg),0 0 14px var(--warn)}
+.rb button{white-space:nowrap}
 /* faq */
 details{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:0 16px;margin:8px 0}
 summary{cursor:pointer;padding:12px 0;font-weight:600;list-style:none;display:flex;justify-content:space-between;gap:10px}
@@ -391,7 +392,7 @@ footer{margin-top:80px;padding-top:22px;border-top:1px solid var(--line);color:v
     <h3>Your workflow</h3>
     <div class="flow"><span>1 Make UI testable</span><b>→</b><span>2 Record repro</span><b>→</b><span>3 Export JSON</span><b>→</b><span>4 Attach to issue</span><b>→</b><span>5 Re-run after fix</span></div>
     <div class="grid2">
-      <div class="mini"><b>Give elements stable hooks</b><span>Flowcraft builds CSS selectors, so stable <code>id</code>, <code>data-testid</code> and <code>name</code> attributes keep flows alive across refactors. Random or hashed class names (CSS-in-JS) are the #1 cause of broken replays.</span></div>
+      <div class="mini"><b>Give elements stable hooks</b><span>Flowcraft picks, in order: a unique <code>id</code>, then a unique <code>data-testid</code> / <code>data-test</code> / <code>data-cy</code> / <code>data-qa</code> / <code>name</code> / <code>aria-label</code> / <code>placeholder</code>, and only then a fragile tag path. Give interactive elements one of the first kinds and flows survive refactors.</span></div>
       <div class="mini"><b>Reproduce UI bugs in seconds</b><span>Record the bug once, export the flow, attach the JSON to the issue. Anyone can <b>Import</b> it and replay the exact path.</span></div>
       <div class="mini"><b>Verify a fix fast</b><span>Re-run the repro flow after your change. Add an <code>assertText</code> for the correct behavior so the flow goes green only when it's really fixed.</span></div>
       <div class="mini"><b>Mind async UI</b><span>Replay auto-waits for visible, enabled, stable, uncovered elements. For slow endpoints add a <code>wait</code> step or raise Delay.</span></div>
@@ -744,15 +745,83 @@ footer{margin-top:80px;padding-top:22px;border-top:1px solid var(--line);color:v
 </section>
 
 <!-- 08 HISTORY -->
-<section id="history" class="reveal" data-s="run history screenshot copy image save image clear log failure">
+<section id="history" class="reveal" data-s="run history log screenshot copy image save image clear failure evidence json limit 20 runs 50 errors iterations stopped finished error credentials privacy file name downloads">
   <h2><span class="n">08</span>Run history</h2>
-  <p class="sub">See what happened on every run.</p>
+  <p class="sub">Flowcraft's black box: what happened on every run, with proof when something failed.</p>
+
+  <h3>Open it</h3>
+  <p>At the bottom of the popup, click <b>Show</b> under <b>Run history</b>. The list is newest first. Click <b>Hide</b> to collapse it again.</p>
+
+  <h3>What an entry looks like</h3>
+  <div class="stage">
+    <div class="mock rb" style="width:380px">
+      <div class="mh"><i>◈</i>RUN HISTORY<span style="margin-left:auto"><button class="small tint-cyan" type="button" tabindex="-1">Hide</button></span></div>
+      <div class="box" style="margin-bottom:8px"><button class="small tint-danger" type="button" tabindex="-1">Clear</button>
+        <div style="margin-top:10px;border:1px solid var(--line-soft);border-left:2px solid var(--ok);border-radius:8px;padding:9px 10px;background:rgba(9,15,28,.6)">
+          <div style="display:flex;justify-content:space-between;gap:8px;align-items:flex-start"><div><b style="font-size:12px">Login and open dashboard</b> — 11/12/2026, 5:10 PM<div class="hint" style="margin-top:3px">1/1 iteration(s)</div></div><button class="small tint-cyan" type="button" tabindex="-1">Save this run</button></div></div>
+        <div style="margin-top:8px;border:1px solid rgba(255,77,109,.4);border-left:2px solid var(--danger);border-radius:8px;padding:9px 10px;background:rgba(40,10,16,.35)">
+          <div style="display:flex;justify-content:space-between;gap:8px;align-items:flex-start"><div><b style="font-size:12px">Seed users</b> — 11/12/2026, 4:52 PM<div class="hint" style="margin-top:3px">3/5 iteration(s) · data-driven · 1 failed step(s) · stopped · error: Stopped: step 4 failed — Not found: #submit</div></div><button class="small tint-cyan" type="button" tabindex="-1">Save this run</button></div>
+          <div style="margin-top:8px"><div class="thumb" style="width:100%;height:70px">failure screenshot (click for full size)</div><div style="display:flex;gap:6px;margin-top:6px"><button class="small ghost" type="button" tabindex="-1">Copy image</button><button class="small ghost" type="button" tabindex="-1">Save image</button></div></div></div>
+      </div>
+    </div>
+    <div class="legend"><dl>
+      <dt><span>●</span> Name &amp; time</dt><dd>The flow that ran and when it started. A deleted flow shows as “(deleted flow)”.</dd>
+      <dt><span>●</span> Iterations <code>3/5</code></dt><dd>Runs completed out of runs requested. Less than requested means the run was stopped or failed early.</dd>
+      <dt><span>●</span> Tags</dt><dd><b>data-driven</b> (used a spreadsheet), <b>N failed step(s)</b>, <b>stopped</b> (you pressed ■ or closed the tab), <b>error: …</b> (why it ended).</dd>
+      <dt><span>●</span> Red edge &amp; screenshot</dt><dd>Entries with an error get a red edge. Each failure includes a screenshot of the tab at that moment.</dd>
+    </dl></div>
+  </div>
+
+  <h3>Buttons in the history</h3>
+  <div class="tw"><table><tbody>
+    <tr><td class="rb"><button class="small tint-cyan" type="button" tabindex="-1">Show</button> <button class="small tint-cyan" type="button" tabindex="-1">Hide</button></td><td>Expand or collapse the panel.</td></tr>
+    <tr><td class="rb"><button class="small tint-danger" type="button" tabindex="-1">Clear</button></td><td>After a confirmation, deletes <b>all</b> run and error history (not your flows).</td></tr>
+    <tr><td class="rb"><button class="small tint-cyan" type="button" tabindex="-1">Save this run</button></td><td>Downloads that one run — steps, results, errors <i>and</i> screenshots — as a JSON file.</td></tr>
+    <tr><td><b>Thumbnail</b></td><td>Click it to open the screenshot full size in a new tab.</td></tr>
+    <tr><td class="rb"><button class="small ghost" type="button" tabindex="-1">Copy image</button></td><td>Puts the screenshot on your clipboard as a PNG, ready to paste into a ticket or chat.</td></tr>
+    <tr><td class="rb"><button class="small ghost" type="button" tabindex="-1">Save image</button></td><td>Saves the screenshot as a <code>.jpg</code> named <code>&lt;flow&gt;-iter&lt;N&gt;-step&lt;M&gt;.jpg</code>.</td></tr>
+  </tbody></table></div>
+
+  <h3>The live status line vs. history</h3>
+  <div class="tw"><table><tbody>
+    <tr><td class="rb"><div class="st run">Run 2/5 · step 8/12</div></td><td>Live progress while a run is going (also on the on-page pill).</td></tr>
+    <tr><td class="rb"><div class="st ok">Finished!</div></td><td>The run completed. Check history for any failed steps that were retried.</td></tr>
+    <tr><td class="rb"><div class="st" style="color:var(--warn);border-color:rgba(255,176,32,.55)">Stopped.</div></td><td>You stopped it (■) or closed the tab.</td></tr>
+    <tr><td class="rb"><div class="st err">Error: …</div></td><td>The run couldn't continue (for example the flow was deleted mid-run).</td></tr>
+  </tbody></table></div>
+  <div class="co"><b>WHEN IS A RUN SAVED?</b><p>A run is added to history when it <b>ends</b> — finished, stopped or errored. A run that's still going isn't listed yet.</p></div>
+
+  <h3>What gets recorded for a failed step</h3>
   <ul>
-    <li><b>Show / Hide</b> expands the panel; <b>Clear</b> wipes all history.</li>
-    <li><b>Save this run</b> downloads one run (steps, results, screenshots, errors) as JSON.</li>
-    <li>Failed steps include a screenshot. Click it to view full size, or use <b>Copy image</b> (PNG to clipboard) / <b>Save image</b> (<code>.jpg</code>).</li>
+    <li>A <b>screenshot</b> of the visible part of the tab at the moment of failure (JPEG, reduced quality to save space — it won't show content scrolled out of view).</li>
+    <li>The <b>iteration</b> and <b>step number</b>, step type, selector and the exact <b>error text</b> (e.g. <code>Not found: #submit</code>).</li>
+    <li>A screenshot is taken for <b>every</b> failed attempt — including a step you then fixed and retried with ▶. That step shows as passed in the run, but its screenshot stays as evidence.</li>
   </ul>
-  <div class="co warn"><b>PRIVACY</b><p>Screenshots capture whatever was on screen when the step failed. Don't share them if they show private data. (Password inputs render as dots.)</p></div>
+
+  <h3>What's inside “Save this run”</h3>
+<pre class="cb2"><span class="k">{</span> <span class="s">"extension"</span>: <span class="s">"Flowcraft"</span>, <span class="s">"version"</span>: <span class="s">"1.1.0"</span>, <span class="s">"exportedAt"</span>: <span class="s">"2026-11-12T11:52:03.000Z"</span>,
+  <span class="s">"run"</span>: {
+    <span class="s">"flowName"</span>: <span class="s">"Seed users"</span>, <span class="s">"startedAt"</span>: <span class="s">"…"</span>, <span class="s">"finishedAt"</span>: <span class="s">"…"</span>,
+    <span class="s">"repeatRequested"</span>: 5, <span class="s">"delayMs"</span>: 300, <span class="s">"dataRows"</span>: 5,
+    <span class="s">"iterations"</span>: [{ <span class="s">"iter"</span>: 1, <span class="s">"steps"</span>: [
+      { <span class="s">"step"</span>: 1, <span class="s">"type"</span>: <span class="s">"input"</span>, <span class="s">"selector"</span>: <span class="s">"#email"</span>, <span class="s">"value"</span>: <span class="s">"user1@test.com"</span>, <span class="s">"ok"</span>: true, <span class="s">"error"</span>: null },
+      { <span class="s">"step"</span>: 4, <span class="s">"type"</span>: <span class="s">"click"</span>, <span class="s">"selector"</span>: <span class="s">"#submit"</span>, <span class="s">"ok"</span>: false, <span class="s">"error"</span>: <span class="s">"Not found: #submit"</span> } ] }],
+    <span class="s">"stopped"</span>: true, <span class="s">"error"</span>: <span class="s">"Stopped: step 4 failed — Not found: #submit"</span>
+  },
+  <span class="s">"errors"</span>: [{ <span class="s">"iter"</span>: 1, <span class="s">"step"</span>: 4, <span class="s">"error"</span>: <span class="s">"Not found: #submit"</span>, <span class="s">"screenshot"</span>: <span class="s">"data:image/jpeg;base64,…"</span> }]
+<span class="k">}</span></pre>
+  <p style="color:var(--muted);font-size:14px">Trimmed sample. Per-step <b>values used</b> are logged for data-driven runs so you can prove which row ran. Credential values are never logged.</p>
+
+  <h3>Limits &amp; storage</h3>
+  <div class="grid2">
+    <div class="mini"><b>Last 20 runs</b><span>Older runs are dropped automatically.</span></div>
+    <div class="mini"><b>Last 50 errors</b><span>Failure entries (with screenshots) are capped separately, oldest first.</span></div>
+    <div class="mini"><b>Local only</b><span>History lives in <code>chrome.storage.local</code>. Nothing is sent anywhere and nothing is written to disk until you click Save.</span></div>
+    <div class="mini"><b>Saved files</b><span>Land in <code>Downloads/Flowcraft/&lt;Mon DD YYYY&gt;/</code>. A run is named <code>&lt;flow&gt;-&lt;timestamp&gt;.json</code>.</span></div>
+  </div>
+  <div class="co only-sqa"><b><span class="rtag sqa">SQA</span>BUG EVIDENCE</b><p>Failed run → <b>Copy image</b> into the ticket, <b>Save this run</b> as an attachment, and quote the error text. The step number and selector tell the developer exactly where it broke.</p></div>
+  <div class="co only-dev"><b><span class="rtag dev">DEV</span>READING A RUN FILE</b><p>Search the JSON for <code>"ok": false</code> to find the failing step, then match its <code>selector</code> against your DOM. <code>iterations</code> shows which data row it happened on.</p></div>
+  <div class="co warn"><b>PRIVACY</b><p>Screenshots show everything visible on the page (password inputs render as dots). Data-driven run files list the non-credential values used. Review before sharing, and don't commit them to a public repo.</p></div>
 </section>
 
 <!-- 09 SECRETS -->
@@ -802,6 +871,10 @@ footer{margin-top:80px;padding-top:22px;border-top:1px solid var(--line);color:v
     <div class="mini"><b>Closing the tab stops the run</b><span>The history entry reads “Stopped: tab closed at step N”. Unlike a failed step, this can't be resumed.</span></div>
     <div class="mini"><b>Native dialogs</b><span><code>alert</code>/<code>confirm</code>/<code>prompt</code> are intercepted <i>only</i> while recording or replaying on that tab, and only noted as info steps. Outside that they behave normally.</span></div>
     <div class="mini"><b>Everything is local</b><span>Flows, settings, history and data files live in <code>chrome.storage.local</code> on your machine; nothing syncs or uploads.</span></div>
+    <div class="mini"><b>Values are captured when you leave a field</b><span>Typing is recorded on the field's <i>change</i> event — when you tab away, click elsewhere or press Enter — not on every keystroke. If you stop recording while still inside a field, click out of it first.</span></div>
+    <div class="mini"><b>How selectors are chosen</b><span>For each element Flowcraft tries, in order: a unique <code>#id</code> → a unique <code>data-testid</code>, <code>data-test</code>, <code>data-cy</code>, <code>data-qa</code>, <code>name</code>, <code>aria-label</code> or <code>placeholder</code> → a path of tags (with <code>:nth-of-type</code>) up to the nearest id. The last kind breaks easily when the layout changes.</span></div>
+    <div class="mini"><b>Automatic recovery from page loads</b><span>If a click starts a page load that tears down the target mid-step, Flowcraft waits for the new page and retries that step once on its own — separate from the “Retry a failed step once” option.</span></div>
+    <div class="mini"><b>Failed, then fixed</b><span>If you clear a problem and press ▶ the step is retried. It counts as passed in the run, but the screenshot of the earlier failure stays in Run history.</span></div>
     <div class="mini"><b>Credentials prompt</b><span>One dialog lists every blank username/password field. Press <kbd>Enter</kbd> to run or <kbd>Esc</kbd> to cancel.</span></div>
   </div>
 </section>
