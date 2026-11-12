@@ -676,7 +676,7 @@ footer{margin-top:80px;padding-top:22px;border-top:1px solid var(--line);color:v
     <tr><td><code>navigate</code> <small>“Go to URL”</small></td><td>Auto + manual</td><td>Loads a URL. Auto-recorded when the address changes without a click (typed URL, bookmark, redirect); can also be added by hand.</td></tr>
     <tr><td><code>fileUpload</code></td><td>Yes (field only)</td><td>Browsers never reveal a chosen file, so at the step Flowcraft shows a file chooser on the page. Tick <b>Remember this file</b> (max 2 MB) and it's stored with the flow — later runs, including unattended and data-driven ones, use it without asking. Remove it any time in Edit steps. The field's <code>accept</code> rules are enforced.</td></tr>
     <tr><td><code>keypress</code></td><td><kbd>Enter</kbd>/<kbd>Esc</kbd> auto</td><td>Dispatches keydown/keypress/keyup. Add it by hand with <b>Add step → Key press</b>, and choose Enter, Escape or Tab. Leave the selector empty to press the key on whatever currently has focus (handy for Tab). Synthetic, so it won't trigger a browser's native default (e.g. a plain form submit).</td></tr>
-    <tr><td><code>dialog</code></td><td>Yes (info)</td><td>Not replayed. Alerts/confirms/prompts are auto-handled during recording and replay.</td></tr>
+    <tr><td><code>dialog</code></td><td>Yes (info)</td><td>Not replayed. During recording and replay <code>alert</code> is swallowed, <code>confirm</code> auto-accepts and <code>prompt</code> returns its default; the step just notes that it happened.</td></tr>
     <tr><td><code>wait</code></td><td>Manual</td><td>Fixed pause in milliseconds (default 500).</td></tr>
     <tr><td><code>assertVisible</code></td><td>Manual</td><td>Fails the run if the element is missing or not visible.</td></tr>
     <tr><td><code>assertText</code></td><td>Manual</td><td>Fails unless the element's text equals (<b>Exact match</b>) or includes (<b>Contains</b>) the expected text. It keeps polling briefly, so text that loads late still passes.</td></tr>
@@ -691,7 +691,7 @@ footer{margin-top:80px;padding-top:22px;border-top:1px solid var(--line);color:v
     <li><b class="t">Download the template</b><span class="d">Click the <b><i class="ico" data-ico="template"></i> Excel icon</b> on the flow. You get a <code>.xlsx</code> with a <b>Link</b> column (each row's start URL — leave empty to use the flow's own), one column per input/checkbox selector (pre-filled with the recorded value), and a <b>Repeat</b> column.</span></li>
     <li><b class="t">Fill it in</b><span class="d">One row per run. A <b>Repeat</b> value runs that row more than once.</span></li>
     <li><b class="t">Run with data</b><span class="d">Click <b><i class="ico" data-ico="data"></i> Run with data</b> and choose the edited file. A <span class="badge">DATA</span> badge appears and a <b>Run data</b> button shows next to <b>Run</b>.</span></li>
-    <li><b class="t">Run it again any time</b><span class="d"><b>Run data</b> runs the stored file exactly as written — every row, repeated per its own Repeat — and shows a confirmation with the filename and first row before starting.</span></li>
+    <li><b class="t">Run it again any time</b><span class="d"><b>Run data</b> runs the stored file exactly as written — every row, repeated per its own Repeat — and shows a confirmation with the filename, the number of runs and the first row's values (up to six fields) before starting.</span></li>
   </ol>
   <h3>What the spreadsheet can change</h3>
   <p>Excel only swaps values into <b>some</b> steps. Everything else in the flow stays exactly as recorded or edited.</p>
@@ -736,7 +736,7 @@ footer{margin-top:80px;padding-top:22px;border-top:1px solid var(--line);color:v
     <thead><tr><th>Action</th><th>Result</th></tr></thead>
     <tbody>
     <tr><td><b><i class="ico" data-ico="export"></i> Export</b></td><td>Downloads that one flow as <code>&lt;flow name&gt;.json</code>.</td></tr>
-    <tr><td><b>Bulk export</b></td><td>Pick any flows from a checklist; get one JSON file.</td></tr>
+    <tr><td><b>Bulk export</b></td><td>Pick any flows from a checklist (All / None shortcuts); get one file named <code>flowcraft-YYYY-MM-DD.json</code>.</td></tr>
     <tr><td><b>Import</b></td><td>Loads a single or bulk file. Each flow gets a fresh ID; same-name flows are skipped and reported, so importing twice never creates duplicates.</td></tr>
     <tr><td><b><i class="ico" data-ico="duplicate"></i> Duplicate</b></td><td>Copies steps + start URL as <code>… (copy)</code>. Doesn't copy a data file.</td></tr>
     </tbody></table></div>
@@ -879,7 +879,7 @@ footer{margin-top:80px;padding-top:22px;border-top:1px solid var(--line);color:v
     <div class="mini"><b>File uploads: ask once or every time</b><span>Browsers never expose the real path of a chosen file, so Flowcraft shows a file chooser on the page at the step. Tick <b>Remember this file</b> (max 2 MB) to store it in the flow so later runs don't ask. A remembered file is <b>embedded in exports</b>, so shared JSON gets bigger. Cancelling the chooser fails the step (and pauses the run).</span></div>
     <div class="mini"><b>Iframes</b><span>Recording works inside every frame, and each step remembers which frame it happened in, so replay targets the right one.</span></div>
     <div class="mini"><b>Closing the tab stops the run</b><span>The history entry reads “Stopped: tab closed at step N”. Unlike a failed step, this can't be resumed.</span></div>
-    <div class="mini"><b>Native dialogs</b><span><code>alert</code>/<code>confirm</code>/<code>prompt</code> are intercepted <i>only</i> while recording or replaying on that tab, and only noted as info steps. Outside that they behave normally.</span></div>
+    <div class="mini"><b>Native dialogs are answered for you</b><span>While recording or replaying on a tab, <code>alert</code> is swallowed, <code>confirm</code> is <b>auto-accepted (OK)</b> and <code>prompt</code> returns its default value — otherwise a dialog would freeze the run. They're noted as info steps. Outside recording/replay they behave normally.</span></div>
     <div class="mini"><b>Everything is local</b><span>Flows, settings, history and data files live in <code>chrome.storage.local</code> on your machine; nothing syncs or uploads.</span></div>
     <div class="mini"><b>Values are captured when you leave a field</b><span>Typing is recorded on the field's <i>change</i> event — when you tab away, click elsewhere or press Enter — not on every keystroke. If you stop recording while still inside a field, click out of it first.</span></div>
     <div class="mini"><b>How selectors are chosen</b><span>For each element Flowcraft tries, in order: a unique <code>#id</code> → a unique <code>data-testid</code>, <code>data-test</code>, <code>data-cy</code>, <code>data-qa</code>, <code>name</code>, <code>aria-label</code> or <code>placeholder</code> → a path of tags (with <code>:nth-of-type</code>) up to the nearest id. The last kind breaks easily when the layout changes.</span></div>
@@ -904,6 +904,7 @@ footer{margin-top:80px;padding-top:22px;border-top:1px solid var(--line);color:v
     <tr><td><b>Very async apps</b></td><td>Auto-waiting helps, but you may still need a larger Delay or <code>wait</code> steps.</td></tr>
     <tr><td><b>CAPTCHA / 2FA / OTP</b></td><td>Intentionally resist automation. Either sign in by hand first, or let the run <b>pause</b> at the next step, solve it yourself and click ▶ (see <a href="#usecases">Human-in-the-loop</a>).</td></tr>
     <tr><td><b>New tabs / windows</b></td><td>Replay keeps driving the original tab, so <code>target="_blank"</code> links aren't followed.</td></tr>
+    <tr><td><b>Confirm dialogs</b></td><td>Replay always clicks <b>OK</b> on a <code>confirm()</code>, so the “Cancel” path can't be tested with a flow.</td></tr>
     <tr><td><b>Rich-text editors</b></td><td><code>contenteditable</code> areas aren't captured — only <code>input</code>, <code>select</code> and <code>textarea</code>.</td></tr>
     <tr><td><b>Hover, drag, canvas</b></td><td>Not recorded. Only clicks, field changes and <kbd>Enter</kbd>/<kbd>Esc</kbd> are.</td></tr>
     <tr><td><b>Spreadsheets</b></td><td>Single-sheet, no formulas or styles. Fine for real Excel/Sheets/LibreOffice output.</td></tr>
@@ -1079,7 +1080,7 @@ footer{margin-top:80px;padding-top:22px;border-top:1px solid var(--line);color:v
    ['Flow card','Run','Navigates the active tab to the start URL and replays the flow Repeat times. Asks for any blank credentials first.',BT('primary','Run')],
    ['Flow card','Run data','Appears once a data file is stored. Runs every row of that file, each repeated per its Repeat column, ignoring the popup Repeat field. Confirms the filename and first row first.',BT('data-run-btn','Run data')],
    ['Flow card','DATA badge and its ✕','Shows a data file is stored (hover: filename and row count). The ✕ removes it and hides Run data.','<span class="data-badge">DATA<i>✕</i></span>'],
-   ['Flow card','Rename','Renames the flow (same uniqueness rule as saving).',IB('violet','rename')],
+   ['Flow card','Rename','Renames the flow (same uniqueness rule as saving). Leaving the name blank keeps the old one; a taken name asks you to choose another.',IB('violet','rename')],
    ['Flow card','Edit steps','Opens the step editor for this flow.',IB('cyan','edit')],
    ['Flow card','Run with data','Opens the data picker in its own tab to choose and validate a spreadsheet.',IB('cyan','data')],
    ['Flow card','Download data template','Downloads an .xlsx with Link, one column per input/checkbox selector (pre-filled), and Repeat.',IB('green','template')],
@@ -1116,7 +1117,7 @@ footer{margin-top:80px;padding-top:22px;border-top:1px solid var(--line);color:v
    ['On the page','Run pill','Run n/N · Step n/N, draggable. Status button pulses; after a failure it becomes a ▶ retry button. ■ stops.','<span style="'+PILL+'"><span style="width:20px;height:20px;border-radius:50%;background:#35e6ff30;color:var(--cyan);display:grid;place-items:center;font-size:8px">▶</span>Run <b style="color:var(--cyan)">1/1</b> · Step <b style="color:var(--cyan)">4/6</b><span style="'+STOPC+'">■</span></span>'],
    ['On the page','File chooser overlay','Appears at a file-upload step (unless a file is already remembered). Pick the file, and optionally tick “Remember this file” (max 2 MB) to store it in the flow.','<div class="modal"><strong>Flowcraft needs a file</strong><div style="font:11px var(--mono);color:#8fa2c2;margin-bottom:8px">#resume-upload</div><div class="lk" style="margin-bottom:8px"><span class="fi" style="padding:5px 8px;font-size:11px">Choose file</span></div>'+CK('Remember this file (max 2 MB)',1)+'</div>'],
    ['Dialogs','Credentials dialog','Lists blank username/password fields. Enter = Run, Esc = Cancel.','<div class="modal"><strong>Enter credentials</strong><div class="fl">Password — #password</div>'+FI('••••••••')+'<div class="lk" style="margin-top:8px;justify-content:flex-end">'+BT('ghost small','Cancel')+BT('primary small','Run')+'</div></div>'],
-   ['Dialogs','Confirm / alert / prompt','Themed replacements for the browser’s own dialogs (delete, clear, rename, errors).','<div class="modal"><strong>Confirm</strong><div style="font-size:12px;color:var(--muted);margin-bottom:8px">Delete this flow?</div><div class="lk" style="justify-content:flex-end">'+BT('ghost small','Cancel')+BT('danger small','OK')+'</div></div>'],
+   ['Dialogs','Confirm / alert / prompt','Themed replacements for the browser’s own dialogs (delete, clear, rename, errors). In all of them Enter confirms and Esc cancels.','<div class="modal"><strong>Confirm</strong><div style="font-size:12px;color:var(--muted);margin-bottom:8px">Delete this flow?</div><div class="lk" style="justify-content:flex-end">'+BT('ghost small','Cancel')+BT('danger small','OK')+'</div></div>'],
    ['Keyboard','Ctrl+Shift+E  (⌘⇧E on Mac)','Start or stop recording without opening the popup. Remap at chrome://extensions/shortcuts.','<span><kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>E</kbd></span>']
   ];
   var refBody=$('#refTbl tbody'),chipBox=$('#refChips'),curArea='All';

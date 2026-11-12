@@ -112,7 +112,7 @@ manual steps that can't be captured by recording alone:
 | `navigate` | Auto-recorded for typed/bookmark/redirect URL changes; can be added manually ("Go to URL") | Loads the URL and waits for the page. |
 | `fileUpload` | Yes (field only) | You're asked to choose a file on the page; tick **Remember this file** (max 2 MB) to store it in the flow so later runs don't ask. A stored file is embedded in exports and can be removed in Edit steps. |
 | `keypress` | `Enter` / `Escape` auto-captured; also add one via **Add step → Key press** (Enter, Escape or Tab; an empty selector presses the key on the focused element) | Dispatches a real `keydown`/`keypress`/`keyup` sequence for the given key. Reaches JS `keydown` listeners, but — being synthetic — won't trigger a browser's *native* default action (e.g. a plain `<form>` submitting on Enter with no JS involved). |
-| `dialog` | Yes (informational) | Not replayed — `alert`/`confirm`/`prompt` calls are auto-handled during recording/replay by `dialog-guard.js`; this step just records that one happened. |
+| `dialog` | Yes (informational) | Not replayed — during recording/replay `dialog-guard.js` swallows `alert`, auto-accepts `confirm` (OK) and answers `prompt` with its default value; this step just records that one happened. |
 | `wait` | No — add manually | A fixed pause (ms), no page access needed. |
 | `assertVisible` | No — add manually | Fails the run if the selector's element isn't found or isn't visible. |
 | `assertText` | No — add manually | Fails the run unless an element's text exactly matches (or, in "contains" mode, includes) an expected value. |
