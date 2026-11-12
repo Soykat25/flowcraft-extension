@@ -16,7 +16,7 @@
 <br>
 
 <a href="https://soykat25.github.io/flowcraft-extension/">
-  <img src="docs/assets/manual-banner.svg" alt="Read the Flowcraft user manual online — illustrated, interactive, searchable" width="760">
+  <img src="docs/assets/manual-banner.svg?v=2" alt="Read the Flowcraft user manual online — illustrated, interactive, searchable" width="760">
 </a>
 
 <br>
