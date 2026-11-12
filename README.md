@@ -10,7 +10,17 @@
 ![Dependencies: 0](https://img.shields.io/badge/dependencies-0-brightgreen.svg)
 ![Status: Beta](https://img.shields.io/badge/status-beta-orange.svg)
 
-[**User manual**](https://soykat25.github.io/flowcraft-extension/) · [Quick start](#quick-start) · [Features](#features) · [Data-driven runs](#data-driven-runs) · [How it works](#how-it-works) · [FAQ](#faq) · [Docs](#documentation) · [Contributing](#contributing)
+<br>
+
+<a href="https://soykat25.github.io/flowcraft-extension/">
+  <img src="https://img.shields.io/badge/%F0%9F%93%96%20READ%20THE%20USER%20MANUAL-Open%20online%20%E2%86%92-35e6ff?style=for-the-badge&labelColor=0a0f1e" alt="Read the Flowcraft user manual online" height="44">
+</a>
+
+<sub>Illustrated, interactive, searchable — with guides for SQA and developers.</sub>
+
+<br>
+
+[Quick start](#quick-start) · [Features](#features) · [Data-driven runs](#data-driven-runs) · [How it works](#how-it-works) · [FAQ](#faq) · [Docs](#documentation) · [Contributing](#contributing)
 
 </div>
 
