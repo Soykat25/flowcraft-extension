@@ -650,6 +650,24 @@ footer{margin-top:80px;padding-top:22px;border-top:1px solid var(--line);color:v
     <li><b class="t">Run with data</b><span class="d">Click <b>≡ Run with data</b> and choose the edited file. A <span class="badge">DATA</span> badge appears and a <b>Run data</b> button shows next to <b>Run</b>.</span></li>
     <li><b class="t">Run it again any time</b><span class="d"><b>Run data</b> runs the stored file exactly as written — every row, repeated per its own Repeat — and shows a confirmation with the filename and first row before starting.</span></li>
   </ol>
+  <h3>What the spreadsheet can change</h3>
+  <p>Excel only swaps values into <b>some</b> steps. Everything else in the flow stays exactly as recorded or edited.</p>
+  <div class="grid2">
+    <div class="mini" style="border-color:#37f0a860"><b style="color:var(--ok)">✔ Changes per row</b><span>
+      • <b>Input steps</b> — the text typed into a field (text, number, date, search box…)<br>
+      • <b>Checkbox / radio steps</b> — checked or not: <code>true</code>, <code>1</code>, <code>yes</code> or <code>y</code> (any case) = checked, anything else = unchecked<br>
+      • <b>Start URL</b> — the <code>Link</code> column, so a row can target another environment<br>
+      • <b>How many times</b> — the <code>Repeat</code> column</span></div>
+    <div class="mini" style="border-color:#ff4d6d60"><b style="color:var(--danger)">✖ Never changed by Excel</b><span>
+      • <b>Clicks</b> and key presses<br>
+      • <b>Wait</b> times and <b>Go to URL</b> steps<br>
+      • <b>Assertions</b> — expected text and what to look for stay fixed<br>
+      • <b>File uploads</b> — you still pick the file at each run<br>
+      • <b>Credentials</b> — if a username/password isn't stored you're prompted once, and that value is used for every row</span></div>
+  </div>
+  <div class="co warn"><b>HOW A COLUMN FINDS ITS STEP</b><p>The column header must equal the step's selector exactly (that's why the template is the safest starting point). If the same selector appears in several steps, they all get the row's value. Delete a column you don't want to vary — a selector with no column keeps its recorded value. <i>Tip:</i> remove unused columns instead of leaving them blank, because a blank cell can overwrite the field with an empty value.</p></div>
+  <div class="co only-sqa"><b><span class="rtag sqa">SQA</span>ASSERTIONS DON'T VARY BY ROW</b><p>Because expected text is fixed, one flow can't check “valid login → Welcome” <i>and</i> “wrong password → Error” from different rows. Keep happy-path rows in one flow, and make a duplicate flow (with its own assertion) for the negative cases. Or use only <code>assertVisible</code> on an element that appears in every row.</p></div>
+
   <h3>Try the row calculator</h3>
   <div class="card">
     <div class="calc" id="calc"></div>
