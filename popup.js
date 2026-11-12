@@ -529,8 +529,18 @@ function buildStepItem(step, idx, total) {
   if (step.type === 'fileUpload') {
     const note = document.createElement('div');
     note.className = 'hint';
-    note.textContent = 'You’ll be asked to choose a file for this field each time the flow runs.';
-    item.appendChild(note);
+    if (step.file && step.file.base64) {
+      note.textContent = 'Stored file: ' + step.file.name + ' (' + Math.max(1, Math.round(step.file.base64.length * 3 / 4 / 1024)) +
+        ' KB) — used on every run, and embedded in exports of this flow.';
+      item.appendChild(note);
+      item.appendChild(mkStepBtn('Remove stored file', 'Remove stored file — you’ll be asked again each run', () => {
+        delete step.file;
+        renderStepsList();
+      }));
+    } else {
+      note.textContent = 'You’ll be asked to choose a file for this field each time the flow runs. Tick “Remember this file” in that prompt to store it (max 2 MB).';
+      item.appendChild(note);
+    }
   }
 
   if (step.type === 'dialog') {
@@ -589,6 +599,7 @@ $('#addStepBtn').onclick = () => {
   let step;
   if (type === 'wait') step = { type: 'wait', ms: 500 };
   else if (type === 'navigate') step = { type: 'navigate', url: '' };
+  else if (type === 'keypress') step = { type: 'keypress', selector: '', key: 'Tab' };
   else if (type === 'assertVisible') step = { type: 'assertVisible', selector: '' };
   else step = { type: 'assertText', selector: '', expectedText: '', matchMode: 'exact' };
   stepsEditorCtx.steps.push(step);

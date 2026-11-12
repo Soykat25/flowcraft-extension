@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased
+
+- **Key press** can now be added from **Add step** (Enter / Escape / Tab). With no selector it presses the key on the focused element.
+- **Remember this file** option in the file-upload prompt: the file (max 2 MB) is stored with the flow so later and unattended runs don't prompt again. Embedded in exports; removable in Edit steps.
+
 ## 1.1.0 — Version 1 (Beta)
 
 Additions on top of the original recorder/replayer:

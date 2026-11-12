@@ -631,8 +631,8 @@ footer{margin-top:80px;padding-top:22px;border-top:1px solid var(--line);color:v
     <tr><td><code>input</code></td><td>Yes</td><td>Sets a field's value and fires <code>input</code>/<code>change</code> so React-style forms notice.</td></tr>
     <tr><td><code>setChecked</code></td><td>Yes</td><td>Sets a checkbox, radio or switch (a “Checked” tick box in the editor).</td></tr>
     <tr><td><code>navigate</code> <small>“Go to URL”</small></td><td>Auto + manual</td><td>Loads a URL. Auto-recorded when the address changes without a click (typed URL, bookmark, redirect); can also be added by hand.</td></tr>
-    <tr><td><code>fileUpload</code></td><td>Yes (field only)</td><td>The file isn't stored. On every run Flowcraft pauses and asks you to choose a file on the page. The field's <code>accept</code> rules are enforced.</td></tr>
-    <tr><td><code>keypress</code></td><td><kbd>Enter</kbd>/<kbd>Esc</kbd> auto</td><td>Dispatches keydown/keypress/keyup. In the editor you can switch a key between Enter, Escape and Tab (Add step doesn't create new keypress steps). Synthetic, so it won't trigger a browser's native default (e.g. a plain form submit).</td></tr>
+    <tr><td><code>fileUpload</code></td><td>Yes (field only)</td><td>Browsers never reveal a chosen file, so at the step Flowcraft shows a file chooser on the page. Tick <b>Remember this file</b> (max 2 MB) and it's stored with the flow — later runs, including unattended and data-driven ones, use it without asking. Remove it any time in Edit steps. The field's <code>accept</code> rules are enforced.</td></tr>
+    <tr><td><code>keypress</code></td><td><kbd>Enter</kbd>/<kbd>Esc</kbd> auto</td><td>Dispatches keydown/keypress/keyup. Add it by hand with <b>Add step → Key press</b>, and choose Enter, Escape or Tab. Leave the selector empty to press the key on whatever currently has focus (handy for Tab). Synthetic, so it won't trigger a browser's native default (e.g. a plain form submit).</td></tr>
     <tr><td><code>dialog</code></td><td>Yes (info)</td><td>Not replayed. Alerts/confirms/prompts are auto-handled during recording and replay.</td></tr>
     <tr><td><code>wait</code></td><td>Manual</td><td>Fixed pause in milliseconds (default 500).</td></tr>
     <tr><td><code>assertVisible</code></td><td>Manual</td><td>Fails the run if the element is missing or not visible.</td></tr>
@@ -662,7 +662,7 @@ footer{margin-top:80px;padding-top:22px;border-top:1px solid var(--line);color:v
       • <b>Clicks</b> and key presses<br>
       • <b>Wait</b> times and <b>Go to URL</b> steps<br>
       • <b>Assertions</b> — expected text and what to look for stay fixed<br>
-      • <b>File uploads</b> — you still pick the file at each run<br>
+      • <b>File uploads</b> — the same file is used for every row (remembered, or picked at each run)<br>
       • <b>Credentials</b> — if a username/password isn't stored you're prompted once, and that value is used for every row</span></div>
   </div>
   <div class="co warn"><b>HOW A COLUMN FINDS ITS STEP</b><p>The column header must equal the step's selector exactly (that's why the template is the safest starting point). If the same selector appears in several steps, they all get the row's value. Delete a column you don't want to vary — a selector with no column keeps its recorded value. <i>Tip:</i> remove unused columns instead of leaving them blank, because a blank cell can overwrite the field with an empty value.</p></div>
@@ -755,7 +755,7 @@ footer{margin-top:80px;padding-top:22px;border-top:1px solid var(--line);color:v
     <div class="mini"><b>Every run starts clean</b><span>Before each run (and each repeat or data row) the tab goes to <code>about:blank</code> and then to the start URL, so every iteration begins from a genuine full page load.</span></div>
     <div class="mini"><b>Per-row start URL</b><span>A <code>Link</code> (or <code>URL</code>) column in the data file sends that row to its own address. An invalid link is logged as an error for that row.</span></div>
     <div class="mini"><b>Checkbox values in data</b><span>For checkbox/radio columns, <code>true</code>, <code>1</code>, <code>yes</code> or <code>y</code> (any case) means checked; anything else unchecks.</span></div>
-    <div class="mini"><b>File uploads ask every time</b><span>Browsers never expose the real path of a chosen file, so Flowcraft pauses at the step and shows a file chooser on the page. If you cancel, that step fails (and the run pauses).</span></div>
+    <div class="mini"><b>File uploads: ask once or every time</b><span>Browsers never expose the real path of a chosen file, so Flowcraft shows a file chooser on the page at the step. Tick <b>Remember this file</b> (max 2 MB) to store it in the flow so later runs don't ask. A remembered file is <b>embedded in exports</b>, so shared JSON gets bigger. Cancelling the chooser fails the step (and pauses the run).</span></div>
     <div class="mini"><b>Iframes</b><span>Recording works inside every frame, and each step remembers which frame it happened in, so replay targets the right one.</span></div>
     <div class="mini"><b>Closing the tab stops the run</b><span>The history entry reads “Stopped: tab closed at step N”. Unlike a failed step, this can't be resumed.</span></div>
     <div class="mini"><b>Native dialogs</b><span><code>alert</code>/<code>confirm</code>/<code>prompt</code> are intercepted <i>only</i> while recording or replaying on that tab, and only noted as info steps. Outside that they behave normally.</span></div>
@@ -952,14 +952,15 @@ footer{margin-top:80px;padding-top:22px;border-top:1px solid var(--line);color:v
    ['Step editor','Milliseconds','Length of a wait step.'],
    ['Step editor','Expected text + Exact/Contains','What an assertText step looks for, and how strictly.'],
    ['Step editor','Key dropdown','Switch a keypress step between Enter, Escape and Tab.'],
-   ['Step editor','Add step dropdown + Add step','Adds Wait, Go to URL, Assert visible or Assert text at the end of the list.'],
+   ['Step editor','Add step dropdown + Add step','Adds Wait, Go to URL, Key press, Assert visible or Assert text at the end of the list.'],
+   ['Step editor','Remove stored file','Shown on a file-upload step that has a remembered file. Removes it so you\u2019re asked again at each run.'],
    ['Step editor','Save / Cancel','Save writes the steps and start URL; Cancel discards your edits.'],
    ['Data picker','Choose file…','Pick the Excel (.xlsx) file named exactly like the template (.csv/.json also read as fallbacks).'],
    ['Data picker','Preview line','Shows whether the file was accepted, its row count, or why it was rejected.'],
    ['Data picker','Run / Cancel','Run stays disabled until the file validates, then asks for credentials if needed and starts.'],
    ['On the page','Recording pill','Pulsing dot, live step count, draggable grip, red ■ to stop.'],
    ['On the page','Run pill','Run n/N · Step n/N, draggable. Status button pulses; after a failure it becomes a ▶ retry button. ■ stops.'],
-   ['On the page','File chooser overlay','Appears at a file-upload step so you can pick the file for this run.'],
+   ['On the page','File chooser overlay','Appears at a file-upload step (unless a file is already remembered). Pick the file, and optionally tick “Remember this file” (max 2 MB) to store it in the flow.'],
    ['Dialogs','Credentials dialog','Lists blank username/password fields. Enter = Run, Esc = Cancel.'],
    ['Dialogs','Confirm / alert / prompt','Themed replacements for the browser\u2019s own dialogs (delete, clear, rename, errors).'],
    ['Keyboard','Ctrl+Shift+E  (⌘⇧E)','Start or stop recording without opening the popup. Remap at chrome://extensions/shortcuts.']

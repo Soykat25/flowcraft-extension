@@ -382,12 +382,16 @@ async function pageExec(step) {
         };
       }
       case 'keypress': {
-        const el = await waitFor(step.selector, step.text);
+        // No selector (e.g. a manually added Tab step) = press the key on
+        // whatever currently has focus.
+        const el = step.selector ? await waitFor(step.selector, step.text) : (document.activeElement || document.body);
         if (!el) return { ok: false, error: 'Not found: ' + step.selector };
-        if (!(await waitActionable(el, {}))) {
-          return { ok: false, error: 'Not actionable (disabled or hidden): ' + step.selector };
+        if (step.selector) {
+          if (!(await waitActionable(el, {}))) {
+            return { ok: false, error: 'Not actionable (disabled or hidden): ' + step.selector };
+          }
+          if (el.focus) el.focus();
         }
-        if (el.focus) el.focus();
         const KEYS = {
           Enter: { key: 'Enter', code: 'Enter', keyCode: 13 },
           Escape: { key: 'Escape', code: 'Escape', keyCode: 27 },
@@ -502,10 +506,19 @@ async function promptFileInTab(tabId, selector) {
     const res = await chrome.tabs.sendMessage(
       tabId, { cmd: 'promptFileUpload', selector }, { frameId: 0 }
     );
-    return (res && res.ok && res.file) || null;
+    return (res && res.ok && res.file) ? Object.assign({}, res.file, { remember: !!res.remember }) : null;
   } catch (e) {
     return null;
   }
+}
+
+async function rememberUploadFile(flowId, stepIndex, file) {
+  const flows = await get('flows', []);
+  const f = flows.find((x) => x.id === flowId);
+  const st = f && f.steps[stepIndex];
+  if (!st || st.type !== 'fileUpload') return;
+  st.file = file;
+  await set({ flows });
 }
 
 // ---------- diagnostics / log history ----------
@@ -606,13 +619,22 @@ async function runFlow({ flowId, repeat, delay, secrets, dataRows, ignoreRepeatC
         const step = Object.assign({}, flow.steps[s]);
         if (step.secret && secrets && secrets[step.selector] != null) {
           step.value = secrets[step.selector];
-        } else if (step.type === 'fileUpload') {
+        } else if (step.type === 'fileUpload' && !(step.file && step.file.base64)) {
           // A script can never recover what was picked at record time
           // (browsers only expose a fake path), so pause right here and ask
           // for a real file via the on-page overlay — pageExec's own "No
           // file chosen" check below covers a cancel (picked stays null).
           const picked = await promptFileInTab(tabId, step.selector);
-          if (picked) step.file = picked;
+          if (picked) {
+            const { remember, ...file } = picked;
+            step.file = file;
+            // "Remember this file" — keep it on the saved step so later runs
+            // (including unattended / data-driven ones) don't prompt again.
+            if (remember) {
+              flow.steps[s].file = file;
+              await rememberUploadFile(flow.id, s, file);
+            }
+          }
         } else if (rowData && rowData[step.selector] != null &&
           (step.type === 'input' || step.type === 'setChecked')) {
           // Data-driven run: substitute this iteration's row value, keyed by
@@ -1017,7 +1039,12 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
                 ms: s.ms != null ? Number(s.ms) || 0 : undefined,
                 expectedText: s.expectedText != null ? String(s.expectedText) : undefined,
                 matchMode: s.matchMode || undefined,
-                key: s.key || undefined
+                key: s.key || undefined,
+                // A remembered upload file travels with the flow; validate shape/size.
+                file: (s.type === 'fileUpload' && s.file && typeof s.file.base64 === 'string' &&
+                  s.file.base64.length <= 2796203 && /^[A-Za-z0-9+/=]*$/.test(s.file.base64))
+                  ? { name: String(s.file.name || 'upload'), type: String(s.file.type || ''), base64: s.file.base64 }
+                  : undefined
               }));
             if (!steps.length) { skipped++; continue; }
 

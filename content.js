@@ -540,11 +540,14 @@
         '.cancel{background:rgba(255,255,255,.08);color:#dbe7f7;}' +
         '.ok{background:linear-gradient(180deg,#35e6ff,#20b8d6);color:#00232b;}' +
         '.ok:disabled{opacity:.4;cursor:not-allowed;}' +
+        '.rem{display:flex;gap:7px;align-items:flex-start;margin-top:12px;font-size:12px;color:#8fa2c2;cursor:pointer;}' +
+        '.rem input{margin-top:2px;}' +
         '</style>' +
         '<div class="backdrop"><div class="card">' +
         '<strong>Flowcraft needs a file</strong>' +
         '<div class="sel"></div>' +
         '<input type="file">' +
+        '<label class="rem"><input type="checkbox" class="rem-cb"><span class="rem-t">Remember this file for this flow (max 2 MB)</span></label>' +
         '<div class="row">' +
         '<button class="cancel" type="button">Cancel</button>' +
         '<button class="ok" type="button" disabled>Run</button>' +
@@ -559,7 +562,19 @@
         host.remove();
         resolve(result);
       }
-      fileInput.addEventListener('change', () => { okBtn.disabled = !fileInput.files[0]; });
+      const remCb = shadow.querySelector('.rem-cb');
+      const remTxt = shadow.querySelector('.rem-t');
+      const MAX_REMEMBER = 2 * 1024 * 1024;
+      fileInput.addEventListener('change', () => {
+        const f = fileInput.files[0];
+        okBtn.disabled = !f;
+        const tooBig = !!f && f.size > MAX_REMEMBER;
+        if (tooBig) remCb.checked = false;
+        remCb.disabled = tooBig;
+        remTxt.textContent = tooBig
+          ? 'Too large to remember (max 2 MB) — you’ll be asked on every run'
+          : 'Remember this file for this flow (max 2 MB)';
+      });
       cancelBtn.addEventListener('click', () => done({ ok: false }));
       okBtn.addEventListener('click', () => {
         const file = fileInput.files[0];
@@ -567,7 +582,7 @@
         const reader = new FileReader();
         reader.onload = () => {
           const base64 = String(reader.result).split(',', 2)[1] || '';
-          done({ ok: true, file: { name: file.name, type: file.type, base64 } });
+          done({ ok: true, file: { name: file.name, type: file.type, base64 }, remember: remCb.checked && !remCb.disabled });
         };
         reader.onerror = () => done({ ok: false });
         reader.readAsDataURL(file);

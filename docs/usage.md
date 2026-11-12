@@ -109,8 +109,8 @@ manual steps that can't be captured by recording alone:
 | `input` | Yes | Sets a text/number/date/etc. field's value, dispatching `input`/`change` so React-style forms register it. |
 | `setChecked` | Yes | Sets a checkbox/radio/switch's checked state. |
 | `navigate` | Auto-recorded for typed/bookmark/redirect URL changes; can be added manually ("Go to URL") | Loads the URL and waits for the page. |
-| `fileUpload` | Yes (field only) | The file is not stored; you're asked to choose one on the page at every run. |
-| `keypress` | `Enter` / `Escape` auto-captured; in the editor a key can be switched to `Tab` | Dispatches a real `keydown`/`keypress`/`keyup` sequence for the given key. Reaches JS `keydown` listeners, but — being synthetic — won't trigger a browser's *native* default action (e.g. a plain `<form>` submitting on Enter with no JS involved). |
+| `fileUpload` | Yes (field only) | You're asked to choose a file on the page; tick **Remember this file** (max 2 MB) to store it in the flow so later runs don't ask. A stored file is embedded in exports and can be removed in Edit steps. |
+| `keypress` | `Enter` / `Escape` auto-captured; also add one via **Add step → Key press** (Enter, Escape or Tab; an empty selector presses the key on the focused element) | Dispatches a real `keydown`/`keypress`/`keyup` sequence for the given key. Reaches JS `keydown` listeners, but — being synthetic — won't trigger a browser's *native* default action (e.g. a plain `<form>` submitting on Enter with no JS involved). |
 | `dialog` | Yes (informational) | Not replayed — `alert`/`confirm`/`prompt` calls are auto-handled during recording/replay by `dialog-guard.js`; this step just records that one happened. |
 | `wait` | No — add manually | A fixed pause (ms), no page access needed. |
 | `assertVisible` | No — add manually | Fails the run if the selector's element isn't found or isn't visible. |
