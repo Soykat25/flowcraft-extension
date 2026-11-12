@@ -1,24 +1,17 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 200" width="880" height="200" role="img" aria-label="Read the Flowcraft user manual online">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 250" width="900" height="250" role="img" aria-label="Read the Flowcraft user manual online">
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#0a1226"/>
-      <stop offset="1" stop-color="#150f33"/>
+      <stop offset="0" stop-color="#0b0713"/>
+      <stop offset="1" stop-color="#1c0a14"/>
     </linearGradient>
-    <linearGradient id="ring" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0" stop-color="#35e6ff"/>
-      <stop offset="0.5" stop-color="#b06cff"/>
-      <stop offset="1" stop-color="#35e6ff"/>
-    </linearGradient>
+    <radialGradient id="cardHeat" cx="0.5" cy="0" r="0.9">
+      <stop offset="0" stop-color="#ff5a1a" stop-opacity="0.28"/>
+      <stop offset="1" stop-color="#ff5a1a" stop-opacity="0"/>
+    </radialGradient>
     <linearGradient id="title" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0" stop-color="#6ff0ff"/>
-      <stop offset="1" stop-color="#c58bff"/>
-    </linearGradient>
-    <linearGradient id="fireBtn" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#fff07a"/>
-      <stop offset="0.5" stop-color="#ff9a1f">
-        <animate attributeName="offset" values="0.45;0.62;0.5;0.58;0.45" dur="0.9s" repeatCount="indefinite"/>
-      </stop>
-      <stop offset="1" stop-color="#ff3d0a"/>
+      <stop offset="0" stop-color="#fff4d6"/>
+      <stop offset="0.5" stop-color="#ffb347"/>
+      <stop offset="1" stop-color="#ff6a2a"/>
     </linearGradient>
     <linearGradient id="flameOuter" x1="0" y1="1" x2="0" y2="0">
       <stop offset="0" stop-color="#e00a0a"/>
@@ -30,48 +23,777 @@
       <stop offset="0" stop-color="#ff8a1c"/>
       <stop offset="1" stop-color="#fffdf2"/>
     </linearGradient>
-    <radialGradient id="ground" cx="0.5" cy="1" r="0.8">
-      <stop offset="0" stop-color="#ff6a13" stop-opacity="0.55"/>
-      <stop offset="1" stop-color="#ff6a13" stop-opacity="0"/>
-    </radialGradient>
-    <pattern id="grid" width="26" height="26" patternUnits="userSpaceOnUse">
-      <path d="M26 0H0V26" fill="none" stroke="#35e6ff" stroke-opacity="0.07" stroke-width="1"/>
-    </pattern>
-    <filter id="glow" x="-20%" y="-40%" width="140%" height="180%">
-      <feGaussianBlur stdDeviation="7" result="b"/>
-      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-    </filter>
-    <filter id="soft" x="-30%" y="-60%" width="160%" height="220%"><feGaussianBlur stdDeviation="12"/></filter>
-    <filter id="fireGlow" x="-50%" y="-150%" width="200%" height="400%"><feGaussianBlur stdDeviation="11"/></filter>
-    <filter id="smokeBlur" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="6"/></filter>
-    <filter id="heat" x="-30%" y="-90%" width="160%" height="220%">
-      <feTurbulence type="fractalNoise" baseFrequency="0.018 0.045" numOctaves="2" seed="4" result="n">
-        <animate attributeName="baseFrequency" values="0.018 0.045;0.03 0.07;0.018 0.045" dur="1.3s" repeatCount="indefinite"/>
-      </feTurbulence>
-      <feDisplacementMap in="SourceGraphic" in2="n" scale="6" xChannelSelector="R" yChannelSelector="G"/>
-    </filter>
     <radialGradient id="pillInner" cx="0.5" cy="0.9" r="0.75">
       <stop offset="0" stop-color="#ff3a1f" stop-opacity="0.55"/>
       <stop offset="0.55" stop-color="#7a0510" stop-opacity="0.35"/>
       <stop offset="1" stop-color="#150005" stop-opacity="0"/>
     </radialGradient>
-    <filter id="neonBlur" x="-20%" y="-60%" width="140%" height="220%"><feGaussianBlur stdDeviation="3.2"/></filter>
+    <pattern id="grid" width="26" height="26" patternUnits="userSpaceOnUse">
+      <path d="M26 0H0V26" fill="none" stroke="#ff7a3a" stroke-opacity="0.06" stroke-width="1"/>
+    </pattern>
+    <filter id="glow" x="-20%" y="-40%" width="140%" height="180%">
+      <feGaussianBlur stdDeviation="6" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="neonBlur" x="-10%" y="-40%" width="120%" height="180%"><feGaussianBlur stdDeviation="4"/></filter>
+    <filter id="bigGlow" x="-10%" y="-60%" width="120%" height="220%"><feGaussianBlur stdDeviation="12"/></filter>
+    <filter id="smokeBlur" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="6"/></filter>
     <filter id="textGlow" x="-30%" y="-80%" width="160%" height="260%">
       <feGaussianBlur stdDeviation="2.2" result="b"/>
       <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
     </filter>
-    <clipPath id="card"><rect x="6" y="6" width="868" height="188" rx="20"/></clipPath>
+    <filter id="heat" x="-5%" y="-120%" width="110%" height="260%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.018 0.045" numOctaves="2" seed="4" result="n">
+        <animate attributeName="baseFrequency" values="0.018 0.045;0.03 0.07;0.018 0.045" dur="1.3s" repeatCount="indefinite"/>
+      </feTurbulence>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="6" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
   </defs>
 
-  <rect x="6" y="6" width="868" height="188" rx="20" fill="none" stroke="url(#ring)" stroke-width="4" opacity="0.5" filter="url(#soft)"/>
-  <rect x="6" y="6" width="868" height="188" rx="20" fill="url(#bg)"/>
-  <rect x="6" y="6" width="868" height="188" rx="20" fill="url(#grid)"/>
-  <rect x="6" y="6" width="868" height="188" rx="20" fill="none" stroke="url(#ring)" stroke-width="2.5"/>
+  <!-- red floor reflection under the whole card -->
+  <ellipse cx="450" cy="230" rx="400" ry="9" fill="#ff2a10" opacity="0.8" filter="url(#bigGlow)">
+    <animate attributeName="opacity" values="0.55;0.95;0.65;0.9;0.55" dur="0.9s" repeatCount="indefinite"/>
+  </ellipse>
+  <ellipse cx="450" cy="229" rx="250" ry="2.6" fill="#ffb27a" opacity="0.9"/>
+
+  <!-- neon halo around the whole card -->
+  <rect x="24" y="44" width="852" height="170" rx="22" fill="none" stroke="#ff1f1f" stroke-width="12" opacity="0.6" filter="url(#bigGlow)">
+    <animate attributeName="opacity" values="0.45;0.8;0.5;0.75;0.45" dur="0.8s" repeatCount="indefinite"/>
+  </rect>
+
+  <!-- card -->
+  <rect x="24" y="44" width="852" height="170" rx="22" fill="url(#bg)"/>
+  <rect x="24" y="44" width="852" height="170" rx="22" fill="url(#cardHeat)"/>
+  <rect x="24" y="44" width="852" height="170" rx="22" fill="url(#grid)"/>
+
+  <!-- smoke -->
+  <g>
+    <circle cx="150" cy="30" r="10" fill="#1c1411" filter="url(#smokeBlur)">
+      <animate attributeName="cy" values="30;4" dur="3.4s" begin="0s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0;0.35;0" dur="3.4s" begin="0s" repeatCount="indefinite"/>
+      <animate attributeName="r" values="7;18" dur="3.4s" begin="0s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="330" cy="30" r="10" fill="#1c1411" filter="url(#smokeBlur)">
+      <animate attributeName="cy" values="30;4" dur="3.9s" begin="1.0s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0;0.35;0" dur="3.9s" begin="1.0s" repeatCount="indefinite"/>
+      <animate attributeName="r" values="7;18" dur="3.9s" begin="1.0s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="520" cy="30" r="10" fill="#1c1411" filter="url(#smokeBlur)">
+      <animate attributeName="cy" values="30;4" dur="3.5s" begin="2.0s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0;0.35;0" dur="3.5s" begin="2.0s" repeatCount="indefinite"/>
+      <animate attributeName="r" values="7;18" dur="3.5s" begin="2.0s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="700" cy="30" r="10" fill="#1c1411" filter="url(#smokeBlur)">
+      <animate attributeName="cy" values="30;4" dur="4.0s" begin="0.6s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0;0.35;0" dur="4.0s" begin="0.6s" repeatCount="indefinite"/>
+      <animate attributeName="r" values="7;18" dur="4.0s" begin="0.6s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="800" cy="30" r="10" fill="#1c1411" filter="url(#smokeBlur)">
+      <animate attributeName="cy" values="30;4" dur="3.6s" begin="2.4s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0;0.35;0" dur="3.6s" begin="2.4s" repeatCount="indefinite"/>
+      <animate attributeName="r" values="7;18" dur="3.6s" begin="2.4s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+
+  <!-- FLAMES around the card -->
+  <g filter="url(#heat)" opacity="0.95">
+    <g transform="translate(60.0 48.0) rotate(0) scale(0.88)">
+      <g>
+        <animateTransform attributeName="transform" type="skewX" values="0;-6;4.8;-3.0;0" dur="2.05s" begin="0.92s" repeatCount="indefinite"/>
+        <g>
+          <animateTransform attributeName="transform" type="scale" values="1 1;0.86 1.28;1.08 0.82;0.94 1.18;1 1" dur="1.28s" begin="0.92s" repeatCount="indefinite"/>
+          <path d="M-13 0C-18 -14 -6 -20 -3 -37C3 -27 15 -19 13 0Z" fill="url(#flameOuter)"/>
+          <path d="M-7 0C-9 -9 -3 -13 -1 -24C3 -17 8 -11 7 0Z" fill="url(#flameInner)"/>
+        </g>
+      </g>
+    </g>
+    <g transform="translate(97.1 48.0) rotate(0) scale(1.19)">
+      <g>
+        <animateTransform attributeName="transform" type="skewX" values="0;-6;4.8;-3.0;0" dur="2.01s" begin="0.59s" repeatCount="indefinite"/>
+        <g>
+          <animateTransform attributeName="transform" type="scale" values="1 1;0.86 1.28;1.08 0.82;0.94 1.18;1 1" dur="1.25s" begin="0.59s" repeatCount="indefinite"/>
+          <path d="M-13 0C-18 -14 -6 -20 -3 -37C3 -27 15 -19 13 0Z" fill="url(#flameOuter)"/>
+          <path d="M-7 0C-9 -9 -3 -13 -1 -24C3 -17 8 -11 7 0Z" fill="url(#flameInner)"/>
+        </g>
+      </g>
+    </g>
+    <g transform="translate(134.3 48.0) rotate(0) scale(1.37)">
+      <g>
+        <animateTransform attributeName="transform" type="skewX" values="0;-6;4.8;-3.0;0" dur="2.01s" begin="0.63s" repeatCount="indefinite"/>
+        <g>
+          <animateTransform attributeName="transform" type="scale" values="1 1;0.86 1.28;1.08 0.82;0.94 1.18;1 1" dur="1.26s" begin="0.63s" repeatCount="indefinite"/>
+          <path d="M-13 0C-18 -14 -6 -20 -3 -37C3 -27 15 -19 13 0Z" fill="url(#flameOuter)"/>
+          <path d="M-7 0C-9 -9 -3 -13 -1 -24C3 -17 8 -11 7 0Z" fill="url(#flameInner)"/>
+        </g>
+      </g>
+    </g>
+    <g transform="translate(171.4 48.0) rotate(0) scale(1.71)">
+      <g>
+        <animateTransform attributeName="transform" type="skewX" values="0;-6;4.8;-3.0;0" dur="1.68s" begin="0.30s" repeatCount="indefinite"/>
+        <g>
+          <animateTransform attributeName="transform" type="scale" values="1 1;0.86 1.28;1.08 0.82;0.94 1.18;1 1" dur="1.05s" begin="0.30s" repeatCount="indefinite"/>
+          <path d="M-13 0C-18 -14 -6 -20 -3 -37C3 -27 15 -19 13 0Z" fill="url(#flameOuter)"/>
+          <path d="M-7 0C-9 -9 -3 -13 -1 -24C3 -17 8 -11 7 0Z" fill="url(#flameInner)"/>
+        </g>
+      </g>
+    </g>
+    <g transform="translate(208.6 48.0) rotate(0) scale(1.53)">
+      <g>
+        <animateTransform attributeName="transform" type="skewX" values="0;-6;4.8;-3.0;0" dur="2.25s" begin="0.69s" repeatCount="indefinite"/>
+        <g>
+          <animateTransform attributeName="transform" type="scale" values="1 1;0.86 1.28;1.08 0.82;0.94 1.18;1 1" dur="1.40s" begin="0.69s" repeatCount="indefinite"/>
+          <path d="M-13 0C-18 -14 -6 -20 -3 -37C3 -27 15 -19 13 0Z" fill="url(#flameOuter)"/>
+          <path d="M-7 0C-9 -9 -3 -13 -1 -24C3 -17 8 -11 7 0Z" fill="url(#flameInner)"/>
+        </g>
+      </g>
+    </g>
+    <g transform="translate(245.7 48.0) rotate(0) scale(1.45)">
+      <g>
+        <animateTransform attributeName="transform" type="skewX" values="0;-6;4.8;-3.0;0" dur="2.39s" begin="0.96s" repeatCount="indefinite"/>
+        <g>
+          <animateTransform attributeName="transform" type="scale" values="1 1;0.86 1.28;1.08 0.82;0.94 1.18;1 1" dur="1.49s" begin="0.96s" repeatCount="indefinite"/>
+          <path d="M-13 0C-18 -14 -6 -20 -3 -37C3 -27 15 -19 13 0Z" fill="url(#flameOuter)"/>
+          <path d="M-7 0C-9 -9 -3 -13 -1 -24C3 -17 8 -11 7 0Z" fill="url(#flameInner)"/>
+        </g>
+      </g>
+    </g>
+    <g transform="translate(282.9 48.0) rotate(0) scale(1.47)">
+      <g>
+        <animateTransform attributeName="transform" type="skewX" values="0;-6;4.8;-3.0;0" dur="2.09s" begin="0.16s" repeatCount="indefinite"/>
+        <g>
+          <animateTransform attributeName="transform" type="scale" values="1 1;0.86 1.28;1.08 0.82;0.94 1.18;1 1" dur="1.31s" begin="0.16s" repeatCount="indefinite"/>
+          <path d="M-13 0C-18 -14 -6 -20 -3 -37C3 -27 15 -19 13 0Z" fill="url(#flameOuter)"/>
+          <path d="M-7 0C-9 -9 -3 -13 -1 -24C3 -17 8 -11 7 0Z" fill="url(#flameInner)"/>
+        </g>
+      </g>
+    </g>
+    <g transform="translate(320.0 48.0) rotate(0) scale(1.10)">
+      <g>
+        <animateTransform attributeName="transform" type="skewX" values="0;-6;4.8;-3.0;0" dur="2.02s" begin="0.06s" repeatCount="indefinite"/>
+        <g>
+          <animateTransform attributeName="transform" type="scale" values="1 1;0.86 1.28;1.08 0.82;0.94 1.18;1 1" dur="1.26s" begin="0.06s" repeatCount="indefinite"/>
+          <path d="M-13 0C-18 -14 -6 -20 -3 -37C3 -27 15 -19 13 0Z" fill="url(#flameOuter)"/>
+          <path d="M-7 0C-9 -9 -3 -13 -1 -24C3 -17 8 -11 7 0Z" fill="url(#flameInner)"/>
+        </g>
+      </g>
+    </g>
+    <g transform="translate(357.1 48.0) rotate(0) scale(1.40)">
+      <g>
+        <animateTransform attributeName="transform" type="skewX" values="0;-6;4.8;-3.0;0" dur="1.79s" begin="0.03s" repeatCount="indefinite"/>
+        <g>
+          <animateTransform attributeName="transform" type="scale" values="1 1;0.86 1.28;1.08 0.82;0.94 1.18;1 1" dur="1.12s" begin="0.03s" repeatCount="indefinite"/>
+          <path d="M-13 0C-18 -14 -6 -20 -3 -37C3 -27 15 -19 13 0Z" fill="url(#flameOuter)"/>
+          <path d="M-7 0C-9 -9 -3 -13 -1 -24C3 -17 8 -11 7 0Z" fill="url(#flameInner)"/>
+        </g>
+      </g>
+    </g>
+    <g transform="translate(394.3 48.0) rotate(0) scale(1.69)">
+      <g>
+        <animateTransform attributeName="transform" type="skewX" values="0;-6;4.8;-3.0;0" dur="1.95s" begin="0.84s" repeatCount="indefinite"/>
+        <g>
+          <animateTransform attributeName="transform" type="scale" values="1 1;0.86 1.28;1.08 0.82;0.94 1.18;1 1" dur="1.22s" begin="0.84s" repeatCount="indefinite"/>
+          <path d="M-13 0C-18 -14 -6 -20 -3 -37C3 -27 15 -19 13 0Z" fill="url(#flameOuter)"/>
+          <path d="M-7 0C-9 -9 -3 -13 -1 -24C3 -17 8 -11 7 0Z" fill="url(#flameInner)"/>
+        </g>
+      </g>
+    </g>
+    <g transform="translate(431.4 48.0) rotate(0) scale(1.83)">
+      <g>
+        <animateTransform attributeName="transform" type="skewX" values="0;-6;4.8;-3.0;0" dur="2.11s" begin="0.50s" repeatCount="indefinite"/>
+        <g>
+          <animateTransform attributeName="transform" type="scale" values="1 1;0.86 1.28;1.08 0.82;0.94 1.18;1 1" dur="1.32s" begin="0.50s" repeatCount="indefinite"/>
+          <path d="M-13 0C-18 -14 -6 -20 -3 -37C3 -27 15 -19 13 0Z" fill="url(#flameOuter)"/>
+          <path d="M-7 0C-9 -9 -3 -13 -1 -24C3 -17 8 -11 7 0Z" fill="url(#flameInner)"/>
+        </g>
+      </g>
+    </g>
+    <g transform="translate(468.6 48.0) rotate(0) scale(1.88)">
+      <g>
+        <animateTransform attributeName="transform" type="skewX" values="0;-6;4.8;-3.0;0" dur="1.97s" begin="0.28s" repeatCount="indefinite"/>
+        <g>
+          <animateTransform attributeName="transform" type="scale" values="1 1;0.86 1.28;1.08 0.82;0.94 1.18;1 1" dur="1.23s" begin="0.28s" repeatCount="indefinite"/>
+          <path d="M-13 0C-18 -14 -6 -20 -3 -37C3 -27 15 -19 13 0Z" fill="url(#flameOuter)"/>
+          <path d="M-7 0C-9 -9 -3 -13 -1 -24C3 -17 8 -11 7 0Z" fill="url(#flameInner)"/>
+        </g>
+      </g>
+    </g>
+    <g transform="translate(505.7 48.0) rotate(0) scale(1.86)">
+      <g>
+        <animateTransform attributeName="transform" type="skewX" values="0;-6;4.8;-3.0;0" dur="2.40s" begin="0.84s" repeatCount="indefinite"/>
+        <g>
+          <animateTransform attributeName="transform" type="scale" values="1 1;0.86 1.28;1.08 0.82;0.94 1.18;1 1" dur="1.50s" begin="0.84s" repeatCount="indefinite"/>
+          <path d="M-13 0C-18 -14 -6 -20 -3 -37C3 -27 15 -19 13 0Z" fill="url(#flameOuter)"/>
+          <path d="M-7 0C-9 -9 -3 -13 -1 -24C3 -17 8 -11 7 0Z" fill="url(#flameInner)"/>
+        </g>
+      </g>
+    </g>
+    <g transform="translate(542.9 48.0) rotate(0) scale(1.54)">
+      <g>
+        <animateTransform attributeName="transform" type="skewX" values="0;-6;4.8;-3.0;0" dur="1.85s" begin="0.23s" repeatCount="indefinite"/>
+        <g>
+          <animateTransform attributeName="transform" type="scale" values="1 1;0.86 1.28;1.08 0.82;0.94 1.18;1 1" dur="1.16s" begin="0.23s" repeatCount="indefinite"/>
+          <path d="M-13 0C-18 -14 -6 -20 -3 -37C3 -27 15 -19 13 0Z" fill="url(#flameOuter)"/>
+          <path d="M-7 0C-9 -9 -3 -13 -1 -24C3 -17 8 -11 7 0Z" fill="url(#flameInner)"/>
+        </g>
+      </g>
+    </g>
+    <g transform="translate(580.0 48.0) rotate(0) scale(1.16)">
+      <g>
+        <animateTransform attributeName="transform" type="skewX" values="0;-6;4.8;-3.0;0" dur="1.66s" begin="0.77s" repeatCount="indefinite"/>
+        <g>
+          <animateTransform attributeName="transform" type="scale" values="1 1;0.86 1.28;1.08 0.82;0.94 1.18;1 1" dur="1.04s" begin="0.77s" repeatCount="indefinite"/>
+          <path d="M-13 0C-18 -14 -6 -20 -3 -37C3 -27 15 -19 13 0Z" fill="url(#flameOuter)"/>
+          <path d="M-7 0C-9 -9 -3 -13 -1 -24C3 -17 8 -11 7 0Z" fill="url(#flameInner)"/>
+        </g>
+      </g>
+    </g>
+    <g transform="translate(617.1 48.0) rotate(0) scale(1.40)">
+      <g>
+        <animateTransform attributeName="transform" type="skewX" values="0;-6;4.8;-3.0;0" dur="2.28s" begin="0.39s" repeatCount="indefinite"/>
+        <g>
+          <animateTransform attributeName="transform" type="scale" values="1 1;0.86 1.28;1.08 0.82;0.94 1.18;1 1" dur="1.42s" begin="0.39s" repeatCount="indefinite"/>
+          <path d="M-13 0C-18 -14 -6 -20 -3 -37C3 -27 15 -19 13 0Z" fill="url(#flameOuter)"/>
+          <path d="M-7 0C-9 -9 -3 -13 -1 -24C3 -17 8 -11 7 0Z" fill="url(#flameInner)"/>
+        </g>
+      </g>
+    </g>
+    <g transform="translate(654.3 48.0) rotate(0) scale(1.73)">
+      <g>
+        <animateTransform attributeName="transform" type="skewX" values="0;-6;4.8;-3.0;0" dur="2.28s" begin="0.00s" repeatCount="indefinite"/>
+        <g>
+          <animateTransform attributeName="transform" type="scale" values="1 1;0.86 1.28;1.08 0.82;0.94 1.18;1 1" dur="1.42s" begin="0.00s" repeatCount="indefinite"/>
+          <path d="M-13 0C-18 -14 -6 -20 -3 -37C3 -27 15 -19 13 0Z" fill="url(#flameOuter)"/>
+          <path d="M-7 0C-9 -9 -3 -13 -1 -24C3 -17 8 -11 7 0Z" fill="url(#flameInner)"/>
+        </g>
+      </g>
+    </g>
+    <g transform="translate(691.4 48.0) rotate(0) scale(1.57)">
+      <g>
+        <animateTransform attributeName="transform" type="skewX" values="0;-6;4.8;-3.0;0" dur="2.33s" begin="0.47s" repeatCount="indefinite"/>
+        <g>
+          <animateTransform attributeName="transform" type="scale" values="1 1;0.86 1.28;1.08 0.82;0.94 1.18;1 1" dur="1.46s" begin="0.47s" repeatCount="indefinite"/>
+          <path d="M-13 0C-18 -14 -6 -20 -3 -37C3 -27 15 -19 13 0Z" fill="url(#flameOuter)"/>
+          <path d="M-7 0C-9 -9 -3 -13 -1 -24C3 -17 8 -11 7 0Z" fill="url(#flameInner)"/>
+        </g>
+      </g>
+    </g>
+    <g transform="translate(728.6 48.0) rotate(0) scale(1.76)">
+      <g>
+        <animateTransform attributeName="transform" type="skewX" values="0;-6;4.8;-3.0;0" dur="1.92s" begin="0.07s" repeatCount="indefinite"/>
+        <g>
+          <animateTransform attributeName="transform" type="scale" values="1 1;0.86 1.28;1.08 0.82;0.94 1.18;1 1" dur="1.20s" begin="0.07s" repeatCount="indefinite"/>
+          <path d="M-13 0C-18 -14 -6 -20 -3 -37C3 -27 15 -19 13 0Z" fill="url(#flameOuter)"/>
+          <path d="M-7 0C-9 -9 -3 -13 -1 -24C3 -17 8 -11 7 0Z" fill="url(#flameInner)"/>
+        </g>
+      </g>
+    </g>
+    <g transform="translate(765.7 48.0) rotate(0) scale(1.49)">
+      <g>
+        <animateTransform attributeName="transform" type="skewX" values="0;-6;4.8;-3.0;0" dur="2.22s" begin="0.27s" repeatCount="indefinite"/>
+        <g>
+          <animateTransform attributeName="transform" type="scale" values="1 1;0.86 1.28;1.08 0.82;0.94 1.18;1 1" dur="1.39s" begin="0.27s" repeatCount="indefinite"/>
+          <path d="M-13 0C-18 -14 -6 -20 -3 -37C3 -27 15 -19 13 0Z" fill="url(#flameOuter)"/>
+          <path d="M-7 0C-9 -9 -3 -13 -1 -24C3 -17 8 -11 7 0Z" fill="url(#flameInner)"/>
+        </g>
+      </g>
+    </g>
+    <g transform="translate(802.9 48.0) rotate(0) scale(1.10)">
+      <g>
+        <animateTransform attributeName="transform" type="skewX" values="0;-6;4.8;-3.0;0" dur="1.87s" begin="0.96s" repeatCount="indefinite"/>
+        <g>
+          <animateTransform attributeName="transform" type="scale" values="1 1;0.86 1.28;1.08 0.82;0.94 1.18;1 1" dur="1.17s" begin="0.96s" repeatCount="indefinite"/>
+          <path d="M-13 0C-18 -14 -6 -20 -3 -37C3 -27 15 -19 13 0Z" fill="url(#flameOuter)"/>
+          <path d="M-7 0C-9 -9 -3 -13 -1 -24C3 -17 8 -11 7 0Z" fill="url(#flameInner)"/>
+        </g>
+      </g>
+    </g>
+    <g transform="translate(840.0 48.0) rotate(0) scale(0.94)">
+      <g>
+        <animateTransform attributeName="transform" type="skewX" values="0;-6;4.8;-3.0;0" dur="1.69s" begin="0.25s" repeatCount="indefinite"/>
+        <g>
+          <animateTransform attributeName="transform" type="scale" values="1 1;0.86 1.28;1.08 0.82;0.94 1.18;1 1" dur="1.06s" begin="0.25s" repeatCount="indefinite"/>
+          <path d="M-13 0C-18 -14 -6 -20 -3 -37C3 -27 15 -19 13 0Z" fill="url(#flameOuter)"/>
+          <path d="M-7 0C-9 -9 -3 -13 -1 -24C3 -17 8 -11 7 0Z" fill="url(#flameInner)"/>
+        </g>
+      </g>
+    </g>
+  </g>
+  <g filter="url(#heat)">
+    <g transform="translate(46.0 48.0) rotate(0) scale(0.64)">
+      <g>
+        <animateTransform attributeName="transform" type="skewX" values="0;-9;7.2;-4.5;0" dur="0.99s" begin="0.56s" repeatCount="indefinite"/>
+        <g>
+          <animateTransform attributeName="transform" type="scale" values="1 1;0.86 1.28;1.08 0.82;0.94 1.18;1 1" dur="0.62s" begin="0.56s" repeatCount="indefinite"/>
+          <path d="M-13 0C-18 -14 -6 -20 -3 -37C3 -27 15 -19 13 0Z" fill="url(#flameOuter)"/>
+          <path d="M-7 0C-9 -9 -3 -13 -1 -24C3 -17 8 -11 7 0Z" fill="url(#flameInner)"/>
+        </g>
+      </g>
+    </g>
+    <g transform="translate(73.9 48.0) rotate(0) scale(0.75)">
+      <g>
+        <animateTransform attributeName="transform" type="skewX" values="0;-9;7.2;-4.5;0" dur="1.27s" begin="0.31s" repeatCount="indefinite"/>
+        <g>
+          <animateTransform attributeName="transform" type="scale" values="1 1;0.86 1.28;1.08 0.82;0.94 1.18;1 1" dur="0.80s" begin="0.31s" repeatCount="indefinite"/>
+          <path d="M-13 0C-18 -14 -6 -20 -3 -37C3 -27 15 -19 13 0Z" fill="url(#flameOuter)"/>
+          <path d="M-7 0C-9 -9 -3 -13 -1 -24C3 -17 8 -11 7 0Z" fill="url(#flameInner)"/>
+        </g>
+      </g>
+    </g>
+    <g transform="translate(101.7 48.0) rotate(0) scale(0.81)">
+      <g>
+        <animateTransform attributeName="transform" type="skewX" values="0;-9;7.2;-4.5;0" dur="1.37s" begin="0.09s" repeatCount="indefinite"/>
+        <g>
+          <animateTransform attributeName="transform" type="scale" values="1 1;0.86 1.28;1.08 0.82;0.94 1.18;1 1" dur="0.86s" begin="0.09s" repeatCount="indefinite"/>
+          <path d="M-13 0C-18 -14 -6 -20 -3 -37C3 -27 15 -19 13 0Z" fill="url(#flameOuter)"/>
+          <path d="M-7 0C-9 -9 -3 -13 -1 -24C3 -17 8 -11 7 0Z" fill="url(#flameInner)"/>
+        </g>
+      </g>
+    </g>
+    <g transform="translate(129.6 48.0) rotate(0) scale(0.89)">
+      <g>
+        <animateTransform attributeName="transform" type="skewX" values="0;-9;7.2;-4.5;0" dur="1.03s" begin="0.29s" repeatCount="indefinite"/>
+        <g>
+          <animateTransform attributeName="transform" type="scale" values="1 1;0.86 1.28;1.08 0.82;0.94 1.18;1 1" dur="0.64s" begin="0.29s" repeatCount="indefinite"/>
+          <path d="M-13 0C-18 -14 -6 -20 -3 -37C3 -27 15 -19 13 0Z" fill="url(#flameOuter)"/>
+          <path d="M-7 0C-9 -9 -3 -13 -1 -24C3 -17 8 -11 7 0Z" fill="url(#flameInner)"/>
+        </g>
+      </g>
+    </g>
+    <g transform="translate(157.4 48.0) rotate(0) scale(0.71)">
+      <g>
+        <animateTransform attributeName="transform" type="skewX" values="0;-9;7.2;-4.5;0" dur="1.11s" begin="0.68s" repeatCount="indefinite"/>
+        <g>
+          <animateTransform attributeName="transform" type="scale" values="1 1;0.86 1.28;1.08 0.82;0.94 1.18;1 1" dur="0.69s" begin="0.68s" repeatCount="indefinite"/>
+          <path d="M-13 0C-18 -14 -6 -20 -3 -37C3 -27 15 -19 13 0Z" fill="url(#flameOuter)"/>
+          <path d="M-7 0C-9 -9 -3 -13 -1 -24C3 -17 8 -11 7 0Z" fill="url(#flameInner)"/>
+        </g>
+      </g>
+    </g>
+    <g transform="translate(185.3 48.0) rotate(0) scale(0.68)">
+      <g>
+        <animateTransform attributeName="transform" type="skewX" values="0;-9;7.2;-4.5;0" dur="1.13s" begin="0.62s" repeatCount="indefinite"/>
+        <g>
+          <animateTransform attributeName="transform" type="scale" values="1 1;0.86 1.28;1.08 0.82;0.94 1.18;1 1" dur="0.71s" begin="0.62s" repeatCount="indefinite"/>
+          <path d="M-13 0C-18 -14 -6 -20 -3 -37C3 -27 15 -19 13 0Z" fill="url(#flameOuter)"/>
+          <path d="M-7 0C-9 -9 -3 -13 -1 -24C3 -17 8 -11 7 0Z" fill="url(#flameInner)"/>
+        </g>
+      </g>
+    </g>
+    <g transform="translate(213.2 48.0) rotate(0) scale(0.47)">
+      <g>
+        <animateTransform attributeName="transform" type="skewX" values="0;-9;7.2;-4.5;0" dur="1.18s" begin="0.60s" repeatCount="indefinite"/>
+        <g>
+          <animateTransform attributeName="transform" type="scale" values="1 1;0.86 1.28;1.08 0.82;0.94 1.18;1 1" dur="0.74s" begin="0.60s" repeatCount="indefinite"/>
+          <path d="M-13 0C-18 -14 -6 -20 -3 -37C3 -27 15 -19 13 0Z" fill="url(#flameOuter)"/>
+          <path d="M-7 0C-9 -9 -3 -13 -1 -24C3 -17 8 -11 7 0Z" fill="url(#flameInner)"/>
+        </g>
+      </g>
+    </g>
+    <g transform="translate(241.0 48.0) rotate(0) scale(0.70)">
+      <g>
+        <animateTransform attributeName="transform" type="skewX" values="0;-9;7.2;-4.5;0" dur="1.02s" begin="0.69s" repeatCount="indefinite"/>
+        <g>
+          <animateTransform attributeName="transform" type="scale" values="1 1;0.86 1.28;1.08 0.82;0.94 1.18;1 1" dur="0.64s" begin="0.69s" repeatCount="indefinite"/>
+          <path d="M-13 0C-18 -14 -6 -20 -3 -37C3 -27 15 -19 13 0Z" fill="url(#flameOuter)"/>
+          <path d="M-7 0C-9 -9 -3 -13 -1 -24C3 -17 8 -11 7 0Z" fill="url(#flameInner)"/>
+        </g>
+      </g>
+    </g>
+    <g transform="translate(268.9 48.0) rotate(0) scale(0.74)">
+      <g>
+        <animateTransform attributeName="transform" type="skewX" values="0;-9;7.2;-4.5;0" dur="1.10s" begin="0.54s" repeatCount="indefinite"/>
+        <g>
+          <animateTransform attributeName="transform" type="scale" values="1 1;0.86 1.28;1.08 0.82;0.94 1.18;1 1" dur="0.69s" begin="0.54s" repeatCount="indefinite"/>
+          <path d="M-13 0C-18 -14 -6 -20 -3 -37C3 -27 15 -19 13 0Z" fill="url(#flameOuter)"/>
+          <path d="M-7 0C-9 -9 -3 -13 -1 -24C3 -17 8 -11 7 0Z" fill="url(#flameInner)"/>
+        </g>
+      </g>
+    </g>
+    <g transform="translate(296.8 48.0) rotate(0) scale(0.83)">
+      <g>
+        <animateTransform attributeName="transform" type="skewX" values="0;-9;7.2;-4.5;0" dur="1.13s" begin="0.05s" repeatCount="indefinite"/>
+        <g>
+          <animateTransform attributeName="transform" type="scale" values="1 1;0.86 1.28;1.08 0.82;0.94 1.18;1 1" dur="0.70s" begin="0.05s" repeatCount="indefinite"/>
+          <path d="M-13 0C-18 -14 -6 -20 -3 -37C3 -27 15 -19 13 0Z" fill="url(#flameOuter)"/>
+          <path d="M-7 0C-9 -9 -3 -13 -1 -24C3 -17 8 -11 7 0Z" fill="url(#flameInner)"/>
+        </g>
+      </g>
+    </g>
+    <g transform="translate(324.6 48.0) rotate(0) scale(0.78)">
+      <g>
+        <animateTransform attributeName="transform" type="skewX" values="0;-9;7.2;-4.5;0" dur="1.29s" begin="0.17s" repeatCount="indefinite"/>
+        <g>
+          <animateTransform attributeName="transform" type="scale" values="1 1;0.86 1.28;1.08 0.82;0.94 1.18;1 1" dur="0.80s" begin="0.17s" repeatCount="indefinite"/>
+          <path d="M-13 0C-18 -14 -6 -20 -3 -37C3 -27 15 -19 13 0Z" fill="url(#flameOuter)"/>
+          <path d="M-7 0C-9 -9 -3 -13 -1 -24C3 -17 8 -11 7 0Z" fill="url(#flameInner)"/>
+        </g>
+      </g>
+    </g>
+    <g transform="translate(352.5 48.0) rotate(0) scale(0.82)">
+      <g>
+        <animateTransform attributeName="transform" type="skewX" values="0;-9;7.2;-4.5;0" dur="1.17s" begin="0.32s" repeatCount="indefinite"/>
+        <g>
+          <animateTransform attributeName="transform" type="scale" values="1 1;0.86 1.28;1.08 0.82;0.94 1.18;1 1" dur="0.73s" begin="0.32s" repeatCount="indefinite"/>
+          <path d="M-13 0C-18 -14 -6 -20 -3 -37C3 -27 15 -19 13 0Z" fill="url(#flameOuter)"/>
+          <path d="M-7 0C-9 -9 -3 -13 -1 -24C3 -17 8 -11 7 0Z" fill="url(#flameInner)"/>
+        </g>
+      </g>
+    </g>
+    <g transform="translate(380.3 48.0) rotate(0) scale(0.75)">
+      <g>
+        <animateTransform attributeName="transform" type="skewX" values="0;-9;7.2;-4.5;0" dur="1.23s" begin="0.40s" repeatCount="indefinite"/>
+        <g>
+          <animateTransform attributeName="transform" type="scale" values="1 1;0.86 1.28;1.08 0.82;0.94 1.18;1 1" dur="0.77s" begin="0.40s" repeatCount="indefinite"/>
+          <path d="M-13 0C-18 -14 -6 -20 -3 -37C3 -27 15 -19 13 0Z" fill="url(#flameOuter)"/>
+          <path d="M-7 0C-9 -9 -3 -13 -1 -24C3 -17 8 -11 7 0Z" fill="url(#flameInner)"/>
+        </g>
+      </g>
+    </g>
+    <g transform="translate(408.2 48.0) rotate(0) scale(0.55)">
+      <g>
+        <animateTransform attributeName="transform" type="skewX" values="0;-9;7.2;-4.5;0" dur="1.06s" begin="0.11s" repeatCount="indefinite"/>
+        <g>
+          <animateTransform attributeName="transform" type="scale" values="1 1;0.86 1.28;1.08 0.82;0.94 1.18;1 1" dur="0.66s" begin="0.11s" repeatCount="indefinite"/>
+          <path d="M-13 0C-18 -14 -6 -20 -3 -37C3 -27 15 -19 13 0Z" fill="url(#flameOuter)"/>
+          <path d="M-7 0C-9 -9 -3 -13 -1 -24C3 -17 8 -11 7 0Z" fill="url(#flameInner)"/>
+        </g>
+      </g>
+    </g>
+    <g transform="translate(436.1 48.0) rotate(0) scale(0.70)">
+      <g>
+        <animateTransform attributeName="transform" type="skewX" values="0;-9;7.2;-4.5;0" dur="1.42s" begin="0.17s" repeatCount="indefinite"/>
+        <g>
+          <animateTransform attributeName="transform" type="scale" values="1 1;0.86 1.28;1.08 0.82;0.94 1.18;1 1" dur="0.89s" begin="0.17s" repeatCount="indefinite"/>
+          <path d="M-13 0C-18 -14 -6 -20 -3 -37C3 -27 15 -19 13 0Z" fill="url(#flameOuter)"/>
+          <path d="M-7 0C-9 -9 -3 -13 -1 -24C3 -17 8 -11 7 0Z" fill="url(#flameInner)"/>
+        </g>
+      </g>
+    </g>
+    <g transform="translate(463.9 48.0) rotate(0) scale(0.71)">
+      <g>
+        <animateTransform attributeName="transform" type="skewX" values="0;-9;7.2;-4.5;0" dur="1.37s" begin="0.66s" repeatCount="indefinite"/>
+        <g>
+          <animateTransform attributeName="transform" type="scale" values="1 1;0.86 1.28;1.08 0.82;0.94 1.18;1 1" dur="0.86s" begin="0.66s" repeatCount="indefinite"/>
+          <path d="M-13 0C-18 -14 -6 -20 -3 -37C3 -27 15 -19 13 0Z" fill="url(#flameOuter)"/>
+          <path d="M-7 0C-9 -9 -3 -13 -1 -24C3 -17 8 -11 7 0Z" fill="url(#flameInner)"/>
+        </g>
+      </g>
+    </g>
+    <g transform="translate(491.8 48.0) rotate(0) scale(0.79)">
+      <g>
+        <animateTransform attributeName="transform" type="skewX" values="0;-9;7.2;-4.5;0" dur="1.49s" begin="0.62s" repeatCount="indefinite"/>
+        <g>
+          <animateTransform attributeName="transform" type="scale" values="1 1;0.86 1.28;1.08 0.82;0.94 1.18;1 1" dur="0.93s" begin="0.62s" repeatCount="indefinite"/>
+          <path d="M-13 0C-18 -14 -6 -20 -3 -37C3 -27 15 -19 13 0Z" fill="url(#flameOuter)"/>
+          <path d="M-7 0C-9 -9 -3 -13 -1 -24C3 -17 8 -11 7 0Z" fill="url(#flameInner)"/>
+        </g>
+      </g>
+    </g>
+    <g transform="translate(519.7 48.0) rotate(0) scale(0.90)">
+      <g>
+        <animateTransform attributeName="transform" type="skewX" values="0;-9;7.2;-4.5;0" dur="1.20s" begin="0.07s" repeatCount="indefinite"/>
+        <g>
+          <animateTransform attributeName="transform" type="scale" values="1 1;0.86 1.28;1.08 0.82;0.94 1.18;1 1" dur="0.75s" begin="0.07s" repeatCount="indefinite"/>
+          <path d="M-13 0C-18 -14 -6 -20 -3 -37C3 -27 15 -19 13 0Z" fill="url(#flameOuter)"/>
+          <path d="M-7 0C-9 -9 -3 -13 -1 -24C3 -17 8 -11 7 0Z" fill="url(#flameInner)"/>
+        </g>
+      </g>
+    </g>
+    <g transform="translate(547.5 48.0) rotate(0) scale(0.72)">
+      <g>
+        <animateTransform attributeName="transform" type="skewX" values="0;-9;7.2;-4.5;0" dur="1.50s" begin="0.17s" repeatCount="indefinite"/>
+        <g>
+          <animateTransform attributeName="transform" type="scale" values="1 1;0.86 1.28;1.08 0.82;0.94 1.18;1 1" dur="0.94s" begin="0.17s" repeatCount="indefinite"/>
+          <path d="M-13 0C-18 -14 -6 -20 -3 -37C3 -27 15 -19 13 0Z" fill="url(#flameOuter)"/>
+          <path d="M-7 0C-9 -9 -3 -13 -1 -24C3 -17 8 -11 7 0Z" fill="url(#flameInner)"/>
+        </g>
+      </g>
+    </g>
+    <g transform="translate(575.4 48.0) rotate(0) scale(0.74)">
+      <g>
+        <animateTransform attributeName="transform" type="skewX" values="0;-9;7.2;-4.5;0" dur="1.10s" begin="0.58s" repeatCount="indefinite"/>
+        <g>
+          <animateTransform attributeName="transform" type="scale" values="1 1;0.86 1.28;1.08 0.82;0.94 1.18;1 1" dur="0.69s" begin="0.58s" repeatCount="indefinite"/>
+          <path d="M-13 0C-18 -14 -6 -20 -3 -37C3 -27 15 -19 13 0Z" fill="url(#flameOuter)"/>
+          <path d="M-7 0C-9 -9 -3 -13 -1 -24C3 -17 8 -11 7 0Z" fill="url(#flameInner)"/>
+        </g>
+      </g>
+    </g>
+    <g transform="translate(603.2 48.0) rotate(0) scale(0.56)">
+      <g>
+        <animateTransform attributeName="transform" type="skewX" values="0;-9;7.2;-4.5;0" dur="1.12s" begin="0.12s" repeatCount="indefinite"/>
+        <g>
+          <animateTransform attributeName="transform" type="scale" values="1 1;0.86 1.28;1.08 0.82;0.94 1.18;1 1" dur="0.70s" begin="0.12s" repeatCount="indefinite"/>
+          <path d="M-13 0C-18 -14 -6 -20 -3 -37C3 -27 15 -19 13 0Z" fill="url(#flameOuter)"/>
+          <path d="M-7 0C-9 -9 -3 -13 -1 -24C3 -17 8 -11 7 0Z" fill="url(#flameInner)"/>
+        </g>
+      </g>
+    </g>
+    <g transform="translate(631.1 48.0) rotate(0) scale(0.63)">
+      <g>
+        <animateTransform attributeName="transform" type="skewX" values="0;-9;7.2;-4.5;0" dur="1.00s" begin="0.16s" repeatCount="indefinite"/>
+        <g>
+          <animateTransform attributeName="transform" type="scale" values="1 1;0.86 1.28;1.08 0.82;0.94 1.18;1 1" dur="0.62s" begin="0.16s" repeatCount="indefinite"/>
+          <path d="M-13 0C-18 -14 -6 -20 -3 -37C3 -27 15 -19 13 0Z" fill="url(#flameOuter)"/>
+          <path d="M-7 0C-9 -9 -3 -13 -1 -24C3 -17 8 -11 7 0Z" fill="url(#flameInner)"/>
+        </g>
+      </g>
+    </g>
+    <g transform="translate(659.0 48.0) rotate(0) scale(0.75)">
+      <g>
+        <animateTransform attributeName="transform" type="skewX" values="0;-9;7.2;-4.5;0" dur="1.44s" begin="0.43s" repeatCount="indefinite"/>
+        <g>
+          <animateTransform attributeName="transform" type="scale" values="1 1;0.86 1.28;1.08 0.82;0.94 1.18;1 1" dur="0.90s" begin="0.43s" repeatCount="indefinite"/>
+          <path d="M-13 0C-18 -14 -6 -20 -3 -37C3 -27 15 -19 13 0Z" fill="url(#flameOuter)"/>
+          <path d="M-7 0C-9 -9 -3 -13 -1 -24C3 -17 8 -11 7 0Z" fill="url(#flameInner)"/>
+        </g>
+      </g>
+    </g>
+    <g transform="translate(686.8 48.0) rotate(0) scale(0.79)">
+      <g>
+        <animateTransform attributeName="transform" type="skewX" values="0;-9;7.2;-4.5;0" dur="1.47s" begin="0.14s" repeatCount="indefinite"/>
+        <g>
+          <animateTransform attributeName="transform" type="scale" values="1 1;0.86 1.28;1.08 0.82;0.94 1.18;1 1" dur="0.92s" begin="0.14s" repeatCount="indefinite"/>
+          <path d="M-13 0C-18 -14 -6 -20 -3 -37C3 -27 15 -19 13 0Z" fill="url(#flameOuter)"/>
+          <path d="M-7 0C-9 -9 -3 -13 -1 -24C3 -17 8 -11 7 0Z" fill="url(#flameInner)"/>
+        </g>
+      </g>
+    </g>
+    <g transform="translate(714.7 48.0) rotate(0) scale(0.77)">
+      <g>
+        <animateTransform attributeName="transform" type="skewX" values="0;-9;7.2;-4.5;0" dur="1.11s" begin="0.31s" repeatCount="indefinite"/>
+        <g>
+          <animateTransform attributeName="transform" type="scale" values="1 1;0.86 1.28;1.08 0.82;0.94 1.18;1 1" dur="0.69s" begin="0.31s" repeatCount="indefinite"/>
+          <path d="M-13 0C-18 -14 -6 -20 -3 -37C3 -27 15 -19 13 0Z" fill="url(#flameOuter)"/>
+          <path d="M-7 0C-9 -9 -3 -13 -1 -24C3 -17 8 -11 7 0Z" fill="url(#flameInner)"/>
+        </g>
+      </g>
+    </g>
+    <g transform="translate(742.6 48.0) rotate(0) scale(0.75)">
+      <g>
+        <animateTransform attributeName="transform" type="skewX" values="0;-9;7.2;-4.5;0" dur="1.06s" begin="0.26s" repeatCount="indefinite"/>
+        <g>
+          <animateTransform attributeName="transform" type="scale" values="1 1;0.86 1.28;1.08 0.82;0.94 1.18;1 1" dur="0.66s" begin="0.26s" repeatCount="indefinite"/>
+          <path d="M-13 0C-18 -14 -6 -20 -3 -37C3 -27 15 -19 13 0Z" fill="url(#flameOuter)"/>
+          <path d="M-7 0C-9 -9 -3 -13 -1 -24C3 -17 8 -11 7 0Z" fill="url(#flameInner)"/>
+        </g>
+      </g>
+    </g>
+    <g transform="translate(770.4 48.0) rotate(0) scale(0.75)">
+      <g>
+        <animateTransform attributeName="transform" type="skewX" values="0;-9;7.2;-4.5;0" dur="1.03s" begin="0.25s" repeatCount="indefinite"/>
+        <g>
+          <animateTransform attributeName="transform" type="scale" values="1 1;0.86 1.28;1.08 0.82;0.94 1.18;1 1" dur="0.65s" begin="0.25s" repeatCount="indefinite"/>
+          <path d="M-13 0C-18 -14 -6 -20 -3 -37C3 -27 15 -19 13 0Z" fill="url(#flameOuter)"/>
+          <path d="M-7 0C-9 -9 -3 -13 -1 -24C3 -17 8 -11 7 0Z" fill="url(#flameInner)"/>
+        </g>
+      </g>
+    </g>
+    <g transform="translate(798.3 48.0) rotate(0) scale(0.65)">
+      <g>
+        <animateTransform attributeName="transform" type="skewX" values="0;-9;7.2;-4.5;0" dur="1.51s" begin="0.46s" repeatCount="indefinite"/>
+        <g>
+          <animateTransform attributeName="transform" type="scale" values="1 1;0.86 1.28;1.08 0.82;0.94 1.18;1 1" dur="0.94s" begin="0.46s" repeatCount="indefinite"/>
+          <path d="M-13 0C-18 -14 -6 -20 -3 -37C3 -27 15 -19 13 0Z" fill="url(#flameOuter)"/>
+          <path d="M-7 0C-9 -9 -3 -13 -1 -24C3 -17 8 -11 7 0Z" fill="url(#flameInner)"/>
+        </g>
+      </g>
+    </g>
+    <g transform="translate(826.1 48.0) rotate(0) scale(0.58)">
+      <g>
+        <animateTransform attributeName="transform" type="skewX" values="0;-9;7.2;-4.5;0" dur="1.29s" begin="0.10s" repeatCount="indefinite"/>
+        <g>
+          <animateTransform attributeName="transform" type="scale" values="1 1;0.86 1.28;1.08 0.82;0.94 1.18;1 1" dur="0.80s" begin="0.10s" repeatCount="indefinite"/>
+          <path d="M-13 0C-18 -14 -6 -20 -3 -37C3 -27 15 -19 13 0Z" fill="url(#flameOuter)"/>
+          <path d="M-7 0C-9 -9 -3 -13 -1 -24C3 -17 8 -11 7 0Z" fill="url(#flameInner)"/>
+        </g>
+      </g>
+    </g>
+    <g transform="translate(854.0 48.0) rotate(0) scale(0.62)">
+      <g>
+        <animateTransform attributeName="transform" type="skewX" values="0;-9;7.2;-4.5;0" dur="0.97s" begin="0.64s" repeatCount="indefinite"/>
+        <g>
+          <animateTransform attributeName="transform" type="scale" values="1 1;0.86 1.28;1.08 0.82;0.94 1.18;1 1" dur="0.61s" begin="0.64s" repeatCount="indefinite"/>
+          <path d="M-13 0C-18 -14 -6 -20 -3 -37C3 -27 15 -19 13 0Z" fill="url(#flameOuter)"/>
+          <path d="M-7 0C-9 -9 -3 -13 -1 -24C3 -17 8 -11 7 0Z" fill="url(#flameInner)"/>
+        </g>
+      </g>
+    </g>
+    <g transform="translate(27.0 70.0) rotate(-84) scale(0.65)">
+      <g>
+        <animateTransform attributeName="transform" type="skewX" values="0;-8;6.4;-4.0;0" dur="1.46s" begin="0.58s" repeatCount="indefinite"/>
+        <g>
+          <animateTransform attributeName="transform" type="scale" values="1 1;0.86 1.28;1.08 0.82;0.94 1.18;1 1" dur="0.91s" begin="0.58s" repeatCount="indefinite"/>
+          <path d="M-13 0C-18 -14 -6 -20 -3 -37C3 -27 15 -19 13 0Z" fill="url(#flameOuter)"/>
+          <path d="M-7 0C-9 -9 -3 -13 -1 -24C3 -17 8 -11 7 0Z" fill="url(#flameInner)"/>
+        </g>
+      </g>
+    </g>
+    <g transform="translate(873.0 76.0) rotate(84) scale(0.65)">
+      <g>
+        <animateTransform attributeName="transform" type="skewX" values="0;-8;6.4;-4.0;0" dur="1.13s" begin="0.38s" repeatCount="indefinite"/>
+        <g>
+          <animateTransform attributeName="transform" type="scale" values="1 1;0.86 1.28;1.08 0.82;0.94 1.18;1 1" dur="0.71s" begin="0.38s" repeatCount="indefinite"/>
+          <path d="M-13 0C-18 -14 -6 -20 -3 -37C3 -27 15 -19 13 0Z" fill="url(#flameOuter)"/>
+          <path d="M-7 0C-9 -9 -3 -13 -1 -24C3 -17 8 -11 7 0Z" fill="url(#flameInner)"/>
+        </g>
+      </g>
+    </g>
+    <g transform="translate(27.0 89.7) rotate(-84) scale(0.64)">
+      <g>
+        <animateTransform attributeName="transform" type="skewX" values="0;-8;6.4;-4.0;0" dur="1.35s" begin="0.44s" repeatCount="indefinite"/>
+        <g>
+          <animateTransform attributeName="transform" type="scale" values="1 1;0.86 1.28;1.08 0.82;0.94 1.18;1 1" dur="0.84s" begin="0.44s" repeatCount="indefinite"/>
+          <path d="M-13 0C-18 -14 -6 -20 -3 -37C3 -27 15 -19 13 0Z" fill="url(#flameOuter)"/>
+          <path d="M-7 0C-9 -9 -3 -13 -1 -24C3 -17 8 -11 7 0Z" fill="url(#flameInner)"/>
+        </g>
+      </g>
+    </g>
+    <g transform="translate(873.0 95.7) rotate(84) scale(0.64)">
+      <g>
+        <animateTransform attributeName="transform" type="skewX" values="0;-8;6.4;-4.0;0" dur="1.27s" begin="0.60s" repeatCount="indefinite"/>
+        <g>
+          <animateTransform attributeName="transform" type="scale" values="1 1;0.86 1.28;1.08 0.82;0.94 1.18;1 1" dur="0.80s" begin="0.60s" repeatCount="indefinite"/>
+          <path d="M-13 0C-18 -14 -6 -20 -3 -37C3 -27 15 -19 13 0Z" fill="url(#flameOuter)"/>
+          <path d="M-7 0C-9 -9 -3 -13 -1 -24C3 -17 8 -11 7 0Z" fill="url(#flameInner)"/>
+        </g>
+      </g>
+    </g>
+    <g transform="translate(27.0 109.3) rotate(-84) scale(0.50)">
+      <g>
+        <animateTransform attributeName="transform" type="skewX" values="0;-8;6.4;-4.0;0" dur="1.16s" begin="0.33s" repeatCount="indefinite"/>
+        <g>
+          <animateTransform attributeName="transform" type="scale" values="1 1;0.86 1.28;1.08 0.82;0.94 1.18;1 1" dur="0.72s" begin="0.33s" repeatCount="indefinite"/>
+          <path d="M-13 0C-18 -14 -6 -20 -3 -37C3 -27 15 -19 13 0Z" fill="url(#flameOuter)"/>
+          <path d="M-7 0C-9 -9 -3 -13 -1 -24C3 -17 8 -11 7 0Z" fill="url(#flameInner)"/>
+        </g>
+      </g>
+    </g>
+    <g transform="translate(873.0 115.3) rotate(84) scale(0.50)">
+      <g>
+        <animateTransform attributeName="transform" type="skewX" values="0;-8;6.4;-4.0;0" dur="1.47s" begin="0.54s" repeatCount="indefinite"/>
+        <g>
+          <animateTransform attributeName="transform" type="scale" values="1 1;0.86 1.28;1.08 0.82;0.94 1.18;1 1" dur="0.92s" begin="0.54s" repeatCount="indefinite"/>
+          <path d="M-13 0C-18 -14 -6 -20 -3 -37C3 -27 15 -19 13 0Z" fill="url(#flameOuter)"/>
+          <path d="M-7 0C-9 -9 -3 -13 -1 -24C3 -17 8 -11 7 0Z" fill="url(#flameInner)"/>
+        </g>
+      </g>
+    </g>
+    <g transform="translate(27.0 129.0) rotate(-84) scale(0.43)">
+      <g>
+        <animateTransform attributeName="transform" type="skewX" values="0;-8;6.4;-4.0;0" dur="1.47s" begin="0.42s" repeatCount="indefinite"/>
+        <g>
+          <animateTransform attributeName="transform" type="scale" values="1 1;0.86 1.28;1.08 0.82;0.94 1.18;1 1" dur="0.92s" begin="0.42s" repeatCount="indefinite"/>
+          <path d="M-13 0C-18 -14 -6 -20 -3 -37C3 -27 15 -19 13 0Z" fill="url(#flameOuter)"/>
+          <path d="M-7 0C-9 -9 -3 -13 -1 -24C3 -17 8 -11 7 0Z" fill="url(#flameInner)"/>
+        </g>
+      </g>
+    </g>
+    <g transform="translate(873.0 135.0) rotate(84) scale(0.43)">
+      <g>
+        <animateTransform attributeName="transform" type="skewX" values="0;-8;6.4;-4.0;0" dur="1.50s" begin="0.55s" repeatCount="indefinite"/>
+        <g>
+          <animateTransform attributeName="transform" type="scale" values="1 1;0.86 1.28;1.08 0.82;0.94 1.18;1 1" dur="0.94s" begin="0.55s" repeatCount="indefinite"/>
+          <path d="M-13 0C-18 -14 -6 -20 -3 -37C3 -27 15 -19 13 0Z" fill="url(#flameOuter)"/>
+          <path d="M-7 0C-9 -9 -3 -13 -1 -24C3 -17 8 -11 7 0Z" fill="url(#flameInner)"/>
+        </g>
+      </g>
+    </g>
+    <g transform="translate(27.0 148.7) rotate(-84) scale(0.54)">
+      <g>
+        <animateTransform attributeName="transform" type="skewX" values="0;-8;6.4;-4.0;0" dur="1.29s" begin="0.41s" repeatCount="indefinite"/>
+        <g>
+          <animateTransform attributeName="transform" type="scale" values="1 1;0.86 1.28;1.08 0.82;0.94 1.18;1 1" dur="0.81s" begin="0.41s" repeatCount="indefinite"/>
+          <path d="M-13 0C-18 -14 -6 -20 -3 -37C3 -27 15 -19 13 0Z" fill="url(#flameOuter)"/>
+          <path d="M-7 0C-9 -9 -3 -13 -1 -24C3 -17 8 -11 7 0Z" fill="url(#flameInner)"/>
+        </g>
+      </g>
+    </g>
+    <g transform="translate(873.0 154.7) rotate(84) scale(0.54)">
+      <g>
+        <animateTransform attributeName="transform" type="skewX" values="0;-8;6.4;-4.0;0" dur="1.55s" begin="0.52s" repeatCount="indefinite"/>
+        <g>
+          <animateTransform attributeName="transform" type="scale" values="1 1;0.86 1.28;1.08 0.82;0.94 1.18;1 1" dur="0.97s" begin="0.52s" repeatCount="indefinite"/>
+          <path d="M-13 0C-18 -14 -6 -20 -3 -37C3 -27 15 -19 13 0Z" fill="url(#flameOuter)"/>
+          <path d="M-7 0C-9 -9 -3 -13 -1 -24C3 -17 8 -11 7 0Z" fill="url(#flameInner)"/>
+        </g>
+      </g>
+    </g>
+    <g transform="translate(27.0 168.3) rotate(-84) scale(0.66)">
+      <g>
+        <animateTransform attributeName="transform" type="skewX" values="0;-8;6.4;-4.0;0" dur="1.32s" begin="0.47s" repeatCount="indefinite"/>
+        <g>
+          <animateTransform attributeName="transform" type="scale" values="1 1;0.86 1.28;1.08 0.82;0.94 1.18;1 1" dur="0.83s" begin="0.47s" repeatCount="indefinite"/>
+          <path d="M-13 0C-18 -14 -6 -20 -3 -37C3 -27 15 -19 13 0Z" fill="url(#flameOuter)"/>
+          <path d="M-7 0C-9 -9 -3 -13 -1 -24C3 -17 8 -11 7 0Z" fill="url(#flameInner)"/>
+        </g>
+      </g>
+    </g>
+    <g transform="translate(873.0 174.3) rotate(84) scale(0.66)">
+      <g>
+        <animateTransform attributeName="transform" type="skewX" values="0;-8;6.4;-4.0;0" dur="1.53s" begin="0.34s" repeatCount="indefinite"/>
+        <g>
+          <animateTransform attributeName="transform" type="scale" values="1 1;0.86 1.28;1.08 0.82;0.94 1.18;1 1" dur="0.96s" begin="0.34s" repeatCount="indefinite"/>
+          <path d="M-13 0C-18 -14 -6 -20 -3 -37C3 -27 15 -19 13 0Z" fill="url(#flameOuter)"/>
+          <path d="M-7 0C-9 -9 -3 -13 -1 -24C3 -17 8 -11 7 0Z" fill="url(#flameInner)"/>
+        </g>
+      </g>
+    </g>
+    <g transform="translate(27.0 188.0) rotate(-84) scale(0.62)">
+      <g>
+        <animateTransform attributeName="transform" type="skewX" values="0;-8;6.4;-4.0;0" dur="1.42s" begin="0.23s" repeatCount="indefinite"/>
+        <g>
+          <animateTransform attributeName="transform" type="scale" values="1 1;0.86 1.28;1.08 0.82;0.94 1.18;1 1" dur="0.89s" begin="0.23s" repeatCount="indefinite"/>
+          <path d="M-13 0C-18 -14 -6 -20 -3 -37C3 -27 15 -19 13 0Z" fill="url(#flameOuter)"/>
+          <path d="M-7 0C-9 -9 -3 -13 -1 -24C3 -17 8 -11 7 0Z" fill="url(#flameInner)"/>
+        </g>
+      </g>
+    </g>
+    <g transform="translate(873.0 194.0) rotate(84) scale(0.62)">
+      <g>
+        <animateTransform attributeName="transform" type="skewX" values="0;-8;6.4;-4.0;0" dur="1.40s" begin="0.37s" repeatCount="indefinite"/>
+        <g>
+          <animateTransform attributeName="transform" type="scale" values="1 1;0.86 1.28;1.08 0.82;0.94 1.18;1 1" dur="0.87s" begin="0.37s" repeatCount="indefinite"/>
+          <path d="M-13 0C-18 -14 -6 -20 -3 -37C3 -27 15 -19 13 0Z" fill="url(#flameOuter)"/>
+          <path d="M-7 0C-9 -9 -3 -13 -1 -24C3 -17 8 -11 7 0Z" fill="url(#flameInner)"/>
+        </g>
+      </g>
+    </g>
+    <g transform="translate(30.0 52.0) rotate(-45) scale(0.90)">
+      <g>
+        <animateTransform attributeName="transform" type="skewX" values="0;-8;6.4;-4.0;0" dur="1.36s" begin="0.10s" repeatCount="indefinite"/>
+        <g>
+          <animateTransform attributeName="transform" type="scale" values="1 1;0.86 1.28;1.08 0.82;0.94 1.18;1 1" dur="0.85s" begin="0.10s" repeatCount="indefinite"/>
+          <path d="M-13 0C-18 -14 -6 -20 -3 -37C3 -27 15 -19 13 0Z" fill="url(#flameOuter)"/>
+          <path d="M-7 0C-9 -9 -3 -13 -1 -24C3 -17 8 -11 7 0Z" fill="url(#flameInner)"/>
+        </g>
+      </g>
+    </g>
+    <g transform="translate(870.0 52.0) rotate(45) scale(0.90)">
+      <g>
+        <animateTransform attributeName="transform" type="skewX" values="0;-8;6.4;-4.0;0" dur="1.36s" begin="0.10s" repeatCount="indefinite"/>
+        <g>
+          <animateTransform attributeName="transform" type="scale" values="1 1;0.86 1.28;1.08 0.82;0.94 1.18;1 1" dur="0.85s" begin="0.10s" repeatCount="indefinite"/>
+          <path d="M-13 0C-18 -14 -6 -20 -3 -37C3 -27 15 -19 13 0Z" fill="url(#flameOuter)"/>
+          <path d="M-7 0C-9 -9 -3 -13 -1 -24C3 -17 8 -11 7 0Z" fill="url(#flameInner)"/>
+        </g>
+      </g>
+    </g>
+  </g>
+
+  <!-- neon red border (drawn over flame bases) -->
+  <rect x="24" y="44" width="852" height="170" rx="22" fill="none" stroke="#ff1f1f" stroke-width="9" opacity="0.5" filter="url(#neonBlur)"/>
+  <rect x="24" y="44" width="852" height="170" rx="22" fill="none" stroke="#ff2b2b" stroke-width="5"/>
+  <rect x="25.5" y="45.5" width="849" height="167" rx="21" fill="none" stroke="#ff9a9a" stroke-width="1.4" opacity="0.8"/>
+  <rect x="31" y="51" width="838" height="156" rx="17" fill="none" stroke="#000" stroke-opacity="0.5" stroke-width="2.5"/>
+  <!-- white-hot glints on the border -->
+  <path d="M284 213C384 217 524 217 624 213" fill="none" stroke="#fff1d6" stroke-width="2.6" stroke-linecap="round" opacity="0.9" filter="url(#neonBlur)"/>
+  <path d="M324 213.5C404 216 504 216 584 213.5" fill="none" stroke="#fff" stroke-width="1.2" stroke-linecap="round"/>
 
   <!-- book icon -->
-  <g transform="translate(40 55)" filter="url(#glow)">
-    <circle cx="45" cy="45" r="44" fill="#35e6ff" fill-opacity="0.08" stroke="#35e6ff" stroke-opacity="0.6" stroke-width="2"/>
-    <g fill="none" stroke="#6ff0ff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round">
+  <g transform="translate(58 93)" filter="url(#glow)">
+    <circle cx="45" cy="45" r="44" fill="#ff5a1a" fill-opacity="0.1" stroke="#ff7a3a" stroke-opacity="0.8" stroke-width="2"/>
+    <g fill="none" stroke="#ffd9a0" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round">
       <path d="M45 30c-6-4.5-14-5.5-23-4.5v33c9-1 17 0 23 4.5 6-4.5 14-5.5 23-4.5v-33c-9-1-17 0-23 4.5z"/>
       <path d="M45 30v33"/>
       <path d="M29 36c3-.5 6-.2 9 .8M29 44c3-.5 6-.2 9 .8" stroke-width="2.2"/>
@@ -80,435 +802,413 @@
   </g>
 
   <!-- live chip -->
-  <g transform="translate(153 24)">
+  <g transform="translate(171 63)">
     <rect width="118" height="26" rx="13" fill="#37f0a8" fill-opacity="0.12" stroke="#37f0a8" stroke-opacity="0.7"/>
     <circle cx="16" cy="13" r="4.5" fill="#37f0a8"/>
     <text x="30" y="18" font-family="ui-monospace,Consolas,monospace" font-size="12.5" font-weight="700" letter-spacing="1.6" fill="#37f0a8">LIVE ONLINE</text>
   </g>
 
   <!-- text -->
-  <text x="152" y="102" font-family="ui-monospace,'SF Mono','Cascadia Mono',Consolas,monospace" font-size="33" font-weight="800" letter-spacing="2" fill="url(#title)" filter="url(#glow)">READ THE USER MANUAL</text>
-  <text x="153" y="134" font-family="system-ui,-apple-system,'Segoe UI',Roboto,sans-serif" font-size="17" fill="#a9bad6">Illustrated  ·  Interactive  ·  Searchable</text>
-  <text x="153" y="160" font-family="system-ui,-apple-system,'Segoe UI',Roboto,sans-serif" font-size="14.5" fill="#6f84a8">Step-by-step guides for SQA &amp; Developers — every button explained</text>
+  <text x="170" y="141" font-family="ui-monospace,'SF Mono','Cascadia Mono',Consolas,monospace" font-size="33" font-weight="800" letter-spacing="2" fill="url(#title)" filter="url(#glow)">READ THE USER MANUAL</text>
+  <text x="171" y="173" font-family="system-ui,-apple-system,'Segoe UI',Roboto,sans-serif" font-size="17" fill="#f1d3bb">Illustrated  ·  Interactive  ·  Searchable</text>
+  <text x="171" y="198" font-family="system-ui,-apple-system,'Segoe UI',Roboto,sans-serif" font-size="14.5" fill="#b98f78">Step-by-step guides for SQA &amp; Developers — every button explained</text>
 
   <!-- BURNING neon button -->
-  <g clip-path="url(#card)">
-  <g transform="translate(655 108)">
-    <!-- red ground reflection -->
-    <ellipse cx="95" cy="70" rx="110" ry="6" fill="#ff2a10" opacity="0.85" filter="url(#fireGlow)">
-      <animate attributeName="opacity" values="0.6;1;0.7;0.95;0.6" dur="0.8s" repeatCount="indefinite"/>
-    </ellipse>
-    <ellipse cx="95" cy="70" rx="70" ry="2.4" fill="#ffb27a" opacity="0.9"/>
-    <!-- heat halo -->
-    <rect x="-10" y="-10" width="210" height="76" rx="36" fill="#ff1a1a" opacity="0.55" filter="url(#fireGlow)">
-      <animate attributeName="opacity" values="0.4;0.85;0.5;0.8;0.4" dur="0.7s" repeatCount="indefinite"/>
+  <g transform="translate(673 146)">
+    <rect x="-10" y="-10" width="210" height="76" rx="36" fill="#ff1a1a" opacity="0.5" filter="url(#bigGlow)">
+      <animate attributeName="opacity" values="0.35;0.8;0.45;0.75;0.35" dur="0.7s" repeatCount="indefinite"/>
     </rect>
-    <!-- smoke -->
-    <g>
-      <circle cx="40" cy="-30" r="11" fill="#1c1411" filter="url(#smokeBlur)">
-        <animate attributeName="cy" values="-34;-92" dur="3.2s" begin="0s" repeatCount="indefinite"/>
-        <animate attributeName="cx" values="40;56" dur="3.2s" begin="0s" repeatCount="indefinite"/>
-        <animate attributeName="opacity" values="0;0.38;0" dur="3.2s" begin="0s" repeatCount="indefinite"/>
-        <animate attributeName="r" values="8;20" dur="3.2s" begin="0s" repeatCount="indefinite"/>
-      </circle>
-      <circle cx="95" cy="-30" r="11" fill="#1c1411" filter="url(#smokeBlur)">
-        <animate attributeName="cy" values="-34;-92" dur="3.8s" begin="1.0s" repeatCount="indefinite"/>
-        <animate attributeName="cx" values="95;111" dur="3.8s" begin="1.0s" repeatCount="indefinite"/>
-        <animate attributeName="opacity" values="0;0.38;0" dur="3.8s" begin="1.0s" repeatCount="indefinite"/>
-        <animate attributeName="r" values="8;20" dur="3.8s" begin="1.0s" repeatCount="indefinite"/>
-      </circle>
-      <circle cx="150" cy="-30" r="11" fill="#1c1411" filter="url(#smokeBlur)">
-        <animate attributeName="cy" values="-34;-92" dur="3.4s" begin="2.0s" repeatCount="indefinite"/>
-        <animate attributeName="cx" values="150;166" dur="3.4s" begin="2.0s" repeatCount="indefinite"/>
-        <animate attributeName="opacity" values="0;0.38;0" dur="3.4s" begin="2.0s" repeatCount="indefinite"/>
-        <animate attributeName="r" values="8;20" dur="3.4s" begin="2.0s" repeatCount="indefinite"/>
-      </circle>
-      <circle cx="70" cy="-30" r="11" fill="#1c1411" filter="url(#smokeBlur)">
-        <animate attributeName="cy" values="-34;-92" dur="4.0s" begin="2.6s" repeatCount="indefinite"/>
-        <animate attributeName="cx" values="70;86" dur="4.0s" begin="2.6s" repeatCount="indefinite"/>
-        <animate attributeName="opacity" values="0;0.38;0" dur="4.0s" begin="2.6s" repeatCount="indefinite"/>
-        <animate attributeName="r" values="8;20" dur="4.0s" begin="2.6s" repeatCount="indefinite"/>
-      </circle>
-    </g>
-    <!-- flames: back, front, sides -->
-    <g filter="url(#heat)" opacity="0.95">
-      <g transform="translate(30.0 0.0) rotate(0) scale(0.94)">
-        <g>
-          <animateTransform attributeName="transform" type="skewX" values="0;-6;4.8;-3.0;0" dur="1.70s" begin="0.52s" repeatCount="indefinite"/>
-          <g>
-            <animateTransform attributeName="transform" type="scale" values="1 1;0.86 1.28;1.08 0.82;0.94 1.18;1 1" dur="1.06s" begin="0.52s" repeatCount="indefinite"/>
-            <path d="M-13 0C-18 -14 -6 -20 -3 -37C3 -27 15 -19 13 0Z" fill="url(#flameOuter)"/>
-            <path d="M-7 0C-9 -9 -3 -13 -1 -24C3 -17 8 -11 7 0Z" fill="url(#flameInner)"/>
-          </g>
-        </g>
-      </g>
-      <g transform="translate(51.7 0.0) rotate(0) scale(1.27)">
-        <g>
-          <animateTransform attributeName="transform" type="skewX" values="0;-6;4.8;-3.0;0" dur="1.94s" begin="0.29s" repeatCount="indefinite"/>
-          <g>
-            <animateTransform attributeName="transform" type="scale" values="1 1;0.86 1.28;1.08 0.82;0.94 1.18;1 1" dur="1.21s" begin="0.29s" repeatCount="indefinite"/>
-            <path d="M-13 0C-18 -14 -6 -20 -3 -37C3 -27 15 -19 13 0Z" fill="url(#flameOuter)"/>
-            <path d="M-7 0C-9 -9 -3 -13 -1 -24C3 -17 8 -11 7 0Z" fill="url(#flameInner)"/>
-          </g>
-        </g>
-      </g>
-      <g transform="translate(73.3 0.0) rotate(0) scale(1.72)">
-        <g>
-          <animateTransform attributeName="transform" type="skewX" values="0;-6;4.8;-3.0;0" dur="1.92s" begin="0.03s" repeatCount="indefinite"/>
-          <g>
-            <animateTransform attributeName="transform" type="scale" values="1 1;0.86 1.28;1.08 0.82;0.94 1.18;1 1" dur="1.20s" begin="0.03s" repeatCount="indefinite"/>
-            <path d="M-13 0C-18 -14 -6 -20 -3 -37C3 -27 15 -19 13 0Z" fill="url(#flameOuter)"/>
-            <path d="M-7 0C-9 -9 -3 -13 -1 -24C3 -17 8 -11 7 0Z" fill="url(#flameInner)"/>
-          </g>
-        </g>
-      </g>
-      <g transform="translate(95.0 0.0) rotate(0) scale(2.02)">
-        <g>
-          <animateTransform attributeName="transform" type="skewX" values="0;-6;4.8;-3.0;0" dur="1.64s" begin="0.07s" repeatCount="indefinite"/>
-          <g>
-            <animateTransform attributeName="transform" type="scale" values="1 1;0.86 1.28;1.08 0.82;0.94 1.18;1 1" dur="1.03s" begin="0.07s" repeatCount="indefinite"/>
-            <path d="M-13 0C-18 -14 -6 -20 -3 -37C3 -27 15 -19 13 0Z" fill="url(#flameOuter)"/>
-            <path d="M-7 0C-9 -9 -3 -13 -1 -24C3 -17 8 -11 7 0Z" fill="url(#flameInner)"/>
-          </g>
-        </g>
-      </g>
-      <g transform="translate(116.7 0.0) rotate(0) scale(1.81)">
-        <g>
-          <animateTransform attributeName="transform" type="skewX" values="0;-6;4.8;-3.0;0" dur="2.13s" begin="0.10s" repeatCount="indefinite"/>
-          <g>
-            <animateTransform attributeName="transform" type="scale" values="1 1;0.86 1.28;1.08 0.82;0.94 1.18;1 1" dur="1.33s" begin="0.10s" repeatCount="indefinite"/>
-            <path d="M-13 0C-18 -14 -6 -20 -3 -37C3 -27 15 -19 13 0Z" fill="url(#flameOuter)"/>
-            <path d="M-7 0C-9 -9 -3 -13 -1 -24C3 -17 8 -11 7 0Z" fill="url(#flameInner)"/>
-          </g>
-        </g>
-      </g>
-      <g transform="translate(138.3 0.0) rotate(0) scale(1.30)">
-        <g>
-          <animateTransform attributeName="transform" type="skewX" values="0;-6;4.8;-3.0;0" dur="2.00s" begin="0.76s" repeatCount="indefinite"/>
-          <g>
-            <animateTransform attributeName="transform" type="scale" values="1 1;0.86 1.28;1.08 0.82;0.94 1.18;1 1" dur="1.25s" begin="0.76s" repeatCount="indefinite"/>
-            <path d="M-13 0C-18 -14 -6 -20 -3 -37C3 -27 15 -19 13 0Z" fill="url(#flameOuter)"/>
-            <path d="M-7 0C-9 -9 -3 -13 -1 -24C3 -17 8 -11 7 0Z" fill="url(#flameInner)"/>
-          </g>
-        </g>
-      </g>
-      <g transform="translate(160.0 0.0) rotate(0) scale(0.98)">
-        <g>
-          <animateTransform attributeName="transform" type="skewX" values="0;-6;4.8;-3.0;0" dur="1.85s" begin="0.78s" repeatCount="indefinite"/>
-          <g>
-            <animateTransform attributeName="transform" type="scale" values="1 1;0.86 1.28;1.08 0.82;0.94 1.18;1 1" dur="1.16s" begin="0.78s" repeatCount="indefinite"/>
-            <path d="M-13 0C-18 -14 -6 -20 -3 -37C3 -27 15 -19 13 0Z" fill="url(#flameOuter)"/>
-            <path d="M-7 0C-9 -9 -3 -13 -1 -24C3 -17 8 -11 7 0Z" fill="url(#flameInner)"/>
-          </g>
-        </g>
-      </g>
-    </g>
     <g filter="url(#heat)">
-      <g transform="translate(24.0 0.0) rotate(0) scale(0.52)">
+    <g transform="translate(22.0 0.0) rotate(0) scale(0.54)">
+      <g>
+        <animateTransform attributeName="transform" type="skewX" values="0;-9;7.2;-4.5;0" dur="1.51s" begin="0.02s" repeatCount="indefinite"/>
         <g>
-          <animateTransform attributeName="transform" type="skewX" values="0;-9;7.2;-4.5;0" dur="1.44s" begin="0.17s" repeatCount="indefinite"/>
-          <g>
-            <animateTransform attributeName="transform" type="scale" values="1 1;0.86 1.28;1.08 0.82;0.94 1.18;1 1" dur="0.90s" begin="0.17s" repeatCount="indefinite"/>
-            <path d="M-13 0C-18 -14 -6 -20 -3 -37C3 -27 15 -19 13 0Z" fill="url(#flameOuter)"/>
-            <path d="M-7 0C-9 -9 -3 -13 -1 -24C3 -17 8 -11 7 0Z" fill="url(#flameInner)"/>
-          </g>
-        </g>
-      </g>
-      <g transform="translate(38.2 0.0) rotate(0) scale(0.68)">
-        <g>
-          <animateTransform attributeName="transform" type="skewX" values="0;-9;7.2;-4.5;0" dur="1.03s" begin="0.19s" repeatCount="indefinite"/>
-          <g>
-            <animateTransform attributeName="transform" type="scale" values="1 1;0.86 1.28;1.08 0.82;0.94 1.18;1 1" dur="0.64s" begin="0.19s" repeatCount="indefinite"/>
-            <path d="M-13 0C-18 -14 -6 -20 -3 -37C3 -27 15 -19 13 0Z" fill="url(#flameOuter)"/>
-            <path d="M-7 0C-9 -9 -3 -13 -1 -24C3 -17 8 -11 7 0Z" fill="url(#flameInner)"/>
-          </g>
-        </g>
-      </g>
-      <g transform="translate(52.4 0.0) rotate(0) scale(0.97)">
-        <g>
-          <animateTransform attributeName="transform" type="skewX" values="0;-9;7.2;-4.5;0" dur="1.06s" begin="0.35s" repeatCount="indefinite"/>
-          <g>
-            <animateTransform attributeName="transform" type="scale" values="1 1;0.86 1.28;1.08 0.82;0.94 1.18;1 1" dur="0.66s" begin="0.35s" repeatCount="indefinite"/>
-            <path d="M-13 0C-18 -14 -6 -20 -3 -37C3 -27 15 -19 13 0Z" fill="url(#flameOuter)"/>
-            <path d="M-7 0C-9 -9 -3 -13 -1 -24C3 -17 8 -11 7 0Z" fill="url(#flameInner)"/>
-          </g>
-        </g>
-      </g>
-      <g transform="translate(66.6 0.0) rotate(0) scale(1.06)">
-        <g>
-          <animateTransform attributeName="transform" type="skewX" values="0;-9;7.2;-4.5;0" dur="1.17s" begin="0.33s" repeatCount="indefinite"/>
-          <g>
-            <animateTransform attributeName="transform" type="scale" values="1 1;0.86 1.28;1.08 0.82;0.94 1.18;1 1" dur="0.73s" begin="0.33s" repeatCount="indefinite"/>
-            <path d="M-13 0C-18 -14 -6 -20 -3 -37C3 -27 15 -19 13 0Z" fill="url(#flameOuter)"/>
-            <path d="M-7 0C-9 -9 -3 -13 -1 -24C3 -17 8 -11 7 0Z" fill="url(#flameInner)"/>
-          </g>
-        </g>
-      </g>
-      <g transform="translate(80.8 0.0) rotate(0) scale(0.97)">
-        <g>
-          <animateTransform attributeName="transform" type="skewX" values="0;-9;7.2;-4.5;0" dur="0.99s" begin="0.12s" repeatCount="indefinite"/>
-          <g>
-            <animateTransform attributeName="transform" type="scale" values="1 1;0.86 1.28;1.08 0.82;0.94 1.18;1 1" dur="0.62s" begin="0.12s" repeatCount="indefinite"/>
-            <path d="M-13 0C-18 -14 -6 -20 -3 -37C3 -27 15 -19 13 0Z" fill="url(#flameOuter)"/>
-            <path d="M-7 0C-9 -9 -3 -13 -1 -24C3 -17 8 -11 7 0Z" fill="url(#flameInner)"/>
-          </g>
-        </g>
-      </g>
-      <g transform="translate(95.0 0.0) rotate(0) scale(1.17)">
-        <g>
-          <animateTransform attributeName="transform" type="skewX" values="0;-9;7.2;-4.5;0" dur="1.20s" begin="0.19s" repeatCount="indefinite"/>
-          <g>
-            <animateTransform attributeName="transform" type="scale" values="1 1;0.86 1.28;1.08 0.82;0.94 1.18;1 1" dur="0.75s" begin="0.19s" repeatCount="indefinite"/>
-            <path d="M-13 0C-18 -14 -6 -20 -3 -37C3 -27 15 -19 13 0Z" fill="url(#flameOuter)"/>
-            <path d="M-7 0C-9 -9 -3 -13 -1 -24C3 -17 8 -11 7 0Z" fill="url(#flameInner)"/>
-          </g>
-        </g>
-      </g>
-      <g transform="translate(109.2 0.0) rotate(0) scale(1.12)">
-        <g>
-          <animateTransform attributeName="transform" type="skewX" values="0;-9;7.2;-4.5;0" dur="1.21s" begin="0.18s" repeatCount="indefinite"/>
-          <g>
-            <animateTransform attributeName="transform" type="scale" values="1 1;0.86 1.28;1.08 0.82;0.94 1.18;1 1" dur="0.76s" begin="0.18s" repeatCount="indefinite"/>
-            <path d="M-13 0C-18 -14 -6 -20 -3 -37C3 -27 15 -19 13 0Z" fill="url(#flameOuter)"/>
-            <path d="M-7 0C-9 -9 -3 -13 -1 -24C3 -17 8 -11 7 0Z" fill="url(#flameInner)"/>
-          </g>
-        </g>
-      </g>
-      <g transform="translate(123.4 0.0) rotate(0) scale(1.10)">
-        <g>
-          <animateTransform attributeName="transform" type="skewX" values="0;-9;7.2;-4.5;0" dur="1.35s" begin="0.15s" repeatCount="indefinite"/>
-          <g>
-            <animateTransform attributeName="transform" type="scale" values="1 1;0.86 1.28;1.08 0.82;0.94 1.18;1 1" dur="0.84s" begin="0.15s" repeatCount="indefinite"/>
-            <path d="M-13 0C-18 -14 -6 -20 -3 -37C3 -27 15 -19 13 0Z" fill="url(#flameOuter)"/>
-            <path d="M-7 0C-9 -9 -3 -13 -1 -24C3 -17 8 -11 7 0Z" fill="url(#flameInner)"/>
-          </g>
-        </g>
-      </g>
-      <g transform="translate(137.6 0.0) rotate(0) scale(0.92)">
-        <g>
-          <animateTransform attributeName="transform" type="skewX" values="0;-9;7.2;-4.5;0" dur="1.25s" begin="0.53s" repeatCount="indefinite"/>
-          <g>
-            <animateTransform attributeName="transform" type="scale" values="1 1;0.86 1.28;1.08 0.82;0.94 1.18;1 1" dur="0.78s" begin="0.53s" repeatCount="indefinite"/>
-            <path d="M-13 0C-18 -14 -6 -20 -3 -37C3 -27 15 -19 13 0Z" fill="url(#flameOuter)"/>
-            <path d="M-7 0C-9 -9 -3 -13 -1 -24C3 -17 8 -11 7 0Z" fill="url(#flameInner)"/>
-          </g>
-        </g>
-      </g>
-      <g transform="translate(151.8 0.0) rotate(0) scale(0.79)">
-        <g>
-          <animateTransform attributeName="transform" type="skewX" values="0;-9;7.2;-4.5;0" dur="1.12s" begin="0.59s" repeatCount="indefinite"/>
-          <g>
-            <animateTransform attributeName="transform" type="scale" values="1 1;0.86 1.28;1.08 0.82;0.94 1.18;1 1" dur="0.70s" begin="0.59s" repeatCount="indefinite"/>
-            <path d="M-13 0C-18 -14 -6 -20 -3 -37C3 -27 15 -19 13 0Z" fill="url(#flameOuter)"/>
-            <path d="M-7 0C-9 -9 -3 -13 -1 -24C3 -17 8 -11 7 0Z" fill="url(#flameInner)"/>
-          </g>
-        </g>
-      </g>
-      <g transform="translate(166.0 0.0) rotate(0) scale(0.53)">
-        <g>
-          <animateTransform attributeName="transform" type="skewX" values="0;-9;7.2;-4.5;0" dur="1.19s" begin="0.45s" repeatCount="indefinite"/>
-          <g>
-            <animateTransform attributeName="transform" type="scale" values="1 1;0.86 1.28;1.08 0.82;0.94 1.18;1 1" dur="0.75s" begin="0.45s" repeatCount="indefinite"/>
-            <path d="M-13 0C-18 -14 -6 -20 -3 -37C3 -27 15 -19 13 0Z" fill="url(#flameOuter)"/>
-            <path d="M-7 0C-9 -9 -3 -13 -1 -24C3 -17 8 -11 7 0Z" fill="url(#flameInner)"/>
-          </g>
-        </g>
-      </g>
-      <g transform="translate(-2.0 40.0) rotate(-72) scale(0.55)">
-        <g>
-          <animateTransform attributeName="transform" type="skewX" values="0;-8;6.4;-4.0;0" dur="1.19s" begin="0.24s" repeatCount="indefinite"/>
-          <g>
-            <animateTransform attributeName="transform" type="scale" values="1 1;0.86 1.28;1.08 0.82;0.94 1.18;1 1" dur="0.75s" begin="0.24s" repeatCount="indefinite"/>
-            <path d="M-13 0C-18 -14 -6 -20 -3 -37C3 -27 15 -19 13 0Z" fill="url(#flameOuter)"/>
-            <path d="M-7 0C-9 -9 -3 -13 -1 -24C3 -17 8 -11 7 0Z" fill="url(#flameInner)"/>
-          </g>
-        </g>
-      </g>
-      <g transform="translate(192.0 40.0) rotate(72) scale(0.55)">
-        <g>
-          <animateTransform attributeName="transform" type="skewX" values="0;-8;6.4;-4.0;0" dur="1.14s" begin="0.33s" repeatCount="indefinite"/>
-          <g>
-            <animateTransform attributeName="transform" type="scale" values="1 1;0.86 1.28;1.08 0.82;0.94 1.18;1 1" dur="0.71s" begin="0.33s" repeatCount="indefinite"/>
-            <path d="M-13 0C-18 -14 -6 -20 -3 -37C3 -27 15 -19 13 0Z" fill="url(#flameOuter)"/>
-            <path d="M-7 0C-9 -9 -3 -13 -1 -24C3 -17 8 -11 7 0Z" fill="url(#flameInner)"/>
-          </g>
-        </g>
-      </g>
-      <g transform="translate(1.0 28.0) rotate(-62) scale(0.63)">
-        <g>
-          <animateTransform attributeName="transform" type="skewX" values="0;-8;6.4;-4.0;0" dur="1.49s" begin="0.29s" repeatCount="indefinite"/>
-          <g>
-            <animateTransform attributeName="transform" type="scale" values="1 1;0.86 1.28;1.08 0.82;0.94 1.18;1 1" dur="0.93s" begin="0.29s" repeatCount="indefinite"/>
-            <path d="M-13 0C-18 -14 -6 -20 -3 -37C3 -27 15 -19 13 0Z" fill="url(#flameOuter)"/>
-            <path d="M-7 0C-9 -9 -3 -13 -1 -24C3 -17 8 -11 7 0Z" fill="url(#flameInner)"/>
-          </g>
-        </g>
-      </g>
-      <g transform="translate(189.0 28.0) rotate(62) scale(0.63)">
-        <g>
-          <animateTransform attributeName="transform" type="skewX" values="0;-8;6.4;-4.0;0" dur="1.54s" begin="0.16s" repeatCount="indefinite"/>
-          <g>
-            <animateTransform attributeName="transform" type="scale" values="1 1;0.86 1.28;1.08 0.82;0.94 1.18;1 1" dur="0.96s" begin="0.16s" repeatCount="indefinite"/>
-            <path d="M-13 0C-18 -14 -6 -20 -3 -37C3 -27 15 -19 13 0Z" fill="url(#flameOuter)"/>
-            <path d="M-7 0C-9 -9 -3 -13 -1 -24C3 -17 8 -11 7 0Z" fill="url(#flameInner)"/>
-          </g>
-        </g>
-      </g>
-      <g transform="translate(4.0 16.0) rotate(-52) scale(0.71)">
-        <g>
-          <animateTransform attributeName="transform" type="skewX" values="0;-8;6.4;-4.0;0" dur="1.45s" begin="0.30s" repeatCount="indefinite"/>
-          <g>
-            <animateTransform attributeName="transform" type="scale" values="1 1;0.86 1.28;1.08 0.82;0.94 1.18;1 1" dur="0.91s" begin="0.30s" repeatCount="indefinite"/>
-            <path d="M-13 0C-18 -14 -6 -20 -3 -37C3 -27 15 -19 13 0Z" fill="url(#flameOuter)"/>
-            <path d="M-7 0C-9 -9 -3 -13 -1 -24C3 -17 8 -11 7 0Z" fill="url(#flameInner)"/>
-          </g>
-        </g>
-      </g>
-      <g transform="translate(186.0 16.0) rotate(52) scale(0.71)">
-        <g>
-          <animateTransform attributeName="transform" type="skewX" values="0;-8;6.4;-4.0;0" dur="1.40s" begin="0.23s" repeatCount="indefinite"/>
-          <g>
-            <animateTransform attributeName="transform" type="scale" values="1 1;0.86 1.28;1.08 0.82;0.94 1.18;1 1" dur="0.87s" begin="0.23s" repeatCount="indefinite"/>
-            <path d="M-13 0C-18 -14 -6 -20 -3 -37C3 -27 15 -19 13 0Z" fill="url(#flameOuter)"/>
-            <path d="M-7 0C-9 -9 -3 -13 -1 -24C3 -17 8 -11 7 0Z" fill="url(#flameInner)"/>
-          </g>
-        </g>
-      </g>
-      <g transform="translate(7.0 6.0) rotate(-42) scale(0.79)">
-        <g>
-          <animateTransform attributeName="transform" type="skewX" values="0;-8;6.4;-4.0;0" dur="1.52s" begin="0.47s" repeatCount="indefinite"/>
-          <g>
-            <animateTransform attributeName="transform" type="scale" values="1 1;0.86 1.28;1.08 0.82;0.94 1.18;1 1" dur="0.95s" begin="0.47s" repeatCount="indefinite"/>
-            <path d="M-13 0C-18 -14 -6 -20 -3 -37C3 -27 15 -19 13 0Z" fill="url(#flameOuter)"/>
-            <path d="M-7 0C-9 -9 -3 -13 -1 -24C3 -17 8 -11 7 0Z" fill="url(#flameInner)"/>
-          </g>
-        </g>
-      </g>
-      <g transform="translate(183.0 6.0) rotate(42) scale(0.79)">
-        <g>
-          <animateTransform attributeName="transform" type="skewX" values="0;-8;6.4;-4.0;0" dur="1.35s" begin="0.33s" repeatCount="indefinite"/>
-          <g>
-            <animateTransform attributeName="transform" type="scale" values="1 1;0.86 1.28;1.08 0.82;0.94 1.18;1 1" dur="0.84s" begin="0.33s" repeatCount="indefinite"/>
-            <path d="M-13 0C-18 -14 -6 -20 -3 -37C3 -27 15 -19 13 0Z" fill="url(#flameOuter)"/>
-            <path d="M-7 0C-9 -9 -3 -13 -1 -24C3 -17 8 -11 7 0Z" fill="url(#flameInner)"/>
-          </g>
+          <animateTransform attributeName="transform" type="scale" values="1 1;0.86 1.28;1.08 0.82;0.94 1.18;1 1" dur="0.94s" begin="0.02s" repeatCount="indefinite"/>
+          <path d="M-13 0C-18 -14 -6 -20 -3 -37C3 -27 15 -19 13 0Z" fill="url(#flameOuter)"/>
+          <path d="M-7 0C-9 -9 -3 -13 -1 -24C3 -17 8 -11 7 0Z" fill="url(#flameInner)"/>
         </g>
       </g>
     </g>
-    <!-- neon pill -->
+    <g transform="translate(40.2 0.0) rotate(0) scale(0.69)">
+      <g>
+        <animateTransform attributeName="transform" type="skewX" values="0;-9;7.2;-4.5;0" dur="0.97s" begin="0.17s" repeatCount="indefinite"/>
+        <g>
+          <animateTransform attributeName="transform" type="scale" values="1 1;0.86 1.28;1.08 0.82;0.94 1.18;1 1" dur="0.60s" begin="0.17s" repeatCount="indefinite"/>
+          <path d="M-13 0C-18 -14 -6 -20 -3 -37C3 -27 15 -19 13 0Z" fill="url(#flameOuter)"/>
+          <path d="M-7 0C-9 -9 -3 -13 -1 -24C3 -17 8 -11 7 0Z" fill="url(#flameInner)"/>
+        </g>
+      </g>
+    </g>
+    <g transform="translate(58.5 0.0) rotate(0) scale(0.97)">
+      <g>
+        <animateTransform attributeName="transform" type="skewX" values="0;-9;7.2;-4.5;0" dur="1.10s" begin="0.30s" repeatCount="indefinite"/>
+        <g>
+          <animateTransform attributeName="transform" type="scale" values="1 1;0.86 1.28;1.08 0.82;0.94 1.18;1 1" dur="0.69s" begin="0.30s" repeatCount="indefinite"/>
+          <path d="M-13 0C-18 -14 -6 -20 -3 -37C3 -27 15 -19 13 0Z" fill="url(#flameOuter)"/>
+          <path d="M-7 0C-9 -9 -3 -13 -1 -24C3 -17 8 -11 7 0Z" fill="url(#flameInner)"/>
+        </g>
+      </g>
+    </g>
+    <g transform="translate(76.8 0.0) rotate(0) scale(1.05)">
+      <g>
+        <animateTransform attributeName="transform" type="skewX" values="0;-9;7.2;-4.5;0" dur="1.29s" begin="0.51s" repeatCount="indefinite"/>
+        <g>
+          <animateTransform attributeName="transform" type="scale" values="1 1;0.86 1.28;1.08 0.82;0.94 1.18;1 1" dur="0.80s" begin="0.51s" repeatCount="indefinite"/>
+          <path d="M-13 0C-18 -14 -6 -20 -3 -37C3 -27 15 -19 13 0Z" fill="url(#flameOuter)"/>
+          <path d="M-7 0C-9 -9 -3 -13 -1 -24C3 -17 8 -11 7 0Z" fill="url(#flameInner)"/>
+        </g>
+      </g>
+    </g>
+    <g transform="translate(95.0 0.0) rotate(0) scale(1.12)">
+      <g>
+        <animateTransform attributeName="transform" type="skewX" values="0;-9;7.2;-4.5;0" dur="1.36s" begin="0.42s" repeatCount="indefinite"/>
+        <g>
+          <animateTransform attributeName="transform" type="scale" values="1 1;0.86 1.28;1.08 0.82;0.94 1.18;1 1" dur="0.85s" begin="0.42s" repeatCount="indefinite"/>
+          <path d="M-13 0C-18 -14 -6 -20 -3 -37C3 -27 15 -19 13 0Z" fill="url(#flameOuter)"/>
+          <path d="M-7 0C-9 -9 -3 -13 -1 -24C3 -17 8 -11 7 0Z" fill="url(#flameInner)"/>
+        </g>
+      </g>
+    </g>
+    <g transform="translate(113.2 0.0) rotate(0) scale(1.13)">
+      <g>
+        <animateTransform attributeName="transform" type="skewX" values="0;-9;7.2;-4.5;0" dur="0.97s" begin="0.38s" repeatCount="indefinite"/>
+        <g>
+          <animateTransform attributeName="transform" type="scale" values="1 1;0.86 1.28;1.08 0.82;0.94 1.18;1 1" dur="0.61s" begin="0.38s" repeatCount="indefinite"/>
+          <path d="M-13 0C-18 -14 -6 -20 -3 -37C3 -27 15 -19 13 0Z" fill="url(#flameOuter)"/>
+          <path d="M-7 0C-9 -9 -3 -13 -1 -24C3 -17 8 -11 7 0Z" fill="url(#flameInner)"/>
+        </g>
+      </g>
+    </g>
+    <g transform="translate(131.5 0.0) rotate(0) scale(0.99)">
+      <g>
+        <animateTransform attributeName="transform" type="skewX" values="0;-9;7.2;-4.5;0" dur="1.30s" begin="0.32s" repeatCount="indefinite"/>
+        <g>
+          <animateTransform attributeName="transform" type="scale" values="1 1;0.86 1.28;1.08 0.82;0.94 1.18;1 1" dur="0.82s" begin="0.32s" repeatCount="indefinite"/>
+          <path d="M-13 0C-18 -14 -6 -20 -3 -37C3 -27 15 -19 13 0Z" fill="url(#flameOuter)"/>
+          <path d="M-7 0C-9 -9 -3 -13 -1 -24C3 -17 8 -11 7 0Z" fill="url(#flameInner)"/>
+        </g>
+      </g>
+    </g>
+    <g transform="translate(149.8 0.0) rotate(0) scale(0.80)">
+      <g>
+        <animateTransform attributeName="transform" type="skewX" values="0;-9;7.2;-4.5;0" dur="1.26s" begin="0.13s" repeatCount="indefinite"/>
+        <g>
+          <animateTransform attributeName="transform" type="scale" values="1 1;0.86 1.28;1.08 0.82;0.94 1.18;1 1" dur="0.79s" begin="0.13s" repeatCount="indefinite"/>
+          <path d="M-13 0C-18 -14 -6 -20 -3 -37C3 -27 15 -19 13 0Z" fill="url(#flameOuter)"/>
+          <path d="M-7 0C-9 -9 -3 -13 -1 -24C3 -17 8 -11 7 0Z" fill="url(#flameInner)"/>
+        </g>
+      </g>
+    </g>
+    <g transform="translate(168.0 0.0) rotate(0) scale(0.49)">
+      <g>
+        <animateTransform attributeName="transform" type="skewX" values="0;-9;7.2;-4.5;0" dur="1.26s" begin="0.35s" repeatCount="indefinite"/>
+        <g>
+          <animateTransform attributeName="transform" type="scale" values="1 1;0.86 1.28;1.08 0.82;0.94 1.18;1 1" dur="0.79s" begin="0.35s" repeatCount="indefinite"/>
+          <path d="M-13 0C-18 -14 -6 -20 -3 -37C3 -27 15 -19 13 0Z" fill="url(#flameOuter)"/>
+          <path d="M-7 0C-9 -9 -3 -13 -1 -24C3 -17 8 -11 7 0Z" fill="url(#flameInner)"/>
+        </g>
+      </g>
+    </g>
+    <g transform="translate(-2.0 40.0) rotate(-72) scale(0.50)">
+      <g>
+        <animateTransform attributeName="transform" type="skewX" values="0;-8;6.4;-4.0;0" dur="1.19s" begin="0.46s" repeatCount="indefinite"/>
+        <g>
+          <animateTransform attributeName="transform" type="scale" values="1 1;0.86 1.28;1.08 0.82;0.94 1.18;1 1" dur="0.74s" begin="0.46s" repeatCount="indefinite"/>
+          <path d="M-13 0C-18 -14 -6 -20 -3 -37C3 -27 15 -19 13 0Z" fill="url(#flameOuter)"/>
+          <path d="M-7 0C-9 -9 -3 -13 -1 -24C3 -17 8 -11 7 0Z" fill="url(#flameInner)"/>
+        </g>
+      </g>
+    </g>
+    <g transform="translate(192.0 40.0) rotate(72) scale(0.50)">
+      <g>
+        <animateTransform attributeName="transform" type="skewX" values="0;-8;6.4;-4.0;0" dur="1.42s" begin="0.17s" repeatCount="indefinite"/>
+        <g>
+          <animateTransform attributeName="transform" type="scale" values="1 1;0.86 1.28;1.08 0.82;0.94 1.18;1 1" dur="0.89s" begin="0.17s" repeatCount="indefinite"/>
+          <path d="M-13 0C-18 -14 -6 -20 -3 -37C3 -27 15 -19 13 0Z" fill="url(#flameOuter)"/>
+          <path d="M-7 0C-9 -9 -3 -13 -1 -24C3 -17 8 -11 7 0Z" fill="url(#flameInner)"/>
+        </g>
+      </g>
+    </g>
+    <g transform="translate(1.0 28.0) rotate(-62) scale(0.57)">
+      <g>
+        <animateTransform attributeName="transform" type="skewX" values="0;-8;6.4;-4.0;0" dur="1.21s" begin="0.30s" repeatCount="indefinite"/>
+        <g>
+          <animateTransform attributeName="transform" type="scale" values="1 1;0.86 1.28;1.08 0.82;0.94 1.18;1 1" dur="0.75s" begin="0.30s" repeatCount="indefinite"/>
+          <path d="M-13 0C-18 -14 -6 -20 -3 -37C3 -27 15 -19 13 0Z" fill="url(#flameOuter)"/>
+          <path d="M-7 0C-9 -9 -3 -13 -1 -24C3 -17 8 -11 7 0Z" fill="url(#flameInner)"/>
+        </g>
+      </g>
+    </g>
+    <g transform="translate(189.0 28.0) rotate(62) scale(0.57)">
+      <g>
+        <animateTransform attributeName="transform" type="skewX" values="0;-8;6.4;-4.0;0" dur="1.55s" begin="0.10s" repeatCount="indefinite"/>
+        <g>
+          <animateTransform attributeName="transform" type="scale" values="1 1;0.86 1.28;1.08 0.82;0.94 1.18;1 1" dur="0.97s" begin="0.10s" repeatCount="indefinite"/>
+          <path d="M-13 0C-18 -14 -6 -20 -3 -37C3 -27 15 -19 13 0Z" fill="url(#flameOuter)"/>
+          <path d="M-7 0C-9 -9 -3 -13 -1 -24C3 -17 8 -11 7 0Z" fill="url(#flameInner)"/>
+        </g>
+      </g>
+    </g>
+    <g transform="translate(4.0 16.0) rotate(-52) scale(0.64)">
+      <g>
+        <animateTransform attributeName="transform" type="skewX" values="0;-8;6.4;-4.0;0" dur="1.49s" begin="0.10s" repeatCount="indefinite"/>
+        <g>
+          <animateTransform attributeName="transform" type="scale" values="1 1;0.86 1.28;1.08 0.82;0.94 1.18;1 1" dur="0.93s" begin="0.10s" repeatCount="indefinite"/>
+          <path d="M-13 0C-18 -14 -6 -20 -3 -37C3 -27 15 -19 13 0Z" fill="url(#flameOuter)"/>
+          <path d="M-7 0C-9 -9 -3 -13 -1 -24C3 -17 8 -11 7 0Z" fill="url(#flameInner)"/>
+        </g>
+      </g>
+    </g>
+    <g transform="translate(186.0 16.0) rotate(52) scale(0.64)">
+      <g>
+        <animateTransform attributeName="transform" type="skewX" values="0;-8;6.4;-4.0;0" dur="1.17s" begin="0.44s" repeatCount="indefinite"/>
+        <g>
+          <animateTransform attributeName="transform" type="scale" values="1 1;0.86 1.28;1.08 0.82;0.94 1.18;1 1" dur="0.73s" begin="0.44s" repeatCount="indefinite"/>
+          <path d="M-13 0C-18 -14 -6 -20 -3 -37C3 -27 15 -19 13 0Z" fill="url(#flameOuter)"/>
+          <path d="M-7 0C-9 -9 -3 -13 -1 -24C3 -17 8 -11 7 0Z" fill="url(#flameInner)"/>
+        </g>
+      </g>
+    </g>
+    <g transform="translate(7.0 6.0) rotate(-42) scale(0.71)">
+      <g>
+        <animateTransform attributeName="transform" type="skewX" values="0;-8;6.4;-4.0;0" dur="1.18s" begin="0.04s" repeatCount="indefinite"/>
+        <g>
+          <animateTransform attributeName="transform" type="scale" values="1 1;0.86 1.28;1.08 0.82;0.94 1.18;1 1" dur="0.74s" begin="0.04s" repeatCount="indefinite"/>
+          <path d="M-13 0C-18 -14 -6 -20 -3 -37C3 -27 15 -19 13 0Z" fill="url(#flameOuter)"/>
+          <path d="M-7 0C-9 -9 -3 -13 -1 -24C3 -17 8 -11 7 0Z" fill="url(#flameInner)"/>
+        </g>
+      </g>
+    </g>
+    <g transform="translate(183.0 6.0) rotate(42) scale(0.71)">
+      <g>
+        <animateTransform attributeName="transform" type="skewX" values="0;-8;6.4;-4.0;0" dur="1.31s" begin="0.22s" repeatCount="indefinite"/>
+        <g>
+          <animateTransform attributeName="transform" type="scale" values="1 1;0.86 1.28;1.08 0.82;0.94 1.18;1 1" dur="0.82s" begin="0.22s" repeatCount="indefinite"/>
+          <path d="M-13 0C-18 -14 -6 -20 -3 -37C3 -27 15 -19 13 0Z" fill="url(#flameOuter)"/>
+          <path d="M-7 0C-9 -9 -3 -13 -1 -24C3 -17 8 -11 7 0Z" fill="url(#flameInner)"/>
+        </g>
+      </g>
+    </g>
+    </g>
     <rect x="0" y="0" width="190" height="56" rx="28" fill="#150005"/>
     <rect x="0" y="0" width="190" height="56" rx="28" fill="url(#pillInner)"/>
     <rect x="3" y="3" width="184" height="50" rx="25" fill="none" stroke="#ff1f1f" stroke-width="9" opacity="0.55" filter="url(#neonBlur)"/>
     <rect x="3" y="3" width="184" height="50" rx="25" fill="none" stroke="#ff2b2b" stroke-width="6"/>
     <rect x="3" y="3" width="184" height="50" rx="25" fill="none" stroke="#ff8f8f" stroke-width="1.6" opacity="0.8"/>
     <rect x="9" y="9" width="172" height="38" rx="19" fill="none" stroke="#000" stroke-opacity="0.55" stroke-width="2.5"/>
-    <!-- white-hot streaks like the reference -->
     <path d="M40 49C70 55 120 55 150 49" fill="none" stroke="#fff1d6" stroke-width="2.4" stroke-linecap="round" opacity="0.9" filter="url(#neonBlur)"/>
     <path d="M52 50.5C80 54 112 54 140 50.5" fill="none" stroke="#ffffff" stroke-width="1.2" stroke-linecap="round" opacity="0.95"/>
-    <path d="M30 12C60 4 130 4 160 12" fill="none" stroke="#ffd6c4" stroke-width="1.2" stroke-linecap="round" opacity="0.55"/>
     <text x="30" y="35" font-family="ui-monospace,'SF Mono',Consolas,monospace" font-size="17" font-weight="800" letter-spacing="1.8" fill="#fff6ea" filter="url(#textGlow)">OPEN NOW</text>
     <g fill="none" stroke="#fff6ea" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" filter="url(#textGlow)">
       <path d="M150 28h20M162 19l9 9-9 9"/>
     </g>
-    <!-- sparks over everything -->
-    <g>
-      <circle cx="25" cy="-6" r="2.05" fill="#ffd36b">
-        <animate attributeName="cy" values="-8;-80" dur="2.08s" begin="0.62s" repeatCount="indefinite"/>
-        <animate attributeName="cx" values="25;33;31" dur="2.08s" begin="0.62s" repeatCount="indefinite"/>
-        <animate attributeName="opacity" values="0;1;0.8;0" dur="2.08s" begin="0.62s" repeatCount="indefinite"/>
-        <animate attributeName="r" values="2.05;0.61" dur="2.08s" begin="0.62s" repeatCount="indefinite"/>
-      </circle>
-      <circle cx="181" cy="-6" r="1.76" fill="#ffd36b">
-        <animate attributeName="cy" values="-8;-91" dur="1.62s" begin="1.88s" repeatCount="indefinite"/>
-        <animate attributeName="cx" values="181;167;187" dur="1.62s" begin="1.88s" repeatCount="indefinite"/>
-        <animate attributeName="opacity" values="0;1;0.8;0" dur="1.62s" begin="1.88s" repeatCount="indefinite"/>
-        <animate attributeName="r" values="1.76;0.53" dur="1.62s" begin="1.88s" repeatCount="indefinite"/>
-      </circle>
-      <circle cx="25" cy="-6" r="2.26" fill="#ffd36b">
-        <animate attributeName="cy" values="-8;-77" dur="1.46s" begin="0.57s" repeatCount="indefinite"/>
-        <animate attributeName="cx" values="25;39;31" dur="1.46s" begin="0.57s" repeatCount="indefinite"/>
-        <animate attributeName="opacity" values="0;1;0.8;0" dur="1.46s" begin="0.57s" repeatCount="indefinite"/>
-        <animate attributeName="r" values="2.26;0.68" dur="1.46s" begin="0.57s" repeatCount="indefinite"/>
-      </circle>
-      <circle cx="30" cy="-6" r="1.66" fill="#ffd36b">
-        <animate attributeName="cy" values="-8;-60" dur="1.4s" begin="0.8s" repeatCount="indefinite"/>
-        <animate attributeName="cx" values="30;44;36" dur="1.4s" begin="0.8s" repeatCount="indefinite"/>
-        <animate attributeName="opacity" values="0;1;0.8;0" dur="1.4s" begin="0.8s" repeatCount="indefinite"/>
-        <animate attributeName="r" values="1.66;0.50" dur="1.4s" begin="0.8s" repeatCount="indefinite"/>
-      </circle>
-      <circle cx="116" cy="-6" r="1.79" fill="#ffd36b">
-        <animate attributeName="cy" values="-8;-66" dur="2.38s" begin="1.37s" repeatCount="indefinite"/>
-        <animate attributeName="cx" values="116;108;110" dur="2.38s" begin="1.37s" repeatCount="indefinite"/>
-        <animate attributeName="opacity" values="0;1;0.8;0" dur="2.38s" begin="1.37s" repeatCount="indefinite"/>
-        <animate attributeName="r" values="1.79;0.54" dur="2.38s" begin="1.37s" repeatCount="indefinite"/>
-      </circle>
-      <circle cx="55" cy="-6" r="1.32" fill="#ffd36b">
-        <animate attributeName="cy" values="-8;-89" dur="1.38s" begin="1.32s" repeatCount="indefinite"/>
-        <animate attributeName="cx" values="55;47;61" dur="1.38s" begin="1.32s" repeatCount="indefinite"/>
-        <animate attributeName="opacity" values="0;1;0.8;0" dur="1.38s" begin="1.32s" repeatCount="indefinite"/>
-        <animate attributeName="r" values="1.32;0.40" dur="1.38s" begin="1.32s" repeatCount="indefinite"/>
-      </circle>
-      <circle cx="82" cy="-6" r="1.78" fill="#ffd36b">
-        <animate attributeName="cy" values="-8;-88" dur="1.2s" begin="0.84s" repeatCount="indefinite"/>
-        <animate attributeName="cx" values="82;90;76" dur="1.2s" begin="0.84s" repeatCount="indefinite"/>
-        <animate attributeName="opacity" values="0;1;0.8;0" dur="1.2s" begin="0.84s" repeatCount="indefinite"/>
-        <animate attributeName="r" values="1.78;0.53" dur="1.2s" begin="0.84s" repeatCount="indefinite"/>
-      </circle>
-      <circle cx="141" cy="-6" r="2.26" fill="#ffd36b">
-        <animate attributeName="cy" values="-8;-81" dur="2.34s" begin="1.31s" repeatCount="indefinite"/>
-        <animate attributeName="cx" values="141;155;147" dur="2.34s" begin="1.31s" repeatCount="indefinite"/>
-        <animate attributeName="opacity" values="0;1;0.8;0" dur="2.34s" begin="1.31s" repeatCount="indefinite"/>
-        <animate attributeName="r" values="2.26;0.68" dur="2.34s" begin="1.31s" repeatCount="indefinite"/>
-      </circle>
-      <circle cx="112" cy="-6" r="1.82" fill="#ffd36b">
-        <animate attributeName="cy" values="-8;-64" dur="1.67s" begin="0.96s" repeatCount="indefinite"/>
-        <animate attributeName="cx" values="112;98;106" dur="1.67s" begin="0.96s" repeatCount="indefinite"/>
-        <animate attributeName="opacity" values="0;1;0.8;0" dur="1.67s" begin="0.96s" repeatCount="indefinite"/>
-        <animate attributeName="r" values="1.82;0.55" dur="1.67s" begin="0.96s" repeatCount="indefinite"/>
-      </circle>
-      <circle cx="122" cy="-6" r="1.37" fill="#ffd36b">
-        <animate attributeName="cy" values="-8;-52" dur="1.39s" begin="0.68s" repeatCount="indefinite"/>
-        <animate attributeName="cx" values="122;114;116" dur="1.39s" begin="0.68s" repeatCount="indefinite"/>
-        <animate attributeName="opacity" values="0;1;0.8;0" dur="1.39s" begin="0.68s" repeatCount="indefinite"/>
-        <animate attributeName="r" values="1.37;0.41" dur="1.39s" begin="0.68s" repeatCount="indefinite"/>
-      </circle>
-      <circle cx="103" cy="-6" r="1.57" fill="#ffd36b">
-        <animate attributeName="cy" values="-8;-76" dur="1.94s" begin="0.14s" repeatCount="indefinite"/>
-        <animate attributeName="cx" values="103;95;109" dur="1.94s" begin="0.14s" repeatCount="indefinite"/>
-        <animate attributeName="opacity" values="0;1;0.8;0" dur="1.94s" begin="0.14s" repeatCount="indefinite"/>
-        <animate attributeName="r" values="1.57;0.47" dur="1.94s" begin="0.14s" repeatCount="indefinite"/>
-      </circle>
-      <circle cx="98" cy="-6" r="1.45" fill="#ffd36b">
-        <animate attributeName="cy" values="-8;-83" dur="1.92s" begin="0.95s" repeatCount="indefinite"/>
-        <animate attributeName="cx" values="98;112;104" dur="1.92s" begin="0.95s" repeatCount="indefinite"/>
-        <animate attributeName="opacity" values="0;1;0.8;0" dur="1.92s" begin="0.95s" repeatCount="indefinite"/>
-        <animate attributeName="r" values="1.45;0.43" dur="1.92s" begin="0.95s" repeatCount="indefinite"/>
-      </circle>
-      <circle cx="133" cy="-6" r="2.27" fill="#ffd36b">
-        <animate attributeName="cy" values="-8;-68" dur="1.57s" begin="0.29s" repeatCount="indefinite"/>
-        <animate attributeName="cx" values="133;147;127" dur="1.57s" begin="0.29s" repeatCount="indefinite"/>
-        <animate attributeName="opacity" values="0;1;0.8;0" dur="1.57s" begin="0.29s" repeatCount="indefinite"/>
-        <animate attributeName="r" values="2.27;0.68" dur="1.57s" begin="0.29s" repeatCount="indefinite"/>
-      </circle>
-      <circle cx="142" cy="-6" r="1.99" fill="#ffd36b">
-        <animate attributeName="cy" values="-8;-61" dur="1.23s" begin="1.9s" repeatCount="indefinite"/>
-        <animate attributeName="cx" values="142;128;148" dur="1.23s" begin="1.9s" repeatCount="indefinite"/>
-        <animate attributeName="opacity" values="0;1;0.8;0" dur="1.23s" begin="1.9s" repeatCount="indefinite"/>
-        <animate attributeName="r" values="1.99;0.60" dur="1.23s" begin="1.9s" repeatCount="indefinite"/>
-      </circle>
-      <circle cx="174" cy="-6" r="1.64" fill="#ffd36b">
-        <animate attributeName="cy" values="-8;-75" dur="2.24s" begin="1.39s" repeatCount="indefinite"/>
-        <animate attributeName="cx" values="174;166;180" dur="2.24s" begin="1.39s" repeatCount="indefinite"/>
-        <animate attributeName="opacity" values="0;1;0.8;0" dur="2.24s" begin="1.39s" repeatCount="indefinite"/>
-        <animate attributeName="r" values="1.64;0.49" dur="2.24s" begin="1.39s" repeatCount="indefinite"/>
-      </circle>
-      <circle cx="67" cy="-6" r="1.73" fill="#ffd36b">
-        <animate attributeName="cy" values="-8;-66" dur="1.84s" begin="1.56s" repeatCount="indefinite"/>
-        <animate attributeName="cx" values="67;59;61" dur="1.84s" begin="1.56s" repeatCount="indefinite"/>
-        <animate attributeName="opacity" values="0;1;0.8;0" dur="1.84s" begin="1.56s" repeatCount="indefinite"/>
-        <animate attributeName="r" values="1.73;0.52" dur="1.84s" begin="1.56s" repeatCount="indefinite"/>
-      </circle>
-    </g>
   </g>
+
+  <!-- sparks over everything -->
+  <g>
+    <circle cx="122" cy="44" r="2.34" fill="#ffd9a0">
+      <animate attributeName="cy" values="44;3" dur="2.3s" begin="2.38s" repeatCount="indefinite"/>
+      <animate attributeName="cx" values="122;132;127" dur="2.3s" begin="2.38s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0;1;0.8;0" dur="2.3s" begin="2.38s" repeatCount="indefinite"/>
+      <animate attributeName="r" values="2.34;0.70" dur="2.3s" begin="2.38s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="437" cy="49" r="1.8" fill="#ffd9a0">
+      <animate attributeName="cy" values="49;11" dur="2.37s" begin="1.1s" repeatCount="indefinite"/>
+      <animate attributeName="cx" values="437;419;428" dur="2.37s" begin="1.1s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0;1;0.8;0" dur="2.37s" begin="1.1s" repeatCount="indefinite"/>
+      <animate attributeName="r" values="1.8;0.54" dur="2.37s" begin="1.1s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="571" cy="50" r="1.31" fill="#ffd9a0">
+      <animate attributeName="cy" values="50;20" dur="2.12s" begin="0.74s" repeatCount="indefinite"/>
+      <animate attributeName="cx" values="571;561;566" dur="2.12s" begin="0.74s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0;1;0.8;0" dur="2.12s" begin="0.74s" repeatCount="indefinite"/>
+      <animate attributeName="r" values="1.31;0.39" dur="2.12s" begin="0.74s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="755" cy="44" r="2.4" fill="#ffd9a0">
+      <animate attributeName="cy" values="44;10" dur="2.1s" begin="1.47s" repeatCount="indefinite"/>
+      <animate attributeName="cx" values="755;737;746" dur="2.1s" begin="1.47s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0;1;0.8;0" dur="2.1s" begin="1.47s" repeatCount="indefinite"/>
+      <animate attributeName="r" values="2.4;0.72" dur="2.1s" begin="1.47s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="416" cy="46" r="1.87" fill="#ffd9a0">
+      <animate attributeName="cy" values="46;4" dur="1.6s" begin="1.47s" repeatCount="indefinite"/>
+      <animate attributeName="cx" values="416;426;421" dur="1.6s" begin="1.47s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0;1;0.8;0" dur="1.6s" begin="1.47s" repeatCount="indefinite"/>
+      <animate attributeName="r" values="1.87;0.56" dur="1.6s" begin="1.47s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="715" cy="47" r="1.73" fill="#ffd9a0">
+      <animate attributeName="cy" values="47;13" dur="2.1s" begin="0.58s" repeatCount="indefinite"/>
+      <animate attributeName="cx" values="715;705;710" dur="2.1s" begin="0.58s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0;1;0.8;0" dur="2.1s" begin="0.58s" repeatCount="indefinite"/>
+      <animate attributeName="r" values="1.73;0.52" dur="2.1s" begin="0.58s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="689" cy="47" r="1.46" fill="#ffd9a0">
+      <animate attributeName="cy" values="47;14" dur="2.53s" begin="1.81s" repeatCount="indefinite"/>
+      <animate attributeName="cx" values="689;707;698" dur="2.53s" begin="1.81s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0;1;0.8;0" dur="2.53s" begin="1.81s" repeatCount="indefinite"/>
+      <animate attributeName="r" values="1.46;0.44" dur="2.53s" begin="1.81s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="264" cy="48" r="1.37" fill="#ffd9a0">
+      <animate attributeName="cy" values="48;13" dur="2.69s" begin="0.5s" repeatCount="indefinite"/>
+      <animate attributeName="cx" values="264;246;255" dur="2.69s" begin="0.5s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0;1;0.8;0" dur="2.69s" begin="0.5s" repeatCount="indefinite"/>
+      <animate attributeName="r" values="1.37;0.41" dur="2.69s" begin="0.5s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="768" cy="44" r="1.42" fill="#ffd9a0">
+      <animate attributeName="cy" values="44;7" dur="2.73s" begin="0.66s" repeatCount="indefinite"/>
+      <animate attributeName="cx" values="768;786;777" dur="2.73s" begin="0.66s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0;1;0.8;0" dur="2.73s" begin="0.66s" repeatCount="indefinite"/>
+      <animate attributeName="r" values="1.42;0.43" dur="2.73s" begin="0.66s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="321" cy="45" r="1.88" fill="#ffd9a0">
+      <animate attributeName="cy" values="45;5" dur="2.56s" begin="0.92s" repeatCount="indefinite"/>
+      <animate attributeName="cx" values="321;331;326" dur="2.56s" begin="0.92s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0;1;0.8;0" dur="2.56s" begin="0.92s" repeatCount="indefinite"/>
+      <animate attributeName="r" values="1.88;0.56" dur="2.56s" begin="0.92s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="773" cy="50" r="1.62" fill="#ffd9a0">
+      <animate attributeName="cy" values="50;7" dur="2.58s" begin="1.5s" repeatCount="indefinite"/>
+      <animate attributeName="cx" values="773;755;764" dur="2.58s" begin="1.5s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0;1;0.8;0" dur="2.58s" begin="1.5s" repeatCount="indefinite"/>
+      <animate attributeName="r" values="1.62;0.49" dur="2.58s" begin="1.5s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="324" cy="50" r="1.57" fill="#ffd9a0">
+      <animate attributeName="cy" values="50;15" dur="2.25s" begin="1.63s" repeatCount="indefinite"/>
+      <animate attributeName="cx" values="324;334;329" dur="2.25s" begin="1.63s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0;1;0.8;0" dur="2.25s" begin="1.63s" repeatCount="indefinite"/>
+      <animate attributeName="r" values="1.57;0.47" dur="2.25s" begin="1.63s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="704" cy="50" r="1.73" fill="#ffd9a0">
+      <animate attributeName="cy" values="50;17" dur="2.19s" begin="1.54s" repeatCount="indefinite"/>
+      <animate attributeName="cx" values="704;686;695" dur="2.19s" begin="1.54s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0;1;0.8;0" dur="2.19s" begin="1.54s" repeatCount="indefinite"/>
+      <animate attributeName="r" values="1.73;0.52" dur="2.19s" begin="1.54s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="827" cy="50" r="2.24" fill="#ffd9a0">
+      <animate attributeName="cy" values="50;10" dur="1.77s" begin="1.87s" repeatCount="indefinite"/>
+      <animate attributeName="cx" values="827;809;818" dur="1.77s" begin="1.87s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0;1;0.8;0" dur="1.77s" begin="1.87s" repeatCount="indefinite"/>
+      <animate attributeName="r" values="2.24;0.67" dur="1.77s" begin="1.87s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="497" cy="44" r="2.25" fill="#ffd9a0">
+      <animate attributeName="cy" values="44;13" dur="2.28s" begin="1.57s" repeatCount="indefinite"/>
+      <animate attributeName="cx" values="497;487;492" dur="2.28s" begin="1.57s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0;1;0.8;0" dur="2.28s" begin="1.57s" repeatCount="indefinite"/>
+      <animate attributeName="r" values="2.25;0.67" dur="2.28s" begin="1.57s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="244" cy="50" r="1.21" fill="#ffd9a0">
+      <animate attributeName="cy" values="50;13" dur="2.07s" begin="0.43s" repeatCount="indefinite"/>
+      <animate attributeName="cx" values="244;226;235" dur="2.07s" begin="0.43s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0;1;0.8;0" dur="2.07s" begin="0.43s" repeatCount="indefinite"/>
+      <animate attributeName="r" values="1.21;0.36" dur="2.07s" begin="0.43s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="223" cy="45" r="2.11" fill="#ffd9a0">
+      <animate attributeName="cy" values="45;7" dur="1.78s" begin="0.83s" repeatCount="indefinite"/>
+      <animate attributeName="cx" values="223;213;218" dur="1.78s" begin="0.83s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0;1;0.8;0" dur="1.78s" begin="0.83s" repeatCount="indefinite"/>
+      <animate attributeName="r" values="2.11;0.63" dur="1.78s" begin="0.83s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="442" cy="50" r="1.31" fill="#ffd9a0">
+      <animate attributeName="cy" values="50;6" dur="2.51s" begin="2.17s" repeatCount="indefinite"/>
+      <animate attributeName="cx" values="442;460;451" dur="2.51s" begin="2.17s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0;1;0.8;0" dur="2.51s" begin="2.17s" repeatCount="indefinite"/>
+      <animate attributeName="r" values="1.31;0.39" dur="2.51s" begin="2.17s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="173" cy="47" r="2.38" fill="#ffd9a0">
+      <animate attributeName="cy" values="47;11" dur="2.03s" begin="1.5s" repeatCount="indefinite"/>
+      <animate attributeName="cx" values="173;183;178" dur="2.03s" begin="1.5s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0;1;0.8;0" dur="2.03s" begin="1.5s" repeatCount="indefinite"/>
+      <animate attributeName="r" values="2.38;0.71" dur="2.03s" begin="1.5s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="514" cy="46" r="2.14" fill="#ffd9a0">
+      <animate attributeName="cy" values="46;3" dur="2.31s" begin="0.49s" repeatCount="indefinite"/>
+      <animate attributeName="cx" values="514;496;505" dur="2.31s" begin="0.49s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0;1;0.8;0" dur="2.31s" begin="0.49s" repeatCount="indefinite"/>
+      <animate attributeName="r" values="2.14;0.64" dur="2.31s" begin="0.49s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="258" cy="45" r="2.47" fill="#ffd9a0">
+      <animate attributeName="cy" values="45;7" dur="2.66s" begin="2.35s" repeatCount="indefinite"/>
+      <animate attributeName="cx" values="258;268;263" dur="2.66s" begin="2.35s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0;1;0.8;0" dur="2.66s" begin="2.35s" repeatCount="indefinite"/>
+      <animate attributeName="r" values="2.47;0.74" dur="2.66s" begin="2.35s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="308" cy="49" r="1.31" fill="#ffd9a0">
+      <animate attributeName="cy" values="49;12" dur="2.6s" begin="0.84s" repeatCount="indefinite"/>
+      <animate attributeName="cx" values="308;318;313" dur="2.6s" begin="0.84s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0;1;0.8;0" dur="2.6s" begin="0.84s" repeatCount="indefinite"/>
+      <animate attributeName="r" values="1.31;0.39" dur="2.6s" begin="0.84s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="603" cy="47" r="1.24" fill="#ffd9a0">
+      <animate attributeName="cy" values="47;5" dur="2.48s" begin="1.17s" repeatCount="indefinite"/>
+      <animate attributeName="cx" values="603;585;594" dur="2.48s" begin="1.17s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0;1;0.8;0" dur="2.48s" begin="1.17s" repeatCount="indefinite"/>
+      <animate attributeName="r" values="1.24;0.37" dur="2.48s" begin="1.17s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="479" cy="50" r="2.09" fill="#ffd9a0">
+      <animate attributeName="cy" values="50;6" dur="1.45s" begin="1.28s" repeatCount="indefinite"/>
+      <animate attributeName="cx" values="479;469;474" dur="1.45s" begin="1.28s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0;1;0.8;0" dur="1.45s" begin="1.28s" repeatCount="indefinite"/>
+      <animate attributeName="r" values="2.09;0.63" dur="1.45s" begin="1.28s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="521" cy="45" r="1.87" fill="#ffd9a0">
+      <animate attributeName="cy" values="45;5" dur="2.8s" begin="2.16s" repeatCount="indefinite"/>
+      <animate attributeName="cx" values="521;539;530" dur="2.8s" begin="2.16s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0;1;0.8;0" dur="2.8s" begin="2.16s" repeatCount="indefinite"/>
+      <animate attributeName="r" values="1.87;0.56" dur="2.8s" begin="2.16s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="544" cy="48" r="1.49" fill="#ffd9a0">
+      <animate attributeName="cy" values="48;10" dur="2.73s" begin="0.21s" repeatCount="indefinite"/>
+      <animate attributeName="cx" values="544;554;549" dur="2.73s" begin="0.21s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0;1;0.8;0" dur="2.73s" begin="0.21s" repeatCount="indefinite"/>
+      <animate attributeName="r" values="1.49;0.45" dur="2.73s" begin="0.21s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="786" cy="48" r="2.3" fill="#ffd9a0">
+      <animate attributeName="cy" values="48;10" dur="2.29s" begin="1.25s" repeatCount="indefinite"/>
+      <animate attributeName="cx" values="786;796;791" dur="2.29s" begin="1.25s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0;1;0.8;0" dur="2.29s" begin="1.25s" repeatCount="indefinite"/>
+      <animate attributeName="r" values="2.3;0.69" dur="2.29s" begin="1.25s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="359" cy="49" r="2.37" fill="#ffd9a0">
+      <animate attributeName="cy" values="49;16" dur="1.93s" begin="2.03s" repeatCount="indefinite"/>
+      <animate attributeName="cx" values="359;369;364" dur="1.93s" begin="2.03s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0;1;0.8;0" dur="1.93s" begin="2.03s" repeatCount="indefinite"/>
+      <animate attributeName="r" values="2.37;0.71" dur="1.93s" begin="2.03s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="184" cy="48" r="1.46" fill="#ffd9a0">
+      <animate attributeName="cy" values="48;10" dur="2.13s" begin="1.38s" repeatCount="indefinite"/>
+      <animate attributeName="cx" values="184;166;175" dur="2.13s" begin="1.38s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0;1;0.8;0" dur="2.13s" begin="1.38s" repeatCount="indefinite"/>
+      <animate attributeName="r" values="1.46;0.44" dur="2.13s" begin="1.38s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="555" cy="44" r="2.46" fill="#ffd9a0">
+      <animate attributeName="cy" values="44;6" dur="2.25s" begin="0.07s" repeatCount="indefinite"/>
+      <animate attributeName="cx" values="555;573;564" dur="2.25s" begin="0.07s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0;1;0.8;0" dur="2.25s" begin="0.07s" repeatCount="indefinite"/>
+      <animate attributeName="r" values="2.46;0.74" dur="2.25s" begin="0.07s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="597" cy="50" r="1.32" fill="#ffd9a0">
+      <animate attributeName="cy" values="50;18" dur="2.79s" begin="0.29s" repeatCount="indefinite"/>
+      <animate attributeName="cx" values="597;579;588" dur="2.79s" begin="0.29s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0;1;0.8;0" dur="2.79s" begin="0.29s" repeatCount="indefinite"/>
+      <animate attributeName="r" values="1.32;0.40" dur="2.79s" begin="0.29s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="591" cy="47" r="2.4" fill="#ffd9a0">
+      <animate attributeName="cy" values="47;13" dur="1.98s" begin="2.3s" repeatCount="indefinite"/>
+      <animate attributeName="cx" values="591;581;586" dur="1.98s" begin="2.3s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0;1;0.8;0" dur="1.98s" begin="2.3s" repeatCount="indefinite"/>
+      <animate attributeName="r" values="2.4;0.72" dur="1.98s" begin="2.3s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="524" cy="47" r="2.26" fill="#ffd9a0">
+      <animate attributeName="cy" values="47;3" dur="1.58s" begin="1.04s" repeatCount="indefinite"/>
+      <animate attributeName="cx" values="524;542;533" dur="1.58s" begin="1.04s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0;1;0.8;0" dur="1.58s" begin="1.04s" repeatCount="indefinite"/>
+      <animate attributeName="r" values="2.26;0.68" dur="1.58s" begin="1.04s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="577" cy="46" r="1.24" fill="#ffd9a0">
+      <animate attributeName="cy" values="46;12" dur="1.55s" begin="1.01s" repeatCount="indefinite"/>
+      <animate attributeName="cx" values="577;567;572" dur="1.55s" begin="1.01s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0;1;0.8;0" dur="1.55s" begin="1.01s" repeatCount="indefinite"/>
+      <animate attributeName="r" values="1.24;0.37" dur="1.55s" begin="1.01s" repeatCount="indefinite"/>
+    </circle>
   </g>
 </svg>
