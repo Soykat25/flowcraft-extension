@@ -25,7 +25,7 @@ Full reference for every control, data-driven runs and the step editor. Back to 
 | **Run data** *(only shown once a data file is set up for this flow — see below)* | Runs the flow using the last file uploaded via **Run with data**, exactly as that file specifies — every row, repeated per its own **Repeat** column — with no dependency on the popup's own **Repeat** field. Shows a confirmation with the filename and the first run's actual values before anything happens on the page. |
 | **DATA** badge | Appears once a data file has been validated for this flow (filename + row count on hover). Click **✕** on it to remove the stored file (this also hides **Run data**). |
 | ✏️ **Rename** | Renames the flow (same uniqueness rule as saving). |
-| **Edit steps** | Opens the [step editor](#step-editor) on this saved flow's steps: reorder, edit a selector/value, delete a step, or add a manual **Wait**/**Assert** step. |
+| **Edit steps** | Opens the [step editor](#step-editor) on this saved flow's steps: reorder, edit a selector/value, delete a step, or add a manual **Wait**, **Go to URL** or **Assert** step; the **Start URL** field at the top can also be changed. |
 | **Run with data** (grid-lines icon) | Opens the data-run picker — see [Data-driven replay](#data-driven-replay). |
 | **Download data template** (Excel icon) | Downloads a ready-to-fill `.xlsx` for this specific flow — one column per input/checkbox step's selector (pre-filled with its currently recorded value) plus a **Link** column (a per-row start URL; empty = the flow's own) and a **Repeat** column. |
 | **Duplicate** | Clones the flow (steps + start URL) under an auto-suffixed name (`… (copy)`), so you can branch it without re-recording. Does not carry over an associated data file. |
@@ -108,7 +108,9 @@ manual steps that can't be captured by recording alone:
 | `click` | Yes | Clicks the element (full pointer/mouse event sequence, with a text-based fallback if the selector no longer resolves). |
 | `input` | Yes | Sets a text/number/date/etc. field's value, dispatching `input`/`change` so React-style forms register it. |
 | `setChecked` | Yes | Sets a checkbox/radio/switch's checked state. |
-| `keypress` | `Enter` / `Escape` only (auto-captured); `Tab` can be added manually | Dispatches a real `keydown`/`keypress`/`keyup` sequence for the given key. Reaches JS `keydown` listeners, but — being synthetic — won't trigger a browser's *native* default action (e.g. a plain `<form>` submitting on Enter with no JS involved). |
+| `navigate` | Auto-recorded for typed/bookmark/redirect URL changes; can be added manually ("Go to URL") | Loads the URL and waits for the page. |
+| `fileUpload` | Yes (field only) | The file is not stored; you're asked to choose one on the page at every run. |
+| `keypress` | `Enter` / `Escape` auto-captured; in the editor a key can be switched to `Tab` | Dispatches a real `keydown`/`keypress`/`keyup` sequence for the given key. Reaches JS `keydown` listeners, but — being synthetic — won't trigger a browser's *native* default action (e.g. a plain `<form>` submitting on Enter with no JS involved). |
 | `dialog` | Yes (informational) | Not replayed — `alert`/`confirm`/`prompt` calls are auto-handled during recording/replay by `dialog-guard.js`; this step just records that one happened. |
 | `wait` | No — add manually | A fixed pause (ms), no page access needed. |
 | `assertVisible` | No — add manually | Fails the run if the selector's element isn't found or isn't visible. |

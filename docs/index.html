@@ -224,6 +224,22 @@ pre.cb2 .k{color:var(--violet)}pre.cb2 .s{color:var(--cyan)}
 .smoke li.bad{border-color:#ff4d6d60;background:#ff4d6d0d}.smoke li.bad .bx{background:var(--danger);border-color:var(--danger);color:#fff}
 .smoke code{margin-left:auto;font-size:11px}
 
+
+/* reference table */
+.refbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:12px 0}
+.refbar input{flex:1;min-width:200px;background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:8px 12px;color:var(--text);font:14px var(--sans);outline:none}
+.refbar input:focus{border-color:var(--cyan)}
+.fc{background:var(--panel);border:1px solid var(--line);color:var(--muted);border-radius:99px;padding:4px 12px;font:600 12px var(--sans);cursor:pointer}
+.fc.on{color:var(--cyan);border-color:var(--cyan);background:var(--panel2)}
+#refTbl td:first-child{white-space:nowrap}
+#refTbl .ar{font:700 10px var(--mono);letter-spacing:.1em;color:var(--violet);white-space:nowrap}
+#refTbl tr.hide{display:none}
+#refCount{color:var(--muted);font-size:13px}
+.recw{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(180deg,#0d1730,#070c1a);border:1px solid #2a4170;border-radius:999px;padding:8px 10px 8px 12px;box-shadow:0 12px 30px #000a;font:12px var(--mono)}
+.recw .rd{width:8px;height:8px;border-radius:50%;background:var(--danger);box-shadow:0 0 8px var(--danger);animation:blink 1s infinite}
+.recw b{color:var(--cyan)}
+.cmp td:first-child{font-weight:700}
+
 /* faq */
 details{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:0 16px;margin:8px 0}
 summary{cursor:pointer;padding:12px 0;font-weight:600;list-style:none;display:flex;justify-content:space-between;gap:10px}
@@ -258,6 +274,8 @@ footer{margin-top:80px;padding-top:22px;border-top:1px solid var(--line);color:v
   <a class="l" href="#share"><i>07</i>Export &amp; import</a>
   <a class="l" href="#history"><i>08</i>Run history</a>
   <a class="l" href="#secrets"><i>09</i>Passwords</a>
+  <a class="l" href="#buttons"><i>⌘</i>Every button</a>
+  <a class="l" href="#know"><i>💡</i>Good to know</a>
   <a class="l" href="#limits"><i>10</i>Limits</a>
   <a class="l" href="#trouble"><i>11</i>Troubleshooting</a>
   <a class="l" href="#faq"><i>12</i>FAQ</a>
@@ -365,9 +383,9 @@ footer{margin-top:80px;padding-top:22px;border-top:1px solid var(--line);color:v
 <!-- USE CASES -->
 <section id="usecases" class="reveal" data-s="use cases bug handoff qa to dev json test data generate smoke suite regression seed records link column environments checklist">
   <h2><span class="n">▸</span>Real-world use cases</h2>
-  <p class="sub">Three ways teams actually use Flowcraft. Pick a tab.</p>
+  <p class="sub">Four ways teams actually use Flowcraft. Pick a tab.</p>
   <div class="tabs" data-tabs>
-    <button class="on">🐞 QA → Dev bug handoff</button><button>🧬 Generate test data</button><button>🔥 Smoke suite</button>
+    <button class="on">🐞 QA → Dev bug handoff</button><button>🧬 Generate test data</button><button>🔥 Smoke suite</button><button>🧑‍🔧 Human-in-the-loop</button>
   </div>
 
   <!-- 1 -->
@@ -434,7 +452,31 @@ footer{margin-top:80px;padding-top:22px;border-top:1px solid var(--line);color:v
     </div>
     <div class="co warn"><b>HONEST LIMITS</b><p>Flows run one at a time from the popup in a real browser tab — no scheduler, no single-click suite run, no CI. If you need those, the exported JSON can be converted to Playwright or Selenium.</p></div>
   </div>
+
+  <!-- 4 -->
+  <div class="tp">
+    <p>When a step fails, the run <b>pauses</b> instead of dying. A person fixes whatever blocked it, clicks the pill's <b>▶</b> button, and the <b>same step</b> is retried. Perfect for the parts a script can't do.</p>
+    <div class="grid2">
+      <div class="mini"><b>🔐 CAPTCHA, 2FA, OTP</b><span>The step after the challenge fails. Solve it by hand, type the code, click ▶ — the flow carries on. This is the workaround for the “automation is blocked” limit.</span></div>
+      <div class="mini"><b>🍪 Cookie banners &amp; pop-ups</b><span>A banner covers a button and the click fails. Close it yourself, then retry.</span></div>
+      <div class="mini"><b>📊 Long data runs</b><span>Row 140 of 200 hits a slow server? Fix it and continue instead of losing the progress.</span></div>
+      <div class="mini"><b>🐌 Slow or broken pages</b><span>Wait for the page to finish (or reload it), then retry the step.</span></div>
+      <div class="mini"><b>🔍 Debugging a flow</b><span>The run stops on the broken step with the page still in its failing state — inspect the element in DevTools to see why the selector missed.</span></div>
+      <div class="mini"><b>🎤 Demos &amp; training</b><span>Let Flowcraft do the routine steps while you handle the one awkward bit live.</span></div>
+    </div>
+    <h3>Pause + ▶ vs. the “Retry a failed step once” checkbox</h3>
+    <div class="tw cmp"><table>
+      <thead><tr><th></th><th>Checkbox</th><th>Pause + ▶ button</th></tr></thead>
+      <tbody>
+      <tr><td>Who acts</td><td>Nobody — automatic</td><td>You</td></tr>
+      <tr><td>What happens</td><td>Waits 500 ms, tries the step once more</td><td>Waits for you, then retries as often as needed</td></tr>
+      <tr><td>Best for</td><td>Brief flakiness on unattended runs</td><td>Problems a human has to fix</td></tr>
+      <tr><td>Together?</td><td colspan="2">Yes. With the checkbox on, a step gets one automatic retry first; only if that also fails does the run pause for you.</td></tr>
+      </tbody></table></div>
+    <div class="co warn"><b>LIMITS</b><p>It retries the <b>same step</b> — it can't skip ahead, and you can't edit the step while paused. Closing the tab ends the run. Press <b>■</b> to stop instead of retrying.</p></div>
+  </div>
 </section>
+
 
 <!-- 01 INSTALL -->
 <section id="install" class="reveal" data-s="install load unpacked developer mode chrome edge extension download clone">
@@ -496,6 +538,10 @@ footer{margin-top:80px;padding-top:22px;border-top:1px solid var(--line);color:v
     <li><b class="t">Use the site normally</b><span class="d">Flowcraft captures clicks, typing, checkbox/radio toggles, <kbd>Enter</kbd> / <kbd>Esc</kbd> and native dialogs.</span></li>
     <li><b class="t">Stop, name, save</b><span class="d">Give it a unique name (case-insensitive). <b>Edit steps</b> lets you fix things before saving; <b>Discard</b> throws the recording away.</span></li>
   </ol>
+  <h3>The recording widget</h3>
+  <p>While you record, a small draggable pill sits on the page: a pulsing red dot, a live step counter and a red <b>■</b> stop button. Drag it by the grip so it doesn't cover what you're clicking; its own clicks are never recorded.</p>
+  <div class="recw"><span class="rd"></span><span>Recording · <b>6</b> steps</span><span style="width:1px;height:18px;background:var(--line2)"></span><span style="width:26px;height:26px;border-radius:50%;background:var(--danger);display:grid;place-items:center;font-size:9px;color:#fff">■</span></div>
+  <h3>Try it</h3>
   <div class="sim card">
     <div class="mock" style="width:100%">
       <div class="mh"><i>◈</i>FLOWCRAFT <span class="beta">SIM</span></div>
@@ -516,6 +562,7 @@ footer{margin-top:80px;padding-top:22px;border-top:1px solid var(--line);color:v
   </div>
   <div class="co ok only-sqa"><b><span class="rtag sqa">SQA</span>TEST-CASE TIP</b><p>Record <b>one scenario per flow</b> and name it after the test case ID. Short flows fail clearly and are easy to re-record.</p></div>
   <div class="co ok only-dev"><b><span class="rtag dev">DEV</span>SELECTOR TIP</b><p>Add <code>data-testid</code> to the elements a flow touches. It survives restyling, so recorded flows keep working.</p></div>
+  <div class="co"><b>WHAT ELSE GETS CAPTURED</b><p>• <b>Typed addresses, bookmarks and redirects</b> become a <code>Go to URL</code> step, so replay follows the same pages.<br>• <b>Starting on a blank new tab</b> is fine — the first real page you open becomes the flow's start URL.<br>• <b>Custom dropdowns</b> (select2 and similar) are caught even when they swallow the normal click.<br>• <b>File inputs</b> are noted but the file itself isn't stored — see <a href="#know">Good to know</a>.</p></div>
   <div class="co warn"><b>TIP</b><p>Prefer elements with a stable <code>id</code>, <code>data-testid</code> or <code>name</code>. Random or hashed class names make replay fragile.</p></div>
 </section>
 
@@ -567,7 +614,7 @@ footer{margin-top:80px;padding-top:22px;border-top:1px solid var(--line);color:v
 <section id="edit" class="reveal" data-s="edit steps reorder delete selector value wait assert assertVisible assertText keypress setChecked click input dialog">
   <h2><span class="n">05</span>Edit steps</h2>
   <p class="sub">Fix, reorder and extend a flow — before or after saving.</p>
-  <p>Click the <b>⚙ Edit steps</b> icon on a saved flow (or on a fresh recording). Use ↑/↓ to reorder, delete a step, edit a selector, value or checked state, and add steps that recording can't capture.</p>
+  <p>Click the <b>⚙ Edit steps</b> icon on a saved flow (or <b>Edit steps</b> on a fresh recording). At the top is the <b>Start URL</b> — change it to run the same flow on another environment (staging, QA, localhost). Each step has <b>↑ ↓ ✕</b> buttons and editable fields for its selector, value, checked state, URL, milliseconds, expected text or key. At the bottom, pick a type from the dropdown and press <b>Add step</b>, then <b>Save</b> (or <b>Cancel</b>).</p>
   <div class="card">
     <div class="step"><span class="t">click</span><span class="s">#login-button</span><span class="m">↑ ↓ ✕</span></div>
     <div class="step"><span class="t">input</span><span class="s">#email — user@test.com</span><span class="m">↑ ↓ ✕</span></div>
@@ -580,12 +627,14 @@ footer{margin-top:80px;padding-top:22px;border-top:1px solid var(--line);color:v
     <tbody>
     <tr><td><code>click</code></td><td>Yes</td><td>Full pointer/mouse sequence; falls back to matching by text if the selector no longer resolves.</td></tr>
     <tr><td><code>input</code></td><td>Yes</td><td>Sets a field's value and fires <code>input</code>/<code>change</code> so React-style forms notice.</td></tr>
-    <tr><td><code>setChecked</code></td><td>Yes</td><td>Sets a checkbox, radio or switch.</td></tr>
-    <tr><td><code>keypress</code></td><td><kbd>Enter</kbd>/<kbd>Esc</kbd> auto; <kbd>Tab</kbd> manual</td><td>Dispatches keydown/keypress/keyup. Synthetic, so it won't trigger a browser's native default action (e.g. a plain form submit).</td></tr>
+    <tr><td><code>setChecked</code></td><td>Yes</td><td>Sets a checkbox, radio or switch (a “Checked” tick box in the editor).</td></tr>
+    <tr><td><code>navigate</code> <small>“Go to URL”</small></td><td>Auto + manual</td><td>Loads a URL. Auto-recorded when the address changes without a click (typed URL, bookmark, redirect); can also be added by hand.</td></tr>
+    <tr><td><code>fileUpload</code></td><td>Yes (field only)</td><td>The file isn't stored. On every run Flowcraft pauses and asks you to choose a file on the page. The field's <code>accept</code> rules are enforced.</td></tr>
+    <tr><td><code>keypress</code></td><td><kbd>Enter</kbd>/<kbd>Esc</kbd> auto</td><td>Dispatches keydown/keypress/keyup. In the editor you can switch a key between Enter, Escape and Tab (Add step doesn't create new keypress steps). Synthetic, so it won't trigger a browser's native default (e.g. a plain form submit).</td></tr>
     <tr><td><code>dialog</code></td><td>Yes (info)</td><td>Not replayed. Alerts/confirms/prompts are auto-handled during recording and replay.</td></tr>
-    <tr><td><code>wait</code></td><td>Manual</td><td>Fixed pause in ms.</td></tr>
+    <tr><td><code>wait</code></td><td>Manual</td><td>Fixed pause in milliseconds (default 500).</td></tr>
     <tr><td><code>assertVisible</code></td><td>Manual</td><td>Fails the run if the element is missing or not visible.</td></tr>
-    <tr><td><code>assertText</code></td><td>Manual</td><td>Fails unless the element's text equals (or, in “contains” mode, includes) the expected text.</td></tr>
+    <tr><td><code>assertText</code></td><td>Manual</td><td>Fails unless the element's text equals (<b>Exact match</b>) or includes (<b>Contains</b>) the expected text. It keeps polling briefly, so text that loads late still passes.</td></tr>
     </tbody></table></div>
 </section>
 
@@ -667,6 +716,34 @@ footer{margin-top:80px;padding-top:22px;border-top:1px solid var(--line);color:v
   <div class="tp"><p>✔ No network requests, no analytics, no telemetry.<br>✔ No third-party code — even the <code>.xlsx</code> reader is hand-written.<br>✔ Dialog interception only while actively recording or replaying on that tab.</p></div>
 </section>
 
+
+<!-- BUTTON REFERENCE -->
+<section id="buttons" class="reveal" data-s="every button reference what does each control do record save flow bulk export import clear cache run data badge rename edit duplicate export delete repeat delay store retry stop history save this run copy image step editor start url add step modal credentials widget keyboard shortcut">
+  <h2><span class="n">⌘</span>Every button, explained</h2>
+  <p class="sub">A complete A–Z of what each control does. Filter by area or type to search.</p>
+  <div class="refbar" id="refChips"></div>
+  <div class="refbar"><input id="refQ" type="search" placeholder="Filter controls… e.g. export, retry, badge" aria-label="Filter controls"><span id="refCount"></span></div>
+  <div class="tw"><table id="refTbl"><thead><tr><th>Area</th><th>Control</th><th>What it does</th></tr></thead><tbody></tbody></table></div>
+</section>
+
+<!-- GOOD TO KNOW -->
+<section id="know" class="reveal" data-s="good to know tips system pages chrome new tab file upload iframe tab closed navigate link checkbox values clean start dropdown select2 history local">
+  <h2><span class="n">💡</span>Good to know</h2>
+  <p class="sub">Behaviors that aren't obvious from the buttons.</p>
+  <div class="grid2">
+    <div class="mini"><b>Normal web pages only</b><span>Flowcraft can't automate browser pages such as <code>chrome://</code>, the Web Store or the new-tab page. If you see “Open a normal web page (http/https) first”, switch to a real site. A flow that has its own start URL <i>can</i> be launched from a blank tab.</span></div>
+    <div class="mini"><b>Every run starts clean</b><span>Before each run (and each repeat or data row) the tab goes to <code>about:blank</code> and then to the start URL, so every iteration begins from a genuine full page load.</span></div>
+    <div class="mini"><b>Per-row start URL</b><span>A <code>Link</code> (or <code>URL</code>) column in the data file sends that row to its own address. An invalid link is logged as an error for that row.</span></div>
+    <div class="mini"><b>Checkbox values in data</b><span>For checkbox/radio columns, <code>true</code>, <code>1</code>, <code>yes</code> or <code>y</code> (any case) means checked; anything else unchecks.</span></div>
+    <div class="mini"><b>File uploads ask every time</b><span>Browsers never expose the real path of a chosen file, so Flowcraft pauses at the step and shows a file chooser on the page. If you cancel, that step fails (and the run pauses).</span></div>
+    <div class="mini"><b>Iframes</b><span>Recording works inside every frame, and each step remembers which frame it happened in, so replay targets the right one.</span></div>
+    <div class="mini"><b>Closing the tab stops the run</b><span>The history entry reads “Stopped: tab closed at step N”. Unlike a failed step, this can't be resumed.</span></div>
+    <div class="mini"><b>Native dialogs</b><span><code>alert</code>/<code>confirm</code>/<code>prompt</code> are intercepted <i>only</i> while recording or replaying on that tab, and only noted as info steps. Outside that they behave normally.</span></div>
+    <div class="mini"><b>Everything is local</b><span>Flows, settings, history and data files live in <code>chrome.storage.local</code> on your machine; nothing syncs or uploads.</span></div>
+    <div class="mini"><b>Credentials prompt</b><span>One dialog lists every blank username/password field. Press <kbd>Enter</kbd> to run or <kbd>Esc</kbd> to cancel.</span></div>
+  </div>
+</section>
+
 <!-- 10 LIMITS -->
 <section id="limits" class="reveal" data-s="limits limitations new tab captcha 2fa hover drag canvas selector timing">
   <h2><span class="n">10</span>Known limits</h2>
@@ -674,7 +751,7 @@ footer{margin-top:80px;padding-top:22px;border-top:1px solid var(--line);color:v
   <div class="tw"><table><tbody>
     <tr><td><b>Fragile selectors</b></td><td>Random or hashed class names break replay. Prefer <code>id</code>, <code>data-testid</code>, <code>name</code>.</td></tr>
     <tr><td><b>Very async apps</b></td><td>Auto-waiting helps, but you may still need a larger Delay or <code>wait</code> steps.</td></tr>
-    <tr><td><b>CAPTCHA / 2FA / OTP</b></td><td>Intentionally resist automation. Sign in by hand first, then start the flow.</td></tr>
+    <tr><td><b>CAPTCHA / 2FA / OTP</b></td><td>Intentionally resist automation. Either sign in by hand first, or let the run <b>pause</b> at the next step, solve it yourself and click ▶ (see <a href="#usecases">Human-in-the-loop</a>).</td></tr>
     <tr><td><b>New tabs / windows</b></td><td>Replay keeps driving the original tab, so <code>target="_blank"</code> links aren't followed.</td></tr>
     <tr><td><b>Hover, drag, canvas</b></td><td>Not recorded. Only clicks, field changes and <kbd>Enter</kbd>/<kbd>Esc</kbd> are.</td></tr>
     <tr><td><b>Spreadsheets</b></td><td>Single-sheet, no formulas or styles. Fine for real Excel/Sheets/LibreOffice output.</td></tr>
@@ -689,11 +766,13 @@ footer{margin-top:80px;padding-top:22px;border-top:1px solid var(--line);color:v
     <thead><tr><th>Symptom</th><th>Try this</th></tr></thead><tbody>
     <tr><td>A step can't find its element</td><td>The page changed. Open <b>Edit steps</b> and fix the selector, or re-record. Check Run history for the screenshot.</td></tr>
     <tr><td>Steps fire before the page is ready</td><td>Raise <b>Delay between steps</b>, or add a <code>wait</code> step.</td></tr>
-    <tr><td>Fails only sometimes</td><td>Tick <b>Retry a failed step once</b>.</td></tr>
+    <tr><td>Fails only sometimes</td><td>Tick <b>Retry a failed step once</b> for automatic second tries, or just click ▶ when a run pauses.</td></tr>
     <tr><td>Data file rejected</td><td>Name doesn't match the template. Re-download the template, or rename the file back (remove “(1)”).</td></tr>
     <tr><td>Wrong data used</td><td>Click ✕ on the DATA badge and upload again. Uploads fully replace the old file.</td></tr>
     <tr><td>Replay stops after a new tab opens</td><td>Not supported. Rework the flow so it stays in one tab.</td></tr>
-    <tr><td>Login blocked by CAPTCHA / 2FA</td><td>Sign in manually, then run a flow that starts after login.</td></tr>
+    <tr><td>Login blocked by CAPTCHA / 2FA</td><td>When the step after it fails the run pauses — solve the challenge by hand, then click the pill's ▶ to continue. Or sign in manually first and start the flow after login.</td></tr>
+    <tr><td>“Open a normal web page first”</td><td>You're on a browser system page. Switch to an http/https site, or give the flow a start URL.</td></tr>
+    <tr><td>Run paused with a red error</td><td>Fix the cause on the page (close a pop-up, wait for loading), then click ▶ on the pill to retry that step, or ■ to stop.</td></tr>
     <tr><td>Popup doesn't reflect updates</td><td>Reload Flowcraft at <code>chrome://extensions</code>.</td></tr>
     <tr><td>Recording shortcut does nothing</td><td>Check or remap it at <code>chrome://extensions/shortcuts</code>.</td></tr>
   </tbody></table></div>
@@ -809,6 +888,72 @@ footer{margin-top:80px;padding-top:22px;border-top:1px solid var(--line);color:v
 
 
 
+
+
+  /* button reference */
+  var REF=[
+   ['Record','● Start recording','Starts recording on the active tab. The popup closes and a recording pill appears. Works from a blank new tab — the first real page becomes the start URL. Not available on browser system pages.'],
+   ['Record','Stop (popup or pill ■)','Ends recording and opens the Save view. Shortcut: Ctrl+Shift+E.'],
+   ['Record','Name this flow','Required, unique (case-insensitive). A duplicate name shows an inline error and blocks saving.'],
+   ['Record','Save flow','Stores the recording under that name.'],
+   ['Record','Edit steps (before saving)','Opens the step editor on the unsaved recording so you can fix a step first.'],
+   ['Record','Discard','Throws the recording away.'],
+   ['Saved flows','Bulk export','Opens a checklist (with All / None) and downloads the chosen flows as one JSON file.'],
+   ['Saved flows','Import','Loads a single or bulk JSON file. Fresh IDs; same-name flows are skipped and reported, so re-importing never duplicates.'],
+   ['Saved flows','Clear cache','After a confirmation, forgets every stored “Run with data” file. Saved flows are untouched.'],
+   ['Flow card','Run','Navigates the active tab to the start URL and replays the flow Repeat times. Asks for any blank credentials first.'],
+   ['Flow card','Run data','Appears once a data file is stored. Runs every row of that file, each repeated per its Repeat column, ignoring the popup Repeat field. Confirms the filename and first row first.'],
+   ['Flow card','DATA badge  ✕','Shows a data file is stored (hover: filename and row count). ✕ removes it and hides Run data.'],
+   ['Flow card','✎ Rename','Renames the flow (same uniqueness rule as saving).'],
+   ['Flow card','⚙ Edit steps','Opens the step editor for this flow.'],
+   ['Flow card','≡ Run with data','Opens the data picker in its own tab to choose and validate a spreadsheet.'],
+   ['Flow card','▦ Download data template','Downloads an .xlsx with Link, one column per input/checkbox selector (pre-filled), and Repeat.'],
+   ['Flow card','⧉ Duplicate','Copies steps and start URL as “… (copy)”. The data file is not copied.'],
+   ['Flow card','⇩ Export','Downloads this one flow as JSON, named after the flow.'],
+   ['Flow card','🗑 Delete','Deletes the flow and its data file, after a confirmation.'],
+   ['Run settings','Repeat','How many times Run repeats. With Run with data it caps the rows (default 1 = no cap). No effect on Run data.'],
+   ['Run settings','Delay between steps (ms)','Extra pause after each step, on top of built-in settling.'],
+   ['Run settings','Store usernames/passwords','Off by default. On = credentials kept in plaintext in saved flows and exports.'],
+   ['Run settings','Retry a failed step once','Off by default. Waits 500 ms and retries the step once before treating it as failed.'],
+   ['Run settings','Stop replay','Visible during a run; stops it after the current step.'],
+   ['Run settings','Status line','Live progress (“Run 2/5 · step 8/12”), then “Finished!”, “Stopped.” or an error.'],
+   ['Run history','Show / Hide','Expands or collapses the history panel.'],
+   ['Run history','Clear','After a confirmation, wipes all run and error history.'],
+   ['Run history','Save this run','Downloads that run (steps, results, errors, screenshots) as JSON.'],
+   ['Run history','Thumbnail','Failure screenshot. Click for full size in a new tab.'],
+   ['Run history','Copy image / Save image','Copy the screenshot as PNG to the clipboard, or save it as a .jpg.'],
+   ['Run history','Run entry line','Shows iterations done / requested, “data-driven”, failed-step count, “stopped” and any error. Older errors appear as “Other errors”.'],
+   ['Step editor','Start URL','The address the flow opens first. Change it to target another environment.'],
+   ['Step editor','↑  ↓  ✕','Move a step up or down, or delete it.'],
+   ['Step editor','Selector field','The CSS selector the step targets. Edit it when the site changes.'],
+   ['Step editor','Value / Checked','New text for an input step, or the tick box for a checkbox step. Credential values show as hidden with a “credential” badge.'],
+   ['Step editor','Go to URL field','Address for a navigate step.'],
+   ['Step editor','Milliseconds','Length of a wait step.'],
+   ['Step editor','Expected text + Exact/Contains','What an assertText step looks for, and how strictly.'],
+   ['Step editor','Key dropdown','Switch a keypress step between Enter, Escape and Tab.'],
+   ['Step editor','Add step dropdown + Add step','Adds Wait, Go to URL, Assert visible or Assert text at the end of the list.'],
+   ['Step editor','Save / Cancel','Save writes the steps and start URL; Cancel discards your edits.'],
+   ['Data picker','Choose file…','Pick an .xlsx (or .csv/.json) named exactly like the template.'],
+   ['Data picker','Preview line','Shows whether the file was accepted, its row count, or why it was rejected.'],
+   ['Data picker','Run / Cancel','Run stays disabled until the file validates, then asks for credentials if needed and starts.'],
+   ['On the page','Recording pill','Pulsing dot, live step count, draggable grip, red ■ to stop.'],
+   ['On the page','Run pill','Run n/N · Step n/N, draggable. Status button pulses; after a failure it becomes a ▶ retry button. ■ stops.'],
+   ['On the page','File chooser overlay','Appears at a file-upload step so you can pick the file for this run.'],
+   ['Dialogs','Credentials dialog','Lists blank username/password fields. Enter = Run, Esc = Cancel.'],
+   ['Dialogs','Confirm / alert / prompt','Themed replacements for the browser\u2019s own dialogs (delete, clear, rename, errors).'],
+   ['Keyboard','Ctrl+Shift+E  (⌘⇧E)','Start or stop recording without opening the popup. Remap at chrome://extensions/shortcuts.']
+  ];
+  var refBody=$('#refTbl tbody'),chipBox=$('#refChips'),curArea='All';
+  if(refBody){
+    var areas=['All'];REF.forEach(function(r){if(areas.indexOf(r[0])<0)areas.push(r[0])});
+    function esc(t){return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;')}
+    refBody.innerHTML=REF.map(function(r){return '<tr data-a="'+r[0]+'"><td><span class="ar">'+r[0].toUpperCase()+'</span></td><td><b>'+esc(r[1])+'</b></td><td>'+esc(r[2])+'</td></tr>'}).join('');
+    function refFilter(){var v=($('#refQ').value||'').toLowerCase(),n=0;
+      $$('#refTbl tbody tr').forEach(function(tr){var ok=(curArea==='All'||tr.getAttribute('data-a')===curArea)&&(!v||tr.textContent.toLowerCase().indexOf(v)>-1);tr.classList.toggle('hide',!ok);if(ok)n++});
+      $('#refCount').textContent=n+' of '+REF.length+' controls'}
+    areas.forEach(function(a){var b=document.createElement('button');b.className='fc'+(a==='All'?' on':'');b.textContent=a;b.onclick=function(){curArea=a;$$('.fc').forEach(function(x){x.classList.toggle('on',x===b)});refFilter()};chipBox.appendChild(b)});
+    $('#refQ').addEventListener('input',refFilter);refFilter();
+  }
 
   /* csv generator */
   function gen(){
