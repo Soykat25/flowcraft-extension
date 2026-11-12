@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Flowcraft User Manual</title>
+<style>
+:root{--bg:#05070f;--bg2:#0a0f1e;--panel:#0b1120;--panel2:#0e1526;--line:#1a2740;--text:#dbe7f7;--muted:#7d8ea9;--cyan:#35e6ff;--violet:#b06cff;--danger:#ff4d6d;--ok:#37f0a8;--warn:#ffb020;--mono:ui-monospace,"JetBrains Mono","SF Mono",Consolas,monospace;--sans:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:radial-gradient(900px 500px at 70% -10%,#0d2a3a55,transparent),var(--bg);color:var(--text);font:16px/1.65 var(--sans)}
+a{color:var(--cyan);text-decoration:none}a:hover{text-decoration:underline}
+.shell{display:grid;grid-template-columns:240px minmax(0,1fr);max-width:1120px;margin:0 auto}
+nav{position:sticky;top:0;align-self:start;height:100vh;padding:28px 20px;border-right:1px solid var(--line);overflow:auto}
+nav .brand{font:700 15px var(--mono);letter-spacing:.2em;margin-bottom:24px;display:flex;gap:8px;align-items:center}
+nav .brand b{color:var(--cyan)}
+nav a{display:block;padding:6px 10px;border-radius:6px;color:var(--muted);font-size:14px}
+nav a:hover{background:var(--panel2);color:var(--text);text-decoration:none}
+main{padding:40px 40px 80px}
+@media(max-width:820px){.shell{grid-template-columns:1fr}nav{position:static;height:auto;border:0;border-bottom:1px solid var(--line)}main{padding:24px 18px 60px}}
+.hero{padding:8px 0 32px}
+.tag{display:inline-block;font:600 11px var(--mono);letter-spacing:.15em;color:var(--danger);border:1px solid var(--danger);border-radius:99px;padding:2px 10px}
+h1{font:800 40px/1.1 var(--sans);margin:14px 0 10px;letter-spacing:-.02em}
+h1 span{color:var(--cyan)}
+.lead{color:var(--muted);font-size:18px;max-width:620px}
+h2{font-size:26px;margin:56px 0 6px;padding-top:12px;display:flex;align-items:center;gap:12px;scroll-margin-top:12px}
+h2 .num{font:700 13px var(--mono);color:var(--bg);background:var(--cyan);border-radius:6px;padding:2px 8px}
+h3{font-size:17px;margin:28px 0 8px;color:var(--violet)}
+p{margin:10px 0}
+code,kbd{font-family:var(--mono);font-size:.88em;background:var(--panel2);border:1px solid var(--line);border-radius:5px;padding:1px 6px}
+kbd{border-bottom-width:2px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:20px;margin:16px 0}
+.callout{border-left:3px solid var(--cyan);background:var(--panel);padding:12px 16px;border-radius:0 10px 10px 0;margin:16px 0}
+.callout.warn{border-color:var(--warn)}.callout.danger{border-color:var(--danger)}
+.callout b{display:block;font:700 12px var(--mono);letter-spacing:.1em;margin-bottom:2px;color:var(--cyan)}
+.callout.warn b{color:var(--warn)}.callout.danger b{color:var(--danger)}
+ol.steps{counter-reset:s;list-style:none;padding:0;margin:16px 0}
+ol.steps li{counter-increment:s;position:relative;padding:4px 0 14px 46px}
+ol.steps li::before{content:counter(s);position:absolute;left:0;top:2px;width:30px;height:30px;border-radius:50%;background:var(--panel2);border:1px solid var(--cyan);color:var(--cyan);display:grid;place-items:center;font:700 13px var(--mono)}
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14.5px}
+th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{color:var(--muted);font:600 11px var(--mono);letter-spacing:.12em;text-transform:uppercase}
+/* ===== UI mockups ===== */
+.stage{display:flex;gap:28px;flex-wrap:wrap;align-items:flex-start;margin:20px 0}
+.mock{width:340px;max-width:100%;background:var(--bg);border:1px solid #223457;border-radius:12px;padding:14px;box-shadow:0 0 0 1px #000,0 18px 50px #000a,0 0 40px #35e6ff10;font-size:13px;position:relative}
+.mock .mh{display:flex;align-items:center;gap:8px;font:700 13px var(--mono);letter-spacing:.25em;margin-bottom:12px}
+.mock .mh i{color:var(--cyan);font-style:normal}
+.mock .beta{margin-left:auto;font:600 10px var(--mono);letter-spacing:0;color:var(--danger);border:1px solid var(--danger);border-radius:99px;padding:0 8px}
+.mock .box{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px;margin-bottom:10px;position:relative}
+.mb{display:block;width:100%;text-align:center;border-radius:6px;padding:8px;font:700 11px var(--mono);letter-spacing:.14em;text-transform:uppercase;border:1px solid transparent}
+.mb.p{background:var(--cyan);color:#001018}.mb.d{background:var(--danger);color:#fff}
+.chip{display:inline-block;border-radius:5px;padding:4px 10px;font:700 10px var(--mono);letter-spacing:.1em;text-transform:uppercase;border:1px solid}
+.chip.v{color:var(--violet);border-color:var(--violet)}.chip.c{color:var(--cyan);border-color:var(--cyan)}.chip.r{color:var(--danger);border-color:var(--danger)}
+.hint{color:var(--muted);font-size:12px;margin-top:8px}
+.mi{background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:7px 10px;color:var(--muted);margin-top:6px}
+.icons{display:flex;gap:6px;margin-top:10px}
+.ic{width:30px;height:30px;border-radius:6px;border:1px solid;display:grid;place-items:center;font-size:13px;position:relative}
+.ic.v{color:var(--violet);border-color:#b06cff80}.ic.c{color:var(--cyan);border-color:#35e6ff80}.ic.g{color:var(--ok);border-color:#37f0a880}.ic.r{color:var(--danger);border-color:#ff4d6d80}
+.dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--danger);animation:p 1.2s infinite;margin-right:6px}
+@keyframes p{50%{opacity:.25}}
+.pin{position:absolute;width:22px;height:22px;border-radius:50%;background:var(--warn);color:#201400;font:800 12px var(--mono);display:grid;place-items:center;box-shadow:0 0 0 3px #05070f}
+.legend{flex:1;min-width:240px}
+.legend dl{margin:0}.legend dt{font-weight:700;display:flex;gap:10px;align-items:center;margin-top:12px}
+.legend dt span{flex:none;width:22px;height:22px;border-radius:50%;background:var(--warn);color:#201400;font:800 12px var(--mono);display:grid;place-items:center}
+.legend dd{margin:2px 0 0 32px;color:var(--muted);font-size:14.5px}
+.shot{width:340px;max-width:100%;border-radius:12px;border:1px solid #223457}
+.badge{font:700 10px var(--mono);background:#ffb02022;color:var(--warn);border:1px solid var(--warn);border-radius:4px;padding:1px 6px;margin-left:6px}
+.sheet{border:1px solid var(--line);border-radius:8px;overflow:hidden;font:12px var(--mono);margin:16px 0;max-width:560px}
+.sheet div{display:grid;grid-template-columns:repeat(3,1fr)}
+.sheet span{padding:6px 10px;border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
+.sheet .h span{background:var(--panel2);color:var(--cyan)}
+.flow{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin:14px 0;font:12px var(--mono)}
+.flow span{background:var(--panel2);border:1px solid var(--line);border-radius:6px;padding:4px 10px}.flow b{color:var(--muted)}
+.step{display:flex;gap:10px;align-items:center;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:8px 10px;margin-top:6px;font:12px var(--mono)}
+.step .t{color:var(--cyan);width:90px;flex:none}.step .s{color:var(--muted);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.step.new .t{color:var(--ok)}
+footer{margin-top:64px;padding-top:20px;border-top:1px solid var(--line);color:var(--muted);font-size:14px}
+</style>
+</head>
+<body>
+<div class="shell">
+<nav>
+  <div class="brand"><b>◈</b> FLOWCRAFT</div>
+  <a href="#install">1 · Install</a>
+  <a href="#tour">2 · Tour of the popup</a>
+  <a href="#record">3 · Record a flow</a>
+  <a href="#run">4 · Run a flow</a>
+  <a href="#edit">5 · Edit steps</a>
+  <a href="#data">6 · Data-driven runs</a>
+  <a href="#share">7 · Export &amp; import</a>
+  <a href="#history">8 · Run history</a>
+  <a href="#secrets">9 · Passwords</a>
+  <a href="#trouble">10 · Troubleshooting</a>
+  <a href="#cheat">Cheat sheet</a>
+</nav>
+
+<main>
+<div class="hero">
+  <span class="tag">BETA</span>
+  <h1>Flowcraft <span>User Manual</span></h1>
+  <p class="lead">Record what you do in the browser, save it as a flow, and replay it — once, many times, or once per row of a spreadsheet.</p>
+</div>
+
+<h2 id="install"><span class="num">01</span> Install</h2>
+<ol class="steps">
+  <li>Download or clone the repository, so you have the <code>Flowcraft</code> folder.</li>
+  <li>Open <code>chrome://extensions</code> (or <code>edge://extensions</code>) and switch on <b>Developer mode</b> in the top-right corner.</li>
+  <li>Click <b>Load unpacked</b> and choose the Flowcraft folder.</li>
+  <li>Click the puzzle-piece icon in the toolbar and <b>pin</b> Flowcraft so its icon is always visible.</li>
+</ol>
+<div class="callout"><b>UPDATING</b>After pulling new code, click the reload icon on Flowcraft's card in <code>chrome://extensions</code>. An already-open popup won't pick up changes.</div>
+
+<h2 id="tour"><span class="num">02</span> Tour of the popup</h2>
+<p>Click the Flowcraft icon to open the control panel. It has four areas.</p>
+<div class="stage">
+  <div class="mock">
+    <div class="mh"><i>◈</i> FLOWCRAFT <span class="beta">Beta</span></div>
+    <div class="box"><span class="pin" style="right:-8px;top:-8px">1</span>
+      <span class="mb p">● Start recording</span>
+      <div class="hint">Tip: <b>Ctrl+Shift+E</b> toggles recording without opening this popup.</div></div>
+    <div class="box"><span class="pin" style="right:-8px;top:-8px">2</span>
+      <b style="font:700 11px var(--mono);letter-spacing:.15em">SAVED FLOWS</b>
+      <div style="display:flex;gap:6px;margin-top:10px"><span class="chip v">Bulk export</span><span class="chip c">Import</span><span class="chip r">Clear cache</span></div>
+      <div class="box" style="margin:10px 0 0;background:var(--panel2)"><b>link change 3</b><div class="hint" style="margin:0 0 8px">6 steps</div><span class="mb p">Run</span>
+        <div class="icons"><span class="ic v">✎</span><span class="ic c">⚙</span><span class="ic c">≡</span><span class="ic g">▦</span><span class="ic v">⧉</span><span class="ic g">⇩</span><span class="ic r">🗑</span></div></div></div>
+    <div class="box"><span class="pin" style="right:-8px;top:-8px">3</span>
+      <div style="display:flex;gap:8px"><div style="flex:1"><div class="hint" style="margin:0">REPEAT</div><div class="mi">1</div></div><div style="flex:1"><div class="hint" style="margin:0">DELAY (MS)</div><div class="mi">300</div></div></div>
+      <div class="hint">☐ Store usernames/passwords inside saved flows<br>☐ Retry a failed step once</div></div>
+    <div class="box" style="margin:0"><span class="pin" style="right:-8px;top:-8px">4</span><b style="font:700 11px var(--mono);letter-spacing:.15em">RUN HISTORY</b> <span class="chip c" style="float:right">Show</span></div>
+  </div>
+  <div class="legend"><dl>
+    <dt><span>1</span> Record panel</dt><dd>Start recording, and later name and save the result.</dd>
+    <dt><span>2</span> Saved flows</dt><dd>Every flow with its own Run button and a row of icons: edit, steps, data, duplicate, export, delete.</dd>
+    <dt><span>3</span> Run settings</dt><dd>How many times to repeat, the pause between steps, and the two safety options.</dd>
+    <dt><span>4</span> Run history</dt><dd>Past runs with failure screenshots.</dd>
+  </dl>
+  <h3>The flow-card icons, left to right</h3>
+  <table>
+    <tr><td><span class="ic v" style="display:inline-grid">✎</span></td><td>Rename</td></tr>
+    <tr><td><span class="ic c" style="display:inline-grid">⚙</span></td><td>Edit steps</td></tr>
+    <tr><td><span class="ic c" style="display:inline-grid">≡</span></td><td>Run with data</td></tr>
+    <tr><td><span class="ic g" style="display:inline-grid">▦</span></td><td>Download data template (Excel)</td></tr>
+    <tr><td><span class="ic v" style="display:inline-grid">⧉</span></td><td>Duplicate</td></tr>
+    <tr><td><span class="ic g" style="display:inline-grid">⇩</span></td><td>Export this flow</td></tr>
+    <tr><td><span class="ic r" style="display:inline-grid">🗑</span></td><td>Delete (asks first)</td></tr>
+  </table>
+  <div class="hint">Hover any icon in the real popup to see its tooltip.</div></div>
+</div>
+<p>Real popup:</p>
+<img class="shot" src="assets/popup.png" alt="Flowcraft popup screenshot">
+
+<h2 id="record"><span class="num">03</span> Record a flow</h2>
+<ol class="steps">
+  <li>Open the page where the flow should start.</li>
+  <li>Click the Flowcraft icon, then <b>● Start recording</b>. The popup closes and a small floating widget shows a live step count with a <b>Stop</b> button. <i>Shortcut:</i> <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>E</kbd> (<kbd>⌘</kbd><kbd>⇧</kbd><kbd>E</kbd> on Mac).</li>
+  <li>Use the site normally. Flowcraft records clicks, typing, checkbox and radio toggles, <kbd>Enter</kbd>/<kbd>Esc</kbd> and native dialogs.</li>
+  <li>Click <b>Stop</b>. The popup opens on the save screen.</li>
+  <li>Type a unique name, then <b>Save flow</b>. Use <b>Edit steps</b> to fix something first, or <b>Discard</b> to throw it away.</li>
+</ol>
+<div class="stage">
+  <div class="mock"><div class="mh"><i>◈</i> FLOWCRAFT</div>
+    <div class="box"><b style="color:var(--danger)"><span class="dot"></span>Recording…</b><div class="hint">6 steps</div><span class="mb d">Stop</span></div></div>
+  <div class="mock"><div class="mh"><i>◈</i> FLOWCRAFT</div>
+    <div class="box"><div class="hint" style="margin:0">Name this flow</div><div class="mi">Login and open dashboard</div>
+      <div style="display:flex;gap:6px;margin-top:10px"><span class="mb p" style="flex:1">Save flow</span><span class="chip c" style="padding:8px">Edit steps</span><span class="chip r" style="padding:8px">Discard</span></div></div></div>
+</div>
+<div class="callout warn"><b>TIP</b>Prefer elements with stable <code>id</code>, <code>data-testid</code> or <code>name</code>. Random or hashed class names make replay fragile.</div>
+
+<h2 id="run"><span class="num">04</span> Run a flow</h2>
+<ol class="steps">
+  <li>Set <b>Repeat</b> (how many times) and <b>Delay between steps</b> (extra pause in ms; raise it for slow pages).</li>
+  <li>Click <b>Run</b> on the flow. Flowcraft opens the recorded start URL in the active tab and replays each step.</li>
+  <li>A floating widget shows progress (<code>Run 2/5 · step 8/12</code>). <b>Stop</b> ends the run after the current step.</li>
+</ol>
+<p>Before each step, Flowcraft waits for the element to be visible, enabled, stable and not covered, then acts. After a step it waits out any page navigation.</p>
+
+<h2 id="edit"><span class="num">05</span> Edit steps</h2>
+<p>Click the <b>Edit steps</b> icon on a saved flow (or on a fresh recording before you save). You can reorder with ↑/↓, delete, edit the selector or value, and add steps that recording can't capture.</p>
+<div class="card">
+  <div class="step"><span class="t">click</span><span class="s">#login-button</span></div>
+  <div class="step"><span class="t">input</span><span class="s">#email — user@test.com</span></div>
+  <div class="step new"><span class="t">+ wait</span><span class="s">1500 ms</span></div>
+  <div class="step new"><span class="t">+ assertText</span><span class="s">.welcome contains "Hello"</span></div>
+</div>
+<table>
+  <tr><th>Step</th><th>Recorded?</th><th>What it does</th></tr>
+  <tr><td><code>click</code></td><td>Yes</td><td>Clicks the element, with a text-based fallback if the selector breaks.</td></tr>
+  <tr><td><code>input</code></td><td>Yes</td><td>Sets a field's value so React-style forms notice.</td></tr>
+  <tr><td><code>setChecked</code></td><td>Yes</td><td>Sets a checkbox, radio or switch.</td></tr>
+  <tr><td><code>keypress</code></td><td>Enter / Esc</td><td>Sends a synthetic key event. <code>Tab</code> can be added by hand.</td></tr>
+  <tr><td><code>wait</code></td><td>Manual</td><td>Pauses for a fixed number of milliseconds.</td></tr>
+  <tr><td><code>assertVisible</code></td><td>Manual</td><td>Fails the run if the element isn't visible.</td></tr>
+  <tr><td><code>assertText</code></td><td>Manual</td><td>Fails unless the element's text matches (or contains) a value.</td></tr>
+</table>
+
+<h2 id="data"><span class="num">06</span> Data-driven runs</h2>
+<p>Run the same flow once per row of a spreadsheet instead of replaying the recorded values.</p>
+<ol class="steps">
+  <li>Click the <b>Excel icon</b> on a flow to download its template.</li>
+  <li>Fill one row per run. Add a <b>Repeat</b> number to run a row more than once.</li>
+  <li>Click <b>Run with data</b> and choose the edited file. A yellow <span class="badge">DATA</span> badge appears.</li>
+  <li>From then on, <b>Run data</b> runs the stored file exactly as written.</li>
+</ol>
+<div class="sheet">
+  <div class="h"><span>#email</span><span>#password</span><span>Repeat</span></div>
+  <div><span>a@test.com</span><span>••••••</span><span>1</span></div>
+  <div><span>b@test.com</span><span>••••••</span><span>2</span></div>
+</div>
+<p>The sheet above expands to <b>3 runs</b>: row 1 once, row 2 twice.</p>
+<div class="callout danger"><b>FILENAME RULE</b>The file must keep the exact name the template had (e.g. <code>login-data-template.xlsx</code>). A different name, or a browser duplicate like <code>… (1).xlsx</code>, is rejected on purpose so a flow never runs with the wrong dataset.</div>
+<p>Uploading a new file replaces the old one. Click ✕ on the DATA badge to remove it. CSV and JSON also work, with the same naming rule.</p>
+
+<h2 id="share"><span class="num">07</span> Export and import</h2>
+<table>
+  <tr><td><b>Export</b> (flow icon)</td><td>Downloads one flow as <code>&lt;name&gt;.json</code>.</td></tr>
+  <tr><td><b>Bulk export</b></td><td>Pick several flows with checkboxes and get one JSON file.</td></tr>
+  <tr><td><b>Import</b></td><td>Loads a single or bulk file. Flows get fresh IDs; same-name flows are skipped, so importing twice never duplicates.</td></tr>
+  <tr><td><b>Duplicate</b></td><td>Copies a flow as <code>… (copy)</code> so you can branch it.</td></tr>
+</table>
+<p>Files are saved to <code>Downloads/Flowcraft/&lt;date&gt;/</code>.</p>
+<div class="callout danger"><b>BEFORE YOU SHARE</b>If "Store usernames/passwords" was on, exports contain plaintext credentials. Turn it off and re-save before sharing.</div>
+
+<h2 id="history"><span class="num">08</span> Run history</h2>
+<p>Click <b>Show</b> under Run history to see past runs. For a failed step you get a screenshot you can <b>Copy image</b> or <b>Save image</b>; click the thumbnail to view it full-size. <b>Save this run</b> downloads that run as JSON. <b>Clear</b> wipes the history.</p>
+<div class="callout warn"><b>PRIVACY</b>Screenshots show whatever was on screen when the step failed. Don't share them if they include private data.</div>
+
+<h2 id="secrets"><span class="num">09</span> Passwords and secrets</h2>
+<p>By default, username, email and password fields are <b>blanked</b> when saved. When you run the flow, Flowcraft asks for those values in one dialog and uses them for that run only.</p>
+<div class="stage"><div class="mock"><div class="mh"><i>◈</i> Enter credentials</div>
+  <div class="box"><div class="hint" style="margin:0">#email</div><div class="mi">you@example.com</div><div class="hint">#password</div><div class="mi">••••••••</div>
+  <div style="display:flex;gap:8px;margin-top:10px"><span class="chip c" style="flex:1;text-align:center;padding:8px">Cancel</span><span class="mb p" style="flex:1">Run</span></div></div></div></div>
+<p>Ticking <b>Store usernames/passwords inside saved flows</b> keeps them in plaintext in your browser profile and in exports. Leave it off unless you accept that.</p>
+
+<h2 id="trouble"><span class="num">10</span> Troubleshooting</h2>
+<table>
+  <tr><th>Problem</th><th>Try this</th></tr>
+  <tr><td>A step can't find its element</td><td>The selector probably changed. Open <b>Edit steps</b> and fix it, or re-record.</td></tr>
+  <tr><td>Steps fire too early on slow pages</td><td>Raise <b>Delay between steps</b>, or add a <code>wait</code> step.</td></tr>
+  <tr><td>A flaky step fails sometimes</td><td>Tick <b>Retry a failed step once</b>.</td></tr>
+  <tr><td>Data file is rejected</td><td>The filename doesn't match the template exactly. Re-download the template or rename the file.</td></tr>
+  <tr><td>Link opens in a new tab and replay stops</td><td>Replay doesn't follow new tabs or windows yet. Redesign the flow around a single tab.</td></tr>
+  <tr><td>Login with CAPTCHA, 2FA or OTP</td><td>These resist automation on purpose. Start the flow after you've signed in manually.</td></tr>
+  <tr><td>Popup doesn't show new changes</td><td>Reload the extension at <code>chrome://extensions</code>.</td></tr>
+</table>
+
+<h2 id="cheat"><span class="num">★</span> Cheat sheet</h2>
+<div class="card">
+  <p><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>E</kbd> start/stop recording &nbsp;·&nbsp; remap at <code>chrome://extensions/shortcuts</code></p>
+  <div class="flow"><span>Record</span><b>→</b><span>Stop</span><b>→</b><span>Name</span><b>→</b><span>Save</span><b>→</b><span>Edit steps</span><b>→</b><span>Run</span><b>→</b><span>Check history</span></div>
+  <p style="margin:0;color:var(--muted)">Beta software with no formal security audit. Only automate sites and accounts you're authorized to test.</p>
+</div>
+
+<footer>Flowcraft · <a href="../README.md">README</a> · <a href="security.md">Security &amp; privacy</a> · MIT licensed</footer>
+</main>
+</div>
+</body>
+</html>

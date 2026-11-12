@@ -10,7 +10,7 @@
 ![Dependencies: 0](https://img.shields.io/badge/dependencies-0-brightgreen.svg)
 ![Status: Beta](https://img.shields.io/badge/status-beta-orange.svg)
 
-[Quick start](#quick-start) · [Features](#features) · [Data-driven runs](#data-driven-runs) · [How it works](#how-it-works) · [FAQ](#faq) · [Docs](#documentation) · [Contributing](#contributing)
+[**User manual**](https://soykat25.github.io/flowcraft-extension/) · [Quick start](#quick-start) · [Features](#features) · [Data-driven runs](#data-driven-runs) · [How it works](#how-it-works) · [FAQ](#faq) · [Docs](#documentation) · [Contributing](#contributing)
 
 </div>
 
@@ -110,6 +110,7 @@ Not directly — flows run from the extension in a real browser. The exported JS
 
 ## Documentation
 
+- [**User manual**](https://soykat25.github.io/flowcraft-extension/) — illustrated step-by-step guide (GitHub Pages)
 - [Usage guide](docs/usage.md) — every popup control, data-driven replay, step types
 - [Security & privacy](docs/security.md) — permissions, passwords, what to keep out of Git
 - [Architecture](docs/architecture.md) — how it works, file map
