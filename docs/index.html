@@ -891,6 +891,8 @@ footer{margin-top:80px;padding-top:22px;border-top:1px solid var(--line);color:v
     <div class="mini"><b>Flow card hints</b><span>Under each flow's name you see “N steps”, plus “· N credential field(s) need input” when blank username/password fields will prompt you at run time.</span></div>
     <div class="mini"><b>Duplicate names</b><span>Duplicating adds “(copy)”, then “(copy) 2”, “(copy) 3”… Saving, renaming and importing all refuse a name that already exists (case-insensitive).</span></div>
     <div class="mini"><b>Clicks also remember the visible text</b><span>For clicks and assertions Flowcraft saves the element's label (first 80 characters) along with the selector. If the element at that position now has a <i>different</i> label — a re-ordered list, say — it looks for the element with the recorded text instead of trusting the position.</span></div>
+    <div class="mini"><b>Why there are “extra” click steps</b><span>Clicking into a text field is recorded as a click <i>before</i> its input step, and ticking a checkbox gives a click <i>plus</i> a checked step. That's normal and replays correctly. A click on an icon or text inside a button is recorded on the button itself.</span></div>
+    <div class="mini"><b>One run at a time</b><span>Flowcraft drives a single replay at a time and nothing stops you starting a second one from the popup while the first is going. Wait for “Finished!” or press <b>■</b> / <b>Stop replay</b> first.</span></div>
     <div class="mini"><b>Credentials prompt</b><span>One dialog lists every blank username/password field. Press <kbd>Enter</kbd> to run or <kbd>Esc</kbd> to cancel.</span></div>
   </div>
 </section>
