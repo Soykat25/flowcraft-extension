@@ -20,6 +20,7 @@ Full reference for every control, data-driven runs and the step editor. Back to 
 | Control | What it does |
 |---|---|
 | **Bulk export** | Opens a checklist of your saved flows and downloads the selected ones as one JSON file. |
+| **Clear cache** | After a confirmation, forgets every stored "Run with data" file for all flows (you'll re-pick the file next time). Saved flows themselves are not affected. |
 | **Import** | Loads flows from a JSON file (single-flow export or bulk export). Each imported flow gets a fresh ID; a flow whose name collides with one you already have is skipped (reported in a summary), so re-importing the same file twice never creates duplicates. |
 | **Run** | Runs the flow: navigates the active tab to its recorded start URL, replays each step, repeating **Repeat** times with **Delay between steps** between actions. Prompts for any unstored username/password fields first. Closes the popup so the on-page progress widget can take over. |
 | **Run data** *(only shown once a data file is set up for this flow — see below)* | Runs the flow using the last file uploaded via **Run with data**, exactly as that file specifies — every row, repeated per its own **Repeat** column — with no dependency on the popup's own **Repeat** field. Shows a confirmation with the filename and the first run's actual values before anything happens on the page. |
@@ -41,7 +42,7 @@ Full reference for every control, data-driven runs and the step editor. Back to 
 | **Store usernames/passwords inside saved flows** | Off by default. See [Passwords / secrets](security.md#passwords--secrets). |
 | **Retry a failed step once before giving up** | Off by default. If a step fails, wait 500&nbsp;ms and try it exactly once more before recording it as a failure. |
 | **Stop replay** | Appears only while a run is in progress; stops it after the current step. |
-| Status line | Live progress ("Run 2/5 · step 8/12"), or the final "Finished!" / "Stopped." / error state. |
+| Status line | Live progress ("Run 2/5 · step 8/12"); "Paused · …" plus the error when a step fails and the run is waiting for you; then the final "Finished!" / "Stopped." / "Error: …". |
 
 ### Floating run widget
 

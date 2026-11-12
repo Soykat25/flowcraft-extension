@@ -794,6 +794,7 @@ footer{margin-top:80px;padding-top:22px;border-top:1px solid var(--line);color:v
   <h3>The live status line vs. history</h3>
   <div class="tw"><table><tbody>
     <tr><td class="rb"><div class="st run">Run 2/5 · step 8/12</div></td><td>Live progress while a run is going (also on the on-page pill).</td></tr>
+    <tr><td class="rb"><div class="st err">Paused · Run 1/1 · step 4/6 · Not found: #submit</div></td><td>A step failed and the run is waiting for you. Fix the page and click ▶ on the on-page pill (or ■ to stop).</td></tr>
     <tr><td class="rb"><div class="st ok">Finished!</div></td><td>The run completed. Check history for any failed steps that were retried.</td></tr>
     <tr><td class="rb"><div class="st" style="color:var(--warn);border-color:rgba(255,176,32,.55)">Stopped.</div></td><td>You stopped it (■) or closed the tab.</td></tr>
     <tr><td class="rb"><div class="st err">Error: …</div></td><td>The run couldn't continue (for example the flow was deleted mid-run).</td></tr>
@@ -924,7 +925,7 @@ footer{margin-top:80px;padding-top:22px;border-top:1px solid var(--line);color:v
     <tr><td>Wrong data used</td><td>Click ✕ on the DATA badge and upload again. Uploads fully replace the old file.</td></tr>
     <tr><td>Replay stops after a new tab opens</td><td>Not supported. Rework the flow so it stays in one tab.</td></tr>
     <tr><td>Login blocked by CAPTCHA / 2FA</td><td>When the step after it fails the run pauses — solve the challenge by hand, then click the pill's ▶ to continue. Or sign in manually first and start the flow after login.</td></tr>
-    <tr><td>“Open a normal web page first”</td><td>You're on a browser system page. Switch to an http/https site, or give the flow a start URL.</td></tr>
+    <tr><td>“Open a normal web page (http/https) first…”</td><td>You're on a browser system page. Switch to an http/https site, or give the flow a start URL.</td></tr>
     <tr><td>Run paused with a red error</td><td>Fix the cause on the page (close a pop-up, wait for loading), then click ▶ on the pill to retry that step, or ■ to stop.</td></tr>
     <tr><td>Popup doesn't reflect updates</td><td>Reload Flowcraft at <code>chrome://extensions</code>.</td></tr>
     <tr><td>Recording shortcut does nothing</td><td>Check or remap it at <code>chrome://extensions/shortcuts</code>.</td></tr>
@@ -1012,13 +1013,13 @@ footer{margin-top:80px;padding-top:22px;border-top:1px solid var(--line);color:v
   var INFO={
     rec:['1 · Record panel','Start recording (or press Ctrl+Shift+E). After you stop, this area turns into the save form: name, Save flow, Edit steps, Discard.'],
     saved:['2 · Saved flows','Every saved flow appears as a card. Bulk export downloads several at once, Import loads JSON, Clear cache removes stored “Run with data” files.'],
-    rename:['<i class="ico" data-ico="rename"></i> Rename','Rename the flow. Names must stay unique (case-insensitive).'],
-    edit:['<i class="ico" data-ico="edit"></i> Edit steps','Reorder, edit or delete steps, and add manual Wait / Assert steps.'],
-    withdata:['<i class="ico" data-ico="data"></i> Run with data','Pick a spreadsheet (xlsx / csv / json) and run once per row. The file name must match the template.'],
-    template:['<i class="ico" data-ico="template"></i> Download data template','Gets an .xlsx with one column per input selector plus a Repeat column, pre-filled with the recorded values.'],
-    dup:['<i class="ico" data-ico="duplicate"></i> Duplicate','Clones steps and start URL as “… (copy)” so you can branch a flow without re-recording. A data file is not copied.'],
-    export:['<i class="ico" data-ico="export"></i> Export','Downloads this one flow as a JSON file named after the flow.'],
-    del:['<i class="ico" data-ico="delete"></i> Delete','Deletes the flow and its data file, after a confirmation.'],
+    rename:['Rename','Rename the flow. Names must stay unique (case-insensitive).'],
+    edit:['Edit steps','Reorder, edit or delete steps, and add manual Wait / Assert steps.'],
+    withdata:['Run with data','Pick a spreadsheet (xlsx / csv / json) and run once per row. The file name must match the template.'],
+    template:['Download data template','Gets an .xlsx with one column per input selector plus a Repeat column, pre-filled with the recorded values.'],
+    dup:['Duplicate','Clones steps and start URL as “… (copy)” so you can branch a flow without re-recording. A data file is not copied.'],
+    export:['Export','Downloads this one flow as a JSON file named after the flow.'],
+    del:['Delete','Deletes the flow and its data file, after a confirmation.'],
     settings:['3 · Run settings','Repeat count, delay between steps, the plaintext-credential option (off by default) and Retry-once.'],
     hist:['4 · Run history','Show or hide past runs, view failure screenshots, save a run as JSON, or clear everything.']
   };
@@ -1090,7 +1091,7 @@ footer{margin-top:80px;padding-top:22px;border-top:1px solid var(--line);color:v
    ['Run settings','Store usernames/passwords','Off by default. Applies when a recording is saved: with it on, credentials are kept in plaintext in that flow and its exports. Switching it off later does not clear flows already saved with it on.',CK('Store usernames/passwords inside saved flows (less secure)',0)],
    ['Run settings','Retry a failed step once','Off by default. Waits 500 ms and retries the step once before treating it as failed.',CK('Retry a failed step once before giving up',0)],
    ['Run settings','Stop replay','Visible during a run; stops it after the current step.',BT('ghost block','Stop replay')],
-   ['Run settings','Status line','Live progress (“Run 2/5 · step 8/12”), then “Finished!”, “Stopped.” or an error.','<div class="lk"><div class="st run">Run 2/5 · step 8/12</div><div class="st ok">Finished!</div></div>'],
+   ['Run settings','Status line','Live progress (“Run 2/5 · step 8/12”); “Paused · …” with the error when a step fails; then “Finished!”, “Stopped.” or “Error: …”.','<div class="lk"><div class="st run">Run 2/5 · step 8/12</div><div class="st err">Paused · Run 2/5 · step 8/12 · Not found: #go</div><div class="st ok">Finished!</div></div>'],
    ['Run history','Show / Hide','Expands or collapses the history panel.',BT('small tint-cyan','Show')],
    ['Run history','Clear','After a confirmation, wipes all run and error history.',BT('small tint-danger','Clear')],
    ['Run history','Save this run','Downloads that run (steps, results, errors, screenshots) as JSON.',BT('small tint-cyan','Save this run')],
@@ -1190,7 +1191,7 @@ footer{margin-top:80px;padding-top:22px;border-top:1px solid var(--line);color:v
   function wTick(){
     if(!wRunning||wd.classList.contains('paused'))return;
     if(wStep>=wTotal){wRunning=false;$('#wHelp').textContent='✔ Finished!';return}
-    if(wStep===3&&wFailOn&&!wFailed){wFailed=true;wd.classList.add('paused');$('#wErr').classList.add('show');$('#wPlay').setAttribute('aria-label','Failed — click to retry this step');$('#wHelp').textContent='Step 4 failed. The run is paused — click the glowing ▶ to retry it, or ■ to stop.';return}
+    if(wStep===3&&wFailOn&&!wFailed){wFailed=true;wStep=4;wDraw();wd.classList.add('paused');$('#wErr').classList.add('show');$('#wPlay').setAttribute('aria-label','Failed — click to retry this step');$('#wHelp').textContent='Step 4 failed. The run is paused — click the glowing ▶ to retry it, or ■ to stop.';return}
     wStep++;wDraw();wTimer=setTimeout(wTick,800);
   }
   $('#wStart').onclick=function(){clearTimeout(wTimer);wStep=0;wFailed=false;wRunning=true;wd.classList.remove('paused');$('#wErr').classList.remove('show');wDraw();$('#wHelp').textContent='Running…';wTimer=setTimeout(wTick,800)};

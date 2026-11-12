@@ -32,8 +32,12 @@ Back to the [README](../README.md).
   start/stop logic the popup uses.
 - `popup.*` is the control panel — record/save/run, the step editor,
   data-driven run, and the run-history panel.
-- `xlsx-lite.js` is a small, self-contained `.xlsx` reader/writer used only
-  by the popup, described above.
+- `xlsx-lite.js` is a small, self-contained `.xlsx` reader/writer: the popup uses
+  its writer for data templates, and the Run-with-data page (`dataUpload.*`) uses
+  its reader to load a filled-in file.
+- When a step fails, `background.js` logs the error with a screenshot, then
+  **pauses** the run and waits for either `resumeReplay` (retry the same step)
+  or `stopReplay`. Each step waits up to 15 s for its element.
 
 ## Files
 

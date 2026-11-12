@@ -31,6 +31,7 @@ relying on it for anything sensitive.
 
 | Permission | Why |
 |---|---|
+| `downloads` | Saves exports, data templates, run logs and screenshots into `Downloads/Flowcraft/<date>/` (a folder named like `Nov122026`). |
 | `storage` | Saved flows, settings, run history, and data-file metadata all live in `chrome.storage.local` (device-local, never synced to a Google account). |
 | `scripting` | Injects the recorder into already-open tabs and drives replay by executing a step function in the page. |
 | `tabs` / `activeTab` | Find/navigate the active tab, and (during replay) bounce it through `about:blank` before each run for a clean, predictable page load. |
