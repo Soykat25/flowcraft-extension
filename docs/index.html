@@ -748,7 +748,7 @@ footer{margin-top:80px;padding-top:22px;border-top:1px solid var(--line);color:v
     <tr><td><b>“Could not read file: invalid JSON.”</b></td><td>Not a Flowcraft export (or the file is damaged).</td></tr>
     <tr><td><b>“No flows found in that file.”</b></td><td>Valid JSON, but no flows inside.</td></tr>
   </tbody></table></div>
-  <p>Only known step types are kept on import; anything unexpected in the file is dropped. Bulk export with nothing ticked says “Select at least one flow to export.”</p>
+  <p>Only known step types are kept on import; anything unexpected in the file is dropped — including <code>dialog</code> notes, which are informational only. Bulk export with nothing ticked says “Select at least one flow to export.”</p>
   <p>Downloads land in <code>Downloads/Flowcraft/&lt;date&gt;/</code> (the folder is named like <code>Nov122026</code> — month, day, year, no spaces).</p>
   <div class="co danger"><b>BEFORE YOU SHARE</b><p>If “Store usernames/passwords” was on, exports contain <b>plaintext credentials</b>. <b>Turning the option off later does not clear them</b> — it only controls <i>new</i> recordings. To remove stored credentials, re-record the flow with the option off and delete the old one. Never commit exported flows or filled-in data sheets to a public repo.</p></div>
 </section>
