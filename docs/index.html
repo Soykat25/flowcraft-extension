@@ -4,254 +4,588 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Flowcraft User Manual</title>
+<meta name="description" content="Illustrated, interactive user manual for the Flowcraft browser flow recorder.">
 <style>
-:root{--bg:#05070f;--bg2:#0a0f1e;--panel:#0b1120;--panel2:#0e1526;--line:#1a2740;--text:#dbe7f7;--muted:#7d8ea9;--cyan:#35e6ff;--violet:#b06cff;--danger:#ff4d6d;--ok:#37f0a8;--warn:#ffb020;--mono:ui-monospace,"JetBrains Mono","SF Mono",Consolas,monospace;--sans:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+:root{
+  --bg:#04060d;--bg2:#080d1a;--panel:#0a1120;--panel2:#0e1730;--line:#1a2845;--line2:#243a63;
+  --text:#dbe7f7;--muted:#7f90ad;--cyan:#35e6ff;--violet:#b06cff;--danger:#ff4d6d;--ok:#37f0a8;--warn:#ffb020;
+  --mono:ui-monospace,"JetBrains Mono","SF Mono","Cascadia Mono",Consolas,monospace;
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+}
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;background:radial-gradient(900px 500px at 70% -10%,#0d2a3a55,transparent),var(--bg);color:var(--text);font:16px/1.65 var(--sans)}
+html{scroll-behavior:smooth;scroll-padding-top:20px}
+body{margin:0;color:var(--text);font:16px/1.7 var(--sans);background:var(--bg);
+  background-image:
+   radial-gradient(1100px 600px at 80% -10%,#0f3a5a40,transparent 60%),
+   radial-gradient(800px 500px at -10% 30%,#3a1a6a30,transparent 60%),
+   linear-gradient(#35e6ff08 1px,transparent 1px),linear-gradient(90deg,#35e6ff08 1px,transparent 1px);
+  background-size:auto,auto,44px 44px,44px 44px;background-attachment:fixed}
 a{color:var(--cyan);text-decoration:none}a:hover{text-decoration:underline}
-.shell{display:grid;grid-template-columns:240px minmax(0,1fr);max-width:1120px;margin:0 auto}
-nav{position:sticky;top:0;align-self:start;height:100vh;padding:28px 20px;border-right:1px solid var(--line);overflow:auto}
-nav .brand{font:700 15px var(--mono);letter-spacing:.2em;margin-bottom:24px;display:flex;gap:8px;align-items:center}
-nav .brand b{color:var(--cyan)}
-nav a{display:block;padding:6px 10px;border-radius:6px;color:var(--muted);font-size:14px}
-nav a:hover{background:var(--panel2);color:var(--text);text-decoration:none}
-main{padding:40px 40px 80px}
-@media(max-width:820px){.shell{grid-template-columns:1fr}nav{position:static;height:auto;border:0;border-bottom:1px solid var(--line)}main{padding:24px 18px 60px}}
-.hero{padding:8px 0 32px}
-.tag{display:inline-block;font:600 11px var(--mono);letter-spacing:.15em;color:var(--danger);border:1px solid var(--danger);border-radius:99px;padding:2px 10px}
-h1{font:800 40px/1.1 var(--sans);margin:14px 0 10px;letter-spacing:-.02em}
-h1 span{color:var(--cyan)}
-.lead{color:var(--muted);font-size:18px;max-width:620px}
-h2{font-size:26px;margin:56px 0 6px;padding-top:12px;display:flex;align-items:center;gap:12px;scroll-margin-top:12px}
-h2 .num{font:700 13px var(--mono);color:var(--bg);background:var(--cyan);border-radius:6px;padding:2px 8px}
-h3{font-size:17px;margin:28px 0 8px;color:var(--violet)}
+::selection{background:#35e6ff40}
+#progress{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--cyan),var(--violet));z-index:50;box-shadow:0 0 12px var(--cyan)}
+
+/* layout */
+.shell{display:grid;grid-template-columns:270px minmax(0,1fr);max-width:1240px;margin:0 auto}
+nav{position:sticky;top:0;align-self:start;height:100vh;padding:26px 18px;border-right:1px solid var(--line);overflow:auto;backdrop-filter:blur(6px)}
+.brand{font:800 15px var(--mono);letter-spacing:.22em;display:flex;gap:8px;align-items:center;margin-bottom:6px}
+.brand b{color:var(--cyan);text-shadow:0 0 12px var(--cyan)}
+.ver{font:600 10px var(--mono);color:var(--muted);margin-bottom:16px}
+#q{width:100%;background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:8px 10px;color:var(--text);font:13px var(--sans);outline:none;margin-bottom:12px}
+#q:focus{border-color:var(--cyan);box-shadow:0 0 0 3px #35e6ff22}
+nav .k{position:absolute;right:30px;top:35px;font:11px var(--mono);color:var(--muted);border:1px solid var(--line);border-radius:4px;padding:0 5px;pointer-events:none}
+nav a.l{display:flex;gap:10px;align-items:center;padding:6px 10px;border-radius:8px;color:var(--muted);font-size:14px;border-left:2px solid transparent}
+nav a.l i{font:700 11px var(--mono);color:var(--line2);font-style:normal;width:18px}
+nav a.l:hover{background:var(--panel2);color:var(--text);text-decoration:none}
+nav a.l.on{background:linear-gradient(90deg,#35e6ff18,transparent);color:var(--cyan);border-left-color:var(--cyan)}
+nav a.l.on i{color:var(--cyan)}
+nav a.l.hide{display:none}
+#none{display:none;color:var(--muted);font-size:13px;padding:6px 10px}
+main{padding:44px 48px 100px;min-width:0}
+@media(max-width:900px){.shell{grid-template-columns:1fr}nav{position:static;height:auto;border:0;border-bottom:1px solid var(--line)}main{padding:26px 16px 70px}nav .k{display:none}}
+
+/* hero */
+.hero{position:relative;padding:12px 0 36px}
+.tag{display:inline-flex;gap:8px;align-items:center;font:700 11px var(--mono);letter-spacing:.16em;color:var(--danger);border:1px solid #ff4d6d80;background:#ff4d6d10;border-radius:99px;padding:3px 12px}
+.tag::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--danger);box-shadow:0 0 8px var(--danger);animation:blink 1.4s infinite}
+@keyframes blink{50%{opacity:.2}}
+h1{font:800 clamp(34px,5vw,56px)/1.05 var(--sans);letter-spacing:-.03em;margin:18px 0 14px}
+h1 .g{background:linear-gradient(90deg,var(--cyan),var(--violet));-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 22px #35e6ff55)}
+.lead{color:var(--muted);font-size:19px;max-width:660px}
+.stats{display:flex;gap:12px;flex-wrap:wrap;margin:26px 0 8px}
+.stat{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 18px;min-width:130px}
+.stat b{display:block;font:800 22px var(--mono);color:var(--cyan)}.stat span{font-size:12px;color:var(--muted)}
+.paths{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:22px}
+.path{display:block;background:linear-gradient(160deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:14px;padding:16px;color:var(--text);transition:.2s}
+.path:hover{border-color:var(--cyan);transform:translateY(-3px);box-shadow:0 10px 30px #35e6ff18;text-decoration:none}
+.path b{display:block;font-size:15px}.path span{color:var(--muted);font-size:13.5px}.path em{font:700 20px var(--mono);font-style:normal;color:var(--cyan)}
+
+/* sections */
+section{margin-top:68px}
+h2{font-size:30px;line-height:1.2;margin:0 0 6px;display:flex;gap:14px;align-items:center;letter-spacing:-.01em}
+h2 .n{font:800 13px var(--mono);color:#001018;background:linear-gradient(135deg,var(--cyan),#7df);border-radius:8px;padding:3px 9px;box-shadow:0 0 18px #35e6ff55}
+.sub{color:var(--muted);margin:0 0 20px}
+h3{font-size:17px;margin:30px 0 8px;color:var(--violet)}
 p{margin:10px 0}
-code,kbd{font-family:var(--mono);font-size:.88em;background:var(--panel2);border:1px solid var(--line);border-radius:5px;padding:1px 6px}
-kbd{border-bottom-width:2px}
-.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:20px;margin:16px 0}
-.callout{border-left:3px solid var(--cyan);background:var(--panel);padding:12px 16px;border-radius:0 10px 10px 0;margin:16px 0}
-.callout.warn{border-color:var(--warn)}.callout.danger{border-color:var(--danger)}
-.callout b{display:block;font:700 12px var(--mono);letter-spacing:.1em;margin-bottom:2px;color:var(--cyan)}
-.callout.warn b{color:var(--warn)}.callout.danger b{color:var(--danger)}
-ol.steps{counter-reset:s;list-style:none;padding:0;margin:16px 0}
-ol.steps li{counter-increment:s;position:relative;padding:4px 0 14px 46px}
-ol.steps li::before{content:counter(s);position:absolute;left:0;top:2px;width:30px;height:30px;border-radius:50%;background:var(--panel2);border:1px solid var(--cyan);color:var(--cyan);display:grid;place-items:center;font:700 13px var(--mono)}
-table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14.5px}
-th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
-th{color:var(--muted);font:600 11px var(--mono);letter-spacing:.12em;text-transform:uppercase}
-/* ===== UI mockups ===== */
-.stage{display:flex;gap:28px;flex-wrap:wrap;align-items:flex-start;margin:20px 0}
-.mock{width:340px;max-width:100%;background:var(--bg);border:1px solid #223457;border-radius:12px;padding:14px;box-shadow:0 0 0 1px #000,0 18px 50px #000a,0 0 40px #35e6ff10;font-size:13px;position:relative}
-.mock .mh{display:flex;align-items:center;gap:8px;font:700 13px var(--mono);letter-spacing:.25em;margin-bottom:12px}
-.mock .mh i{color:var(--cyan);font-style:normal}
-.mock .beta{margin-left:auto;font:600 10px var(--mono);letter-spacing:0;color:var(--danger);border:1px solid var(--danger);border-radius:99px;padding:0 8px}
-.mock .box{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px;margin-bottom:10px;position:relative}
-.mb{display:block;width:100%;text-align:center;border-radius:6px;padding:8px;font:700 11px var(--mono);letter-spacing:.14em;text-transform:uppercase;border:1px solid transparent}
-.mb.p{background:var(--cyan);color:#001018}.mb.d{background:var(--danger);color:#fff}
-.chip{display:inline-block;border-radius:5px;padding:4px 10px;font:700 10px var(--mono);letter-spacing:.1em;text-transform:uppercase;border:1px solid}
-.chip.v{color:var(--violet);border-color:var(--violet)}.chip.c{color:var(--cyan);border-color:var(--cyan)}.chip.r{color:var(--danger);border-color:var(--danger)}
+code,kbd{font-family:var(--mono);font-size:.86em;background:var(--panel2);border:1px solid var(--line);border-radius:5px;padding:1px 6px}
+kbd{border-bottom-width:2px;color:var(--cyan)}
+.card{background:linear-gradient(160deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:14px;padding:20px;margin:16px 0}
+.co{border-left:3px solid var(--cyan);background:var(--panel);padding:12px 16px 12px 18px;border-radius:0 12px 12px 0;margin:18px 0}
+.co.warn{border-color:var(--warn)}.co.danger{border-color:var(--danger)}.co.ok{border-color:var(--ok)}
+.co b{display:block;font:800 11px var(--mono);letter-spacing:.14em;margin-bottom:3px;color:var(--cyan)}
+.co.warn b{color:var(--warn)}.co.danger b{color:var(--danger)}.co.ok b{color:var(--ok)}
+.co p{margin:4px 0 0}
+
+/* steps */
+ol.steps{counter-reset:s;list-style:none;padding:0;margin:20px 0;position:relative}
+ol.steps::before{content:"";position:absolute;left:15px;top:8px;bottom:18px;width:2px;background:linear-gradient(var(--cyan),var(--violet) 80%,transparent)}
+ol.steps li{counter-increment:s;position:relative;padding:2px 0 20px 50px}
+ol.steps li::before{content:counter(s);position:absolute;left:0;top:0;width:32px;height:32px;border-radius:50%;background:var(--bg2);border:2px solid var(--cyan);color:var(--cyan);display:grid;place-items:center;font:800 13px var(--mono);box-shadow:0 0 14px #35e6ff44}
+ol.steps li b.t{display:block;font-size:16.5px}
+ol.steps li span.d{color:var(--muted)}
+
+/* tables */
+.tw{overflow:auto;border:1px solid var(--line);border-radius:12px;margin:14px 0}
+table{width:100%;border-collapse:collapse;font-size:14.5px}
+th,td{text-align:left;padding:10px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child td{border-bottom:0}
+th{background:var(--panel2);color:var(--muted);font:700 11px var(--mono);letter-spacing:.12em;text-transform:uppercase}
+tbody tr:hover td{background:#35e6ff08}
+
+/* popup mock */
+.stage{display:flex;gap:30px;flex-wrap:wrap;align-items:flex-start;margin:22px 0}
+.mock{width:350px;max-width:100%;background:var(--bg);border:1px solid #2a4170;border-radius:14px;padding:14px;box-shadow:0 0 0 1px #000,0 24px 60px #000b,0 0 50px #35e6ff14;font-size:13px;position:relative}
+.mock::before{content:"";position:absolute;inset:0;border-radius:14px;background:linear-gradient(180deg,#35e6ff10,transparent 20%);pointer-events:none}
+.mh{display:flex;align-items:center;gap:8px;font:800 13px var(--mono);letter-spacing:.25em;margin-bottom:12px}
+.mh i{color:var(--cyan);font-style:normal;text-shadow:0 0 10px var(--cyan)}
+.beta{margin-left:auto;font:600 10px var(--mono);letter-spacing:0;color:var(--danger);border:1px solid var(--danger);border-radius:99px;padding:0 8px}
+.box{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px;margin-bottom:10px;position:relative}
+.mb{display:block;width:100%;text-align:center;border-radius:7px;padding:9px;font:800 11px var(--mono);letter-spacing:.14em;text-transform:uppercase;border:1px solid transparent;cursor:pointer;color:inherit;background:none}
+.mb.p{background:var(--cyan);color:#001018;box-shadow:0 0 18px #35e6ff44}.mb.d{background:var(--danger);color:#fff;box-shadow:0 0 18px #ff4d6d44}
+.chip{display:inline-block;border-radius:6px;padding:4px 10px;font:800 10px var(--mono);letter-spacing:.1em;text-transform:uppercase;border:1px solid;background:none;cursor:default}
+.chip.v{color:var(--violet);border-color:#b06cff80}.chip.c{color:var(--cyan);border-color:#35e6ff80}.chip.r{color:var(--danger);border-color:#ff4d6d80}
 .hint{color:var(--muted);font-size:12px;margin-top:8px}
-.mi{background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:7px 10px;color:var(--muted);margin-top:6px}
-.icons{display:flex;gap:6px;margin-top:10px}
-.ic{width:30px;height:30px;border-radius:6px;border:1px solid;display:grid;place-items:center;font-size:13px;position:relative}
+.mi{background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:7px 10px;color:var(--muted);margin-top:6px;font-size:13px}
+.icons{display:flex;gap:6px;margin-top:10px;flex-wrap:wrap}
+.ic{width:34px;height:34px;border-radius:8px;border:1px solid;display:grid;place-items:center;font-size:14px;cursor:pointer;background:none;transition:.15s;font-family:inherit}
 .ic.v{color:var(--violet);border-color:#b06cff80}.ic.c{color:var(--cyan);border-color:#35e6ff80}.ic.g{color:var(--ok);border-color:#37f0a880}.ic.r{color:var(--danger);border-color:#ff4d6d80}
-.dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--danger);animation:p 1.2s infinite;margin-right:6px}
-@keyframes p{50%{opacity:.25}}
-.pin{position:absolute;width:22px;height:22px;border-radius:50%;background:var(--warn);color:#201400;font:800 12px var(--mono);display:grid;place-items:center;box-shadow:0 0 0 3px #05070f}
-.legend{flex:1;min-width:240px}
-.legend dl{margin:0}.legend dt{font-weight:700;display:flex;gap:10px;align-items:center;margin-top:12px}
-.legend dt span{flex:none;width:22px;height:22px;border-radius:50%;background:var(--warn);color:#201400;font:800 12px var(--mono);display:grid;place-items:center}
-.legend dd{margin:2px 0 0 32px;color:var(--muted);font-size:14.5px}
-.shot{width:340px;max-width:100%;border-radius:12px;border:1px solid #223457}
-.badge{font:700 10px var(--mono);background:#ffb02022;color:var(--warn);border:1px solid var(--warn);border-radius:4px;padding:1px 6px;margin-left:6px}
-.sheet{border:1px solid var(--line);border-radius:8px;overflow:hidden;font:12px var(--mono);margin:16px 0;max-width:560px}
-.sheet div{display:grid;grid-template-columns:repeat(3,1fr)}
-.sheet span{padding:6px 10px;border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
-.sheet .h span{background:var(--panel2);color:var(--cyan)}
-.flow{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin:14px 0;font:12px var(--mono)}
-.flow span{background:var(--panel2);border:1px solid var(--line);border-radius:6px;padding:4px 10px}.flow b{color:var(--muted)}
-.step{display:flex;gap:10px;align-items:center;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:8px 10px;margin-top:6px;font:12px var(--mono)}
-.step .t{color:var(--cyan);width:90px;flex:none}.step .s{color:var(--muted);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.step.new .t{color:var(--ok)}
-footer{margin-top:64px;padding-top:20px;border-top:1px solid var(--line);color:var(--muted);font-size:14px}
+.ic:hover,.ic.on{background:#ffffff14;transform:translateY(-2px);box-shadow:0 0 16px currentColor}
+.dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--danger);animation:blink 1s infinite;margin-right:6px;box-shadow:0 0 8px var(--danger)}
+.pin{position:absolute;right:-9px;top:-9px;width:24px;height:24px;border-radius:50%;background:var(--warn);color:#201400;font:800 12px var(--mono);display:grid;place-items:center;box-shadow:0 0 0 3px var(--bg),0 0 14px var(--warn);cursor:pointer;border:0;z-index:2}
+.pin:hover,.pin.on{transform:scale(1.2)}
+.legend{flex:1;min-width:260px}
+.info{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px;min-height:130px}
+.info h4{margin:0 0 4px;font-size:16px;color:var(--cyan)}.info p{margin:4px 0;color:var(--muted);font-size:14.5px}
+.shot{width:350px;max-width:100%;border-radius:14px;border:1px solid #2a4170;box-shadow:0 20px 50px #000a,0 0 40px #35e6ff14}
+.badge{font:800 10px var(--mono);background:#ffb02022;color:var(--warn);border:1px solid var(--warn);border-radius:4px;padding:1px 6px;margin-left:6px}
+
+/* tabs */
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin:14px 0 0}
+.tabs button{background:var(--panel);border:1px solid var(--line);color:var(--muted);border-radius:8px 8px 0 0;padding:7px 14px;font:600 13px var(--sans);cursor:pointer}
+.tabs button.on{color:var(--cyan);border-color:var(--cyan);background:var(--panel2)}
+.tp{display:none;border:1px solid var(--line);border-radius:0 12px 12px 12px;background:var(--panel2);padding:14px 18px;margin-bottom:14px}
+.tp.on{display:block}
+
+/* code / copy */
+.cb{position:relative;background:#02040a;border:1px solid var(--line);border-radius:10px;padding:12px 70px 12px 14px;font:13px var(--mono);color:var(--ok);overflow:auto;margin:12px 0}
+.cb button{position:absolute;right:8px;top:8px;background:var(--panel2);border:1px solid var(--line2);color:var(--text);border-radius:6px;font:600 11px var(--sans);padding:3px 9px;cursor:pointer}
+.cb button:hover{border-color:var(--cyan);color:var(--cyan)}
+
+/* simulator */
+.sim{display:grid;grid-template-columns:350px 1fr;gap:26px;align-items:start}
+@media(max-width:860px){.sim{grid-template-columns:1fr}}
+.log{background:#02040a;border:1px solid var(--line);border-radius:12px;padding:14px;font:12.5px/1.8 var(--mono);min-height:230px;max-height:300px;overflow:auto}
+.log div{animation:in .35s both}.log .t{color:var(--cyan)}.log .s{color:var(--muted)}.log .ok{color:var(--ok)}
+@keyframes in{from{opacity:0;transform:translateX(-8px)}}
+.fake{background:var(--panel);border:1px dashed var(--line2);border-radius:10px;padding:12px;margin-bottom:10px}
+.fake .mi{cursor:text}
+.fake button{cursor:pointer}
+
+.step{display:flex;gap:10px;align-items:center;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:8px 10px;margin-top:6px;font:12.5px var(--mono)}
+.step .t{color:var(--cyan);width:105px;flex:none}.step .s{color:var(--muted);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.step.new .t{color:var(--ok)}.step .m{color:var(--muted)}
+
+/* data calc */
+.calc{display:grid;gap:8px;max-width:560px}
+.calc .r{display:grid;grid-template-columns:1fr 1fr 90px 34px;gap:6px}
+.calc input{background:var(--bg);border:1px solid var(--line);border-radius:6px;color:var(--text);padding:7px 9px;font:13px var(--mono);width:100%;outline:none}
+.calc input:focus{border-color:var(--cyan)}
+.calc .hd{font:700 11px var(--mono);color:var(--cyan)}
+.small{background:var(--panel2);border:1px solid var(--line2);color:var(--text);border-radius:6px;padding:6px 12px;font:600 12px var(--sans);cursor:pointer}
+.small:hover{border-color:var(--cyan);color:var(--cyan)}
+.seq{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+.seq span{font:12px var(--mono);background:var(--panel2);border:1px solid var(--line2);border-radius:6px;padding:3px 9px;animation:in .3s both}
+.seq span b{color:var(--cyan)}
+
+/* flow diagram */
+.flow{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:16px 0;font:13px var(--mono)}
+.flow span{background:var(--panel2);border:1px solid var(--line2);border-radius:8px;padding:6px 12px}.flow b{color:var(--cyan)}
+
+/* faq */
+details{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:0 16px;margin:8px 0}
+summary{cursor:pointer;padding:12px 0;font-weight:600;list-style:none;display:flex;justify-content:space-between;gap:10px}
+summary::after{content:"+";color:var(--cyan);font:700 18px var(--mono)}details[open] summary::after{content:"−"}
+details[open]{border-color:var(--line2)}details p{color:var(--muted);margin:0 0 14px}
+summary::-webkit-details-marker{display:none}
+
+.reveal{opacity:0;transform:translateY(18px);transition:.6s}.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}html{scroll-behavior:auto}}
+footer{margin-top:80px;padding-top:22px;border-top:1px solid var(--line);color:var(--muted);font-size:14px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+#top{position:fixed;right:20px;bottom:20px;width:42px;height:42px;border-radius:50%;background:var(--panel2);border:1px solid var(--cyan);color:var(--cyan);cursor:pointer;font-size:18px;opacity:0;pointer-events:none;transition:.2s;box-shadow:0 0 20px #35e6ff33}
+#top.show{opacity:1;pointer-events:auto}
 </style>
 </head>
 <body>
+<div id="progress"></div>
 <div class="shell">
-<nav>
+
+<nav id="nav">
   <div class="brand"><b>◈</b> FLOWCRAFT</div>
-  <a href="#install">1 · Install</a>
-  <a href="#tour">2 · Tour of the popup</a>
-  <a href="#record">3 · Record a flow</a>
-  <a href="#run">4 · Run a flow</a>
-  <a href="#edit">5 · Edit steps</a>
-  <a href="#data">6 · Data-driven runs</a>
-  <a href="#share">7 · Export &amp; import</a>
-  <a href="#history">8 · Run history</a>
-  <a href="#secrets">9 · Passwords</a>
-  <a href="#trouble">10 · Troubleshooting</a>
-  <a href="#cheat">Cheat sheet</a>
+  <div class="ver">USER MANUAL · v1.1.0 BETA</div>
+  <input id="q" type="search" placeholder="Search the manual…" autocomplete="off" aria-label="Search the manual"><span class="k">/</span>
+  <a class="l" href="#start"><i>00</i>Start here</a>
+  <a class="l" href="#install"><i>01</i>Install</a>
+  <a class="l" href="#tour"><i>02</i>Tour of the popup</a>
+  <a class="l" href="#record"><i>03</i>Record a flow</a>
+  <a class="l" href="#run"><i>04</i>Run a flow</a>
+  <a class="l" href="#edit"><i>05</i>Edit steps</a>
+  <a class="l" href="#data"><i>06</i>Data-driven runs</a>
+  <a class="l" href="#share"><i>07</i>Export &amp; import</a>
+  <a class="l" href="#history"><i>08</i>Run history</a>
+  <a class="l" href="#secrets"><i>09</i>Passwords</a>
+  <a class="l" href="#limits"><i>10</i>Limits</a>
+  <a class="l" href="#trouble"><i>11</i>Troubleshooting</a>
+  <a class="l" href="#faq"><i>12</i>FAQ</a>
+  <a class="l" href="#cheat"><i>★</i>Cheat sheet</a>
+  <div id="none">No sections match.</div>
 </nav>
 
 <main>
-<div class="hero">
-  <span class="tag">BETA</span>
-  <h1>Flowcraft <span>User Manual</span></h1>
-  <p class="lead">Record what you do in the browser, save it as a flow, and replay it — once, many times, or once per row of a spreadsheet.</p>
-</div>
 
-<h2 id="install"><span class="num">01</span> Install</h2>
-<ol class="steps">
-  <li>Download or clone the repository, so you have the <code>Flowcraft</code> folder.</li>
-  <li>Open <code>chrome://extensions</code> (or <code>edge://extensions</code>) and switch on <b>Developer mode</b> in the top-right corner.</li>
-  <li>Click <b>Load unpacked</b> and choose the Flowcraft folder.</li>
-  <li>Click the puzzle-piece icon in the toolbar and <b>pin</b> Flowcraft so its icon is always visible.</li>
-</ol>
-<div class="callout"><b>UPDATING</b>After pulling new code, click the reload icon on Flowcraft's card in <code>chrome://extensions</code>. An already-open popup won't pick up changes.</div>
-
-<h2 id="tour"><span class="num">02</span> Tour of the popup</h2>
-<p>Click the Flowcraft icon to open the control panel. It has four areas.</p>
-<div class="stage">
-  <div class="mock">
-    <div class="mh"><i>◈</i> FLOWCRAFT <span class="beta">Beta</span></div>
-    <div class="box"><span class="pin" style="right:-8px;top:-8px">1</span>
-      <span class="mb p">● Start recording</span>
-      <div class="hint">Tip: <b>Ctrl+Shift+E</b> toggles recording without opening this popup.</div></div>
-    <div class="box"><span class="pin" style="right:-8px;top:-8px">2</span>
-      <b style="font:700 11px var(--mono);letter-spacing:.15em">SAVED FLOWS</b>
-      <div style="display:flex;gap:6px;margin-top:10px"><span class="chip v">Bulk export</span><span class="chip c">Import</span><span class="chip r">Clear cache</span></div>
-      <div class="box" style="margin:10px 0 0;background:var(--panel2)"><b>link change 3</b><div class="hint" style="margin:0 0 8px">6 steps</div><span class="mb p">Run</span>
-        <div class="icons"><span class="ic v">✎</span><span class="ic c">⚙</span><span class="ic c">≡</span><span class="ic g">▦</span><span class="ic v">⧉</span><span class="ic g">⇩</span><span class="ic r">🗑</span></div></div></div>
-    <div class="box"><span class="pin" style="right:-8px;top:-8px">3</span>
-      <div style="display:flex;gap:8px"><div style="flex:1"><div class="hint" style="margin:0">REPEAT</div><div class="mi">1</div></div><div style="flex:1"><div class="hint" style="margin:0">DELAY (MS)</div><div class="mi">300</div></div></div>
-      <div class="hint">☐ Store usernames/passwords inside saved flows<br>☐ Retry a failed step once</div></div>
-    <div class="box" style="margin:0"><span class="pin" style="right:-8px;top:-8px">4</span><b style="font:700 11px var(--mono);letter-spacing:.15em">RUN HISTORY</b> <span class="chip c" style="float:right">Show</span></div>
+<!-- HERO -->
+<div class="hero" id="start">
+  <span class="tag">BETA · RECORD · REPLAY · AUTOMATE</span>
+  <h1>Flowcraft<br><span class="g">User Manual</span></h1>
+  <p class="lead">Record what you do in the browser, save it as a <b>flow</b>, and replay it — once, many times, or once for every row of a spreadsheet. No code, no account, nothing leaves your machine.</p>
+  <div class="stats">
+    <div class="stat"><b>3 min</b><span>to your first flow</span></div>
+    <div class="stat"><b>0</b><span>dependencies</span></div>
+    <div class="stat"><b>100%</b><span>local &amp; private</span></div>
+    <div class="stat"><b>MV3</b><span>Chrome &amp; Edge</span></div>
   </div>
-  <div class="legend"><dl>
-    <dt><span>1</span> Record panel</dt><dd>Start recording, and later name and save the result.</dd>
-    <dt><span>2</span> Saved flows</dt><dd>Every flow with its own Run button and a row of icons: edit, steps, data, duplicate, export, delete.</dd>
-    <dt><span>3</span> Run settings</dt><dd>How many times to repeat, the pause between steps, and the two safety options.</dd>
-    <dt><span>4</span> Run history</dt><dd>Past runs with failure screenshots.</dd>
-  </dl>
-  <h3>The flow-card icons, left to right</h3>
-  <table>
-    <tr><td><span class="ic v" style="display:inline-grid">✎</span></td><td>Rename</td></tr>
-    <tr><td><span class="ic c" style="display:inline-grid">⚙</span></td><td>Edit steps</td></tr>
-    <tr><td><span class="ic c" style="display:inline-grid">≡</span></td><td>Run with data</td></tr>
-    <tr><td><span class="ic g" style="display:inline-grid">▦</span></td><td>Download data template (Excel)</td></tr>
-    <tr><td><span class="ic v" style="display:inline-grid">⧉</span></td><td>Duplicate</td></tr>
-    <tr><td><span class="ic g" style="display:inline-grid">⇩</span></td><td>Export this flow</td></tr>
-    <tr><td><span class="ic r" style="display:inline-grid">🗑</span></td><td>Delete (asks first)</td></tr>
-  </table>
-  <div class="hint">Hover any icon in the real popup to see its tooltip.</div></div>
-</div>
-<p>Real popup:</p>
-<img class="shot" src="assets/popup.png" alt="Flowcraft popup screenshot">
-
-<h2 id="record"><span class="num">03</span> Record a flow</h2>
-<ol class="steps">
-  <li>Open the page where the flow should start.</li>
-  <li>Click the Flowcraft icon, then <b>● Start recording</b>. The popup closes and a small floating widget shows a live step count with a <b>Stop</b> button. <i>Shortcut:</i> <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>E</kbd> (<kbd>⌘</kbd><kbd>⇧</kbd><kbd>E</kbd> on Mac).</li>
-  <li>Use the site normally. Flowcraft records clicks, typing, checkbox and radio toggles, <kbd>Enter</kbd>/<kbd>Esc</kbd> and native dialogs.</li>
-  <li>Click <b>Stop</b>. The popup opens on the save screen.</li>
-  <li>Type a unique name, then <b>Save flow</b>. Use <b>Edit steps</b> to fix something first, or <b>Discard</b> to throw it away.</li>
-</ol>
-<div class="stage">
-  <div class="mock"><div class="mh"><i>◈</i> FLOWCRAFT</div>
-    <div class="box"><b style="color:var(--danger)"><span class="dot"></span>Recording…</b><div class="hint">6 steps</div><span class="mb d">Stop</span></div></div>
-  <div class="mock"><div class="mh"><i>◈</i> FLOWCRAFT</div>
-    <div class="box"><div class="hint" style="margin:0">Name this flow</div><div class="mi">Login and open dashboard</div>
-      <div style="display:flex;gap:6px;margin-top:10px"><span class="mb p" style="flex:1">Save flow</span><span class="chip c" style="padding:8px">Edit steps</span><span class="chip r" style="padding:8px">Discard</span></div></div></div>
-</div>
-<div class="callout warn"><b>TIP</b>Prefer elements with stable <code>id</code>, <code>data-testid</code> or <code>name</code>. Random or hashed class names make replay fragile.</div>
-
-<h2 id="run"><span class="num">04</span> Run a flow</h2>
-<ol class="steps">
-  <li>Set <b>Repeat</b> (how many times) and <b>Delay between steps</b> (extra pause in ms; raise it for slow pages).</li>
-  <li>Click <b>Run</b> on the flow. Flowcraft opens the recorded start URL in the active tab and replays each step.</li>
-  <li>A floating widget shows progress (<code>Run 2/5 · step 8/12</code>). <b>Stop</b> ends the run after the current step.</li>
-</ol>
-<p>Before each step, Flowcraft waits for the element to be visible, enabled, stable and not covered, then acts. After a step it waits out any page navigation.</p>
-
-<h2 id="edit"><span class="num">05</span> Edit steps</h2>
-<p>Click the <b>Edit steps</b> icon on a saved flow (or on a fresh recording before you save). You can reorder with ↑/↓, delete, edit the selector or value, and add steps that recording can't capture.</p>
-<div class="card">
-  <div class="step"><span class="t">click</span><span class="s">#login-button</span></div>
-  <div class="step"><span class="t">input</span><span class="s">#email — user@test.com</span></div>
-  <div class="step new"><span class="t">+ wait</span><span class="s">1500 ms</span></div>
-  <div class="step new"><span class="t">+ assertText</span><span class="s">.welcome contains "Hello"</span></div>
-</div>
-<table>
-  <tr><th>Step</th><th>Recorded?</th><th>What it does</th></tr>
-  <tr><td><code>click</code></td><td>Yes</td><td>Clicks the element, with a text-based fallback if the selector breaks.</td></tr>
-  <tr><td><code>input</code></td><td>Yes</td><td>Sets a field's value so React-style forms notice.</td></tr>
-  <tr><td><code>setChecked</code></td><td>Yes</td><td>Sets a checkbox, radio or switch.</td></tr>
-  <tr><td><code>keypress</code></td><td>Enter / Esc</td><td>Sends a synthetic key event. <code>Tab</code> can be added by hand.</td></tr>
-  <tr><td><code>wait</code></td><td>Manual</td><td>Pauses for a fixed number of milliseconds.</td></tr>
-  <tr><td><code>assertVisible</code></td><td>Manual</td><td>Fails the run if the element isn't visible.</td></tr>
-  <tr><td><code>assertText</code></td><td>Manual</td><td>Fails unless the element's text matches (or contains) a value.</td></tr>
-</table>
-
-<h2 id="data"><span class="num">06</span> Data-driven runs</h2>
-<p>Run the same flow once per row of a spreadsheet instead of replaying the recorded values.</p>
-<ol class="steps">
-  <li>Click the <b>Excel icon</b> on a flow to download its template.</li>
-  <li>Fill one row per run. Add a <b>Repeat</b> number to run a row more than once.</li>
-  <li>Click <b>Run with data</b> and choose the edited file. A yellow <span class="badge">DATA</span> badge appears.</li>
-  <li>From then on, <b>Run data</b> runs the stored file exactly as written.</li>
-</ol>
-<div class="sheet">
-  <div class="h"><span>#email</span><span>#password</span><span>Repeat</span></div>
-  <div><span>a@test.com</span><span>••••••</span><span>1</span></div>
-  <div><span>b@test.com</span><span>••••••</span><span>2</span></div>
-</div>
-<p>The sheet above expands to <b>3 runs</b>: row 1 once, row 2 twice.</p>
-<div class="callout danger"><b>FILENAME RULE</b>The file must keep the exact name the template had (e.g. <code>login-data-template.xlsx</code>). A different name, or a browser duplicate like <code>… (1).xlsx</code>, is rejected on purpose so a flow never runs with the wrong dataset.</div>
-<p>Uploading a new file replaces the old one. Click ✕ on the DATA badge to remove it. CSV and JSON also work, with the same naming rule.</p>
-
-<h2 id="share"><span class="num">07</span> Export and import</h2>
-<table>
-  <tr><td><b>Export</b> (flow icon)</td><td>Downloads one flow as <code>&lt;name&gt;.json</code>.</td></tr>
-  <tr><td><b>Bulk export</b></td><td>Pick several flows with checkboxes and get one JSON file.</td></tr>
-  <tr><td><b>Import</b></td><td>Loads a single or bulk file. Flows get fresh IDs; same-name flows are skipped, so importing twice never duplicates.</td></tr>
-  <tr><td><b>Duplicate</b></td><td>Copies a flow as <code>… (copy)</code> so you can branch it.</td></tr>
-</table>
-<p>Files are saved to <code>Downloads/Flowcraft/&lt;date&gt;/</code>.</p>
-<div class="callout danger"><b>BEFORE YOU SHARE</b>If "Store usernames/passwords" was on, exports contain plaintext credentials. Turn it off and re-save before sharing.</div>
-
-<h2 id="history"><span class="num">08</span> Run history</h2>
-<p>Click <b>Show</b> under Run history to see past runs. For a failed step you get a screenshot you can <b>Copy image</b> or <b>Save image</b>; click the thumbnail to view it full-size. <b>Save this run</b> downloads that run as JSON. <b>Clear</b> wipes the history.</p>
-<div class="callout warn"><b>PRIVACY</b>Screenshots show whatever was on screen when the step failed. Don't share them if they include private data.</div>
-
-<h2 id="secrets"><span class="num">09</span> Passwords and secrets</h2>
-<p>By default, username, email and password fields are <b>blanked</b> when saved. When you run the flow, Flowcraft asks for those values in one dialog and uses them for that run only.</p>
-<div class="stage"><div class="mock"><div class="mh"><i>◈</i> Enter credentials</div>
-  <div class="box"><div class="hint" style="margin:0">#email</div><div class="mi">you@example.com</div><div class="hint">#password</div><div class="mi">••••••••</div>
-  <div style="display:flex;gap:8px;margin-top:10px"><span class="chip c" style="flex:1;text-align:center;padding:8px">Cancel</span><span class="mb p" style="flex:1">Run</span></div></div></div></div>
-<p>Ticking <b>Store usernames/passwords inside saved flows</b> keeps them in plaintext in your browser profile and in exports. Leave it off unless you accept that.</p>
-
-<h2 id="trouble"><span class="num">10</span> Troubleshooting</h2>
-<table>
-  <tr><th>Problem</th><th>Try this</th></tr>
-  <tr><td>A step can't find its element</td><td>The selector probably changed. Open <b>Edit steps</b> and fix it, or re-record.</td></tr>
-  <tr><td>Steps fire too early on slow pages</td><td>Raise <b>Delay between steps</b>, or add a <code>wait</code> step.</td></tr>
-  <tr><td>A flaky step fails sometimes</td><td>Tick <b>Retry a failed step once</b>.</td></tr>
-  <tr><td>Data file is rejected</td><td>The filename doesn't match the template exactly. Re-download the template or rename the file.</td></tr>
-  <tr><td>Link opens in a new tab and replay stops</td><td>Replay doesn't follow new tabs or windows yet. Redesign the flow around a single tab.</td></tr>
-  <tr><td>Login with CAPTCHA, 2FA or OTP</td><td>These resist automation on purpose. Start the flow after you've signed in manually.</td></tr>
-  <tr><td>Popup doesn't show new changes</td><td>Reload the extension at <code>chrome://extensions</code>.</td></tr>
-</table>
-
-<h2 id="cheat"><span class="num">★</span> Cheat sheet</h2>
-<div class="card">
-  <p><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>E</kbd> start/stop recording &nbsp;·&nbsp; remap at <code>chrome://extensions/shortcuts</code></p>
-  <div class="flow"><span>Record</span><b>→</b><span>Stop</span><b>→</b><span>Name</span><b>→</b><span>Save</span><b>→</b><span>Edit steps</span><b>→</b><span>Run</span><b>→</b><span>Check history</span></div>
-  <p style="margin:0;color:var(--muted)">Beta software with no formal security audit. Only automate sites and accounts you're authorized to test.</p>
+  <div class="paths">
+    <a class="path" href="#install"><em>▶</em><b>I'm new</b><span>Install it and record your first flow in minutes.</span></a>
+    <a class="path" href="#data"><em>▦</em><b>Run with spreadsheets</b><span>One run per row, with a live calculator.</span></a>
+    <a class="path" href="#trouble"><em>⚠</em><b>Something failed</b><span>Fix broken steps, timing and rejected files.</span></a>
+    <a class="path" href="#cheat"><em>★</em><b>Quick reference</b><span>Shortcuts and the whole workflow on one card.</span></a>
+  </div>
 </div>
 
-<footer>Flowcraft · <a href="../README.md">README</a> · <a href="security.md">Security &amp; privacy</a> · MIT licensed</footer>
+<!-- 01 INSTALL -->
+<section id="install" class="reveal" data-s="install load unpacked developer mode chrome edge extension download clone">
+  <h2><span class="n">01</span>Install</h2>
+  <p class="sub">About two minutes. No build step, no store account.</p>
+  <ol class="steps">
+    <li><b class="t">Get the code</b><span class="d">Download the ZIP from GitHub and extract it, or clone it:</span>
+      <div class="cb"><code>git clone https://github.com/Soykat25/flowcraft-extension.git</code><button data-copy="git clone https://github.com/Soykat25/flowcraft-extension.git">Copy</button></div></li>
+    <li><b class="t">Open the extensions page</b><span class="d">Go to <code>chrome://extensions</code> (Chrome) or <code>edge://extensions</code> (Edge), and switch on <b>Developer mode</b> in the top-right corner.</span></li>
+    <li><b class="t">Load it</b><span class="d">Click <b>Load unpacked</b> and pick the Flowcraft folder (the one that contains <code>manifest.json</code>).</span></li>
+    <li><b class="t">Pin it</b><span class="d">Click the puzzle-piece icon in the toolbar and pin Flowcraft so its icon is always visible.</span></li>
+  </ol>
+  <div class="co"><b>UPDATING</b><p>After pulling new code, click the <b>reload</b> icon on Flowcraft's card in <code>chrome://extensions</code>. An already-open popup won't pick up new code on its own.</p></div>
+</section>
+
+<!-- 02 TOUR -->
+<section id="tour" class="reveal" data-s="tour popup interface icons buttons panel saved flows repeat delay history rename duplicate">
+  <h2><span class="n">02</span>Tour of the popup</h2>
+  <p class="sub">Interactive: click a yellow number or any icon to see what it does.</p>
+  <div class="stage">
+    <div class="mock" id="tourMock">
+      <div class="mh"><i>◈</i>FLOWCRAFT<span class="beta">Beta</span></div>
+      <div class="box"><button class="pin" data-info="rec">1</button>
+        <span class="mb p">● Start recording</span>
+        <div class="hint">Tip: <b>Ctrl+Shift+E</b> toggles recording without opening this popup.</div></div>
+      <div class="box"><button class="pin" data-info="saved">2</button>
+        <b style="font:800 11px var(--mono);letter-spacing:.15em">SAVED FLOWS</b>
+        <div style="display:flex;gap:6px;margin-top:10px;flex-wrap:wrap"><span class="chip v">Bulk export</span><span class="chip c">Import</span><span class="chip r">Clear cache</span></div>
+        <div class="box" style="margin:10px 0 0;background:var(--panel2)"><b>link change 3</b><div class="hint" style="margin:0 0 8px">6 steps</div><span class="mb p">Run</span>
+          <div class="icons">
+            <button class="ic v" data-info="rename" title="Rename">✎</button>
+            <button class="ic c" data-info="edit" title="Edit steps">⚙</button>
+            <button class="ic c" data-info="withdata" title="Run with data">≡</button>
+            <button class="ic g" data-info="template" title="Download data template">▦</button>
+            <button class="ic v" data-info="dup" title="Duplicate">⧉</button>
+            <button class="ic g" data-info="export" title="Export">⇩</button>
+            <button class="ic r" data-info="del" title="Delete">🗑</button>
+          </div></div></div>
+      <div class="box"><button class="pin" data-info="settings">3</button>
+        <div style="display:flex;gap:8px"><div style="flex:1"><div class="hint" style="margin:0">REPEAT</div><div class="mi">1</div></div><div style="flex:1"><div class="hint" style="margin:0">DELAY (MS)</div><div class="mi">300</div></div></div>
+        <div class="hint">☐ Store usernames/passwords in flows<br>☐ Retry a failed step once</div></div>
+      <div class="box" style="margin:0"><button class="pin" data-info="hist">4</button><b style="font:800 11px var(--mono);letter-spacing:.15em">RUN HISTORY</b> <span class="chip c" style="float:right">Show</span></div>
+    </div>
+    <div class="legend">
+      <div class="info" id="info"><h4>Select something</h4><p>Click a numbered marker or an icon on the popup to see what it does.</p></div>
+      <h3>The real thing</h3>
+      <img class="shot" src="assets/popup.png" alt="Screenshot of the Flowcraft popup">
+    </div>
+  </div>
+</section>
+
+<!-- 03 RECORD -->
+<section id="record" class="reveal" data-s="record start stop save name discard shortcut ctrl shift e widget clicks typing">
+  <h2><span class="n">03</span>Record a flow</h2>
+  <p class="sub">Try the simulator: it behaves like the real recorder.</p>
+  <ol class="steps">
+    <li><b class="t">Open your start page</b><span class="d">The page you're on becomes the flow's start URL.</span></li>
+    <li><b class="t">Press Start recording</b><span class="d">The popup closes and a small floating widget shows a live step count with a <b>Stop</b> button. Shortcut: <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>E</kbd> (<kbd>⌘</kbd><kbd>⇧</kbd><kbd>E</kbd> on Mac), no popup needed. Remap it at <code>chrome://extensions/shortcuts</code>.</span></li>
+    <li><b class="t">Use the site normally</b><span class="d">Flowcraft captures clicks, typing, checkbox/radio toggles, <kbd>Enter</kbd> / <kbd>Esc</kbd> and native dialogs.</span></li>
+    <li><b class="t">Stop, name, save</b><span class="d">Give it a unique name (case-insensitive). <b>Edit steps</b> lets you fix things before saving; <b>Discard</b> throws the recording away.</span></li>
+  </ol>
+  <div class="sim card">
+    <div class="mock" style="width:100%">
+      <div class="mh"><i>◈</i>FLOWCRAFT <span class="beta">SIM</span></div>
+      <div class="fake" id="fakePage">
+        <div class="hint" style="margin:0 0 6px">Pretend web page</div>
+        <div class="mi" id="fEmail" tabindex="0">email: (click to fill)</div>
+        <div class="mi" id="fPass" tabindex="0">password: (click to fill)</div>
+        <button class="mb p" id="fLogin" style="margin-top:10px;padding:7px">Log in</button>
+      </div>
+      <div class="box" style="margin:0">
+        <div id="simIdle"><button class="mb p" id="simStart">● Start recording</button></div>
+        <div id="simRec" hidden><b style="color:var(--danger)"><span class="dot"></span>Recording…</b><div class="hint" id="simCount">0 steps</div><button class="mb d" id="simStop">Stop</button></div>
+        <div id="simSave" hidden><div class="hint" style="margin:0">Name this flow</div><div class="mi" style="color:var(--text)">Login and open dashboard</div><button class="mb p" id="simSaveBtn" style="margin-top:10px">Save flow</button></div>
+      </div>
+    </div>
+    <div><div class="log" id="simLog"><div class="s">› Press “Start recording”, then click the fake page elements.</div></div>
+      <button class="small" id="simReset" style="margin-top:10px">↺ Reset simulator</button></div>
+  </div>
+  <div class="co warn"><b>TIP</b><p>Prefer elements with a stable <code>id</code>, <code>data-testid</code> or <code>name</code>. Random or hashed class names make replay fragile.</p></div>
+</section>
+
+<!-- 04 RUN -->
+<section id="run" class="reveal" data-s="run replay repeat delay widget stop progress retry settings navigation actionability">
+  <h2><span class="n">04</span>Run a flow</h2>
+  <p class="sub">Replay a saved flow, with settings you control.</p>
+  <div class="tw"><table>
+    <thead><tr><th>Setting</th><th>What it does</th></tr></thead>
+    <tbody>
+    <tr><td><b>Repeat</b></td><td>How many times a plain <b>Run</b> repeats. With <b>Run with data</b> it instead <i>caps</i> how many rows run (leave at <code>1</code> to cap nothing). It has no effect on <b>Run data</b>.</td></tr>
+    <tr><td><b>Delay between steps</b></td><td>Extra pause (ms) after each step, on top of built-in settling time. Raise it for slow or async pages.</td></tr>
+    <tr><td><b>Store usernames/passwords</b></td><td>Off by default. See <a href="#secrets">Passwords</a>.</td></tr>
+    <tr><td><b>Retry a failed step once</b></td><td>Off by default. On failure, waits 500 ms and tries that step exactly one more time before counting a failure.</td></tr>
+    <tr><td><b>Stop replay</b></td><td>Appears during a run and stops it after the current step.</td></tr>
+    </tbody></table></div>
+  <ol class="steps">
+    <li><b class="t">Click Run</b><span class="d">Flowcraft prompts for any blanked username/password fields, navigates the active tab to the start URL (via <code>about:blank</code> for a clean load), then replays each step.</span></li>
+    <li><b class="t">Watch the widget</b><span class="d">The popup closes; a floating widget shows <code>Run 2/5 · step 8/12</code> and an error line if something fails.</span></li>
+  </ol>
+  <h3>What “smart replay” means</h3>
+  <p>Before acting, each step waits for its element to be <b>present, visible, enabled, stable</b> (not animating) and — for clicks — <b>not covered</b> by another element. After a step, it waits out any navigation it triggered before starting the next one.</p>
+</section>
+
+<!-- 05 EDIT -->
+<section id="edit" class="reveal" data-s="edit steps reorder delete selector value wait assert assertVisible assertText keypress setChecked click input dialog">
+  <h2><span class="n">05</span>Edit steps</h2>
+  <p class="sub">Fix, reorder and extend a flow — before or after saving.</p>
+  <p>Click the <b>⚙ Edit steps</b> icon on a saved flow (or on a fresh recording). Use ↑/↓ to reorder, delete a step, edit a selector, value or checked state, and add steps that recording can't capture.</p>
+  <div class="card">
+    <div class="step"><span class="t">click</span><span class="s">#login-button</span><span class="m">↑ ↓ ✕</span></div>
+    <div class="step"><span class="t">input</span><span class="s">#email — user@test.com</span><span class="m">↑ ↓ ✕</span></div>
+    <div class="step new"><span class="t">+ wait</span><span class="s">1500 ms</span><span class="m">↑ ↓ ✕</span></div>
+    <div class="step new"><span class="t">+ assertVisible</span><span class="s">.dashboard</span><span class="m">↑ ↓ ✕</span></div>
+    <div class="step new"><span class="t">+ assertText</span><span class="s">.welcome contains “Hello”</span><span class="m">↑ ↓ ✕</span></div>
+  </div>
+  <div class="tw"><table>
+    <thead><tr><th>Step</th><th>Recorded?</th><th>What it does on replay</th></tr></thead>
+    <tbody>
+    <tr><td><code>click</code></td><td>Yes</td><td>Full pointer/mouse sequence; falls back to matching by text if the selector no longer resolves.</td></tr>
+    <tr><td><code>input</code></td><td>Yes</td><td>Sets a field's value and fires <code>input</code>/<code>change</code> so React-style forms notice.</td></tr>
+    <tr><td><code>setChecked</code></td><td>Yes</td><td>Sets a checkbox, radio or switch.</td></tr>
+    <tr><td><code>keypress</code></td><td><kbd>Enter</kbd>/<kbd>Esc</kbd> auto; <kbd>Tab</kbd> manual</td><td>Dispatches keydown/keypress/keyup. Synthetic, so it won't trigger a browser's native default action (e.g. a plain form submit).</td></tr>
+    <tr><td><code>dialog</code></td><td>Yes (info)</td><td>Not replayed. Alerts/confirms/prompts are auto-handled during recording and replay.</td></tr>
+    <tr><td><code>wait</code></td><td>Manual</td><td>Fixed pause in ms.</td></tr>
+    <tr><td><code>assertVisible</code></td><td>Manual</td><td>Fails the run if the element is missing or not visible.</td></tr>
+    <tr><td><code>assertText</code></td><td>Manual</td><td>Fails unless the element's text equals (or, in “contains” mode, includes) the expected text.</td></tr>
+    </tbody></table></div>
+</section>
+
+<!-- 06 DATA -->
+<section id="data" class="reveal" data-s="data driven spreadsheet xlsx csv json template repeat rows run with data filename badge cache">
+  <h2><span class="n">06</span>Data-driven runs</h2>
+  <p class="sub">Run the same flow once per spreadsheet row.</p>
+  <ol class="steps">
+    <li><b class="t">Download the template</b><span class="d">Click the <b>▦ Excel icon</b> on the flow. You get a <code>.xlsx</code> with one column per input/checkbox selector (pre-filled with the recorded value) plus a <b>Repeat</b> column.</span></li>
+    <li><b class="t">Fill it in</b><span class="d">One row per run. A <b>Repeat</b> value runs that row more than once.</span></li>
+    <li><b class="t">Run with data</b><span class="d">Click <b>≡ Run with data</b> and choose the edited file. A <span class="badge">DATA</span> badge appears and a <b>Run data</b> button shows next to <b>Run</b>.</span></li>
+    <li><b class="t">Run it again any time</b><span class="d"><b>Run data</b> runs the stored file exactly as written — every row, repeated per its own Repeat — and shows a confirmation with the filename and first row before starting.</span></li>
+  </ol>
+  <h3>Try the row calculator</h3>
+  <div class="card">
+    <div class="calc" id="calc"></div>
+    <button class="small" id="addRow" style="margin-top:10px">+ Add row</button>
+    <div class="hint" id="calcTotal" style="margin-top:14px;font-size:14px"></div>
+    <div class="seq" id="seq"></div>
+  </div>
+  <div class="co danger"><b>FILENAME RULE</b><p>The file must keep the exact name the template had (e.g. <code>login-data-template.xlsx</code>). A file for another flow, or a browser-renamed duplicate such as <code>… (1).xlsx</code>, is <b>rejected on purpose</b> — it's the main guard against running a flow with the wrong or a stale dataset. CSV and JSON work as fallbacks with the same naming rule.</p></div>
+  <ul>
+    <li>A new upload <b>fully replaces</b> the old file (never merges).</li>
+    <li>Click ✕ on the DATA badge to remove the stored file.</li>
+    <li><b>Clear cache</b> (top of Saved flows) wipes stored “Run with data” files for all flows.</li>
+  </ul>
+</section>
+
+<!-- 07 SHARE -->
+<section id="share" class="reveal" data-s="export import bulk duplicate share json download folder">
+  <h2><span class="n">07</span>Export &amp; import</h2>
+  <p class="sub">Share flows with teammates as plain JSON.</p>
+  <div class="tw"><table>
+    <thead><tr><th>Action</th><th>Result</th></tr></thead>
+    <tbody>
+    <tr><td><b>⇩ Export</b></td><td>Downloads that one flow as <code>&lt;flow name&gt;.json</code>.</td></tr>
+    <tr><td><b>Bulk export</b></td><td>Pick any flows from a checklist; get one JSON file.</td></tr>
+    <tr><td><b>Import</b></td><td>Loads a single or bulk file. Each flow gets a fresh ID; same-name flows are skipped and reported, so importing twice never creates duplicates.</td></tr>
+    <tr><td><b>⧉ Duplicate</b></td><td>Copies steps + start URL as <code>… (copy)</code>. Doesn't copy a data file.</td></tr>
+    </tbody></table></div>
+  <p>Downloads land in <code>Downloads/Flowcraft/&lt;Mon DD YYYY&gt;/</code>.</p>
+  <div class="co danger"><b>BEFORE YOU SHARE</b><p>If “Store usernames/passwords” was on, exports contain <b>plaintext credentials</b>. Turn it off and re-save first. Never commit exported flows or filled-in data sheets to a public repo.</p></div>
+</section>
+
+<!-- 08 HISTORY -->
+<section id="history" class="reveal" data-s="run history screenshot copy image save image clear log failure">
+  <h2><span class="n">08</span>Run history</h2>
+  <p class="sub">See what happened on every run.</p>
+  <ul>
+    <li><b>Show / Hide</b> expands the panel; <b>Clear</b> wipes all history.</li>
+    <li><b>Save this run</b> downloads one run (steps, results, screenshots, errors) as JSON.</li>
+    <li>Failed steps include a screenshot. Click it to view full size, or use <b>Copy image</b> (PNG to clipboard) / <b>Save image</b> (<code>.jpg</code>).</li>
+  </ul>
+  <div class="co warn"><b>PRIVACY</b><p>Screenshots capture whatever was on screen when the step failed. Don't share them if they show private data. (Password inputs render as dots.)</p></div>
+</section>
+
+<!-- 09 SECRETS -->
+<section id="secrets" class="reveal" data-s="password username email credentials secret store plaintext security privacy permissions">
+  <h2><span class="n">09</span>Passwords &amp; secrets</h2>
+  <p class="sub">Safe by default.</p>
+  <p>Password fields, plus username/email fields (<code>autocomplete="username"</code>, or an id/name/placeholder containing “user”, “login”, “email” or “account”), are recorded as steps but their <b>values are blanked</b> before saving. When you run the flow, Flowcraft asks for them in one dialog and uses them for that run only — nothing is written to disk.</p>
+  <div class="stage"><div class="mock"><div class="mh"><i>◈</i>Enter credentials</div>
+    <div class="box"><div class="hint" style="margin:0">#email</div><div class="mi">you@example.com</div><div class="hint">#password</div><div class="mi">••••••••</div>
+    <div style="display:flex;gap:8px;margin-top:12px"><span class="chip c" style="flex:1;text-align:center;padding:9px">Cancel</span><span class="mb p" style="flex:1">Run</span></div></div></div>
+    <div class="legend"><div class="co danger" style="margin-top:0"><b>OPT-IN, PLAINTEXT</b><p>Ticking <b>Store usernames/passwords inside saved flows</b> keeps them in <code>chrome.storage.local</code> in plaintext, readable by anyone with access to your browser profile, and included in exports.</p></div></div></div>
+  <div class="tabs" data-tabs>
+    <button class="on">Permissions</button><button>What it doesn't do</button>
+  </div>
+  <div class="tp on"><div class="tw" style="margin:0"><table><tbody>
+    <tr><td><code>storage</code></td><td>Saved flows, settings and history, kept locally and never synced.</td></tr>
+    <tr><td><code>scripting</code></td><td>Injects the recorder and drives replay.</td></tr>
+    <tr><td><code>tabs</code> / <code>activeTab</code></td><td>Finds and navigates the active tab.</td></tr>
+    <tr><td><code>unlimitedStorage</code></td><td>Failure screenshots can be large.</td></tr>
+    <tr><td><code>downloads</code></td><td>Saves exports into <code>Downloads/Flowcraft/</code>.</td></tr>
+    <tr><td><code>&lt;all_urls&gt;</code></td><td>Needed to record and replay on whatever site <i>you</i> choose. It's the broadest permission.</td></tr>
+  </tbody></table></div></div>
+  <div class="tp"><p>✔ No network requests, no analytics, no telemetry.<br>✔ No third-party code — even the <code>.xlsx</code> reader is hand-written.<br>✔ Dialog interception only while actively recording or replaying on that tab.</p></div>
+</section>
+
+<!-- 10 LIMITS -->
+<section id="limits" class="reveal" data-s="limits limitations new tab captcha 2fa hover drag canvas selector timing">
+  <h2><span class="n">10</span>Known limits</h2>
+  <p class="sub">Know these before you build a flow.</p>
+  <div class="tw"><table><tbody>
+    <tr><td><b>Fragile selectors</b></td><td>Random or hashed class names break replay. Prefer <code>id</code>, <code>data-testid</code>, <code>name</code>.</td></tr>
+    <tr><td><b>Very async apps</b></td><td>Auto-waiting helps, but you may still need a larger Delay or <code>wait</code> steps.</td></tr>
+    <tr><td><b>CAPTCHA / 2FA / OTP</b></td><td>Intentionally resist automation. Sign in by hand first, then start the flow.</td></tr>
+    <tr><td><b>New tabs / windows</b></td><td>Replay keeps driving the original tab, so <code>target="_blank"</code> links aren't followed.</td></tr>
+    <tr><td><b>Hover, drag, canvas</b></td><td>Not recorded. Only clicks, field changes and <kbd>Enter</kbd>/<kbd>Esc</kbd> are.</td></tr>
+    <tr><td><b>Spreadsheets</b></td><td>Single-sheet, no formulas or styles. Fine for real Excel/Sheets/LibreOffice output.</td></tr>
+  </tbody></table></div>
+</section>
+
+<!-- 11 TROUBLE -->
+<section id="trouble" class="reveal" data-s="troubleshooting problem fix error fails rejected slow flaky not found reload">
+  <h2><span class="n">11</span>Troubleshooting</h2>
+  <p class="sub">Pick your symptom.</p>
+  <div class="tw"><table>
+    <thead><tr><th>Symptom</th><th>Try this</th></tr></thead><tbody>
+    <tr><td>A step can't find its element</td><td>The page changed. Open <b>Edit steps</b> and fix the selector, or re-record. Check Run history for the screenshot.</td></tr>
+    <tr><td>Steps fire before the page is ready</td><td>Raise <b>Delay between steps</b>, or add a <code>wait</code> step.</td></tr>
+    <tr><td>Fails only sometimes</td><td>Tick <b>Retry a failed step once</b>.</td></tr>
+    <tr><td>Data file rejected</td><td>Name doesn't match the template. Re-download the template, or rename the file back (remove “(1)”).</td></tr>
+    <tr><td>Wrong data used</td><td>Click ✕ on the DATA badge and upload again. Uploads fully replace the old file.</td></tr>
+    <tr><td>Replay stops after a new tab opens</td><td>Not supported. Rework the flow so it stays in one tab.</td></tr>
+    <tr><td>Login blocked by CAPTCHA / 2FA</td><td>Sign in manually, then run a flow that starts after login.</td></tr>
+    <tr><td>Popup doesn't reflect updates</td><td>Reload Flowcraft at <code>chrome://extensions</code>.</td></tr>
+    <tr><td>Recording shortcut does nothing</td><td>Check or remap it at <code>chrome://extensions/shortcuts</code>.</td></tr>
+  </tbody></table></div>
+</section>
+
+<!-- 12 FAQ -->
+<section id="faq" class="reveal" data-s="faq questions ci headless playwright selenium data safe network">
+  <h2><span class="n">12</span>FAQ</h2>
+  <p class="sub">Quick answers.</p>
+  <details><summary>Does Flowcraft send my data anywhere?</summary><p>No. It makes no network requests and has no telemetry. Everything lives in <code>chrome.storage.local</code> on your machine.</p></details>
+  <details><summary>Why does it need access to all websites?</summary><p>Recording and replay must run on whatever site you point them at, so there's no fixed site list.</p></details>
+  <details><summary>Can I run flows headless or in CI?</summary><p>Not directly; flows run from the extension in a real browser. The exported JSON is plain, so it could be converted to Playwright or Selenium.</p></details>
+  <details><summary>Can I share a flow with a teammate?</summary><p>Yes. Export it (or bulk export) and send the JSON; they use <b>Import</b>. Make sure “Store usernames/passwords” was off.</p></details>
+  <details><summary>Is it safe to use on my real accounts?</summary><p>It's beta software with no formal audit. Use it on sites and accounts you're authorized to automate, ideally test environments.</p></details>
+</section>
+
+<!-- CHEAT -->
+<section id="cheat" class="reveal" data-s="cheat sheet shortcut quick reference workflow">
+  <h2><span class="n">★</span>Cheat sheet</h2>
+  <p class="sub">The whole workflow on one card.</p>
+  <div class="card">
+    <div class="flow"><span>Record</span><b>→</b><span>Stop</span><b>→</b><span>Name</span><b>→</b><span>Save</span><b>→</b><span>Edit steps</span><b>→</b><span>Run</span><b>→</b><span>Check history</span></div>
+    <div class="tw" style="margin-bottom:0"><table><tbody>
+      <tr><td><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>E</kbd></td><td>Start / stop recording (<kbd>⌘</kbd><kbd>⇧</kbd><kbd>E</kbd> on Mac)</td></tr>
+      <tr><td><kbd>/</kbd></td><td>Jump to this manual's search</td></tr>
+      <tr><td><b>Run</b></td><td>Replay <i>Repeat</i> times</td></tr>
+      <tr><td><b>Run data</b></td><td>Replay the stored file, every row</td></tr>
+      <tr><td><b>Retry once</b></td><td>Second chance for a failed step after 500 ms</td></tr>
+    </tbody></table></div>
+  </div>
+  <div class="co warn"><b>REMEMBER</b><p>Beta software, no formal security audit. Only automate sites and accounts you're authorized to test.</p></div>
+</section>
+
+<footer><span>Flowcraft · MIT licensed</span><span><a href="../README.md">README</a> · <a href="security.md">Security &amp; privacy</a> · <a href="usage.md">Reference</a> · <a href="architecture.md">Architecture</a></span></footer>
 </main>
 </div>
+<button id="top" aria-label="Back to top">↑</button>
+
+<script>
+(function(){
+  var $=function(s,r){return (r||document).querySelector(s)},$$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
+
+  /* reading progress + back-to-top */
+  var bar=$('#progress'),top=$('#top');
+  function onScroll(){var h=document.documentElement,m=h.scrollHeight-h.clientHeight;bar.style.width=(m>0?h.scrollTop/m*100:0)+'%';top.classList.toggle('show',h.scrollTop>600)}
+  addEventListener('scroll',onScroll,{passive:true});onScroll();
+  top.onclick=function(){scrollTo({top:0})};
+
+  /* scroll-spy */
+  var links=$$('nav a.l'),secs=$$('main [id]').filter(function(e){return e.tagName==='SECTION'||e.id==='start'});
+  if('IntersectionObserver' in window){
+    var spy=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){links.forEach(function(a){a.classList.toggle('on',a.getAttribute('href')==='#'+e.target.id)})}})},{rootMargin:'-20% 0px -70% 0px'});
+    secs.forEach(function(s){spy.observe(s)});
+    var rv=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');rv.unobserve(e.target)}})},{threshold:.06});
+    $$('.reveal').forEach(function(s){rv.observe(s)});
+  }else $$('.reveal').forEach(function(s){s.classList.add('in')});
+
+  /* search */
+  var q=$('#q'),none=$('#none');
+  q.addEventListener('input',function(){
+    var v=q.value.trim().toLowerCase(),shown=0;
+    links.forEach(function(a){
+      var id=a.getAttribute('href').slice(1),s=document.getElementById(id);
+      var hay=((s&&(s.getAttribute('data-s')||'')+' '+s.textContent)||a.textContent).toLowerCase();
+      var hit=!v||hay.indexOf(v)>-1||a.textContent.toLowerCase().indexOf(v)>-1;
+      a.classList.toggle('hide',!hit);if(hit)shown++;
+    });
+    none.style.display=shown?'none':'block';
+  });
+  addEventListener('keydown',function(e){if(e.key==='/'&&document.activeElement!==q&&!/input|textarea/i.test(document.activeElement.tagName)){e.preventDefault();q.focus()}if(e.key==='Escape'){q.value='';q.dispatchEvent(new Event('input'));q.blur()}});
+
+  /* copy buttons */
+  $$('[data-copy]').forEach(function(b){b.onclick=function(){
+    var t=b.getAttribute('data-copy');
+    (navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(function(){b.textContent='Copied ✓'},function(){b.textContent='Select & copy'});
+    setTimeout(function(){b.textContent='Copy'},1600)}});
+
+  /* tabs */
+  $$('[data-tabs]').forEach(function(t){var bs=$$('button',t),ps=[];var n=t.nextElementSibling;while(n&&n.classList.contains('tp')){ps.push(n);n=n.nextElementSibling}
+    bs.forEach(function(b,i){b.onclick=function(){bs.forEach(function(x,j){x.classList.toggle('on',i===j);ps[j]&&ps[j].classList.toggle('on',i===j)})}})});
+
+  /* popup tour */
+  var INFO={
+    rec:['1 · Record panel','Start recording (or press Ctrl+Shift+E). After you stop, this area turns into the save form: name, Save flow, Edit steps, Discard.'],
+    saved:['2 · Saved flows','Every saved flow appears as a card. Bulk export downloads several at once, Import loads JSON, Clear cache removes stored “Run with data” files.'],
+    rename:['✎ Rename','Rename the flow. Names must stay unique (case-insensitive).'],
+    edit:['⚙ Edit steps','Reorder, edit or delete steps, and add manual Wait / Assert steps.'],
+    withdata:['≡ Run with data','Pick a spreadsheet (xlsx / csv / json) and run once per row. The file name must match the template.'],
+    template:['▦ Download data template','Gets an .xlsx with one column per input selector plus a Repeat column, pre-filled with the recorded values.'],
+    dup:['⧉ Duplicate','Clones steps and start URL as “… (copy)” so you can branch a flow without re-recording. A data file is not copied.'],
+    export:['⇩ Export','Downloads this one flow as a JSON file named after the flow.'],
+    del:['🗑 Delete','Deletes the flow and its data file, after a confirmation.'],
+    settings:['3 · Run settings','Repeat count, delay between steps, the plaintext-credential option (off by default) and Retry-once.'],
+    hist:['4 · Run history','Show or hide past runs, view failure screenshots, save a run as JSON, or clear everything.']
+  };
+  var info=$('#info');
+  $$('#tourMock [data-info]').forEach(function(b){b.onclick=function(){
+    var d=INFO[b.getAttribute('data-info')];info.innerHTML='<h4></h4><p></p>';$('h4',info).textContent=d[0];$('p',info).textContent=d[1];
+    $$('#tourMock .on').forEach(function(x){x.classList.remove('on')});b.classList.add('on')}});
+
+  /* recorder simulator */
+  var log=$('#simLog'),count=0,rec=false;
+  function say(cls,txt){var d=document.createElement('div');d.className=cls;d.textContent=txt;log.appendChild(d);log.scrollTop=log.scrollHeight}
+  function show(id){['simIdle','simRec','simSave'].forEach(function(x){$('#'+x).hidden=x!==id})}
+  function step(type,sel){if(!rec)return;count++;$('#simCount').textContent=count+' step'+(count>1?'s':'');say('t','+ '+type+'  '+sel)}
+  $('#simStart').onclick=function(){rec=true;count=0;$('#simCount').textContent='0 steps';log.innerHTML='';say('ok','● recording started');show('simRec')};
+  $('#simStop').onclick=function(){rec=false;say('ok','■ stopped — '+count+' step(s) captured');show('simSave')};
+  $('#simSaveBtn').onclick=function(){say('ok','✔ saved “Login and open dashboard”'+(count?' ('+count+' steps)':''));show('simIdle')};
+  $('#simReset').onclick=function(){rec=false;count=0;log.innerHTML='';say('s','› Press “Start recording”, then click the fake page elements.');show('simIdle')};
+  $('#fEmail').onclick=function(){this.textContent='email: user@test.com';step('input','#email')};
+  $('#fPass').onclick=function(){this.textContent='password: ••••••••';step('input','#password  (blanked on save)')};
+  $('#fLogin').onclick=function(){step('click','button[type=submit]')};
+
+  /* data-row calculator */
+  var calc=$('#calc'),rows=[['a@test.com','1'],['b@test.com','2']];
+  function drawCalc(){
+    calc.innerHTML='<div class="r hd"><span>#email</span><span>#password</span><span>Repeat</span><span></span></div>';
+    rows.forEach(function(r,i){
+      var d=document.createElement('div');d.className='r';
+      d.innerHTML='<input value="'+r[0]+'" aria-label="email"><input value="••••••" aria-label="password" disabled><input value="'+r[1]+'" inputmode="numeric" aria-label="repeat"><button class="small" aria-label="remove">✕</button>';
+      var ins=$$('input',d);
+      ins[0].oninput=function(){rows[i][0]=ins[0].value;seq()};
+      ins[2].oninput=function(){rows[i][1]=ins[2].value;seq()};
+      $('button',d).onclick=function(){rows.splice(i,1);drawCalc()};
+      calc.appendChild(d)});
+    seq();
+  }
+  function seq(){
+    var out=[];rows.forEach(function(r,i){var n=Math.max(1,Math.min(50,parseInt(r[1],10)||1));for(var k=0;k<n;k++)out.push(i+1)});
+    $('#calcTotal').innerHTML='This file expands to <b style="color:var(--cyan)">'+out.length+' run'+(out.length===1?'':'s')+'</b>. Run order:';
+    var s=$('#seq');s.innerHTML='';out.forEach(function(r,i){var e=document.createElement('span');e.innerHTML='#'+(i+1)+' → row <b>'+r+'</b>';s.appendChild(e)});
+  }
+  $('#addRow').onclick=function(){if(rows.length<8){rows.push(['new@test.com','1']);drawCalc()}};
+  drawCalc();
+})();
+</script>
 </body>
 </html>
