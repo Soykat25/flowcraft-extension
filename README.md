@@ -9,6 +9,9 @@
 ![Edge](https://img.shields.io/badge/Edge-supported-0078D7?logo=microsoftedge&logoColor=white)
 ![Dependencies: 0](https://img.shields.io/badge/dependencies-0-brightgreen.svg)
 ![Status: Beta](https://img.shields.io/badge/status-beta-orange.svg)
+[![Stars](https://img.shields.io/github/stars/Soykat25/flowcraft-extension?style=flat&logo=github)](https://github.com/Soykat25/flowcraft-extension/stargazers)
+[![Last commit](https://img.shields.io/github/last-commit/Soykat25/flowcraft-extension)](https://github.com/Soykat25/flowcraft-extension/commits/main)
+[![Manual online](https://img.shields.io/badge/manual-online-35e6ff?logo=readthedocs&logoColor=white)](https://soykat25.github.io/flowcraft-extension/)
 
 <br>
 
