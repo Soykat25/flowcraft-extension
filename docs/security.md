@@ -18,6 +18,8 @@ popup. If you do, values are kept in `chrome.storage.local` in
 included if you export that flow). Keep this off unless you understand and
 accept that.
 
+> **Note:** the setting is applied when a recording is *saved*. Turning it off later does not remove credentials from flows that were already saved with it on — re-record such a flow with the option off and delete the old one before sharing or exporting.
+
 ## Security & privacy
 
 Flowcraft is **beta, single-developer software** — it hasn't been through a

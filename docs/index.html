@@ -447,7 +447,7 @@ footer{margin-top:80px;padding-top:22px;border-top:1px solid var(--line);color:v
         <li>Click <b>Run</b> and watch the bug happen. On failure the run <b>pauses</b> so you can inspect the page.</li>
         <li>Fix, then <b>Run</b> again until the assertion passes.</li></ol></div>
     </div>
-    <div class="co warn"><b>CHECK BEFORE SENDING</b><p>• Credentials are blanked unless “Store usernames/passwords” was on — turn it off, and tell the dev which test account to use.<br>• Exports hold steps only, <b>not</b> screenshots or the data file. Attach the screenshot (or <b>Save this run</b>) separately.<br>• The dev's build must still have the same elements; if a selector changed, they can fix it in Edit steps.</p></div>
+    <div class="co warn"><b>CHECK BEFORE SENDING</b><p>• Credentials are blanked when you <b>save</b> unless “Store usernames/passwords” was on <i>at that moment</i>. A flow saved with it on keeps them even if you switch it off afterwards — re-record it with the option off before sending. Tell the dev which test account to use.<br>• Exports hold steps only, <b>not</b> screenshots or the data file. Attach the screenshot (or <b>Save this run</b>) separately.<br>• The dev's build must still have the same elements; if a selector changed, they can fix it in Edit steps.</p></div>
   </div>
 
   <!-- 2 -->
@@ -740,8 +740,16 @@ footer{margin-top:80px;padding-top:22px;border-top:1px solid var(--line);color:v
     <tr><td><b><i class="ico" data-ico="duplicate"></i> Duplicate</b></td><td>Copies steps + start URL as <code>… (copy)</code>. Doesn't copy a data file.</td></tr>
     </tbody></table></div>
   <div class="co only-dev"><b><span class="rtag dev">DEV</span>BUG REPRO</b><p>Attach the exported JSON to the issue. Teammates <b>Import</b> it and replay the exact path — no written steps needed.</p></div>
+  <h3>What import tells you</h3>
+  <div class="tw"><table><tbody>
+    <tr><td><b>“Imported N flow(s).”</b></td><td>Plus a note if some entries were invalid and skipped.</td></tr>
+    <tr><td><b>“Nothing to import — every flow in this file is already saved.”</b></td><td>All names already exist; re-importing is harmless.</td></tr>
+    <tr><td><b>“Could not read file: invalid JSON.”</b></td><td>Not a Flowcraft export (or the file is damaged).</td></tr>
+    <tr><td><b>“No flows found in that file.”</b></td><td>Valid JSON, but no flows inside.</td></tr>
+  </tbody></table></div>
+  <p>Only known step types are kept on import; anything unexpected in the file is dropped. Bulk export with nothing ticked says “Select at least one flow to export.”</p>
   <p>Downloads land in <code>Downloads/Flowcraft/&lt;Mon DD YYYY&gt;/</code>.</p>
-  <div class="co danger"><b>BEFORE YOU SHARE</b><p>If “Store usernames/passwords” was on, exports contain <b>plaintext credentials</b>. Turn it off and re-save first. Never commit exported flows or filled-in data sheets to a public repo.</p></div>
+  <div class="co danger"><b>BEFORE YOU SHARE</b><p>If “Store usernames/passwords” was on, exports contain <b>plaintext credentials</b>. <b>Turning the option off later does not clear them</b> — it only controls <i>new</i> recordings. To remove stored credentials, re-record the flow with the option off and delete the old one. Never commit exported flows or filled-in data sheets to a public repo.</p></div>
 </section>
 
 <!-- 08 HISTORY -->
@@ -832,7 +840,7 @@ footer{margin-top:80px;padding-top:22px;border-top:1px solid var(--line);color:v
   <div class="stage"><div class="mock"><div class="mh"><i>◈</i>Enter credentials</div>
     <div class="box"><div class="hint" style="margin:0">#email</div><div class="mi">you@example.com</div><div class="hint">#password</div><div class="mi">••••••••</div>
     <div style="display:flex;gap:8px;margin-top:12px"><span class="chip c" style="flex:1;text-align:center;padding:9px">Cancel</span><span class="mb p" style="flex:1">Run</span></div></div></div>
-    <div class="legend"><div class="co danger" style="margin-top:0"><b>OPT-IN, PLAINTEXT</b><p>Ticking <b>Store usernames/passwords inside saved flows</b> keeps them in <code>chrome.storage.local</code> in plaintext, readable by anyone with access to your browser profile, and included in exports.</p></div></div></div>
+    <div class="legend"><div class="co danger" style="margin-top:0"><b>OPT-IN, PLAINTEXT</b><p>Ticking <b>Store usernames/passwords inside saved flows</b> before you save a recording keeps them in <code>chrome.storage.local</code> in plaintext, readable by anyone with access to your browser profile, and included in exports.</p></div></div></div>
   <div class="tabs" data-tabs>
     <button class="on">Permissions</button><button>What it doesn't do</button>
   </div>
@@ -875,6 +883,11 @@ footer{margin-top:80px;padding-top:22px;border-top:1px solid var(--line);color:v
     <div class="mini"><b>How selectors are chosen</b><span>For each element Flowcraft tries, in order: a unique <code>#id</code> → a unique <code>data-testid</code>, <code>data-test</code>, <code>data-cy</code>, <code>data-qa</code>, <code>name</code>, <code>aria-label</code> or <code>placeholder</code> → a path of tags (with <code>:nth-of-type</code>) up to the nearest id. The last kind breaks easily when the layout changes.</span></div>
     <div class="mini"><b>Automatic recovery from page loads</b><span>If a click starts a page load that tears down the target mid-step, Flowcraft waits for the new page and retries that step once on its own — separate from the “Retry a failed step once” option.</span></div>
     <div class="mini"><b>Failed, then fixed</b><span>If you clear a problem and press ▶ the step is retried. It counts as passed in the run, but the screenshot of the earlier failure stays in Run history.</span></div>
+    <div class="mini"><b>Recording survives page loads</b><span>Recording state is kept while you move between pages, so clicking a link or submitting a form doesn't end it. The pill reappears on each new page, and the popup can be closed and reopened — after Stop it returns to the Save screen with “N steps captured · start: …”.</span></div>
+    <div class="mini"><b>Hover menus on replay</b><span>Hover isn't recorded, but before a click Flowcraft hovers the element's ancestors, which opens most JavaScript-driven flyout menus. Menus that open only through pure-CSS <code>:hover</code> can't be reproduced.</span></div>
+    <div class="mini"><b>What counts as a field</b><span>Typing is captured for <code>input</code>, <code>select</code> and <code>textarea</code> elements (dropdown choices are recorded as input steps). Rich-text editors that use <code>contenteditable</code> aren't captured.</span></div>
+    <div class="mini"><b>Flow card hints</b><span>Under each flow's name you see “N steps”, plus “· N credential field(s) need input” when blank username/password fields will prompt you at run time.</span></div>
+    <div class="mini"><b>Duplicate names</b><span>Duplicating adds “(copy)”, then “(copy) 2”, “(copy) 3”… Saving, renaming and importing all refuse a name that already exists (case-insensitive).</span></div>
     <div class="mini"><b>Credentials prompt</b><span>One dialog lists every blank username/password field. Press <kbd>Enter</kbd> to run or <kbd>Esc</kbd> to cancel.</span></div>
   </div>
 </section>
@@ -888,6 +901,7 @@ footer{margin-top:80px;padding-top:22px;border-top:1px solid var(--line);color:v
     <tr><td><b>Very async apps</b></td><td>Auto-waiting helps, but you may still need a larger Delay or <code>wait</code> steps.</td></tr>
     <tr><td><b>CAPTCHA / 2FA / OTP</b></td><td>Intentionally resist automation. Either sign in by hand first, or let the run <b>pause</b> at the next step, solve it yourself and click ▶ (see <a href="#usecases">Human-in-the-loop</a>).</td></tr>
     <tr><td><b>New tabs / windows</b></td><td>Replay keeps driving the original tab, so <code>target="_blank"</code> links aren't followed.</td></tr>
+    <tr><td><b>Rich-text editors</b></td><td><code>contenteditable</code> areas aren't captured — only <code>input</code>, <code>select</code> and <code>textarea</code>.</td></tr>
     <tr><td><b>Hover, drag, canvas</b></td><td>Not recorded. Only clicks, field changes and <kbd>Enter</kbd>/<kbd>Esc</kbd> are.</td></tr>
     <tr><td><b>Spreadsheets</b></td><td>Single-sheet, no formulas or styles. Fine for real Excel/Sheets/LibreOffice output.</td></tr>
   </tbody></table></div>
@@ -903,6 +917,8 @@ footer{margin-top:80px;padding-top:22px;border-top:1px solid var(--line);color:v
     <tr><td>Steps fire before the page is ready</td><td>Raise <b>Delay between steps</b>, or add a <code>wait</code> step.</td></tr>
     <tr><td>Fails only sometimes</td><td>Tick <b>Retry a failed step once</b> for automatic second tries, or just click ▶ when a run pauses.</td></tr>
     <tr><td>Data file rejected</td><td>Name doesn't match the template. Re-download the template, or rename the file back (remove “(1)”).</td></tr>
+    <tr><td>“This flow has no input or checkbox steps to drive with data”</td><td>The template needs at least one input or checkbox step. Record or add one, then download the template again.</td></tr>
+    <tr><td>“…N credential field(s) need input” under a flow</td><td>Normal: those blank fields will be asked for when you press Run. Enter them in the dialog (Enter = Run).</td></tr>
     <tr><td>Wrong data used</td><td>Click ✕ on the DATA badge and upload again. Uploads fully replace the old file.</td></tr>
     <tr><td>Replay stops after a new tab opens</td><td>Not supported. Rework the flow so it stays in one tab.</td></tr>
     <tr><td>Login blocked by CAPTCHA / 2FA</td><td>When the step after it fails the run pauses — solve the challenge by hand, then click the pill's ▶ to continue. Or sign in manually first and start the flow after login.</td></tr>
@@ -920,7 +936,7 @@ footer{margin-top:80px;padding-top:22px;border-top:1px solid var(--line);color:v
   <details><summary>Does Flowcraft send my data anywhere?</summary><p>No. It makes no network requests and has no telemetry. Everything lives in <code>chrome.storage.local</code> on your machine.</p></details>
   <details><summary>Why does it need access to all websites?</summary><p>Recording and replay must run on whatever site you point them at, so there's no fixed site list.</p></details>
   <details><summary>Can I run flows headless or in CI?</summary><p>Not directly; flows run from the extension in a real browser. The exported JSON is plain, so it could be converted to Playwright or Selenium.</p></details>
-  <details><summary>Can I share a flow with a teammate?</summary><p>Yes. Export it (or bulk export) and send the JSON; they use <b>Import</b>. Make sure “Store usernames/passwords” was off.</p></details>
+  <details><summary>Can I share a flow with a teammate?</summary><p>Yes. Export it (or bulk export) and send the JSON; they use <b>Import</b>. Make sure “Store usernames/passwords” was off <i>when you saved</i> the flow — switching it off afterwards doesn't remove credentials already stored in it.</p></details>
   <details><summary>Is it safe to use on my real accounts?</summary><p>It's beta software with no formal audit. Use it on sites and accounts you're authorized to automate, ideally test environments.</p></details>
 </section>
 
@@ -1069,7 +1085,7 @@ footer{margin-top:80px;padding-top:22px;border-top:1px solid var(--line);color:v
    ['Flow card','Delete','Deletes the flow and its data file, after a confirmation.',IB('danger','delete')],
    ['Run settings','Repeat','How many times Run repeats. With Run with data it caps the rows (default 1 = no cap). No effect on Run data.','<div><span class="fl">Repeat</span>'+FI('1')+'</div>'],
    ['Run settings','Delay between steps (ms)','Extra pause after each step, on top of built-in settling.','<div><span class="fl">Delay between steps (ms)</span>'+FI('300')+'</div>'],
-   ['Run settings','Store usernames/passwords','Off by default. On = credentials kept in plaintext in saved flows and exports.',CK('Store usernames/passwords inside saved flows (less secure)',0)],
+   ['Run settings','Store usernames/passwords','Off by default. Applies when a recording is saved: with it on, credentials are kept in plaintext in that flow and its exports. Switching it off later does not clear flows already saved with it on.',CK('Store usernames/passwords inside saved flows (less secure)',0)],
    ['Run settings','Retry a failed step once','Off by default. Waits 500 ms and retries the step once before treating it as failed.',CK('Retry a failed step once before giving up',0)],
    ['Run settings','Stop replay','Visible during a run; stops it after the current step.',BT('ghost block','Stop replay')],
    ['Run settings','Status line','Live progress (“Run 2/5 · step 8/12”), then “Finished!”, “Stopped.” or an error.','<div class="lk"><div class="st run">Run 2/5 · step 8/12</div><div class="st ok">Finished!</div></div>'],
