@@ -19,6 +19,10 @@ Flowcraft is a Chrome/Edge extension that records your clicks and form inputs on
 > [!WARNING]
 > **Beta, single-developer software** with no formal security audit. Only automate sites and accounts you are authorized to test. Read [Security & privacy](docs/security.md) before using it on anything sensitive.
 
+<div align="center">
+  <img src="docs/assets/popup.png" alt="Flowcraft popup showing a saved flow with Run, edit, data and export buttons" width="340">
+</div>
+
 <!-- TODO: add a demo GIF here, e.g. docs/assets/demo.gif -->
 
 ## Quick start
