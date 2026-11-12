@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Run with data — Flowcraft</title>
+  <link rel="stylesheet" href="popup.css">
+  <style>
+    /* popup.css sizes body for the small toolbar dropdown; this is now a
+       plain tab, so center that same card instead of pinning it top-left. */
+    body { width: auto; margin: 60px auto; max-width: 420px; }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <div class="card">
+      <strong>Run with data — <span id="flowName"></span></strong>
+      <p class="hint">
+        Pick an <b>Excel (.xlsx)</b> file named exactly like this flow's
+        <b>Download template</b> output — a differently-named file, or a
+        browser-renamed duplicate like "…-data-template (1).xlsx", is
+        rejected. (CSV/JSON fallbacks use the same naming rule with their own
+        extension.) Each column header / key must match a step's selector.
+        Add a <b>Repeat</b> column to run a row more than once —
+        e.g. row 1 Repeat=1, row 2 Repeat=2 runs row 1 once then row 2 twice
+        (3 runs total).
+      </p>
+      <input id="fileInput" type="file"
+        accept=".xlsx,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,.csv,text/csv,application/json,.json"
+        hidden>
+      <button id="pickBtn" class="tint-cyan block" type="button">Choose file…</button>
+      <div id="preview" class="status"></div>
+      <div class="row modal-actions">
+        <button id="cancelBtn" class="ghost">Cancel</button>
+        <button id="okBtn" class="primary" disabled>Run</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Credentials for any secret (username/password) field with no stored
+       value — asked only once a file's been picked and validated, right
+       before actually running (same timing as the old in-popup flow). -->
+  <div id="secretsOverlay" class="modal-overlay" hidden>
+    <div class="modal card">
+      <strong>Enter credentials</strong>
+      <div id="secretsFields" class="modal-fields"></div>
+      <div class="row modal-actions">
+        <button id="secretsCancelBtn" class="ghost">Cancel</button>
+        <button id="secretsOkBtn" class="primary">Run</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="xlsx-lite.js"></script>
+  <script src="data-helpers.js"></script>
+  <script src="dataUpload.js"></script>
+</body>
+</html>

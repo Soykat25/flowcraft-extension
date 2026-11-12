@@ -1,0 +1,210 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Flowcraft</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="app">
+    <header class="masthead">
+      <div class="title-row">
+        <span class="glyph" aria-hidden="true">◈</span>
+        <h1>FLOWCRAFT</h1>
+        <span class="ver beta">Beta</span>
+      </div>
+      <div class="rail" aria-hidden="true"></div>
+    </header>
+
+    <!-- Record / Save -->
+    <section class="card">
+      <div id="idleView">
+        <button id="startBtn" class="primary block">● Start recording</button>
+        <div class="hint">Tip: <b>Ctrl+Shift+E</b> (<b>⌘⇧E</b> on Mac) toggles recording without opening this popup.</div>
+      </div>
+
+      <div id="recordingView" hidden>
+        <div class="rec">● Recording…</div>
+        <div id="stepCount" class="hint">0 steps</div>
+        <button id="stopBtn" class="danger block">Stop</button>
+      </div>
+
+      <div id="saveView" hidden>
+        <label>Name this flow</label>
+        <input id="flowName" type="text" placeholder="e.g. Login and open dashboard">
+        <div id="flowNameError" class="status err" hidden></div>
+        <div class="row save-actions">
+          <button id="saveBtn" class="primary">Save flow</button>
+          <button id="editRecordingStepsBtn" class="tint-cyan">Edit steps</button>
+          <button id="discardBtn" class="tint-danger">Discard</button>
+        </div>
+        <div id="saveMeta" class="hint"></div>
+      </div>
+    </section>
+
+    <!-- Saved flows -->
+    <section class="card">
+      <div class="row between">
+        <strong>Saved flows</strong>
+      </div>
+      <div class="row flow-list-actions">
+        <button id="exportBtn" class="small tint-violet">Bulk export</button>
+        <button id="importBtn" class="small tint-cyan">Import</button>
+        <button id="clearCacheBtn" class="small tint-danger" type="button"
+          title="Clear cached &quot;Run with data&quot; files stored for these flows">Clear cache</button>
+      </div>
+      <input id="importFile" type="file" accept="application/json,.json" hidden>
+      <div id="flowList" class="list"></div>
+      <div id="noFlows" class="hint">No saved flows yet.</div>
+    </section>
+
+    <!-- Run settings -->
+    <section class="card">
+      <div class="row">
+        <div class="field">
+          <label>Repeat</label>
+          <input id="repeat" type="number" min="1" value="1">
+        </div>
+        <div class="field">
+          <label>Delay between steps (ms)</label>
+          <input id="delay" type="number" min="0" value="300">
+        </div>
+      </div>
+      <label class="check">
+        <input type="checkbox" id="storeSecrets">
+        Store usernames/passwords inside saved flows (less secure)
+      </label>
+      <label class="check">
+        <input type="checkbox" id="retryOnFail">
+        Retry a failed step once before giving up
+      </label>
+      <button id="stopReplayBtn" class="ghost block" hidden>Stop replay</button>
+      <div id="status" class="status"></div>
+    </section>
+
+    <!-- Run history -->
+    <section class="card">
+      <div class="row between">
+        <strong>Run history</strong>
+        <button id="toggleHistoryBtn" class="small tint-cyan" type="button">Show</button>
+      </div>
+      <div id="historyPanel" hidden>
+        <button id="clearLogBtn" class="small tint-danger" type="button">Clear</button>
+        <div id="logList" class="log-list"></div>
+        <div id="noLogs" class="hint">No runs recorded yet.</div>
+      </div>
+    </section>
+
+    <footer class="credit">
+      <span class="line" aria-hidden="true"></span>
+      <span class="mark">DEVELOPED&nbsp;BY&nbsp;<b>SOYKAT</b></span>
+      <span class="line" aria-hidden="true"></span>
+    </footer>
+  </div>
+
+  <!-- Credentials prompt: shown before running a flow that has username/password
+       fields with no stored value. Collects all of them in one form instead of
+       one native prompt() per field. -->
+  <div id="secretsOverlay" class="modal-overlay" hidden>
+    <div class="modal card">
+      <strong>Enter credentials</strong>
+      <div id="secretsFields" class="modal-fields"></div>
+      <div class="row modal-actions">
+        <button id="secretsCancelBtn" class="ghost">Cancel</button>
+        <button id="secretsOkBtn" class="primary">Run</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bulk export flow picker: lets the user choose which saved flows to
+       include before downloading them as one JSON file. -->
+  <div id="bulkExportOverlay" class="modal-overlay" hidden>
+    <div class="modal card">
+      <div class="row between">
+        <strong>Select flows to export</strong>
+        <div class="row" style="gap:6px;">
+          <button id="bulkExportAllBtn" class="ghost small" type="button">All</button>
+          <button id="bulkExportNoneBtn" class="ghost small" type="button">None</button>
+        </div>
+      </div>
+      <div id="bulkExportList" class="modal-list"></div>
+      <div class="row modal-actions">
+        <button id="bulkExportCancelBtn" class="ghost">Cancel</button>
+        <button id="bulkExportOkBtn" class="primary">Export</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Generic confirm dialog (e.g. delete flow), styled to match the app
+       instead of the browser's native confirm(). -->
+  <div id="confirmOverlay" class="modal-overlay" hidden>
+    <div class="modal card">
+      <strong id="confirmTitle">Confirm</strong>
+      <p id="confirmMessage" class="hint"></p>
+      <div class="row modal-actions">
+        <button id="confirmCancelBtn" class="ghost">Cancel</button>
+        <button id="confirmOkBtn" class="danger">OK</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Generic info dialog, styled to match the app instead of the browser's
+       native alert(). -->
+  <div id="alertOverlay" class="modal-overlay" hidden>
+    <div class="modal card">
+      <strong id="alertTitle">Flowcraft</strong>
+      <p id="alertMessage" class="hint"></p>
+      <div class="row modal-actions">
+        <button id="alertOkBtn" class="primary">OK</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Generic single-line text prompt (e.g. rename flow), styled to match
+       the app instead of the browser's native prompt(). -->
+  <div id="promptOverlay" class="modal-overlay" hidden>
+    <div class="modal card">
+      <strong id="promptTitle">Flowcraft</strong>
+      <div class="field">
+        <input id="promptInput" type="text">
+      </div>
+      <div class="row modal-actions">
+        <button id="promptCancelBtn" class="ghost">Cancel</button>
+        <button id="promptOkBtn" class="primary">OK</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Step editor: lets a user view/reorder/edit/delete the recorded steps
+       of either a pending (not-yet-saved) recording or an already-saved
+       flow, and add manual Wait / Assert steps. -->
+  <div id="stepsOverlay" class="modal-overlay" hidden>
+    <div class="modal card wide">
+      <div class="row between">
+        <strong>Edit steps</strong>
+        <span id="stepsCount" class="hint"></span>
+      </div>
+      <label class="hint" for="startUrlInput">Start URL — the flow opens this address first. Change it to run on another environment.</label>
+      <input id="startUrlInput" type="text" placeholder="https://…">
+      <div id="stepsList" class="step-editor-list"></div>
+      <div class="row" style="gap:6px;">
+        <select id="addStepType" style="flex:1;">
+          <option value="wait">Wait (ms)</option>
+          <option value="navigate">Go to URL</option>
+          <option value="assertVisible">Assert visible</option>
+          <option value="assertText">Assert text</option>
+        </select>
+        <button id="addStepBtn" class="small tint-cyan" type="button">Add step</button>
+      </div>
+      <div class="row modal-actions">
+        <button id="stepsCancelBtn" class="ghost">Cancel</button>
+        <button id="stepsSaveBtn" class="primary">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="xlsx-lite.js"></script>
+  <script src="data-helpers.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>
