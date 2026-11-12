@@ -64,9 +64,7 @@
   <!-- live chip -->
   <g transform="translate(715 24)">
     <rect width="118" height="26" rx="13" fill="#37f0a8" fill-opacity="0.12" stroke="#37f0a8" stroke-opacity="0.7"/>
-    <circle cx="16" cy="13" r="4.5" fill="#37f0a8">
-      <animate attributeName="opacity" values="1;0.25;1" dur="1.4s" repeatCount="indefinite"/>
-    </circle>
+    <circle cx="16" cy="13" r="4.5" fill="#37f0a8"/>
     <text x="30" y="18" font-family="ui-monospace,Consolas,monospace" font-size="12.5" font-weight="700" letter-spacing="1.6" fill="#37f0a8">LIVE ONLINE</text>
   </g>
 
