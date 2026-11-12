@@ -27,7 +27,7 @@ Full reference for every control, data-driven runs and the step editor. Back to 
 | ✏️ **Rename** | Renames the flow (same uniqueness rule as saving). |
 | **Edit steps** | Opens the [step editor](#step-editor) on this saved flow's steps: reorder, edit a selector/value, delete a step, or add a manual **Wait**/**Assert** step. |
 | **Run with data** (grid-lines icon) | Opens the data-run picker — see [Data-driven replay](#data-driven-replay). |
-| **Download data template** (Excel icon) | Downloads a ready-to-fill `.xlsx` for this specific flow — one column per input/checkbox step's selector (pre-filled with its currently recorded value) plus a **Repeat** column. |
+| **Download data template** (Excel icon) | Downloads a ready-to-fill `.xlsx` for this specific flow — one column per input/checkbox step's selector (pre-filled with its currently recorded value) plus a **Link** column (a per-row start URL; empty = the flow's own) and a **Repeat** column. |
 | **Duplicate** | Clones the flow (steps + start URL) under an auto-suffixed name (`… (copy)`), so you can branch it without re-recording. Does not carry over an associated data file. |
 | **Export** | Downloads this one flow as its own JSON file, named after the flow. |
 | 🗑️ **Delete** | Deletes the flow (confirmation required) and any data file associated with it. |
@@ -63,7 +63,7 @@ same recorded values every time.
 
 1. Click the Excel icon (**Download data template**) on a flow — it downloads
    a `.xlsx` with one column per input/checkbox step's selector, pre-filled
-   with that step's currently recorded value, plus a **Repeat** column.
+   with that step's currently recorded value, plus a **Link** column (a per-row start URL; empty = the flow's own) and a **Repeat** column.
 2. Edit that file — one row per run, and (optionally) a **Repeat** value per
    row to run that row more than once, e.g. row 1 `Repeat=1` + row 2
    `Repeat=2` expands to 3 runs: row 1, row 2, row 2.
