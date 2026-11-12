@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 170" width="880" height="170" role="img" aria-label="Read the Flowcraft user manual online">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0a1226"/>
+      <stop offset="1" stop-color="#150f33"/>
+    </linearGradient>
+    <linearGradient id="ring" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#35e6ff"/>
+      <stop offset="0.5" stop-color="#b06cff"/>
+      <stop offset="1" stop-color="#35e6ff"/>
+      <animate attributeName="x1" values="-1;0;-1" dur="6s" repeatCount="indefinite"/>
+      <animate attributeName="x2" values="0;1;0" dur="6s" repeatCount="indefinite"/>
+    </linearGradient>
+    <linearGradient id="title" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#6ff0ff"/>
+      <stop offset="1" stop-color="#c58bff"/>
+    </linearGradient>
+    <linearGradient id="btn" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#8ff3ff"/>
+      <stop offset="1" stop-color="#21c8e6"/>
+    </linearGradient>
+    <pattern id="grid" width="26" height="26" patternUnits="userSpaceOnUse">
+      <path d="M26 0H0V26" fill="none" stroke="#35e6ff" stroke-opacity="0.07" stroke-width="1"/>
+    </pattern>
+    <filter id="glow" x="-20%" y="-40%" width="140%" height="180%">
+      <feGaussianBlur stdDeviation="7" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="soft" x="-30%" y="-60%" width="160%" height="220%">
+      <feGaussianBlur stdDeviation="12"/>
+    </filter>
+    <clipPath id="card"><rect x="6" y="6" width="868" height="158" rx="20"/></clipPath>
+  </defs>
+
+  <!-- outer glow -->
+  <rect x="6" y="6" width="868" height="158" rx="20" fill="none" stroke="url(#ring)" stroke-width="4" opacity="0.55" filter="url(#soft)"/>
+
+  <!-- card -->
+  <rect x="6" y="6" width="868" height="158" rx="20" fill="url(#bg)"/>
+  <rect x="6" y="6" width="868" height="158" rx="20" fill="url(#grid)"/>
+  <g clip-path="url(#card)">
+    <rect x="-200" y="0" width="120" height="170" fill="#35e6ff" opacity="0.07" transform="skewX(-20)">
+      <animate attributeName="x" values="-200;1000" dur="5s" repeatCount="indefinite"/>
+    </rect>
+  </g>
+  <rect x="6" y="6" width="868" height="158" rx="20" fill="none" stroke="url(#ring)" stroke-width="2.5"/>
+
+  <!-- book icon -->
+  <g transform="translate(40 40)" filter="url(#glow)">
+    <circle cx="45" cy="45" r="44" fill="#35e6ff" fill-opacity="0.08" stroke="#35e6ff" stroke-opacity="0.6" stroke-width="2"/>
+    <g fill="none" stroke="#6ff0ff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M45 30c-6-4.5-14-5.5-23-4.5v33c9-1 17 0 23 4.5 6-4.5 14-5.5 23-4.5v-33c-9-1-17 0-23 4.5z"/>
+      <path d="M45 30v33"/>
+      <path d="M29 36c3-.5 6-.2 9 .8M29 44c3-.5 6-.2 9 .8" stroke-width="2.2"/>
+      <path d="M52 36.8c3-1 6-1.3 9-.8M52 44.8c3-1 6-1.3 9-.8" stroke-width="2.2"/>
+    </g>
+  </g>
+
+  <!-- text -->
+  <text x="152" y="76" font-family="ui-monospace,'SF Mono','Cascadia Mono',Consolas,monospace" font-size="33" font-weight="800" letter-spacing="2" fill="url(#title)" filter="url(#glow)">READ THE USER MANUAL</text>
+  <text x="153" y="108" font-family="system-ui,-apple-system,'Segoe UI',Roboto,sans-serif" font-size="17" fill="#a9bad6">Illustrated  ·  Interactive  ·  Searchable</text>
+  <text x="153" y="134" font-family="system-ui,-apple-system,'Segoe UI',Roboto,sans-serif" font-size="14.5" fill="#6f84a8">Step-by-step guides for SQA &amp; Developers — every button explained</text>
+
+  <!-- live chip -->
+  <g transform="translate(715 24)">
+    <rect width="118" height="26" rx="13" fill="#37f0a8" fill-opacity="0.12" stroke="#37f0a8" stroke-opacity="0.7"/>
+    <circle cx="16" cy="13" r="4.5" fill="#37f0a8">
+      <animate attributeName="opacity" values="1;0.25;1" dur="1.4s" repeatCount="indefinite"/>
+    </circle>
+    <text x="30" y="18" font-family="ui-monospace,Consolas,monospace" font-size="12.5" font-weight="700" letter-spacing="1.6" fill="#37f0a8">LIVE ONLINE</text>
+  </g>
+
+  <!-- button -->
+  <g transform="translate(655 76)">
+    <rect x="0" y="0" width="190" height="56" rx="14" fill="#35e6ff" opacity="0.55" filter="url(#soft)">
+      <animate attributeName="opacity" values="0.35;0.8;0.35" dur="2s" repeatCount="indefinite"/>
+    </rect>
+    <rect x="0" y="0" width="190" height="56" rx="14" fill="url(#btn)"/>
+    <text x="28" y="35" font-family="ui-monospace,'SF Mono',Consolas,monospace" font-size="17" font-weight="800" letter-spacing="1.8" fill="#04121a">OPEN NOW</text>
+    <g fill="none" stroke="#04121a" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M150 28h22M164 19l9 9-9 9">
+        <animateTransform attributeName="transform" type="translate" values="0 0;5 0;0 0" dur="1.2s" repeatCount="indefinite"/>
+      </path>
+    </g>
+  </g>
+</svg>

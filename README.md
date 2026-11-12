@@ -16,10 +16,8 @@
 <br>
 
 <a href="https://soykat25.github.io/flowcraft-extension/">
-  <img src="https://img.shields.io/badge/%F0%9F%93%96%20READ%20THE%20USER%20MANUAL-Open%20online%20%E2%86%92-35e6ff?style=for-the-badge&labelColor=0a0f1e" alt="Read the Flowcraft user manual online" height="44">
+  <img src="docs/assets/manual-banner.svg" alt="Read the Flowcraft user manual online — illustrated, interactive, searchable" width="760">
 </a>
-
-<sub>Illustrated, interactive, searchable — with guides for SQA and developers.</sub>
 
 <br>
 
