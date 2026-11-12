@@ -413,17 +413,19 @@ footer{margin-top:80px;padding-top:22px;border-top:1px solid var(--line);color:v
     <ol class="steps">
       <li><b class="t">Record “create one record”</b><span class="d">E.g. fill the sign-up form and submit. Save it as <code>Seed users</code>.</span></li>
       <li><b class="t">Download the data template</b><span class="d">Click <b>▦</b>. Columns: <code>Link</code>, one per input selector, then <code>Repeat</code>.</span></li>
-      <li><b class="t">Generate the rows</b><span class="d">Use the generator below (or Excel fill-down) so each row has unique values.</span></li>
+      <li><b class="t">Generate the rows</b><span class="d">Use the Excel generator below (or fill-down in Excel) so each row has unique values.</span></li>
       <li><b class="t">Run with data</b><span class="d">Upload the file under its exact template name, then <b>Run data</b>. One record is created per row.</span></li>
     </ol>
-    <h3>Row generator</h3>
+    <h3>Excel row generator</h3>
+    <p>Builds a ready-to-fill <b>.xlsx</b> with the same layout the extension's own template uses (<code>Link</code>, then your selector columns, then <code>Repeat</code>), named correctly for your flow.</p>
     <div class="card"><div class="gen">
-      <div><label>COLUMN HEADERS (selectors from your template, comma-separated)</label><input id="gCols" value="#email,#name"></div>
+      <div><label>FLOW NAME (exactly as saved in Flowcraft)</label><input id="gFlow" value="Seed users"></div>
+      <div><label>SELECTOR COLUMNS (comma-separated, copied from your downloaded template)</label><input id="gCols" value="#email,#name"></div>
       <div><label>VALUE PATTERNS (use {n} for the row number)</label><input id="gPat" value="user{n}@test.com,Tester {n}"></div>
       <div class="row2"><div><label>LINK (start URL, optional)</label><input id="gLink" value="https://staging.example.com/signup"></div><div><label>REPEAT</label><input id="gRep" value="1"></div><div><label>ROWS</label><input id="gN" value="10" inputmode="numeric"></div></div>
-      <div><label>CSV OUTPUT</label><textarea id="gOut" readonly></textarea></div>
-      <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="small" id="gCopy">Copy CSV</button><button class="small" id="gDl">Download as .csv</button></div>
-      <div class="hint">Rename the downloaded file to exactly <code>&lt;flow name&gt;-data-template.csv</code>. Values must not contain commas (the CSV reader splits on every comma).</div>
+      <div><label>PREVIEW (first rows)</label><div class="tw" style="margin:0"><table id="gPrev"></table></div></div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center"><button class="small" id="gDl" style="border-color:var(--cyan);color:var(--cyan)">⇩ Download .xlsx</button><span class="hint" id="gName" style="margin:0"></span></div>
+      <div class="hint">Safest habit: still download the template from the extension first and paste your generated values into it — then the headers can't be wrong. A column that doesn't match one of the flow's selectors is ignored; a selector with no column keeps its recorded value.</div>
     </div></div>
     <div class="co ok"><b>LINK COLUMN = MULTIPLE ENVIRONMENTS</b><p>The <code>Link</code> column gives each row its own start URL. Put <code>staging</code> in some rows and <code>qa</code> in others to seed several environments from one file. Leave it empty to use the flow's own start URL.</p></div>
     <div class="co danger"><b>USE TEST ENVIRONMENTS</b><p>This really creates records. Run it against staging or QA, never production, and check the app doesn't send real emails or payments.</p></div>
@@ -655,7 +657,7 @@ footer{margin-top:80px;padding-top:22px;border-top:1px solid var(--line);color:v
     <div class="hint" id="calcTotal" style="margin-top:14px;font-size:14px"></div>
     <div class="seq" id="seq"></div>
   </div>
-  <div class="co danger"><b>FILENAME RULE</b><p>The file must keep the exact name the template had (e.g. <code>login-data-template.xlsx</code>). A file for another flow, or a browser-renamed duplicate such as <code>… (1).xlsx</code>, is <b>rejected on purpose</b> — it's the main guard against running a flow with the wrong or a stale dataset. CSV and JSON work as fallbacks with the same naming rule. CSV is read very simply — split on commas, no quoted cells — so values can't contain commas.</p></div>
+  <div class="co danger"><b>FILENAME RULE</b><p>The file must keep the exact name the template had (e.g. <code>login-data-template.xlsx</code>). A file for another flow, or a browser-renamed duplicate such as <code>… (1).xlsx</code>, is <b>rejected on purpose</b> — it's the main guard against running a flow with the wrong or a stale dataset. <b>Excel (.xlsx) is the supported format.</b> Only <code>.xlsx</code>, <code>.csv</code> and <code>.json</code> are read (not old <code>.xls</code>); CSV/JSON are bare-bones fallbacks with the same naming rule, and CSV can't contain commas inside values.</p></div>
   <div class="co ok only-sqa"><b><span class="rtag sqa">SQA</span>TEST MATRIX</b><p>Treat each spreadsheet row as a test scenario: <i>valid</i>, <i>empty field</i>, <i>too long</i>, <i>special characters</i>, <i>boundary values</i>. Add an assertion step so each row has a pass/fail result.</p></div>
   <ul>
     <li>A new upload <b>fully replaces</b> the old file (never merges).</li>
@@ -811,6 +813,7 @@ footer{margin-top:80px;padding-top:22px;border-top:1px solid var(--line);color:v
 </div>
 <button id="top" aria-label="Back to top">↑</button>
 
+<script src="assets/xlsx-lite.js"></script>
 <script>
 (function(){
   var $=function(s,r){return (r||document).querySelector(s)},$$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
@@ -933,7 +936,7 @@ footer{margin-top:80px;padding-top:22px;border-top:1px solid var(--line);color:v
    ['Step editor','Key dropdown','Switch a keypress step between Enter, Escape and Tab.'],
    ['Step editor','Add step dropdown + Add step','Adds Wait, Go to URL, Assert visible or Assert text at the end of the list.'],
    ['Step editor','Save / Cancel','Save writes the steps and start URL; Cancel discards your edits.'],
-   ['Data picker','Choose file…','Pick an .xlsx (or .csv/.json) named exactly like the template.'],
+   ['Data picker','Choose file…','Pick the Excel (.xlsx) file named exactly like the template (.csv/.json also read as fallbacks).'],
    ['Data picker','Preview line','Shows whether the file was accepted, its row count, or why it was rejected.'],
    ['Data picker','Run / Cancel','Run stays disabled until the file validates, then asks for credentials if needed and starts.'],
    ['On the page','Recording pill','Pulsing dot, live step count, draggable grip, red ■ to stop.'],
@@ -955,19 +958,33 @@ footer{margin-top:80px;padding-top:22px;border-top:1px solid var(--line);color:v
     $('#refQ').addEventListener('input',refFilter);refFilter();
   }
 
-  /* csv generator */
+  /* excel generator */
   function gen(){
     var cols=$('#gCols').value.split(',').map(function(x){return x.trim()}).filter(Boolean),
         pats=$('#gPat').value.split(',').map(function(x){return x.trim()}),
         n=Math.max(1,Math.min(500,parseInt($('#gN').value,10)||1)),link=$('#gLink').value.trim(),rep=$('#gRep').value.trim()||'1',
-        out=['Link,'+cols.join(',')+',Repeat'];
-    for(var i=1;i<=n;i++){out.push([link].concat(cols.map(function(_,c){return (pats[c]||'').replace(/\{n\}/g,i)}),[rep]).join(','))}
-    $('#gOut').value=out.join('\n');
+        flow=$('#gFlow').value.trim().replace(/[\\/:*?"<>|]+/g,'-')||'flow',
+        headers=['Link'].concat(cols,['Repeat']),rows=[];
+    for(var i=1;i<=n;i++)rows.push([link].concat(cols.map(function(_,c){return (pats[c]||'').replace(/\{n\}/g,i)}),[rep]));
+    var t=$('#gPrev');t.innerHTML='';
+    var h=document.createElement('thead');h.innerHTML='<tr>'+headers.map(function(x){return '<th></th>'}).join('')+'</tr>';
+    $$('th',h).forEach(function(th,i){th.textContent=headers[i]});t.appendChild(h);
+    var tb=document.createElement('tbody');rows.slice(0,5).forEach(function(r){var tr=document.createElement('tr');r.forEach(function(v){var td=document.createElement('td');td.textContent=v;tr.appendChild(td)});tb.appendChild(tr)});
+    if(rows.length>5){var tr=document.createElement('tr'),td=document.createElement('td');td.colSpan=headers.length;td.style.color='var(--muted)';td.textContent='… '+(rows.length-5)+' more row(s)';tr.appendChild(td);tb.appendChild(tr)}
+    t.appendChild(tb);
+    $('#gName').textContent='File: '+flow+'-data-template.xlsx · '+rows.length+' row(s)';
+    return {headers:headers,rows:rows,name:flow+'-data-template.xlsx'};
   }
-  ['gCols','gPat','gLink','gRep','gN'].forEach(function(id){var e=$('#'+id);if(e)e.addEventListener('input',gen)});
-  if($('#gOut')){gen();
-    $('#gCopy').onclick=function(){var b=this,t=$('#gOut').value;(navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(function(){b.textContent='Copied ✓'},function(){$('#gOut').select();b.textContent='Press Ctrl+C'});setTimeout(function(){b.textContent='Copy CSV'},1600)};
-    $('#gDl').onclick=function(){var a=document.createElement('a');a.href=URL.createObjectURL(new Blob([$('#gOut').value],{type:'text/csv'}));a.download='my-flow-data-template.csv';a.click()};
+  ['gFlow','gCols','gPat','gLink','gRep','gN'].forEach(function(id){var e=$('#'+id);if(e)e.addEventListener('input',gen)});
+  if($('#gPrev')){gen();
+    $('#gDl').onclick=function(){
+      var d=gen(),b=this;
+      if(!window.XlsxLite){b.textContent='Excel writer failed to load';return}
+      var bytes=XlsxLite.write('Data',d.headers,d.rows),
+          a=document.createElement('a');
+      a.href=URL.createObjectURL(new Blob([bytes],{type:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'}));
+      a.download=d.name;a.click();setTimeout(function(){URL.revokeObjectURL(a.href)},2000);
+    };
   }
 
   /* smoke tracker */
