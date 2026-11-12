@@ -43,6 +43,10 @@ Full reference for every control, data-driven runs and the step editor. Back to 
 | **Stop replay** | Appears only while a run is in progress; stops it after the current step. |
 | Status line | Live progress ("Run 2/5 · step 8/12"), or the final "Finished!" / "Stopped." / error state. |
 
+### Floating run widget
+
+During a run, a draggable pill on the page shows `Run n/N · Step n/N`. Its status button pulses while replaying; if a step fails the run **pauses**, an error line appears, and clicking the button **retries that step**. The red ■ button stops the run.
+
 ### Run history
 
 | Control | What it does |

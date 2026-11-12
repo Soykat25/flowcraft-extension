@@ -160,6 +160,21 @@ tbody tr:hover td{background:#35e6ff08}
 .flow{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:16px 0;font:13px var(--mono)}
 .flow span{background:var(--panel2);border:1px solid var(--line2);border-radius:8px;padding:6px 12px}.flow b{color:var(--cyan)}
 
+
+/* run widget */
+.wdg{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(180deg,#0d1730,#070c1a);border:1px solid #2a4170;border-radius:999px;padding:8px 10px 8px 12px;box-shadow:0 12px 30px #000a,0 0 30px #35e6ff18;font:12px var(--mono);user-select:none;position:relative}
+.wdg .grip{display:grid;grid-template-columns:repeat(2,3px);gap:3px;opacity:.5;cursor:grab}.wdg .grip i{width:3px;height:3px;border-radius:50%;background:var(--muted)}
+.wdg .play{position:relative;width:20px;height:20px;border-radius:50%;border:0;background:#35e6ff1f;color:var(--cyan);display:grid;place-items:center;font-size:8px;cursor:default}
+.wdg .play::after{content:"";position:absolute;inset:-3px;border-radius:50%;border:1px solid var(--cyan);animation:ring 1.4s infinite}
+@keyframes ring{from{transform:scale(.8);opacity:.9}to{transform:scale(1.5);opacity:0}}
+.wdg.paused .play{background:#35e6ff30;cursor:pointer;width:24px;height:24px;font-size:11px;box-shadow:0 0 16px #35e6ff66}.wdg.paused .play::after{display:none}
+.wdg .lb b{color:var(--cyan)}.wdg .dv{width:1px;height:18px;background:var(--line2)}
+.wdg .stp{width:26px;height:26px;border-radius:50%;border:0;background:var(--danger);color:#fff;display:grid;place-items:center;font-size:9px;cursor:pointer;box-shadow:0 0 14px #ff4d6d66}
+.wdg-err{display:none;margin:0 0 8px;max-width:320px;padding:8px 11px;border-radius:10px;background:#28101a;border:1px solid #ff4d6d73;color:#ffb3c0;font:600 11px/1.4 var(--mono)}
+.wdg-err.show{display:block;animation:in .25s both}
+.anat{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin-top:14px}
+.anat div{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px 12px;font-size:14px;color:var(--muted)}.anat b{color:var(--text);display:block}
+
 /* faq */
 details{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:0 16px;margin:8px 0}
 summary{cursor:pointer;padding:12px 0;font-weight:600;list-style:none;display:flex;justify-content:space-between;gap:10px}
@@ -316,8 +331,31 @@ footer{margin-top:80px;padding-top:22px;border-top:1px solid var(--line);color:v
     </tbody></table></div>
   <ol class="steps">
     <li><b class="t">Click Run</b><span class="d">Flowcraft prompts for any blanked username/password fields, navigates the active tab to the start URL (via <code>about:blank</code> for a clean load), then replays each step.</span></li>
-    <li><b class="t">Watch the widget</b><span class="d">The popup closes; a floating widget shows <code>Run 2/5 · step 8/12</code> and an error line if something fails.</span></li>
+    <li><b class="t">Watch the widget</b><span class="d">The popup closes and a floating widget shows <code>Run 2/5 · Step 8/12</code>. See the widget below.</span></li>
   </ol>
+
+  <h3>The floating run widget</h3>
+  <p>While a flow runs, a small draggable pill appears on the page. It's your remote control — try it below.</p>
+  <div class="card" id="wdgDemo">
+    <div class="wdg-err" id="wErr">Element not found: #submit-btn</div>
+    <div class="wdg" id="wdg"><span class="grip"><i></i><i></i><i></i><i></i><i></i><i></i></span>
+      <button class="play" id="wPlay" aria-label="Replaying">▶</button>
+      <span class="lb">Run <b id="wRun">1/1</b> · Step <b id="wStep">0/6</b></span><span class="dv"></span>
+      <button class="stp" id="wStop" aria-label="Stop replay">■</button></div>
+    <div style="margin-top:14px;display:flex;gap:8px;flex-wrap:wrap">
+      <button class="small" id="wStart">▶ Start demo run</button>
+      <button class="small" id="wFail">⚠ Make step 4 fail</button>
+    </div>
+    <div class="hint" id="wHelp" style="font-size:13px">Press “Start demo run”. Tick “Make step 4 fail” first to see the pause-and-retry behaviour.</div>
+    <div class="anat">
+      <div><b>⠿ Grip</b>Drag the pill anywhere on the page so it never covers what you're testing.</div>
+      <div><b>▶ Status button</b>Pulses while replaying. If a step fails it turns solid and becomes a <b>retry</b> button.</div>
+      <div><b>Run 1/1 · Step 4/6</b>Current run out of total runs, and current step out of all steps.</div>
+      <div><b>■ Stop</b>Ends the run after the current step.</div>
+    </div>
+  </div>
+  <div class="co ok"><b>FAILED STEP? FIX IT, THEN RETRY</b><p>When a step fails, the run <b>pauses</b> instead of dying. A red error line appears above the pill, and the status button lights up. Fix the page (or whatever blocked it) and click the button to <b>retry that step</b>, or press <b>■</b> to stop.</p></div>
+
   <h3>What “smart replay” means</h3>
   <p>Before acting, each step waits for its element to be <b>present, visible, enabled, stable</b> (not animating) and — for clicks — <b>not covered</b> by another element. After a step, it waits out any navigation it triggered before starting the next one.</p>
 </section>
@@ -563,6 +601,21 @@ footer{margin-top:80px;padding-top:22px;border-top:1px solid var(--line);color:v
   $('#fEmail').onclick=function(){this.textContent='email: user@test.com';step('input','#email')};
   $('#fPass').onclick=function(){this.textContent='password: ••••••••';step('input','#password  (blanked on save)')};
   $('#fLogin').onclick=function(){step('click','button[type=submit]')};
+
+
+  /* run widget demo */
+  var wd=$('#wdg'),wTimer=null,wStep=0,wTotal=6,wFailOn=false,wFailed=false,wRunning=false;
+  function wDraw(){$('#wStep').textContent=wStep+'/'+wTotal}
+  function wTick(){
+    if(!wRunning||wd.classList.contains('paused'))return;
+    if(wStep>=wTotal){wRunning=false;$('#wHelp').textContent='✔ Finished!';return}
+    if(wStep===3&&wFailOn&&!wFailed){wFailed=true;wd.classList.add('paused');$('#wErr').classList.add('show');$('#wPlay').setAttribute('aria-label','Failed — click to retry this step');$('#wHelp').textContent='Step 4 failed. The run is paused — click the glowing ▶ to retry it, or ■ to stop.';return}
+    wStep++;wDraw();wTimer=setTimeout(wTick,800);
+  }
+  $('#wStart').onclick=function(){clearTimeout(wTimer);wStep=0;wFailed=false;wRunning=true;wd.classList.remove('paused');$('#wErr').classList.remove('show');wDraw();$('#wHelp').textContent='Running…';wTimer=setTimeout(wTick,800)};
+  $('#wFail').onclick=function(){wFailOn=!wFailOn;this.textContent=wFailOn?'⚠ Step 4 will fail (on)':'⚠ Make step 4 fail'};
+  $('#wPlay').onclick=function(){if(!wd.classList.contains('paused'))return;wd.classList.remove('paused');$('#wErr').classList.remove('show');$('#wHelp').textContent='Retrying step 4…';wTimer=setTimeout(wTick,800)};
+  $('#wStop').onclick=function(){clearTimeout(wTimer);wRunning=false;wd.classList.remove('paused');$('#wErr').classList.remove('show');$('#wHelp').textContent='Stopped.'};
 
   /* data-row calculator */
   var calc=$('#calc'),rows=[['a@test.com','1'],['b@test.com','2']];
