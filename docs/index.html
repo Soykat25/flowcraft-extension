@@ -652,7 +652,7 @@ footer{margin-top:80px;padding-top:22px;border-top:1px solid var(--line);color:v
   <div class="co ok"><b>FAILED STEP? FIX IT, THEN RETRY</b><p>When a step fails, the run <b>pauses</b> instead of dying. A red error line appears above the pill, and the status button lights up. Fix the page (or whatever blocked it) and click the button to <b>retry that step</b>, or press <b>■</b> to stop.</p></div>
 
   <h3>What “smart replay” means</h3>
-  <p>Before acting, each step waits for its element to be <b>present, visible, enabled, stable</b> (not animating) and — for clicks — <b>not covered</b> by another element. After a step, it waits out any navigation it triggered before starting the next one.</p>
+  <p>Before acting, each step waits up to <b>15 seconds</b> for its element to be <b>present, visible, enabled, stable</b> (not animating) and — for clicks — <b>not covered</b> by another element. After a step, it waits out any navigation it triggered before starting the next one.</p>
 </section>
 
 <!-- 05 EDIT -->
@@ -715,7 +715,8 @@ footer{margin-top:80px;padding-top:22px;border-top:1px solid var(--line);color:v
   <div class="card">
     <div class="calc" id="calc"></div>
     <button class="small" id="addRow" style="margin-top:10px">+ Add row</button>
-    <div class="hint" id="calcTotal" style="margin-top:14px;font-size:14px"></div>
+    <div class="hint" style="margin-top:12px">Repeat <b>0</b> skips that row; a blank or invalid Repeat counts as <b>1</b>. (The demo caps one row at 50.)</div>
+    <div class="hint" id="calcTotal" style="margin-top:10px;font-size:14px"></div>
     <div class="seq" id="seq"></div>
   </div>
   <div class="co danger"><b>FILENAME RULE</b><p>The file must keep the exact name the template had (e.g. <code>login-data-template.xlsx</code>). A file for another flow, or a browser-renamed duplicate such as <code>… (1).xlsx</code>, is <b>rejected on purpose</b> — it's the main guard against running a flow with the wrong or a stale dataset. <b>Excel (.xlsx) is the supported format.</b> Only <code>.xlsx</code>, <code>.csv</code> and <code>.json</code> are read (not old <code>.xls</code>); CSV/JSON are bare-bones fallbacks with the same naming rule, and CSV can't contain commas inside values.</p></div>
@@ -748,7 +749,7 @@ footer{margin-top:80px;padding-top:22px;border-top:1px solid var(--line);color:v
     <tr><td><b>“No flows found in that file.”</b></td><td>Valid JSON, but no flows inside.</td></tr>
   </tbody></table></div>
   <p>Only known step types are kept on import; anything unexpected in the file is dropped. Bulk export with nothing ticked says “Select at least one flow to export.”</p>
-  <p>Downloads land in <code>Downloads/Flowcraft/&lt;Mon DD YYYY&gt;/</code>.</p>
+  <p>Downloads land in <code>Downloads/Flowcraft/&lt;date&gt;/</code> (the folder is named like <code>Nov122026</code> — month, day, year, no spaces).</p>
   <div class="co danger"><b>BEFORE YOU SHARE</b><p>If “Store usernames/passwords” was on, exports contain <b>plaintext credentials</b>. <b>Turning the option off later does not clear them</b> — it only controls <i>new</i> recordings. To remove stored credentials, re-record the flow with the option off and delete the old one. Never commit exported flows or filled-in data sheets to a public repo.</p></div>
 </section>
 
@@ -825,7 +826,7 @@ footer{margin-top:80px;padding-top:22px;border-top:1px solid var(--line);color:v
     <div class="mini"><b>Last 20 runs</b><span>Older runs are dropped automatically.</span></div>
     <div class="mini"><b>Last 50 errors</b><span>Failure entries (with screenshots) are capped separately, oldest first.</span></div>
     <div class="mini"><b>Local only</b><span>History lives in <code>chrome.storage.local</code>. Nothing is sent anywhere and nothing is written to disk until you click Save.</span></div>
-    <div class="mini"><b>Saved files</b><span>Land in <code>Downloads/Flowcraft/&lt;Mon DD YYYY&gt;/</code>. A run is named <code>&lt;flow&gt;-&lt;timestamp&gt;.json</code>.</span></div>
+    <div class="mini"><b>Saved files</b><span>Land in <code>Downloads/Flowcraft/&lt;date&gt;/</code> (the folder is named like <code>Nov122026</code> — month, day, year, no spaces). A run is named <code>&lt;flow&gt;-&lt;timestamp&gt;.json</code>.</span></div>
   </div>
   <div class="co only-sqa"><b><span class="rtag sqa">SQA</span>BUG EVIDENCE</b><p>Failed run → <b>Copy image</b> into the ticket, <b>Save this run</b> as an attachment, and quote the error text. The step number and selector tell the developer exactly where it broke.</p></div>
   <div class="co only-dev"><b><span class="rtag dev">DEV</span>READING A RUN FILE</b><p>Search the JSON for <code>"ok": false</code> to find the failing step, then match its <code>selector</code> against your DOM. <code>iterations</code> shows which data row it happened on.</p></div>
@@ -888,6 +889,7 @@ footer{margin-top:80px;padding-top:22px;border-top:1px solid var(--line);color:v
     <div class="mini"><b>What counts as a field</b><span>Typing is captured for <code>input</code>, <code>select</code> and <code>textarea</code> elements (dropdown choices are recorded as input steps). Rich-text editors that use <code>contenteditable</code> aren't captured.</span></div>
     <div class="mini"><b>Flow card hints</b><span>Under each flow's name you see “N steps”, plus “· N credential field(s) need input” when blank username/password fields will prompt you at run time.</span></div>
     <div class="mini"><b>Duplicate names</b><span>Duplicating adds “(copy)”, then “(copy) 2”, “(copy) 3”… Saving, renaming and importing all refuse a name that already exists (case-insensitive).</span></div>
+    <div class="mini"><b>Clicks also remember the visible text</b><span>For clicks and assertions Flowcraft saves the element's label (first 80 characters) along with the selector. If the element at that position now has a <i>different</i> label — a re-ordered list, say — it looks for the element with the recorded text instead of trusting the position.</span></div>
     <div class="mini"><b>Credentials prompt</b><span>One dialog lists every blank username/password field. Press <kbd>Enter</kbd> to run or <kbd>Esc</kbd> to cancel.</span></div>
   </div>
 </section>
@@ -1211,7 +1213,7 @@ footer{margin-top:80px;padding-top:22px;border-top:1px solid var(--line);color:v
     seq();
   }
   function seq(){
-    var out=[];rows.forEach(function(r,i){var n=Math.max(1,Math.min(50,parseInt(r[1],10)||1));for(var k=0;k<n;k++)out.push(i+1)});
+    var out=[];rows.forEach(function(r,i){var v=parseInt(r[1],10),n=(isFinite(v)&&v>=0)?Math.min(50,v):1;for(var k=0;k<n;k++)out.push(i+1)});
     $('#calcTotal').innerHTML='This file expands to <b style="color:var(--cyan)">'+out.length+' run'+(out.length===1?'':'s')+'</b>. Run order:';
     var s=$('#seq');s.innerHTML='';out.forEach(function(r,i){var e=document.createElement('span');e.innerHTML='#'+(i+1)+' → row <b>'+r+'</b>';s.appendChild(e)});
   }
