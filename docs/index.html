@@ -175,6 +175,26 @@ tbody tr:hover td{background:#35e6ff08}
 .anat{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin-top:14px}
 .anat div{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px 12px;font-size:14px;color:var(--muted)}.anat b{color:var(--text);display:block}
 
+
+/* role switch */
+.roles{display:inline-flex;gap:4px;padding:4px;background:var(--panel);border:1px solid var(--line2);border-radius:14px;margin-top:22px}
+.roles button{display:flex;align-items:center;gap:8px;background:none;border:0;border-radius:10px;padding:9px 16px;color:var(--muted);font:700 13px var(--sans);cursor:pointer;transition:.2s}
+.roles button em{font-style:normal;font-size:16px}
+.roles button:hover{color:var(--text)}
+.roles button.on{background:linear-gradient(135deg,#35e6ff26,#b06cff26);color:var(--text);box-shadow:inset 0 0 0 1px var(--cyan),0 0 22px #35e6ff22}
+.rolehint{color:var(--muted);font-size:13px;margin-top:8px}
+body[data-role="sqa"] .only-dev,body[data-role="dev"] .only-sqa{display:none!important}
+.rtag{display:inline-block;font:800 10px var(--mono);letter-spacing:.12em;border-radius:5px;padding:1px 7px;margin-right:8px;border:1px solid}
+.rtag.sqa{color:var(--ok);border-color:#37f0a880}.rtag.dev{color:var(--violet);border-color:#b06cff80}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px;margin:14px 0}
+.mini{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.mini b{display:block;margin-bottom:4px}.mini span{color:var(--muted);font-size:14.5px}
+.chk{list-style:none;padding:0;margin:12px 0}.chk li{padding:6px 0 6px 30px;position:relative;border-bottom:1px dashed var(--line)}
+.chk li::before{content:"☐";position:absolute;left:0;color:var(--cyan);font-size:17px;line-height:1.4}
+.chk li.d::before{content:"☑";color:var(--ok)}
+pre.cb2{background:#02040a;border:1px solid var(--line);border-radius:10px;padding:14px;font:12.5px/1.6 var(--mono);color:#a9f5d6;overflow:auto;margin:12px 0;position:relative}
+pre.cb2 .k{color:var(--violet)}pre.cb2 .s{color:var(--cyan)}
+
 /* faq */
 details{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:0 16px;margin:8px 0}
 summary{cursor:pointer;padding:12px 0;font-weight:600;list-style:none;display:flex;justify-content:space-between;gap:10px}
@@ -198,6 +218,7 @@ footer{margin-top:80px;padding-top:22px;border-top:1px solid var(--line);color:v
   <div class="ver">USER MANUAL · v1.1.0 BETA</div>
   <input id="q" type="search" placeholder="Search the manual…" autocomplete="off" aria-label="Search the manual"><span class="k">/</span>
   <a class="l" href="#start"><i>00</i>Start here</a>
+  <a class="l" href="#role"><i>▸</i>For your role</a>
   <a class="l" href="#install"><i>01</i>Install</a>
   <a class="l" href="#tour"><i>02</i>Tour of the popup</a>
   <a class="l" href="#record"><i>03</i>Record a flow</a>
@@ -221,6 +242,11 @@ footer{margin-top:80px;padding-top:22px;border-top:1px solid var(--line);color:v
   <span class="tag">BETA · RECORD · REPLAY · AUTOMATE</span>
   <h1>Flowcraft<br><span class="g">User Manual</span></h1>
   <p class="lead">Record what you do in the browser, save it as a <b>flow</b>, and replay it — once, many times, or once for every row of a spreadsheet. No code, no account, nothing leaves your machine.</p>
+  <div class="roles" id="roles" role="tablist" aria-label="Choose your role">
+    <button role="tab" data-role="sqa" class="on"><em>🧪</em>I'm in SQA / QA</button>
+    <button role="tab" data-role="dev"><em>💻</em>I'm a Developer</button>
+  </div>
+  <div class="rolehint" id="roleHint">Pick your role — the manual adds tips, checklists and examples written for you.</div>
   <div class="stats">
     <div class="stat"><b>3 min</b><span>to your first flow</span></div>
     <div class="stat"><b>0</b><span>dependencies</span></div>
@@ -234,6 +260,76 @@ footer{margin-top:80px;padding-top:22px;border-top:1px solid var(--line);color:v
     <a class="path" href="#cheat"><em>★</em><b>Quick reference</b><span>Shortcuts and the whole workflow on one card.</span></a>
   </div>
 </div>
+
+
+<!-- ROLE -->
+<section id="role" class="reveal" data-s="role sqa qa tester developer dev regression test suite bug report evidence data-testid json repro matrix smoke checklist">
+  <h2><span class="n">▸</span><span id="roleTitle">Guide for SQA</span></h2>
+  <p class="sub" id="roleSub">Build repeatable checks and bring back evidence.</p>
+
+  <!-- SQA -->
+  <div class="only-sqa">
+    <h3>Your workflow</h3>
+    <div class="flow"><span>1 Record test case</span><b>→</b><span>2 Add assertions</span><b>→</b><span>3 Add data rows</span><b>→</b><span>4 Run</span><b>→</b><span>5 Attach evidence</span></div>
+    <div class="grid2">
+      <div class="mini"><b>One flow = one test case</b><span>Name flows like <code>TC-101 Login valid</code> so the list reads like your test plan. Use <b>⧉ Duplicate</b> to branch a negative case (<code>TC-102 Login wrong password</code>) without re-recording.</span></div>
+      <div class="mini"><b>Always finish with an assertion</b><span>A flow without checks only proves the clicks worked. Add <code>assertVisible</code> / <code>assertText</code> at the end (Edit steps) so a wrong result actually <b>fails</b>.</span></div>
+      <div class="mini"><b>Cover scenarios with data</b><span>Put valid, invalid and boundary values in the spreadsheet — one row each. Use <b>Repeat</b> to run a row several times for flaky-bug hunting. See the <a href="#data">calculator</a>.</span></div>
+      <div class="mini"><b>Evidence in one click</b><span>On a failed run: open <b>Run history</b>, use <b>Copy image</b> and paste the screenshot into your bug ticket, and <b>Save this run</b> to attach the full JSON.</span></div>
+    </div>
+    <h3>Writing a bug report from a failed run</h3>
+    <ol class="steps">
+      <li><b class="t">Title &amp; build</b><span class="d">Name the flow and the app version/environment you ran against.</span></li>
+      <li><b class="t">Steps to reproduce</b><span class="d">Open <b>Edit steps</b> — the ordered step list is your repro steps.</span></li>
+      <li><b class="t">Expected vs actual</b><span class="d">Expected = your assertion. Actual = the error line and the screenshot.</span></li>
+      <li><b class="t">Attach</b><span class="d">Failure screenshot (<b>Save image</b>) + <b>Save this run</b> JSON. Check the screenshot shows no private data first.</span></li>
+    </ol>
+    <h3>Pre-release smoke checklist</h3>
+    <ul class="chk">
+      <li>Every critical path has its own flow (login, signup, checkout, search…)</li>
+      <li>Each flow ends with at least one assertion</li>
+      <li>Data files named exactly as their templates, one row per scenario</li>
+      <li>“Store usernames/passwords” is <b>off</b> and test accounts are used</li>
+      <li>Flows exported (bulk export) and shared with the team</li>
+      <li>Retry-once enabled only for known-flaky steps, not to hide real bugs</li>
+    </ul>
+    <div class="co warn"><b>SQA CAVEATS</b><p>CAPTCHA, 2FA and OTP will block automation — sign in manually, or use a test environment with those switched off. Run only against environments you're authorized to test.</p></div>
+  </div>
+
+  <!-- DEV -->
+  <div class="only-dev">
+    <h3>Your workflow</h3>
+    <div class="flow"><span>1 Make UI testable</span><b>→</b><span>2 Record repro</span><b>→</b><span>3 Export JSON</span><b>→</b><span>4 Attach to issue</span><b>→</b><span>5 Re-run after fix</span></div>
+    <div class="grid2">
+      <div class="mini"><b>Give elements stable hooks</b><span>Flowcraft builds CSS selectors, so stable <code>id</code>, <code>data-testid</code> and <code>name</code> attributes keep flows alive across refactors. Random or hashed class names (CSS-in-JS) are the #1 cause of broken replays.</span></div>
+      <div class="mini"><b>Reproduce UI bugs in seconds</b><span>Record the bug once, export the flow, attach the JSON to the issue. Anyone can <b>Import</b> it and replay the exact path.</span></div>
+      <div class="mini"><b>Verify a fix fast</b><span>Re-run the repro flow after your change. Add an <code>assertText</code> for the correct behavior so the flow goes green only when it's really fixed.</span></div>
+      <div class="mini"><b>Mind async UI</b><span>Replay auto-waits for visible, enabled, stable, uncovered elements. For slow endpoints add a <code>wait</code> step or raise Delay.</span></div>
+    </div>
+    <h3>What an exported flow looks like</h3>
+    <pre class="cb2"><span class="k">{</span> <span class="s">"app"</span>: <span class="s">"flowcraft"</span>, <span class="s">"version"</span>: 1, <span class="s">"exportedAt"</span>: 1760000000000,
+  <span class="s">"flows"</span>: [{
+    <span class="s">"name"</span>: <span class="s">"Login and open dashboard"</span>,
+    <span class="s">"startUrl"</span>: <span class="s">"https://app.example.com/login"</span>,
+    <span class="s">"steps"</span>: [
+      { <span class="s">"type"</span>: <span class="s">"input"</span>, <span class="s">"selector"</span>: <span class="s">"#email"</span>, <span class="s">"value"</span>: <span class="s">"user@test.com"</span>, <span class="s">"secret"</span>: true },
+      { <span class="s">"type"</span>: <span class="s">"click"</span>, <span class="s">"selector"</span>: <span class="s">"button[type=submit]"</span>, <span class="s">"tag"</span>: <span class="s">"button"</span>, <span class="s">"text"</span>: <span class="s">"Log in"</span> }
+    ]
+  }]
+<span class="k">}</span></pre>
+    <p style="color:var(--muted);font-size:14px">Illustrative sample. The format is beta and may change between versions. Credential values are blanked unless “Store usernames/passwords” is on.</p>
+    <h3>Hacking on Flowcraft itself</h3>
+    <div class="tw"><table><tbody>
+      <tr><td><b>No build step</b></td><td>Plain JS/HTML/CSS, no dependencies. Load unpacked and edit in place.</td></tr>
+      <tr><td><b>Reload loop</b></td><td>After edits, click the reload icon on the extension card. An open popup won't pick up new code.</td></tr>
+      <tr><td><b>Syntax check</b></td><td><code>node --check popup.js</code> (and the other files) before opening a PR.</td></tr>
+      <tr><td><b>Where things live</b></td><td><code>content.js</code> recorder · <code>background.js</code> service worker + replay engine · <code>popup.*</code> UI · <code>xlsx-lite.js</code> spreadsheet I/O. See <a href="architecture.md">Architecture</a>.</td></tr>
+      <tr><td><b>House rule</b></td><td>No third-party code and no network requests — the extension has <code>&lt;all_urls&gt;</code> access. See <a href="../CONTRIBUTING.md">CONTRIBUTING</a>.</td></tr>
+      <tr><td><b>Keep out of Git</b></td><td>Exported flows, filled data sheets and run-history JSON can hold credentials or screenshots.</td></tr>
+    </tbody></table></div>
+    <div class="co"><b>CI?</b><p>Flows run from the extension in a real browser. Because the JSON is plain, it can be converted to Playwright or Selenium specs if you need headless runs.</p></div>
+  </div>
+</section>
 
 <!-- 01 INSTALL -->
 <section id="install" class="reveal" data-s="install load unpacked developer mode chrome edge extension download clone">
@@ -313,6 +409,8 @@ footer{margin-top:80px;padding-top:22px;border-top:1px solid var(--line);color:v
     <div><div class="log" id="simLog"><div class="s">› Press “Start recording”, then click the fake page elements.</div></div>
       <button class="small" id="simReset" style="margin-top:10px">↺ Reset simulator</button></div>
   </div>
+  <div class="co ok only-sqa"><b><span class="rtag sqa">SQA</span>TEST-CASE TIP</b><p>Record <b>one scenario per flow</b> and name it after the test case ID. Short flows fail clearly and are easy to re-record.</p></div>
+  <div class="co ok only-dev"><b><span class="rtag dev">DEV</span>SELECTOR TIP</b><p>Add <code>data-testid</code> to the elements a flow touches. It survives restyling, so recorded flows keep working.</p></div>
   <div class="co warn"><b>TIP</b><p>Prefer elements with a stable <code>id</code>, <code>data-testid</code> or <code>name</code>. Random or hashed class names make replay fragile.</p></div>
 </section>
 
@@ -404,6 +502,7 @@ footer{margin-top:80px;padding-top:22px;border-top:1px solid var(--line);color:v
     <div class="seq" id="seq"></div>
   </div>
   <div class="co danger"><b>FILENAME RULE</b><p>The file must keep the exact name the template had (e.g. <code>login-data-template.xlsx</code>). A file for another flow, or a browser-renamed duplicate such as <code>… (1).xlsx</code>, is <b>rejected on purpose</b> — it's the main guard against running a flow with the wrong or a stale dataset. CSV and JSON work as fallbacks with the same naming rule.</p></div>
+  <div class="co ok only-sqa"><b><span class="rtag sqa">SQA</span>TEST MATRIX</b><p>Treat each spreadsheet row as a test scenario: <i>valid</i>, <i>empty field</i>, <i>too long</i>, <i>special characters</i>, <i>boundary values</i>. Add an assertion step so each row has a pass/fail result.</p></div>
   <ul>
     <li>A new upload <b>fully replaces</b> the old file (never merges).</li>
     <li>Click ✕ on the DATA badge to remove the stored file.</li>
@@ -423,6 +522,7 @@ footer{margin-top:80px;padding-top:22px;border-top:1px solid var(--line);color:v
     <tr><td><b>Import</b></td><td>Loads a single or bulk file. Each flow gets a fresh ID; same-name flows are skipped and reported, so importing twice never creates duplicates.</td></tr>
     <tr><td><b>⧉ Duplicate</b></td><td>Copies steps + start URL as <code>… (copy)</code>. Doesn't copy a data file.</td></tr>
     </tbody></table></div>
+  <div class="co only-dev"><b><span class="rtag dev">DEV</span>BUG REPRO</b><p>Attach the exported JSON to the issue. Teammates <b>Import</b> it and replay the exact path — no written steps needed.</p></div>
   <p>Downloads land in <code>Downloads/Flowcraft/&lt;Mon DD YYYY&gt;/</code>.</p>
   <div class="co danger"><b>BEFORE YOU SHARE</b><p>If “Store usernames/passwords” was on, exports contain <b>plaintext credentials</b>. Turn it off and re-save first. Never commit exported flows or filled-in data sheets to a public repo.</p></div>
 </section>
@@ -602,6 +702,20 @@ footer{margin-top:80px;padding-top:22px;border-top:1px solid var(--line);color:v
   $('#fPass').onclick=function(){this.textContent='password: ••••••••';step('input','#password  (blanked on save)')};
   $('#fLogin').onclick=function(){step('click','button[type=submit]')};
 
+
+
+  /* role switch */
+  var ROLE={sqa:['Guide for SQA','Build repeatable checks and bring back evidence.','You\u2019re viewing the SQA / QA edition.'],dev:['Guide for Developers','Make your UI testable, reproduce bugs fast, and hack on Flowcraft.','You\u2019re viewing the Developer edition.']};
+  function setRole(r,save){
+    if(!ROLE[r])r='sqa';
+    document.body.setAttribute('data-role',r);
+    $$('#roles button').forEach(function(b){var on=b.getAttribute('data-role')===r;b.classList.toggle('on',on);b.setAttribute('aria-selected',on)});
+    $('#roleTitle').textContent=ROLE[r][0];$('#roleSub').textContent=ROLE[r][1];$('#roleHint').textContent=ROLE[r][2]+' Switch any time.';
+    if(save){try{localStorage.setItem('fc-role',r)}catch(e){}}
+  }
+  $$('#roles button').forEach(function(b){b.onclick=function(){setRole(b.getAttribute('data-role'),true)}});
+  var saved='sqa';try{saved=localStorage.getItem('fc-role')||'sqa'}catch(e){}
+  setRole(saved,false);
 
   /* run widget demo */
   var wd=$('#wdg'),wTimer=null,wStep=0,wTotal=6,wFailOn=false,wFailed=false,wRunning=false;
